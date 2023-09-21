@@ -2,7 +2,7 @@
 
 public enum StandardEngineCharacteristics
 {
-    EngineStop = 0,
+    EngineStop,
     ConstantSpeed = 100,
     ConstantFuelFlow = 10,
 }
