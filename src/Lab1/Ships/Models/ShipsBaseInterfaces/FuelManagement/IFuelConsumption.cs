@@ -2,5 +2,5 @@
 
 public interface IFuelConsumption : IFuelConsumptionPerUnitTime
 {
-    int FuelUseAtStartup { get; set; }
+    int FuelUseAtStartup { get; }
 }

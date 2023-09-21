@@ -2,5 +2,5 @@
 
 public interface IConstantEngineSpeed
 {
-    int ConstantSpeed { get; set; }
+    int ConstantSpeed { get; }
 }

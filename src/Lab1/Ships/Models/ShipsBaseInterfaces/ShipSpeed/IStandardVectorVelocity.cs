@@ -2,5 +2,5 @@
 
 public interface IStandardVectorVelocity
 {
-    int MovementSpeed { get; set; }
+    int MovementSpeed { get; }
 }

@@ -2,5 +2,5 @@
 
 public interface IGradationPart
 {
-    int Gradation { get; set; }
+    int Gradation { get; }
 }

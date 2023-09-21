@@ -2,5 +2,5 @@
 
 public interface ICanBeLaunched : IOperationalStatus
 {
-    bool Running { get; set; }
+    bool Running { get; }
 }

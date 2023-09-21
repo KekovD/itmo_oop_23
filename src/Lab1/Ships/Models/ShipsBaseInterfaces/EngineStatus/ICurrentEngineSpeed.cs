@@ -2,5 +2,5 @@
 
 public interface ICurrentEngineSpeed
 {
-    int CurrentEngineSpeed { get; set; }
+    int CurrentEngineSpeed { get; }
 }

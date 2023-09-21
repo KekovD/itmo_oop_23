@@ -2,5 +2,5 @@
 
 public interface ILightSpeedCounter
 {
-    int LightCounter { get; set; }
+    int LightCounter { get; }
 }

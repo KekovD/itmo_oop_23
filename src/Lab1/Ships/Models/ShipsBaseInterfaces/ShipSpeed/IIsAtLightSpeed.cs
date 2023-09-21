@@ -2,5 +2,5 @@
 
 public interface IIsAtLightSpeed : IStandardVectorVelocity, ILightVectorVelocity
 {
-    bool AtLightSpeed { get; set; }
+    bool AtLightSpeed { get; }
 }

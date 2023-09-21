@@ -2,5 +2,5 @@
 
 public interface ILevelOfHealth : IOperationalStatus
 {
-    int Health { get; set; }
+    int Health { get; }
 }

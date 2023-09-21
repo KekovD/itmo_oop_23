@@ -2,5 +2,5 @@
 
 public interface IOperationalStatus
 {
-    bool Serviceability { get; set; }
+    bool Serviceability { get; }
 }

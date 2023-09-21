@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.FuelManagement;
 
-public interface IAmountOfStandardMoney
+public interface IImFullTank
 {
-    int StandardMoney { get; set; }
+    bool ImFull { get; }
 }

@@ -2,5 +2,5 @@
 
 public interface ILightVectorVelocity : ILightSpeedCounter
 {
-    int LightSpeed { get; set; }
+    int LightSpeed { get; }
 }

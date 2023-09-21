@@ -2,5 +2,5 @@
 
 public interface IFuelQuantity
 {
-    int FuelResidue { get; set; }
+    int FuelResidue { get; }
 }
