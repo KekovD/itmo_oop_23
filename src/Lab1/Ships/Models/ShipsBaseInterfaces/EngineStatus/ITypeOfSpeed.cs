@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 
-public interface ITypeOfSpeed : IConstantEngineSpeed, IFunctionalDesignEngineSpeed, IPossibleJumpEngineDistance
+public interface ITypeOfSpeed : IGradationPart, IEngineTypeIdentification
 {
-    int TypeOfEngine(int grade);
+    BaseEngineType TypeOfEngine { get; }
 }

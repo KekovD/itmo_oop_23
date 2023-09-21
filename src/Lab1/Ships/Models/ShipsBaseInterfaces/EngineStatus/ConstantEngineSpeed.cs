@@ -1,6 +1,7 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 
-public interface IPossibleJumpEngineDistance
+public enum ConstantEngineSpeed
 {
-    int TypeOfJumpEngine(int grade);
+    None = 0,
+    StandardConstantSpeed = 100,
 }
