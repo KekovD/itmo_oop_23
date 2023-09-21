@@ -16,8 +16,8 @@ public abstract class BaseEngines : ITypeOfSpeed, ICanBeLaunched, IFuelConsumpti
 
     public int Gradation { get; }
     public BaseEngineType TypeOfEngine { get; }
-    public bool Running { get; protected set; }
-    public bool Serviceability { get; protected set; }
+    public bool Running { get; }
+    public bool Serviceability { get; }
     public int FuelUseAtStartup { get; protected set; }
     public int FuelUsePerUnitTime { get; protected set; }
     public BaseEngineType EngineTypeIdentification(int grade)
