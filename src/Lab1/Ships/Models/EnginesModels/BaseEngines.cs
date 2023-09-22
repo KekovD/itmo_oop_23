@@ -1,7 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.FuelManagement;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
 public abstract class BaseEngines : EngineTypeIdentification, ICanBeLaunched, IFuelConsumption
 {

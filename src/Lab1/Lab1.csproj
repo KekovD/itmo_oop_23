@@ -10,6 +10,7 @@
       <Folder Include="Environment\Models\" />
       <Folder Include="Environment\Services\" />
       <Folder Include="Ships\Entities\" />
+      <Folder Include="Ships\Models\DeflectorsModels\" />
       <Folder Include="Ships\Services\" />
     </ItemGroup>
 
