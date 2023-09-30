@@ -1,8 +1,8 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
-public abstract class BaseDeflector : GradeDeflectorIdentification
+public abstract class BaseAndGradeDeflector : PhotonsAndGradeDeflectorIdentification
 {
-    protected BaseDeflector(int grade)
+    protected BaseAndGradeDeflector(int grade)
     {
         Gradation = grade;
         HealthOfDeflector = DeflectorIdentification(grade);
