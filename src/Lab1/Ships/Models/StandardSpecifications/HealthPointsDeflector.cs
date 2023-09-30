@@ -6,5 +6,4 @@ public enum HealthPointsDeflector
     DeflectorFirstHealth = 20,
     DeflectorSecondHealth = 100,
     DeflectorThirdHealth = 400,
-    DeflectorPhotonsHealth = 3,
 }
