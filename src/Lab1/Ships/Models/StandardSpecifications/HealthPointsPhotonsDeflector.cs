@@ -2,6 +2,6 @@
 
 public enum HealthPointsPhotonsDeflector
 {
-    PhotonsDeflectorBrokenHealth,
+    PhotonsDeflectorBrokenOrBaseHealth,
     PhotonsDeflectorsHealth = 3,
 }

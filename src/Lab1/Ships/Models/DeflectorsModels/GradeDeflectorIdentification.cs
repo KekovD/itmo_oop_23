@@ -5,14 +5,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
 public abstract class GradeDeflectorIdentification : DeflectorTypeIdentification, IGradeDeflectorIdentification
 {
-    public HealthPointsDeflector DeflectorIdentification(int grade)
+    public int DeflectorIdentification(int grade)
     {
         return grade switch
         {
-            0 => HealthPointsDeflector.DeflectorBrokenHealth,
-            1 => HealthPointsDeflector.DeflectorFirstHealth,
-            2 => HealthPointsDeflector.DeflectorSecondHealth,
-            3 => HealthPointsDeflector.DeflectorThirdHealth,
+            0 => (int)HealthPointsDeflector.DeflectorBrokenHealth,
+            1 => (int)HealthPointsDeflector.DeflectorFirstHealth,
+            2 => (int)HealthPointsDeflector.DeflectorSecondHealth,
+            3 => (int)HealthPointsDeflector.DeflectorThirdHealth,
             _ => throw new System.ArgumentException("Invalid grade deflector value", nameof(grade)),
         };
     }
