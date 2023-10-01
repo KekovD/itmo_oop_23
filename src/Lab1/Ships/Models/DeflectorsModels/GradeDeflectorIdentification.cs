@@ -5,11 +5,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
 public abstract class GradeDeflectorIdentification : DeflectorTypeIdentification, IGradeDeflectorIdentification
 {
-    public int DeflectorIdentification(int grade)
+    public int DeflectorIdentification(int grade) ////TODO: refactor exception.
     {
         return grade switch
         {
-            0 => (int)HealthPointsDeflector.DeflectorBrokenHealth,
+            0 => throw new System.ArgumentException("Invalid grade deflector value. Cannot created broken", nameof(grade)),
             1 => (int)HealthPointsDeflector.DeflectorFirstHealth,
             2 => (int)HealthPointsDeflector.DeflectorSecondHealth,
             3 => (int)HealthPointsDeflector.DeflectorThirdHealth,

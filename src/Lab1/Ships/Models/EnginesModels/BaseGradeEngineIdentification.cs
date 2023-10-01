@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
 public abstract class BaseGradeEngineIdentification : IGradeEngineIdentification
 {
-    public BaseEngineType EngineIdentification(int grade)
+    public BaseEngineType EngineIdentification(int grade) ////TODO: refactor exception
     {
         return grade switch
         {
