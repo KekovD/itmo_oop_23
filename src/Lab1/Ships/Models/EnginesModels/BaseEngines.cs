@@ -3,18 +3,19 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.FuelM
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-public abstract class BaseEngines : EngineTypeIdentification, ICanBeLaunched, IFuelConsumption
+public abstract class BaseEngines : EngineTypeIdentification, ICanBeLaunched, IFuelConsumption, ICurrentEngineSpeed
 {
     protected BaseEngines(int grade)
     {
         Gradation = grade;
-        TypeOfEngine = EngineIdentification(grade);
         Running = false;
+        CurrentEngineSpeed = 0;
         Serviceability = true;
     }
 
+    public int CurrentEngineSpeed { get; protected set; }
     public bool Running { get; }
     public bool Serviceability { get; }
-    public int FuelUseAtStartup { get; protected set; }
-    public int FuelUsePerUnitTime { get; protected set; }
+    public int FuelUseAtStartup { get; protected init; }
+    public int FuelUsePerUnitTime { get; protected init; }
 }

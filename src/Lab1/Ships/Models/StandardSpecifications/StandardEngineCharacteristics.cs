@@ -4,5 +4,6 @@ public enum StandardEngineCharacteristics
 {
     EngineStop,
     ConstantSpeed = 100,
-    ConstantFuelFlow = 10,
+    CEngineConstantFuelFlow = 10,
+    EEngineConstantFuelFlow = 25,
 }

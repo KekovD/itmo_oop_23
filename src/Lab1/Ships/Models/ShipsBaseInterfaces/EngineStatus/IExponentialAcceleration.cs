@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 
-public interface IFunctionalDesignEngineSpeed
+public interface IExponentialAcceleration
 {
-    int FunctionalSpeed(int currentSpeed, int mass);
+    int ExponentialAcceleration(int speed, int distance);
 }
