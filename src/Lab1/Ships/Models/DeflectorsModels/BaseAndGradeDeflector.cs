@@ -8,5 +8,6 @@ public abstract class BaseAndGradeDeflector : PhotonsAndGradeDeflectorIdentifica
         HealthOfDeflector = DeflectorIdentification(grade);
         DeflectAntimatterFlares = photons;
         PhotonsHealth = InitPhotonsDeflectorHealthPoints(photons);
+        Serviceability = true;
     }
 }
