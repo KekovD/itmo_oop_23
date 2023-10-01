@@ -3,8 +3,10 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
 
-public abstract class HullTypeIdentification : IInitHealthPointsHull
+public abstract class HullTypeIdentification : IInitHealthPointsHull, IHullHealthPoint
 {
+    public int HealthOfHull { get; protected init; }
+    public int Gradation { get; protected init; }
     public int InitHealthPointsHull(int grade) ////TODO: refactor exception
     {
         return grade switch
