@@ -2,12 +2,11 @@
 
 public abstract class BaseAndGradeDeflector : PhotonsAndGradeDeflectorIdentification
 {
-    protected BaseAndGradeDeflector(int grade, bool photons)
+    protected BaseAndGradeDeflector(bool photons)
     {
-        Gradation = grade;
-        HealthOfDeflector = DeflectorIdentification(grade);
+        ////HealthOfDeflector = DeflectorIdentification(grade);
         DeflectAntimatterFlares = photons;
-        PhotonsHealth = InitPhotonsDeflectorHealthPoints(photons);
+        ////PhotonsHealth = InitPhotonsDeflectorHealthPoints(photons);
         Serviceability = true;
     }
 }
