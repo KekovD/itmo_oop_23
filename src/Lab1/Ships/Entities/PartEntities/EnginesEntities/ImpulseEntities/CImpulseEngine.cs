@@ -1,7 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.EnginesEntities.ImpulseEntities;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 
 public class CImpulseEngine : BaseImpulseEngines
 {

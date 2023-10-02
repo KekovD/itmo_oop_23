@@ -1,7 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.EnginesEntities.JumpEntities;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 
 public class GammaJumpEngine : BaseJumpEngines
 {
