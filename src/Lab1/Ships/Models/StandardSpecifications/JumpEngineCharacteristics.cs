@@ -3,7 +3,9 @@
 public enum JumpEngineCharacteristics
 {
     JumpStop,
-    ConstantFlowRate = 100,
+    AlphaFlowRate = 100,
+    OmegaFlowRate = 200,
+    GammaFlowRate = 400,
     AlphaDistance = 1000,
     OmegaDistance = 2500,
     GammaDistance = 5000,

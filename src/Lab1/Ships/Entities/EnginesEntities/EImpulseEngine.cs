@@ -5,10 +5,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.EnginesEntities;
 
-public class EImpulseEngine : BaseEngines, IExponentialAcceleration
+public class EImpulseEngine : BaseImpulseEngines, IExponentialAcceleration
 {
-    public EImpulseEngine(int grade)
-        : base(grade)
+    public EImpulseEngine()
     {
         TypeOfEngine = BaseEngineType.StandardEngine;
         DesignSpeed = (int)StandardEngineCharacteristics.ESpeed;
