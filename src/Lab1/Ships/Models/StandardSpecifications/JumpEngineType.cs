@@ -2,8 +2,7 @@
 
 public enum JumpEngineType
 {
-    None,
-    AlphaType = 2,
+    AlphaType,
     OmegaType,
     GammaType,
 }

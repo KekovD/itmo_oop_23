@@ -2,6 +2,6 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 
-public interface IInterfacesForImpulseEngine : IDesignSpeedOfEngine, ICurrentEngineSpeed, IFuelConsumption
+public interface IInterfacesForImpulseEngine : IDesignSpeedOfEngine, ICurrentEngineSpeed, IFuelConsumption, IImpulseType
 {
 }
