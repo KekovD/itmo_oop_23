@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces;
 
-public interface IGradationPart
+public interface IPartWeight
 {
-    int Gradation { get; }
+    int PartWeight { get; }
 }
