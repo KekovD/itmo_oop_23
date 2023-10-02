@@ -9,7 +9,6 @@
       <Folder Include="Environment\Entities\" />
       <Folder Include="Environment\Models\" />
       <Folder Include="Environment\Services\" />
-      <Folder Include="Ships\Entities\PartEntities\DeflectorEntities\WhithPhotons\" />
       <Folder Include="Ships\Services\" />
     </ItemGroup>
 
