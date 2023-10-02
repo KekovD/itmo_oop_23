@@ -1,10 +1,8 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.HullInterfaces;
 
-public abstract class BaseHull : HullTypeIdentification
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
+
+public abstract class BaseHull : IHullHealthPoint
 {
-    protected BaseHull(int grade)
-    {
-        Gradation = grade;
-        HealthOfHull = InitHealthPointsHull(grade);
-    }
+    public int HealthOfHull { get; protected set; }
 }
