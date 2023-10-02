@@ -2,7 +2,7 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.DeflectorsInterfaces;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
-public abstract class BaseAndGradeDeflector : IHealthPointsPhotonsDeflector, IOperationalStatus, IClassOfDeflector, IPartWeight
+public abstract class BaseDeflector : IHealthPointsPhotonsDeflector, IOperationalStatus, IClassOfDeflector, IPartWeight
 {
     public bool DeflectAntimatterFlares { get; protected init; }
     public int PhotonsHealth { get; protected set; }
