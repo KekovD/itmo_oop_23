@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
+﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
@@ -10,23 +11,13 @@ public class EImpulseEngine : BaseEngines, IExponentialAcceleration
         : base(grade)
     {
         TypeOfEngine = BaseEngineType.StandardEngine;
+        DesignSpeed = (int)StandardEngineCharacteristics.ESpeed;
         FuelUseAtStartup = (int)StandardEngineCharacteristics.EEngineConstantFuelFlow;
-        FuelUsePerUnitTime = (int)StandardEngineCharacteristics.EEngineConstantFuelFlow; ////TODO: rework
+        FuelUsePerUnitTime = (int)StandardEngineCharacteristics.EEngineConstantFuelFlow;
     }
 
-    public int ExponentialAcceleration(int speed, int distance) ////TODO: maybe refactor
+    public int ExponentialAcceleration(int speed, int distance)
     {
-        int time = 0;
-        int currentDistance = 0;
-        const int dt = 2;
-
-        while (currentDistance < distance)
-        {
-            time++;
-            int vt = ((5 * time) + 1) * speed;
-            currentDistance += vt * dt;
-        }
-
-        return time;
+        return speed + (int)Math.Exp(distance);
     }
 }

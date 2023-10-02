@@ -9,6 +9,7 @@ public class CImpulseEngine : BaseEngines
         : base(grade)
     {
         TypeOfEngine = BaseEngineType.StandardEngine;
+        DesignSpeed = (int)StandardEngineCharacteristics.CSpeed;
         FuelUseAtStartup = (int)StandardEngineCharacteristics.CEngineConstantFuelFlow;
         FuelUsePerUnitTime = (int)StandardEngineCharacteristics.CEngineConstantFuelFlow;
     }

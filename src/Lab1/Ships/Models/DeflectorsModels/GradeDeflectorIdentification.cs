@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
 public abstract class GradeDeflectorIdentification : DeflectorTypeIdentification, IGradeDeflectorIdentification
 {
-    public int DeflectorIdentification(int grade) ////TODO: refactor exception.
+    public int DeflectorIdentification(int grade) ////TODO: refactor exception. Отмена, это можно нахуй убрать.
     {
         return grade switch
         {
