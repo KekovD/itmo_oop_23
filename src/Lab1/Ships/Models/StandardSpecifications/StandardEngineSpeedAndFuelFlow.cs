@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
-public enum StandardEngineCharacteristics
+public enum StandardEngineSpeedAndFuelFlow
 {
     EngineStop,
     CSpeed = 20,

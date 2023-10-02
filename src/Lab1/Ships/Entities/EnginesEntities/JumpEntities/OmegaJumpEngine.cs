@@ -9,7 +9,8 @@ public class OmegaJumpEngine : BaseJumpEngines
     {
         TypeOfEngine = BaseEngineType.JumpEngine;
         JumpType = JumpEngineType.OmegaType;
-        JumpRage = (int)JumpEngineCharacteristics.OmegaDistance;
-        JumpFuelConsumption = (int)JumpEngineCharacteristics.OmegaFlowRate;
+        JumpRage = (int)JumpEngineSpeedAndFuelFlow.OmegaDistance;
+        JumpFuelConsumption = (int)JumpEngineSpeedAndFuelFlow.OmegaFlowRate;
+        PartWeight = (int)WeightOfEngine.OmegaWeight;
     }
 }

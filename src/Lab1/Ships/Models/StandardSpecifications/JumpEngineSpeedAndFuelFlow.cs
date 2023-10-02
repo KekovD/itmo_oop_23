@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
-public enum JumpEngineCharacteristics
+public enum JumpEngineSpeedAndFuelFlow
 {
     JumpStop,
     AlphaFlowRate = 100,

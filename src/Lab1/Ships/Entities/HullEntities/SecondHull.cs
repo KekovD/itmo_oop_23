@@ -8,6 +8,6 @@ public class SecondHull : BaseHull
     public SecondHull()
     {
         HealthOfHull = (int)HealthPointHull.HullSecondHealth;
-        PartWeight = (int)WeightHull.SecondHullWeight;
+        PartWeight = (int)WeightOfHull.SecondHullWeight;
     }
 }
