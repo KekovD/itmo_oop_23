@@ -3,9 +3,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
 
-public class SecondHull : BaseHull
+public class HullSecond : BaseHull
 {
-    public SecondHull()
+    public HullSecond()
     {
         HealthOfHull = (int)HealthPointHull.HullSecondHealth;
         PartWeight = (int)WeightOfHull.SecondHullWeight;

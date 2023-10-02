@@ -3,11 +3,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
 
-public class FirstHull : BaseHull
+public class HullThird : BaseHull
 {
-    public FirstHull()
+    public HullThird()
     {
-        HealthOfHull = (int)HealthPointHull.HullFirstHealth;
-        PartWeight = (int)WeightOfHull.FirstHullWeight;
+        HealthOfHull = (int)HealthPointHull.HullThirdHealth;
+        PartWeight = (int)WeightOfHull.ThirdHullWeight;
     }
 }
