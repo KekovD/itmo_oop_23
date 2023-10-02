@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.EngineStatus;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.EnginesEntities;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.EnginesEntities.ImpulseEntities;
 
 public class EImpulseEngine : BaseImpulseEngines, IExponentialAcceleration
 {
