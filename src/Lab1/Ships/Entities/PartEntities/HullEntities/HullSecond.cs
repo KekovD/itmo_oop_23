@@ -1,5 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.HullSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
 

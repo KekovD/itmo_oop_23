@@ -1,5 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.EngineSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 
