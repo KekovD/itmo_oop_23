@@ -1,16 +1,16 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.FuelManagement.ShipFuelManagement;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.TankModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.TankModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
 
-public class JumpTank : BaseTank, IAmountOfJumpMoney
+public class JumpTank : BaseTank
 {
-    public JumpTank(int fullJumpTank, int currentJumpFuelResidue, int moneyJump)
+    public JumpTank()
+    {
+    }
+
+    public JumpTank(int fullJumpTank, int currentJumpFuelResidue)
     {
         FullTank = fullJumpTank;
         FuelResidue = currentJumpFuelResidue;
-        JumpMoney = moneyJump;
     }
-
-    public int JumpMoney { get; }
 }

@@ -8,15 +8,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class WalkingShuttleShip : BaseShip
 {
-    public WalkingShuttleShip(int currentStandardFuelResidue, int moneyStandard)
+    public WalkingShuttleShip(int currentMoney, int currentStandardFuelResidue)
+        : base(currentMoney)
     {
         ShipHull = new HullFirst();
         ShipStandardTank = new StandardTank(
             (int)CapacityTankStandard.CapacityStandardWalkingShuttle,
-            currentStandardFuelResidue,
-            moneyStandard);
+            currentStandardFuelResidue);
         ImpulseEngine = new CImpulseEngine();
-        HaveJumpEngine = false;
-        HaveDeflector = false;
     }
 }

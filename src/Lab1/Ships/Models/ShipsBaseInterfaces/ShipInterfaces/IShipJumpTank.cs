@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public interface IShipStandardTank
+public interface IShipJumpTank
 {
-    StandardTank ShipStandardTank { get; }
+    JumpTank ShipJumpTank { get; }
 }

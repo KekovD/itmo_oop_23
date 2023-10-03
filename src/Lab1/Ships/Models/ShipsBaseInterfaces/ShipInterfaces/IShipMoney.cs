@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public interface IHaveJumpEngine
+public interface IShipMoney
 {
-    bool HaveJumpEngine { get; }
+    int ShipMoney { get; }
 }

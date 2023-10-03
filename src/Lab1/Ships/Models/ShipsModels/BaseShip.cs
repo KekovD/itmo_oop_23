@@ -1,15 +1,19 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.TankModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShip : IHaveJumpEngine, IHaveDeflector, IShipHull, IShipImpulseEngine
+public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipMoney
 {
-    public bool HaveJumpEngine { get; protected init; }
-    public bool HaveDeflector { get; protected init; }
+    protected BaseShip(int currentMoney)
+    {
+        ShipMoney = currentMoney;
+    }
+
+    public int ShipMoney { get; protected set; }
     public BaseImpulseEngines ImpulseEngine { get; protected init; } = new BaseImpulseEngines();
     public BaseHull ShipHull { get; protected init; } = new BaseHull();
-    public BaseTank ShipStandardTank { get; protected init; } = new BaseTank();
+    public StandardTank ShipStandardTank { get; protected init; } = new StandardTank();
 }
