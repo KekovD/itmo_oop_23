@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.Hu
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
 
-public abstract class BaseHull : IHullHealthPoint, IPartWeight
+public class BaseHull : IHullHealthPoint, IPartWeight
 {
     public int HealthOfHull { get; protected set; } = (int)HealthPointHull.HullBrokenHealth;
     public bool Serviceability { get; protected set; } = true;
