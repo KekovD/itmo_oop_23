@@ -11,9 +11,9 @@ public class EImpulseEngine : BaseImpulseEngines, IExponentialAcceleration
     {
         TypeOfEngine = BaseEngineType.StandardEngine;
         ImpulseType = ImpulseEngineType.EClassType;
-        DesignSpeed = (int)StandardEngineSpeedAndFuelFlow.ESpeed;
-        FuelUseAtStartup = (int)StandardEngineSpeedAndFuelFlow.EEngineConstantFuelFlow;
-        FuelUsePerUnitTime = (int)StandardEngineSpeedAndFuelFlow.EEngineConstantFuelFlow;
+        DesignSpeed = (int)StandardEngineSpeed.ESpeed;
+        FuelUseAtStartup = (int)StandardEngineFuelFlow.EEngineConstantFuelFlow;
+        FuelUsePerUnitTime = (int)StandardEngineFuelFlow.EEngineConstantFuelFlow;
         PartWeight = (int)WeightOfEngine.EClassWeight;
     }
 

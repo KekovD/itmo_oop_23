@@ -9,9 +9,9 @@ public class CImpulseEngine : BaseImpulseEngines
     {
         TypeOfEngine = BaseEngineType.StandardEngine;
         ImpulseType = ImpulseEngineType.CLassType;
-        DesignSpeed = (int)StandardEngineSpeedAndFuelFlow.CSpeed;
-        FuelUseAtStartup = (int)StandardEngineSpeedAndFuelFlow.CEngineConstantFuelFlow;
-        FuelUsePerUnitTime = (int)StandardEngineSpeedAndFuelFlow.CEngineConstantFuelFlow;
+        DesignSpeed = (int)StandardEngineSpeed.CSpeed;
+        FuelUseAtStartup = (int)StandardEngineFuelFlow.CEngineConstantFuelFlow;
+        FuelUsePerUnitTime = (int)StandardEngineFuelFlow.CEngineConstantFuelFlow;
         PartWeight = (int)WeightOfEngine.CLassWeight;
     }
 }
