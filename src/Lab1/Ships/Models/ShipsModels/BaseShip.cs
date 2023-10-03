@@ -1,5 +1,9 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public abstract class BaseShip
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
+
+public abstract class BaseShip : IHaveJumpEngine, IHaveDeflector
 {
+    public bool HaveJumpEngine { get; protected init; }
+    public bool HaveDeflector { get; protected init; }
 }
