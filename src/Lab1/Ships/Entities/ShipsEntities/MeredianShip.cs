@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities.StandardDeflectors;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
@@ -9,7 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class MeredianShip : BaseShipWithDeflector ////TODO: добавить излучатели(смотри тз)
 {
-    public MeredianShip(int currentMoney, int currentStandardFuelResidue)
+    public MeredianShip(int currentMoney, int currentStandardFuelResidue, bool havePhotons)
         : base(currentMoney)
     {
         ShipHull = new HullSecond();
@@ -17,6 +17,6 @@ public class MeredianShip : BaseShipWithDeflector ////TODO: добавить и�
             (int)CapacityTankStandard.CapacityStandardWalkingShuttle,
             currentStandardFuelResidue);
         ImpulseEngine = new EImpulseEngine();
-        ShipDeflector = new DeflectorStandardSecond();
+        ShipDeflector = new DeflectorSecond(havePhotons);
     }
 }

@@ -10,5 +10,5 @@ public abstract class BaseShipWithDeflector : BaseShip, IShipDeflector
     {
     }
 
-    public BaseDeflector ShipDeflector { get; protected init; } = new BaseDeflector();
+    public BaseDeflector ShipDeflector { get; protected init; } = new BaseDeflector(false);
 }

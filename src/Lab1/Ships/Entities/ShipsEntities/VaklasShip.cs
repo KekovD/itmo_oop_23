@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities.StandardDeflectors;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
@@ -10,7 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class VaklasShip : BaseShipWithJumpEngineAndDeflector
 {
-    public VaklasShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue)
+    public VaklasShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
         : base(currentMoney)
     {
         ShipHull = new HullSecond();
@@ -22,6 +22,6 @@ public class VaklasShip : BaseShipWithJumpEngineAndDeflector
             (int)CapacityTankJump.CapacityJumpVaklas,
             currentJumpFuelResidue);
         JumpEngine = new GammaJumpEngine();
-        ShipDeflector = new DeflectorStandardFirst();
+        ShipDeflector = new DeflectorFirst(havePhotons);
     }
 }
