@@ -14,7 +14,7 @@ public class MeredianShip : BaseShipWithDeflector ////TODO: добавить и�
     {
         ShipHull = new HullSecond();
         ShipStandardTank = new StandardTank(
-            (int)CapacityTankStandard.CapacityStandardWalkingShuttle,
+            (int)CapacityTankStandard.CapacityStandardMeredian,
             currentStandardFuelResidue);
         ImpulseEngine = new EImpulseEngine();
         ShipDeflector = new DeflectorSecond(havePhotons);
