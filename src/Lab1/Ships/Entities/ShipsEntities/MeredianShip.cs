@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.Ta
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
-public class MeredianShip : BaseShipWithDeflector ////TODO: добавить излучатели(смотри тз)
+public class MeredianShip : BaseShipWithDeflector
 {
     public MeredianShip(int currentMoney, int currentStandardFuelResidue, bool havePhotons)
         : base(currentMoney)
@@ -18,5 +18,6 @@ public class MeredianShip : BaseShipWithDeflector ////TODO: добавить и�
             currentStandardFuelResidue);
         ImpulseEngine = new EImpulseEngine();
         ShipDeflector = new DeflectorSecond(havePhotons);
+        ShipAntiNitrinoEmitter = true;
     }
 }
