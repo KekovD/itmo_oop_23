@@ -3,7 +3,7 @@
 public enum JumpEngineFuelFlow
 {
     None,
-    AlphaFlowRate = 100,
-    OmegaFlowRate = 200,
-    GammaFlowRate = 400,
+    AlphaFlowRate = 10,
+    OmegaFlowRate = 5,
+    GammaFlowRate = 2,
 }
