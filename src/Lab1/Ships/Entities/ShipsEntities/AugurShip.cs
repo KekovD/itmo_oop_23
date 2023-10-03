@@ -8,7 +8,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.Ta
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
-public class AugurShip : BaseShipWithJumpEngineAndDeflector
+public class AugurShip : BaseShipWithJumpEngineAndDeflector ////TODO: ебануть учитывание веса жи есть
 {
     public AugurShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
         : base(currentMoney)
