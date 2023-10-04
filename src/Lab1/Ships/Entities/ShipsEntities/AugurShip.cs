@@ -23,5 +23,7 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector ////TODO: ебану
             currentJumpFuelResidue);
         JumpEngine = new AlphaJumpEngine();
         ShipDeflector = new DeflectorThird(havePhotons);
+        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight +
+                     ShipStandardTank.PartWeight + ShipJumpTank.PartWeight;
     }
 }

@@ -12,5 +12,6 @@ public class StandardTank : BaseTank
     {
         FullTank = fullStandardTank;
         FuelResidue = currentStandardFuelResidue;
+        FuelWeight();
     }
 }

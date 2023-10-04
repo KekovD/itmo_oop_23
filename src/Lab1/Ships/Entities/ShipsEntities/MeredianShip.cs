@@ -19,5 +19,7 @@ public class MeredianShip : BaseShipWithDeflector
         ImpulseEngine = new EImpulseEngine();
         ShipDeflector = new DeflectorSecond(havePhotons);
         ShipAntiNitrinoEmitter = true;
+        ShipWeight = ShipHull.PartWeight + ShipStandardTank.PartWeight + ImpulseEngine.PartWeight +
+                     ShipDeflector.PartWeight;
     }
 }

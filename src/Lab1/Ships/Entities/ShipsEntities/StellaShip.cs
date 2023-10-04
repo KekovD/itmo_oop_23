@@ -23,5 +23,7 @@ public class StellaShip : BaseShipWithJumpEngineAndDeflector
             currentJumpFuelResidue);
         JumpEngine = new OmegaJumpEngine();
         ShipDeflector = new DeflectorFirst(havePhotons);
+        ShipWeight = ShipHull.PartWeight + ShipStandardTank.PartWeight + ImpulseEngine.PartWeight +
+                     ShipJumpTank.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
     }
 }
