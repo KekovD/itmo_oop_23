@@ -10,8 +10,5 @@ public abstract class BaseTank : IShipTank, IPartWeight, IFuelWeightCalculation
     public int FuelResidue { get; protected set; }
     public int PartWeight { get; private set; }
 
-    public void FuelWeight()
-    {
-        PartWeight = (int)(FuelResidue * FuelWeightRatio);
-    }
+    public void FuelWeight() => PartWeight = (int)(FuelResidue * FuelWeightRatio);
 }
