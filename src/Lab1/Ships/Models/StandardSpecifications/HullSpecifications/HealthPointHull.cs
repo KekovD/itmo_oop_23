@@ -4,6 +4,6 @@ public enum HealthPointHull
 {
     None,
     HullFirstHealth = 15,
-    HullSecondHealth = 100,
+    HullSecondHealth = 85,
     HullThirdHealth = 205,
 }
