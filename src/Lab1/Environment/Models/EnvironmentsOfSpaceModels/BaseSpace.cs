@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.SpaceBaseInterfaces;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 

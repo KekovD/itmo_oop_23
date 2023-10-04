@@ -8,4 +8,8 @@ public class BaseHull : IHullHealthPoint, IPartWeight
     public int HealthOfHull { get; protected set; }
     public bool Serviceability { get; protected set; } = true;
     public int PartWeight { get; protected init; }
+    public void SetHealthOfHull(int newValue)
+    {
+        HealthOfHull = newValue;
+    }
 }
