@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.TankModels;
 
 public abstract class BaseTank : IShipTank, IPartWeight, IFuelWeightCalculation
 {
-    private const double FuelWeightRatio = 0.2;
+    private const double FuelWeightRatio = 0.1;
     public int FullTank { get; protected init; }
     public int FuelResidue { get; protected set; }
     public int PartWeight { get; private set; }

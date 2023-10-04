@@ -2,6 +2,7 @@
 
 public enum ImpulseEngineType
 {
+    None,
     CLassType,
     EClassType,
 }

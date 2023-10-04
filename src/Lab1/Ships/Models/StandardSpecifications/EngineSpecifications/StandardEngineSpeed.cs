@@ -2,7 +2,7 @@
 
 public enum StandardEngineSpeed
 {
-    EngineStop,
+    None,
     CSpeed = 20,
     ESpeed = 30,
 }

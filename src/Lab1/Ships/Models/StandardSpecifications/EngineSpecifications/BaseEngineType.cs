@@ -2,6 +2,7 @@
 
 public enum BaseEngineType
 {
+    None,
     StandardEngine,
     JumpEngine,
 }

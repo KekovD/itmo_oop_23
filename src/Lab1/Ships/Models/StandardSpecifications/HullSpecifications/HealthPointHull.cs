@@ -2,7 +2,7 @@
 
 public enum HealthPointHull
 {
-    HullBrokenHealth,
+    None,
     HullFirstHealth = 15,
     HullSecondHealth = 100,
     HullThirdHealth = 205,
