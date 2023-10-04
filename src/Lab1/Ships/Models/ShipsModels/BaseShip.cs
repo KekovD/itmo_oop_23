@@ -5,13 +5,14 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipI
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipMoney, IShipAntiNitrinoEmitter, IShipWeight
+public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipMoney, IShipAntiNitrinoEmitter, IShipWeight, IShipCrew
 {
     protected BaseShip(int currentMoney)
     {
         ShipMoney = currentMoney;
     }
 
+    public bool ShipCrewAlive { get; protected set; } = true;
     public int ShipMoney { get; protected set; }
     public BaseImpulseEngines ImpulseEngine { get; protected init; } = new BaseImpulseEngines();
     public BaseHull ShipHull { get; protected init; } = new BaseHull();
