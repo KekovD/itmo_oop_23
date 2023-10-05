@@ -4,11 +4,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels
 
 public abstract class AntimatterFlashes : SmallAsteroidsAndMeteorites
 {
-    public override void DoingDamage(BaseShip ship, int damage)
+    public override void DoingDamage(BaseShip ship)
     {
         if (ship is BaseShipWithDeflector { ShipDeflector.DeflectAntimatterFlares: true } derivedShip)
         {
-            derivedShip.ShipDeflector.SetHealthOfPhotonsDeflector(derivedShip.ShipDeflector.PhotonsHealth - damage);
+            derivedShip.ShipDeflector.SetHealthOfPhotonsDeflector(derivedShip.ShipDeflector.PhotonsHealth -
+                                                                  StandardDamage);
             return;
         }
 

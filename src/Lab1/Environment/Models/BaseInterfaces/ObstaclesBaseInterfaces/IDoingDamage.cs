@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.
 
 public interface IDoingDamage
 {
-    void DoingDamage(BaseShip ship, int damage);
+    void DoingDamage(BaseShip ship);
 }
