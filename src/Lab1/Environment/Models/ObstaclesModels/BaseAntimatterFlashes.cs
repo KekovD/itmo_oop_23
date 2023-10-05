@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class AntimatterFlashes : SmallAsteroidsAndMeteorites
+public abstract class BaseAntimatterFlashes : BaseSmallAsteroidsAndMeteorites
 {
     public override void DoingDamage(BaseShip ship)
     {

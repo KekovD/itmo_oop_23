@@ -2,5 +2,5 @@
 
 public interface IExponentialAcceleration
 {
-    int ExponentialAcceleration(int speed, int distance);
+    int ETransitTime(int distance);
 }

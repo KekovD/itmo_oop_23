@@ -1,9 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
-
-public abstract class BaseHighDensitySpaceNebulae : BaseSpace, ISubspaceChannelLength
+public abstract class BaseHighDensitySpaceNebulae : BaseSpace
 {
-    public int SubspaceChannelLength { get; protected set; }
-    public int SubspaceChannelCoordinate { get; protected set; }
 }

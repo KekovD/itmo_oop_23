@@ -17,8 +17,8 @@ public class EImpulseEngine : BaseImpulseEngines, IExponentialAcceleration
         PartWeight = (int)WeightOfEngine.EClassWeight;
     }
 
-    public int ExponentialAcceleration(int speed, int distance)
+    public int ETransitTime(int distance)
     {
-        return speed + (int)Math.Exp(distance);
+        return DesignSpeed + (int)Math.Exp(distance);
     }
 }

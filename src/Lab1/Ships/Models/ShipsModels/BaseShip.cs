@@ -9,11 +9,11 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
 {
     public bool ShipAlive { get; private set; } = true;
     public bool ShipCrewAlive { get; private set; } = true;
-    public BaseImpulseEngines ImpulseEngine { get; protected init; } = new BaseImpulseEngines();
+    public BaseImpulseEngines? ImpulseEngine { get; protected init; }
     public BaseHull ShipHull { get; protected init; } = new BaseHull();
-    public StandardTank ShipStandardTank { get; protected init; } = new StandardTank();
+    public StandardTank? ShipStandardTank { get; protected init; }
     public bool ShipAntiNitrinoEmitter { get; protected init; }
-    public int ShipWeight { get; protected set; }
+    public int ShipWeight { get; protected init; }
 
     public void SetShipAlive()
     {

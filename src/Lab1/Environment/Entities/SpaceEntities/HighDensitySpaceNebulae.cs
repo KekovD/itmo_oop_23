@@ -4,15 +4,13 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecificati
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
 
-public class NormalSpace : BaseNormalSpace
+public class HighDensitySpaceNebulae : BaseHighDensitySpaceNebulae
 {
-    public NormalSpace(int routeLength, int numberOfObstaclesOnRoute, int secondNumberOfObstaclesOnRoute)
+    public HighDensitySpaceNebulae(int routeLength, int numberOfObstaclesOnRoute)
     {
-        TypeOfSpace = ExistingTypesOfSpace.NormalSpace;
+        TypeOfSpace = ExistingTypesOfSpace.HighDensitySpaceNebulae;
         RouteLength = routeLength;
         NumberOfObstaclesOnRoute = numberOfObstaclesOnRoute;
-        TypeOfObstacles = new SmallAsteroids();
-        SecondNumberOfObstaclesOnRoute = secondNumberOfObstaclesOnRoute;
-        TypeOfSecondObstacles = new Meteorites();
+        TypeOfObstacles = new AntimatterFlash();
     }
 }

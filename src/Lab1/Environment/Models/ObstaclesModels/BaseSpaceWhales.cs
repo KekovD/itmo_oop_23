@@ -2,21 +2,29 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class SmallAsteroidsAndMeteorites : StandardObstacles
+public abstract class BaseSpaceWhales : BaseAntimatterFlashes
 {
     public override void DoingDamage(BaseShip ship)
     {
+        if (ship.ShipAntiNitrinoEmitter)
+        {
+            return;
+        }
+
         if (ship is BaseShipWithDeflector derivedShip)
         {
+            if (derivedShip.ShipDeflector.DeflectAntimatterFlares)
+            {
+                derivedShip.ShipDeflector.SetHealthOfPhotonsDeflector(derivedShip.ShipDeflector.PhotonsHealth -
+                                                                      StandardDamage);
+            }
+
             if (derivedShip.ShipDeflector.Serviceability)
             {
                 derivedShip.ShipDeflector.SetHealthOfDeflector(derivedShip.ShipDeflector.HealthOfDeflector -
                                                                StandardDamage);
-                return;
             }
 
-            derivedShip.ShipHull.SetHealthOfHull(derivedShip.ShipHull.HealthOfHull - StandardDamage);
-            derivedShip.SetShipAlive();
             return;
         }
 
