@@ -15,6 +15,6 @@ public class WalkingShuttleShip : BaseShip
             (int)CapacityTankStandard.CapacityStandardWalkingShuttle,
             currentStandardFuelResidue);
         ImpulseEngine = new CImpulseEngine();
-        ShipWeight = ShipHull.PartWeight + ShipStandardTank.PartWeight + ImpulseEngine.PartWeight;
+        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight;
     }
 }

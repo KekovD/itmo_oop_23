@@ -22,7 +22,11 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
             currentJumpFuelResidue);
         JumpEngine = new AlphaJumpEngine();
         ShipDeflector = new DeflectorThird(havePhotons);
-        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight +
-                     ShipStandardTank.PartWeight + ShipJumpTank.PartWeight;
+        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
+    }
+
+    public override int ShipIJumpFuelCost(int distance)
+    {
+        return distance * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

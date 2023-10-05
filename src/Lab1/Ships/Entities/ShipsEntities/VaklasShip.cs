@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
+﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
@@ -22,7 +23,11 @@ public class VaklasShip : BaseShipWithJumpEngineAndDeflector
             currentJumpFuelResidue);
         JumpEngine = new GammaJumpEngine();
         ShipDeflector = new DeflectorFirst(havePhotons);
-        ShipWeight = ShipHull.PartWeight + ShipStandardTank.PartWeight + ImpulseEngine.PartWeight +
-                     ShipJumpTank.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
+        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
+    }
+
+    public override int ShipIJumpFuelCost(int distance)
+    {
+        return (int)Math.Pow(distance, 2) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

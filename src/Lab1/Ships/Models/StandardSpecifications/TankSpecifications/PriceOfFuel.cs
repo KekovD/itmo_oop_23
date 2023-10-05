@@ -3,6 +3,6 @@
 public enum PriceOfFuel
 {
     None,
-    PriceStandardFuel = 3,
-    PriceJumpFuel = 5,
+    PriceStandardFuel = 2,
+    PriceJumpFuel = 3,
 }

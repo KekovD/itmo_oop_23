@@ -12,6 +12,5 @@ public class JumpTank : BaseTank
     {
         FullTank = fullJumpTank;
         FuelResidue = currentJumpFuelResidue;
-        FuelWeight();
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public interface IShipImpulseSpeed
+public interface IShipIJumpFuelCost
 {
-    int ShipImpulseSpeed(int distance);
+    int ShipIJumpFuelCost(int distance);
 }
