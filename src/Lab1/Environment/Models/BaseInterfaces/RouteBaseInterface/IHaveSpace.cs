@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.SpaceBaseInterfaces;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 
 public interface IHaveSpace<T>
 {
