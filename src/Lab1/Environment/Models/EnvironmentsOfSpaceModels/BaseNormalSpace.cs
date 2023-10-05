@@ -1,5 +1,7 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class BaseNormalSpace
+namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
+
+public abstract class BaseNormalSpace : SmallAsteroidsAndMeteorites
 {
 }
