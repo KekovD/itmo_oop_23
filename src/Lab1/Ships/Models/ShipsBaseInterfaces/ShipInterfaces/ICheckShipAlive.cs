@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public interface IShipCrew : IKillCrew
+public interface ICheckShipAlive : IShipAlive
 {
-    bool ShipCrewAlive { get; }
+    void SetShipAlive();
 }

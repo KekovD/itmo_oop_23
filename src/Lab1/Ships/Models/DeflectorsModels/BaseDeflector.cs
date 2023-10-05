@@ -1,10 +1,11 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.DeflectorsInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.DeflectorSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
-public class BaseDeflector : IHealthPointsPhotonsDeflector, IOperationalStatus, IClassOfDeflector, IPartWeight
+public class BaseDeflector : PartServiceability, IHealthPointsPhotonsDeflector, IClassOfDeflector, IPartWeight, ISetHealthOfDeflector
 {
     public BaseDeflector(bool havePhotons)
     {
@@ -17,9 +18,33 @@ public class BaseDeflector : IHealthPointsPhotonsDeflector, IOperationalStatus, 
         }
     }
 
-    public bool DeflectAntimatterFlares { get; protected init; }
-    public int PhotonsHealth { get; protected set; }
-    public bool Serviceability { get; protected set; } = true;
+    public bool DeflectAntimatterFlares { get; private set; }
+    public int PhotonsHealth { get; private set; }
     public int HealthOfDeflector { get; protected set;  }
     public int PartWeight { get; protected init; }
+
+    public void SetHealthOfDeflector(int newValue)
+    {
+        HealthOfDeflector = newValue;
+        SetPartServiceability();
+    }
+
+    public void SetHealthOfPhotonsDeflector(int newValue)
+    {
+        PhotonsHealth = newValue;
+        SetPartServiceability();
+    }
+
+    public override void SetPartServiceability()
+    {
+        if (HealthOfDeflector <= 0)
+        {
+            Serviceability = false;
+        }
+
+        if (PhotonsHealth <= 0)
+        {
+            DeflectAntimatterFlares = false;
+        }
+    }
 }
