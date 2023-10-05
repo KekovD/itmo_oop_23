@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.S
 
 public interface IShipJumpEngine : IShipJumpTank
 {
-    BaseJumpEngines JumpEngine { get; }
+    BaseJumpEngines? JumpEngine { get; }
 }

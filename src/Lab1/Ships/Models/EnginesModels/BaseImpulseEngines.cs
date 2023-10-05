@@ -3,11 +3,13 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.En
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-public class BaseImpulseEngines : BaseEngines, IInterfacesForImpulseEngine
+public abstract class BaseImpulseEngines : BaseEngines, IInterfacesForImpulseEngine
 {
     public ImpulseEngineType ImpulseType { get; protected init; }
     public int DesignSpeed { get; protected init; }
     public int CurrentEngineSpeed { get; protected set; }
     public int FuelUseAtStartup { get; protected init; }
     public int FuelUsePerUnitTime { get; protected init; }
+
+    public abstract int GetImpulseEngineSpeed(int distance);
 }

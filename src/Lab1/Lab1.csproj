@@ -5,8 +5,6 @@
     </PropertyGroup>
 
 
-    <ItemGroup>
-      <Folder Include="Environment\Services\" />
-    </ItemGroup>
+
 
 </Project>

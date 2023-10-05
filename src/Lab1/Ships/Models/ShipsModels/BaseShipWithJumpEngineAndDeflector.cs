@@ -6,6 +6,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IShipJumpEngine
 {
-    public BaseJumpEngines JumpEngine { get; protected init; } = new BaseJumpEngines();
+    public BaseJumpEngines? JumpEngine { get; protected init; }
     public JumpTank ShipJumpTank { get; protected init; } = new JumpTank();
 }

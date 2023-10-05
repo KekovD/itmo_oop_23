@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 
-public interface ISecondNumberOfObstaclesOnRoute
+public interface IRouteCountLength : IObstaclesOnRouteCount
 {
-    int SecondNumberOfObstaclesOnRoute { get; }
+    int RouteLength { get; }
 }

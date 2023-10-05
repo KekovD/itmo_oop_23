@@ -14,4 +14,9 @@ public class CImpulseEngine : BaseImpulseEngines
         FuelUsePerUnitTime = (int)StandardEngineFuelFlow.CEngineConstantFuelFlow;
         PartWeight = (int)WeightOfEngine.CLassWeight;
     }
+
+    public override int GetImpulseEngineSpeed(int distance)
+    {
+        return DesignSpeed;
+    }
 }

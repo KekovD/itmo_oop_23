@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.En
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-public class BaseJumpEngines : BaseEngines, IInterfacesForJumpEngine
+public abstract class BaseJumpEngines : BaseEngines, IInterfacesForJumpEngine
 {
     public int JumpFuelConsumption { get; protected init; }
     public int JumpRage { get; protected init; }

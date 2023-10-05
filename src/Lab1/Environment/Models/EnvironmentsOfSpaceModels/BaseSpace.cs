@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecificati
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 
-public abstract class BaseSpace : ITypeOfSpace, IRouteLength, IHaveObstacles
+public abstract class BaseSpace : ITypeOfSpace, IRouteCountLength, IHaveObstacles
 {
     public ExistingTypesOfSpace TypeOfSpace { get; protected init; }
     public int RouteLength { get; protected init; }
