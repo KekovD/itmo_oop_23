@@ -9,8 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class MeredianShip : BaseShipWithDeflector
 {
-    public MeredianShip(int currentMoney, int currentStandardFuelResidue, bool havePhotons)
-        : base(currentMoney)
+    public MeredianShip(int currentStandardFuelResidue, bool havePhotons)
     {
         ShipHull = new HullSecond();
         ShipStandardTank = new StandardTank(

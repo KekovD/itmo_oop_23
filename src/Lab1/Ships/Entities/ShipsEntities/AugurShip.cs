@@ -10,8 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class AugurShip : BaseShipWithJumpEngineAndDeflector
 {
-    public AugurShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
-        : base(currentMoney)
+    public AugurShip(int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
     {
         ShipHull = new HullThird();
         ShipStandardTank = new StandardTank(

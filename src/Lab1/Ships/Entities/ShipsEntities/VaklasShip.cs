@@ -10,8 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class VaklasShip : BaseShipWithJumpEngineAndDeflector
 {
-    public VaklasShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
-        : base(currentMoney)
+    public VaklasShip(int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
     {
         ShipHull = new HullSecond();
         ShipStandardTank = new StandardTank(

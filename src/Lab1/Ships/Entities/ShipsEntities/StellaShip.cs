@@ -10,8 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class StellaShip : BaseShipWithJumpEngineAndDeflector
 {
-    public StellaShip(int currentMoney, int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
-        : base(currentMoney)
+    public StellaShip(int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
     {
         ShipHull = new HullFirst();
         ShipStandardTank = new StandardTank(

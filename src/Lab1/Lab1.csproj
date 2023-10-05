@@ -8,7 +8,6 @@
     <ItemGroup>
       <Folder Include="Environment\Entities\" />
       <Folder Include="Environment\Services\" />
-      <Folder Include="Ships\Services\" />
     </ItemGroup>
 
 </Project>
