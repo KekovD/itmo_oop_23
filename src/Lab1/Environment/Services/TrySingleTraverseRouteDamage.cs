@@ -2,27 +2,16 @@
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class TrySingleTraverseRoute : ITryTraverseRoute
+public class TrySingleTraverseRouteDamage : ITryTraverseRouteDamage
 {
-    public bool TryTraverseRoute(BaseShip ship, BaseSpace space, int distance)
+    public bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance)
     {
         if (space is NormalSpace derivedSpace)
         {
-            if (ship.ShipStandardTank == null)
-            {
-                throw new PartOfShipNullException(nameof(ship.ShipStandardTank));
-            }
-
-            if (ship.ShipImpulseFuelConsumption(distance) > ship.ShipStandardTank.FuelResidue)
-            {
-                return false;
-            }
-
             if (derivedSpace.TypeOfObstacles == null)
             {
                 throw new PartOfSpaceNullException(nameof(derivedSpace.TypeOfObstacles));
@@ -55,21 +44,6 @@ public class TrySingleTraverseRoute : ITryTraverseRoute
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
-                if (derivedShip.ShipJumpFuelConsumption(distance) > derivedShip.ShipJumpTank.FuelResidue)
-                {
-                    return false;
-                }
-
-                if (derivedShip.JumpEngine == null)
-                {
-                    throw new PartOfShipNullException(nameof(derivedShip.JumpEngine));
-                }
-
-                if (derivedShip.JumpEngine.JumpRage < distance)
-                {
-                    return false;
-                }
-
                 if (derivedSpaceSecond.TypeOfObstacles == null)
                 {
                     throw new PartOfSpaceNullException(nameof(derivedSpaceSecond.TypeOfObstacles));
@@ -105,11 +79,6 @@ public class TrySingleTraverseRoute : ITryTraverseRoute
                     derivedSpaceThird.TypeOfObstacles.DoingDamage(ship);
                 }
 
-                return false;
-            }
-
-            if (ship.ImpulseEngine is CImpulseEngine)
-            {
                 return false;
             }
 

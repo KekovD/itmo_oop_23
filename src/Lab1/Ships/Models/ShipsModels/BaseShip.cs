@@ -10,7 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrinoEmitter, IShipWeight, IShipCrew, ICheckShipAlive,
     IGetImpulseFuelCost
 {
-    protected const double ShipWeightRatio = 0.05;
+    private const double ShipWeightRatio = 0.05;
     public bool ShipAlive { get; private set; } = true;
     public bool ShipCrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }

@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 
-public interface ITryTraverseRoute
+public interface ITryTraverseRouteDistance
 {
-    bool TryTraverseRoute(BaseShip ship, BaseSpace space, int distance);
+    bool TryTraverseRouteDistance(BaseShip ship, BaseSpace space, int distance);
 }
