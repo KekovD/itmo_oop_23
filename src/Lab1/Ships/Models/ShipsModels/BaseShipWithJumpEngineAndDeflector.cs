@@ -9,4 +9,5 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
     public BaseJumpEngines? JumpEngine { get; protected init; }
     public JumpTank ShipJumpTank { get; protected init; } = new JumpTank();
     public abstract int ShipIJumpFuelCost(int distance);
+    public abstract int ShipJumpFuelConsumption(int distance);
 }

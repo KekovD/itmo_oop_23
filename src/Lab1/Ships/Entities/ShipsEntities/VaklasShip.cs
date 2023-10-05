@@ -1,4 +1,5 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
@@ -26,8 +27,23 @@ public class VaklasShip : BaseShipWithJumpEngineAndDeflector
         ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
     }
 
+    public override int ShipJumpFuelConsumption(int distance)
+    {
+        if (JumpEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(JumpEngine));
+        }
+
+        return JumpEngine.JumpFuelConsumption * (int)Math.Pow(distance, 2);
+    }
+
     public override int ShipIJumpFuelCost(int distance)
     {
-        return (int)Math.Pow(distance, 2) * (int)PriceOfFuel.PriceJumpFuel;
+        if (JumpEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(JumpEngine));
+        }
+
+        return JumpEngine.JumpFuelConsumption * (int)Math.Pow(distance, 2) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

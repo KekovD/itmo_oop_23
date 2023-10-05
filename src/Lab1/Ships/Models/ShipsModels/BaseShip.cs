@@ -1,7 +1,7 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.TankSpecifications;
 
@@ -28,6 +28,19 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
     {
         ShipCrewAlive = false;
         SetShipAlive();
+    }
+
+    public int ShipImpulseFuelConsumption(int distance)
+    {
+        if (ImpulseEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(ImpulseEngine));
+        }
+
+        int speed = ImpulseEngine.GetImpulseEngineSpeed(distance) - (int)(ShipWeightRatio * ShipWeight);
+        int time = (int)(speed / distance);
+
+        return (time * ImpulseEngine.FuelUsePerUnitTime) + ImpulseEngine.FuelUseAtStartup;
     }
 
     public int ShipImpulseFuelCost(int distance)

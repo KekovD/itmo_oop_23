@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.MyException;
+namespace Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
 public class PartOfShipNullException : Exception
 {
     public PartOfShipNullException()
-        : base("Part is null")
+        : base("Ship's part is null")
     {
     }
 

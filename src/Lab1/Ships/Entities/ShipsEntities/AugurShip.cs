@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
@@ -25,8 +26,23 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
         ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
     }
 
+    public override int ShipJumpFuelConsumption(int distance)
+    {
+        if (JumpEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(JumpEngine));
+        }
+
+        return JumpEngine.JumpFuelConsumption * distance;
+    }
+
     public override int ShipIJumpFuelCost(int distance)
     {
-        return distance * (int)PriceOfFuel.PriceJumpFuel;
+        if (JumpEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(JumpEngine));
+        }
+
+        return JumpEngine.JumpFuelConsumption * distance * (int)PriceOfFuel.PriceJumpFuel;
     }
 }
