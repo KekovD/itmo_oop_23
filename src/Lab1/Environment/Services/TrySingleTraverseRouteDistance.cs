@@ -20,8 +20,13 @@ public class TrySingleTraverseRouteDistance : ITryTraverseRouteDistance
 
             if (ship.ShipImpulseFuelConsumption(distance) > ship.ShipStandardTank.FuelResidue)
             {
+                ship.ShipStandardTank.SetFuelResidue(ship.ShipStandardTank.FuelResidue -
+                                                     ship.ShipImpulseFuelConsumption(distance));
                 return false;
             }
+
+            ship.ShipStandardTank.SetFuelResidue(ship.ShipStandardTank.FuelResidue -
+                                                 ship.ShipImpulseFuelConsumption(distance));
 
             return true;
         }
@@ -30,11 +35,6 @@ public class TrySingleTraverseRouteDistance : ITryTraverseRouteDistance
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
-                if (derivedShip.ShipJumpFuelConsumption(distance) > derivedShip.ShipJumpTank.FuelResidue)
-                {
-                    return false;
-                }
-
                 if (derivedShip.JumpEngine == null)
                 {
                     throw new PartOfShipNullException(nameof(derivedShip.JumpEngine));
@@ -44,6 +44,16 @@ public class TrySingleTraverseRouteDistance : ITryTraverseRouteDistance
                 {
                     return false;
                 }
+
+                if (derivedShip.ShipJumpFuelConsumption(distance) > derivedShip.ShipJumpTank.FuelResidue)
+                {
+                    derivedShip.ShipJumpTank.SetFuelResidue(derivedShip.ShipJumpTank.FuelResidue -
+                                                            derivedShip.ShipJumpFuelConsumption(distance));
+                    return false;
+                }
+
+                derivedShip.ShipJumpTank.SetFuelResidue(derivedShip.ShipJumpTank.FuelResidue -
+                                                        derivedShip.ShipJumpFuelConsumption(distance));
 
                 return true;
             }

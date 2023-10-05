@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.FuelManagement.ShipFuelManagement;
 
-public interface IFuelResidue : ISetFuelResidue
+public interface ISetFuelResidue
 {
-    int FuelResidue { get; }
+    void SetFuelResidue(int newValue);
 }
