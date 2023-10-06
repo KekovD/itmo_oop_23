@@ -36,12 +36,10 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
                     return false;
                 }
 
-                derivedShip.ShipJumpTank.SetFuelResidue(derivedShip.ShipJumpTank.FuelResidue -
-                                                        derivedShip.ShipJumpFuelConsumption(distance));
-
                 return true;
             }
 
+            ship.SetNoJumpEngine();
             return false;
         }
 

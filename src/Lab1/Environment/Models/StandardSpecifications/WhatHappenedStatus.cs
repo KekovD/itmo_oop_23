@@ -8,4 +8,5 @@ public enum WhatHappenedStatus
     ShortJumpRange,
     DeflectorDestroyed,
     Successfully,
+    NoJumpEngine,
 }

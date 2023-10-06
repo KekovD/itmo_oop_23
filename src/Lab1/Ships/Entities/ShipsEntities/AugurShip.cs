@@ -11,16 +11,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class AugurShip : BaseShipWithJumpEngineAndDeflector
 {
-    public AugurShip(int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
+    public AugurShip(bool havePhotons)
     {
         ShipHull = new HullThird();
-        ShipStandardTank = new StandardTank(
-            (int)CapacityTankStandard.CapacityStandardAugur,
-            currentStandardFuelResidue);
+        ShipStandardTank = new StandardTank((int)CapacityTankStandard.CapacityStandardAugur);
         ImpulseEngine = new EImpulseEngine();
-        ShipJumpTank = new JumpTank(
-            (int)CapacityTankJump.CapacityJumpAugur,
-            currentJumpFuelResidue);
+        ShipJumpTank = new JumpTank((int)CapacityTankJump.CapacityJumpAugur);
         JumpEngine = new AlphaJumpEngine();
         ShipDeflector = new DeflectorThird(havePhotons);
         ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;

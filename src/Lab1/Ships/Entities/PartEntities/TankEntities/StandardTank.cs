@@ -4,13 +4,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEn
 
 public class StandardTank : BaseTank
 {
-    public StandardTank()
-    {
-    }
-
-    public StandardTank(int fullStandardTank, int currentStandardFuelResidue)
+    public StandardTank(int fullStandardTank)
     {
         FullTank = fullStandardTank;
-        FuelResidue = currentStandardFuelResidue;
     }
 }

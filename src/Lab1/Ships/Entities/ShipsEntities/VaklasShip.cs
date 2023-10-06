@@ -12,16 +12,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
 
 public class VaklasShip : BaseShipWithJumpEngineAndDeflector
 {
-    public VaklasShip(int currentStandardFuelResidue, int currentJumpFuelResidue, bool havePhotons)
+    public VaklasShip(bool havePhotons)
     {
         ShipHull = new HullSecond();
-        ShipStandardTank = new StandardTank(
-            (int)CapacityTankStandard.CapacityStandardVaklas,
-            currentStandardFuelResidue);
+        ShipStandardTank = new StandardTank((int)CapacityTankStandard.CapacityStandardVaklas);
         ImpulseEngine = new EImpulseEngine();
-        ShipJumpTank = new JumpTank(
-            (int)CapacityTankJump.CapacityJumpVaklas,
-            currentJumpFuelResidue);
+        ShipJumpTank = new JumpTank((int)CapacityTankJump.CapacityJumpVaklas);
         JumpEngine = new GammaJumpEngine();
         ShipDeflector = new DeflectorFirst(havePhotons);
         ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;

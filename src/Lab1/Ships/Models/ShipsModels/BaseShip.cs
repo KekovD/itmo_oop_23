@@ -18,6 +18,7 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
     public StandardTank? ShipStandardTank { get; protected init; }
     public bool ShipAntiNitrinoEmitter { get; protected init; }
     public int ShipWeight { get; protected init; }
+    public bool NoJumpEngineCheck { get; private set; } = true;
 
     public void SetShipAlive()
     {
@@ -28,6 +29,11 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
     {
         ShipCrewAlive = false;
         SetShipAlive();
+    }
+
+    public void SetNoJumpEngine()
+    {
+        NoJumpEngineCheck = false;
     }
 
     public int ShipImpulseFuelConsumption(int distance)

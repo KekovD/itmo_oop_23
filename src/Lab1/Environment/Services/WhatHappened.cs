@@ -28,6 +28,11 @@ public abstract class WhatHappened : OptimumShip, ICheckWhatHappened
             return WhatHappenedStatus.DeflectorDestroyed;
         }
 
+        if (ship.NoJumpEngineCheck == false)
+        {
+            return WhatHappenedStatus.NoJumpEngine;
+        }
+
         return WhatHappenedStatus.Successfully;
     }
 
