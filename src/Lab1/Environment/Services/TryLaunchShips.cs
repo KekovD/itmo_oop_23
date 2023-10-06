@@ -1,31 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class TryLaunchShips : TrySingleTraverseRouteDistance
+public class TryLaunchShips : TrySingleTraverseRouteDistance, ILaunchShips
 {
-    public Collection<Collection<bool>> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public ICollection<bool> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {
-        var resultCollection = new Collection<Collection<bool>>();
+        var resultCollection = new Collection<bool>();
 
-        foreach (BaseSpace segment in manySegments)
+        foreach (BaseShip ship in manyShips)
         {
-            var segmentResults = new Collection<bool>();
-            foreach (BaseShip ship in manyShips)
+            foreach (BaseSpace segment in manySegments)
             {
-                bool tryResult = TryTraverseRouteDistance(ship, segment, segment.RouteLength);
-                if (tryResult)
+                if (!TryTraverseRouteDistance(ship, segment, segment.RouteLength))
                 {
-                    tryResult = TryTraverseRouteDamage(ship, segment, segment.RouteLength);
+                    resultCollection.Add(false);
                 }
-
-                segmentResults.Add(tryResult);
             }
 
-            resultCollection.Add(segmentResults);
+            resultCollection.Add(true);
         }
 
         return resultCollection;

@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.
 
 public interface ILaunchShips
 {
-     ICollection<ICollection<bool>> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegment);
+     ICollection<bool> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
 }
