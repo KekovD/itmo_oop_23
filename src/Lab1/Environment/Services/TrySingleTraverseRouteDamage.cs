@@ -85,6 +85,6 @@ public abstract class TrySingleTraverseRouteDamage : ITryTraverseRouteDamage
             return true;
         }
 
-        return false;
+        throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDamage));
     }
 }

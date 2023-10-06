@@ -71,6 +71,6 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
             return true;
         }
 
-        return false;
+        throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDistance));
     }
 }
