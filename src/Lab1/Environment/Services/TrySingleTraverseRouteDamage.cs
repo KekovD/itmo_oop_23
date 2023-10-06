@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public abstract class TrySingleTraverseRouteDamage : ITryTraverseRouteDamage
+public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTraverseRouteDamage
 {
     public bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance)
     {

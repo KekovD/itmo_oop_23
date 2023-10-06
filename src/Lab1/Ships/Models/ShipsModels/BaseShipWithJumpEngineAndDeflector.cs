@@ -4,10 +4,16 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipI
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IShipJumpEngine, IShipIJumpFuelCost
+public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IShipJumpEngine, IShipIJumpFuelCost, ISetEnoughDistanceJump
 {
     public BaseJumpEngines? JumpEngine { get; protected init; }
     public JumpTank ShipJumpTank { get; protected init; } = new JumpTank();
+    public bool EnoughDistanceJump { get; private set; } = true;
     public abstract int ShipIJumpFuelCost(int distance);
     public abstract int ShipJumpFuelConsumption(int distance);
+
+    public void SetFalseEnoughDistanceJump()
+    {
+        EnoughDistanceJump = false;
+    }
 }

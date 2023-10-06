@@ -18,16 +18,6 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
                 throw new PartOfShipNullException(nameof(ship.ShipStandardTank));
             }
 
-            if (ship.ShipImpulseFuelConsumption(distance) > ship.ShipStandardTank.FuelResidue)
-            {
-                ship.ShipStandardTank.SetFuelResidue(ship.ShipStandardTank.FuelResidue -
-                                                     ship.ShipImpulseFuelConsumption(distance));
-                return false;
-            }
-
-            ship.ShipStandardTank.SetFuelResidue(ship.ShipStandardTank.FuelResidue -
-                                                 ship.ShipImpulseFuelConsumption(distance));
-
             return true;
         }
 
@@ -42,13 +32,7 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
 
                 if (derivedShip.JumpEngine.JumpRage < distance)
                 {
-                    return false;
-                }
-
-                if (derivedShip.ShipJumpFuelConsumption(distance) > derivedShip.ShipJumpTank.FuelResidue)
-                {
-                    derivedShip.ShipJumpTank.SetFuelResidue(derivedShip.ShipJumpTank.FuelResidue -
-                                                            derivedShip.ShipJumpFuelConsumption(distance));
+                    derivedShip.SetFalseEnoughDistanceJump();
                     return false;
                 }
 

@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpace
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class OptimumShip : SingleCostOfRoute, IOptimumShip
+public abstract class OptimumShip : SingleCostOfRoute, IOptimumShip
 {
     public int GetOptimumShip(IList<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {

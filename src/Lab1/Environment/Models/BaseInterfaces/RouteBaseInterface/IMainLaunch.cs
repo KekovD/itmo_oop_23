@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 
-public interface ILaunchShips
+public interface IMainLaunch
 {
-     ICollection<bool> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
+    IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
 }

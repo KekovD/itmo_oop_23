@@ -6,9 +6,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class TryLaunchShips : TrySingleTraverseRouteDistance, ILaunchShips
+public abstract class LaunchShips : TrySingleTraverseRouteDistance, ITryLaunchShips
 {
-    public ICollection<bool> LaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public Collection<bool> TryLaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {
         var resultCollection = new Collection<bool>();
 
