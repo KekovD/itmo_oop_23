@@ -24,12 +24,18 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
             }
 
             int iterator = 0;
+            int counterObstacles = 0;
             foreach (BaseStandardObstacles obstacles in derivedSpace.TypeOfObstacles)
             {
                 for (int i = 1; i < derivedSpace.NumberOfObstaclesOnRoute[iterator]; i++)
                 {
                     obstacles.DoingDamage(ship);
+                    counterObstacles++;
                 }
+
+                derivedSpace.SetNumberOfObstacles(
+                    derivedSpace.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                counterObstacles = 0;
 
                 iterator++;
             }
@@ -57,12 +63,18 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
                 }
 
                 int iterator = 0;
+                int counterObstacles = 0;
                 foreach (BaseStandardObstacles obstacles in derivedSpaceSecond.TypeOfObstacles)
                 {
                     for (int i = 1; i < derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator]; i++)
                     {
                         obstacles.DoingDamage(derivedShip);
+                        counterObstacles++;
                     }
+
+                    derivedSpaceSecond.SetNumberOfObstacles(
+                        derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                    counterObstacles = 0;
 
                     iterator++;
                 }
@@ -91,6 +103,7 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
             }
 
             int iterator = 0;
+            int counterObstacles = 0;
             foreach (BaseStandardObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
             {
                 if (ship.ShipAntiNitrinoEmitter == false && derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
@@ -98,7 +111,12 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
                     for (int i = 1; i < derivedSpaceThird.NumberOfObstaclesOnRoute[iterator]; i++)
                     {
                         obstacles.DoingDamage(ship);
+                        counterObstacles++;
                     }
+
+                    derivedSpaceThird.SetNumberOfObstacles(
+                        derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                    counterObstacles = 0;
                 }
 
                 iterator++;
