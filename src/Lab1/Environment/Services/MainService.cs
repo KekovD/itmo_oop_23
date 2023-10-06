@@ -25,13 +25,36 @@ public class MainService : LaunchShips, IMainLaunch
 
             resultMainLaunch.Add(shipInfo);
 
-            if (shipResult && CheckWhatHappened(allShips[iterator]) != WhatHappenedStatus.Successfully)
+            if ((shipResult && CheckWhatHappened(allShips[iterator]) != WhatHappenedStatus.Successfully) &&
+                (shipResult && CheckWhatHappened(allShips[iterator]) != WhatHappenedStatus.DeflectorDestroyed))
             {
                 throw new ServicesInvalidOperationException(nameof(MainLaunch));
             }
 
             iterator++;
         }
+
+        var falseIndex = new List<int>();
+        int iteratorSecond = 0;
+        foreach (bool result in resultLaunch)
+        {
+            if (result == false)
+            {
+                falseIndex.Add(iteratorSecond);
+            }
+
+            iteratorSecond++;
+        }
+
+        foreach (int i in falseIndex)
+        {
+            allShips.RemoveAt(i);
+        }
+
+        int resultPrefer = GetOptimumShip(allShips, manySpaces);
+        string shipNamePrefer = allShips[resultPrefer].GetType().Name;
+        var shipInfoPrefer = new List<string> { shipNamePrefer, shipNamePrefer };
+        resultMainLaunch.Add(shipInfoPrefer);
 
         return resultMainLaunch;
     }

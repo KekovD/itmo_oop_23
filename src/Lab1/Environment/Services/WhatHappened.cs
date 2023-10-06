@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public abstract class WhatHappened : ICheckWhatHappened
+public abstract class WhatHappened : OptimumShip, ICheckWhatHappened
 {
     public WhatHappenedStatus CheckWhatHappened(BaseShip ship)
     {
