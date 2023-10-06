@@ -12,32 +12,31 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class SecondTest
+public class FourthTest
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
         var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
-        const string checkFirst = "CrewKilled";
-        const string checkSecond = "Successfully";
-        bool result = checkFirst.Equals(checkList[0][1], StringComparison.Ordinal);
-        result &= checkSecond.Equals(checkList[1][1], StringComparison.Ordinal);
+        const string check = "WalkingShuttleShip";
+        bool result = check.Equals(checkList[2][0], StringComparison.Ordinal);
         return result;
     }
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
+    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip vaklasShip)
     {
         var manyShips = new List<BaseShip>
         {
-            vaklasShipWithoutPhotons,
-            vaklasShipWithPhotons,
+            walkingShuttleShip,
+            vaklasShip,
         };
         var obstacles = new Collection<int>();
+        obstacles.Add(2);
         obstacles.Add(3);
-        var space = new HighDensitySpaceNebulae(100, obstacles);
+        var space = new NormalSpace(100, obstacles);
         var manySpaces = new List<BaseSpace>();
         manySpaces.Add(space);
         Assert.True(CheckResult(manyShips, manySpaces));
@@ -49,8 +48,8 @@ public class SecondTest
         {
             new object[]
             {
+                new WalkingShuttleShip(),
                 new VaklasShip(false),
-                new VaklasShip(true),
             },
         };
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();

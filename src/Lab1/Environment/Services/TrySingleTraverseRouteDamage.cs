@@ -31,6 +31,12 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
                 {
                     obstacles.DoingDamage(ship);
                     counterObstacles++;
+                    if (ship.ShipAlive == false)
+                    {
+                        derivedSpace.SetNumberOfObstacles(
+                            derivedSpace.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                        return false;
+                    }
                 }
 
                 derivedSpace.SetNumberOfObstacles(
@@ -70,6 +76,12 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
                     {
                         obstacles.DoingDamage(derivedShip);
                         counterObstacles++;
+                        if (ship.ShipAlive == false)
+                        {
+                            derivedSpaceSecond.SetNumberOfObstacles(
+                                derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                            return false;
+                        }
                     }
 
                     derivedSpaceSecond.SetNumberOfObstacles(
