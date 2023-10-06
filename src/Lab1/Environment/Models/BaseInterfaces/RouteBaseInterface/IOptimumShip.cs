@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.
 
 public interface IOptimumShip
 {
-    ICollection<int> GetOptimumShip(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegment);
+    int GetOptimumShip(IList<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
 }
