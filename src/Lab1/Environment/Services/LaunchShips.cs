@@ -17,6 +17,7 @@ public abstract class LaunchShips : TrySingleTraverseRouteDistance, ITryLaunchSh
             bool checkAdd = true;
             foreach (BaseSpace segment in manySegments)
             {
+                TryTraverseRouteDamage(ship, segment, segment.RouteLength);
                 if (!TryTraverseRouteDistance(ship, segment, segment.RouteLength))
                 {
                     checkAdd &= false;
