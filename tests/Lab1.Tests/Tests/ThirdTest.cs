@@ -12,32 +12,35 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class FirstTest
+public class ThirdTest
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
         var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
-        const string checkFirst = "NoJumpEngine";
-        const string checkSecond = "ShortJumpRange";
+        const string checkFirst = "ShipDestroyed";
+        const string checkSecond = "DeflectorDestroyed";
+        const string checkThird = "Successfully";
         bool result = checkFirst.Equals(checkList[0][1], StringComparison.Ordinal);
         result &= checkSecond.Equals(checkList[1][1], StringComparison.Ordinal);
+        result &= checkThird.Equals(checkList[2][1], StringComparison.Ordinal);
         return result;
     }
 
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip augurShip)
+    private void ConditionCheck(BaseShip vaklasShip, BaseShip augurShip, BaseShip meredianShip)
     {
         var manyShips = new List<BaseShip>
         {
-            walkingShuttleShip,
+            vaklasShip,
             augurShip,
+            meredianShip,
         };
         var obstacles = new Collection<int>();
-        obstacles.Add(1);
-        var space = new HighDensitySpaceNebulae(10000, obstacles);
+        obstacles.Add(4);
+        var space = new NitrinoParticleNebulae(10, obstacles);
         var manySpaces = new List<BaseSpace>();
         manySpaces.Add(space);
         Assert.True(CheckResult(manyShips, manySpaces));
@@ -49,8 +52,9 @@ public class FirstTest
         {
             new object[]
             {
-                new WalkingShuttleShip(),
+                new VaklasShip(false),
                 new AugurShip(false),
+                new MeredianShip(false),
             },
         };
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();

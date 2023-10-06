@@ -112,6 +112,12 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
                     {
                         obstacles.DoingDamage(ship);
                         counterObstacles++;
+                        if (ship.ShipAlive == false)
+                        {
+                            derivedSpaceThird.SetNumberOfObstacles(
+                                derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                            return false;
+                        }
                     }
 
                     derivedSpaceThird.SetNumberOfObstacles(

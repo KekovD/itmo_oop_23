@@ -6,5 +6,5 @@ public enum ObstructionDamage
     AntimatterFlash,
     SmallAsteroidsDamage = 10,
     MeteoritesDamage = 40,
-    SpaceWhaleDamage = 400,
+    SpaceWhaleDamage = 1000,
 }

@@ -14,12 +14,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class SecondTest
 {
-    public static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
         var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
-        string checkFirst = "CrewKilled";
-        string checkSecond = "Successfully";
+        const string checkFirst = "CrewKilled";
+        const string checkSecond = "Successfully";
         bool result = checkFirst.Equals(checkList[0][1], StringComparison.Ordinal);
         result &= checkSecond.Equals(checkList[1][1], StringComparison.Ordinal);
         return result;
@@ -28,7 +28,7 @@ public class SecondTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    public void AllNumbersAreOddWithClassData(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
+    private void ConditionCheck(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
     {
         var manyShips = new List<BaseShip>
         {
