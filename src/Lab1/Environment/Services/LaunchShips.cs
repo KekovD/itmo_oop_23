@@ -14,15 +14,16 @@ public abstract class LaunchShips : TrySingleTraverseRouteDistance, ITryLaunchSh
 
         foreach (BaseShip ship in manyShips)
         {
+            bool checkAdd = true;
             foreach (BaseSpace segment in manySegments)
             {
                 if (!TryTraverseRouteDistance(ship, segment, segment.RouteLength))
                 {
-                    resultCollection.Add(false);
+                    checkAdd &= false;
                 }
             }
 
-            resultCollection.Add(true);
+            resultCollection.Add(checkAdd);
         }
 
         return resultCollection;

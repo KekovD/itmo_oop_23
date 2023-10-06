@@ -2,14 +2,16 @@
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class MainService : LaunchShips, IMainLaunch
 {
+    public MainService()
+    {
+    }
+
     public IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
@@ -24,12 +26,6 @@ public class MainService : LaunchShips, IMainLaunch
             var shipInfo = new List<string> { shipName, shipResultString };
 
             resultMainLaunch.Add(shipInfo);
-
-            if ((shipResult && CheckWhatHappened(allShips[iterator]) != WhatHappenedStatus.Successfully) &&
-                (shipResult && CheckWhatHappened(allShips[iterator]) != WhatHappenedStatus.DeflectorDestroyed))
-            {
-                throw new ServicesInvalidOperationException(nameof(MainLaunch));
-            }
 
             iterator++;
         }
@@ -46,9 +42,19 @@ public class MainService : LaunchShips, IMainLaunch
             iteratorSecond++;
         }
 
+        int countIteration = 0;
         foreach (int i in falseIndex)
         {
-            allShips.RemoveAt(i);
+            allShips.RemoveAt(i - countIteration);
+            countIteration++;
+        }
+
+        if (allShips.Count == 0)
+        {
+            const string noneShip = "None";
+            var shipInfoPreferNone = new List<string> { noneShip, noneShip };
+            resultMainLaunch.Add(shipInfoPreferNone);
+            return resultMainLaunch;
         }
 
         int resultPrefer = GetOptimumShip(allShips, manySpaces);
