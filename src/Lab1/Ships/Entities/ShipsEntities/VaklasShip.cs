@@ -40,6 +40,6 @@ public class VaklasShip : BaseShipWithJumpEngineAndDeflector
             throw new PartOfShipNullException(nameof(JumpEngine));
         }
 
-        return JumpEngine.JumpFuelConsumption * (int)Math.Pow(distance, 2) * (int)PriceOfFuel.PriceJumpFuel;
+        return ShipJumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

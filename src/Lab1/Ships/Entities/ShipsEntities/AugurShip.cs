@@ -39,6 +39,6 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
             throw new PartOfShipNullException(nameof(JumpEngine));
         }
 
-        return JumpEngine.JumpFuelConsumption * distance * (int)PriceOfFuel.PriceJumpFuel;
+        return ShipJumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

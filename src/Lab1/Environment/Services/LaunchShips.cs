@@ -20,7 +20,7 @@ public abstract class LaunchShips : TrySingleTraverseRouteDistance, ITryLaunchSh
                 TryTraverseRouteDamage(ship, segment, segment.RouteLength);
                 if (!TryTraverseRouteDistance(ship, segment, segment.RouteLength))
                 {
-                    checkAdd &= false;
+                    checkAdd = false;
                 }
             }
 

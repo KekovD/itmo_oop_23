@@ -40,6 +40,6 @@ public class StellaShip : BaseShipWithJumpEngineAndDeflector
             throw new PartOfShipNullException(nameof(JumpEngine));
         }
 
-        return (int)(JumpEngine.JumpFuelConsumption * distance * Math.Log2(distance)) * (int)PriceOfFuel.PriceJumpFuel;
+        return ShipJumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

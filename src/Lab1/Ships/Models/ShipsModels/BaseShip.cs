@@ -36,19 +36,6 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
         NoJumpEngineCheck = false;
     }
 
-    public int ShipImpulseFuelConsumption(int distance)
-    {
-        if (ImpulseEngine == null)
-        {
-            throw new PartOfShipNullException(nameof(ImpulseEngine));
-        }
-
-        int speed = ImpulseEngine.GetImpulseEngineSpeed(distance) - (int)(ShipWeightRatio * ShipWeight);
-        int time = (int)(speed / distance);
-
-        return (time * ImpulseEngine.FuelUsePerUnitTime) + ImpulseEngine.FuelUseAtStartup;
-    }
-
     public int ShipImpulseFuelCost(int distance)
     {
         if (ImpulseEngine == null)
