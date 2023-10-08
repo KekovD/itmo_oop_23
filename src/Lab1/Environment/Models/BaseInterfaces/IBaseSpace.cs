@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 
-public interface IBaseSpaceInterface
+public interface IBaseSpace
 {
     int RouteLength { get; }
     IList<int>? NumberOfObstaclesOnRoute { get; }

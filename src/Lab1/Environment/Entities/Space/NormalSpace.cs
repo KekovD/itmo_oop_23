@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.ObstaclesEntities;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
 public class NormalSpace : BaseSpace
 {

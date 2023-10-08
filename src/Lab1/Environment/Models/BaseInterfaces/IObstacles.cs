@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 
-public interface IObstaclesInterfaces
+public interface IObstacles
 {
     int StandardDamage { get; }
     void DoingDamage(BaseShip ship);

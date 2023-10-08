@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
@@ -13,7 +13,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public abstract class LaunchShips : IServicesInterface
+public abstract class LaunchShips : IServices
 {
     private const int WrongTypeOfEngineRatio = 100000;
     public Collection<bool> TryLaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
