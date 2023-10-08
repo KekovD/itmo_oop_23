@@ -8,10 +8,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class MainService : LaunchShips, IMainLaunch
 {
-    public MainService()
-    {
-    }
-
     public IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
