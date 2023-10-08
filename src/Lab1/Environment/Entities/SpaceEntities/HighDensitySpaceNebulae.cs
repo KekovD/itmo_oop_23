@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
 
-public class HighDensitySpaceNebulae : BaseHighDensitySpaceNebulae
+public class HighDensitySpaceNebulae : BaseSpace
 {
     public HighDensitySpaceNebulae(int routeLength, Collection<int> numberOfObstaclesOnRoute)
     {

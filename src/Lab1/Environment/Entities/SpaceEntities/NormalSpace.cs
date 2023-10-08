@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
 
-public class NormalSpace : BaseNormalSpace
+public class NormalSpace : BaseSpace
 {
     public NormalSpace(int routeLength, Collection<int> numberOfObstaclesOnRoute)
     {

@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
 
-public class NitrinoParticleNebulae : BaseNitrinoParticleNebulae
+public class NitrinoParticleNebulae : BaseSpace
 {
     public NitrinoParticleNebulae(int routeLength, Collection<int> numberOfObstaclesOnRoute)
     {
