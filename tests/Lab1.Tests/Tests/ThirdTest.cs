@@ -6,8 +6,8 @@ using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.SpaceEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.ShipsEntities;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;

@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 

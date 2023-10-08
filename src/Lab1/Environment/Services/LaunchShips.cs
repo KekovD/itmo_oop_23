@@ -8,8 +8,8 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpace
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
