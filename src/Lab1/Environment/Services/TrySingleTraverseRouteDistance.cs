@@ -13,11 +13,6 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
     {
         if (space is NormalSpace)
         {
-            if (ship.ShipStandardTank == null)
-            {
-                throw new PartOfShipNullException(nameof(ship.ShipStandardTank));
-            }
-
             return true;
         }
 

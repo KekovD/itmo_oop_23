@@ -3,7 +3,6 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.DeflectorE
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.ImpulseEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.HullEntities;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.TankSpecifications;
 
@@ -14,9 +13,7 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
     public AugurShip(bool havePhotons)
     {
         ShipHull = new HullThird();
-        ShipStandardTank = new StandardTank((int)CapacityTankStandard.CapacityStandardAugur);
         ImpulseEngine = new EImpulseEngine();
-        ShipJumpTank = new JumpTank((int)CapacityTankJump.CapacityJumpAugur);
         JumpEngine = new AlphaJumpEngine();
         ShipDeflector = new DeflectorThird(havePhotons);
         ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;

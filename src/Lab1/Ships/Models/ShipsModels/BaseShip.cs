@@ -1,5 +1,4 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.TankEntities;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
@@ -14,7 +13,6 @@ public abstract class BaseShip : IBaseShipInterface
     public bool ShipCrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
     public BaseHull ShipHull { get; protected init; } = new BaseHull();
-    public StandardTank? ShipStandardTank { get; protected init; }
     public bool ShipAntiNitrinoEmitter { get; protected init; }
     public int ShipWeight { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
