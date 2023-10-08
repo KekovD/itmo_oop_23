@@ -5,7 +5,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.S
 
 public interface IBaseShipInterface
 {
-    BaseHull ShipHull { get; }
+    BaseHull? ShipHull { get; }
     BaseImpulseEngines? ImpulseEngine { get; }
     bool ShipAntiNitrinoEmitter { get; }
     int ShipWeight { get; }

@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
@@ -20,6 +21,11 @@ public abstract class BaseSpaceWhales : BaseObstacles
                 derivedShip.ShipDeflector.SetPartServiceability();
                 return;
             }
+        }
+
+        if (ship.ShipHull == null)
+        {
+            throw new PartOfShipNullException(nameof(ship.ShipHull));
         }
 
         ship.ShipHull.SetHealthOfHull(ship.ShipHull.HealthOfHull - StandardDamage);

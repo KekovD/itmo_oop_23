@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
-public class MainService : LaunchShips, IMainLaunch
+public class MainService : LaunchShips
 {
-    public IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    public override IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
         var resultMainLaunch = new List<IList<string>>();

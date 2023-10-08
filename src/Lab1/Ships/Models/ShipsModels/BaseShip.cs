@@ -12,13 +12,18 @@ public abstract class BaseShip : IBaseShipInterface
     public bool ShipAlive { get; private set; } = true;
     public bool ShipCrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
-    public BaseHull ShipHull { get; protected init; } = new BaseHull();
+    public BaseHull? ShipHull { get; protected init; }
     public bool ShipAntiNitrinoEmitter { get; protected init; }
     public int ShipWeight { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
 
     public void CheckShipAlive()
     {
+        if (ShipHull == null)
+        {
+            throw new PartOfShipNullException(nameof(ShipHull));
+        }
+
         ShipAlive = ShipHull.Serviceability & ShipCrewAlive;
     }
 
