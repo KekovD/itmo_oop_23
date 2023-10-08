@@ -13,14 +13,14 @@ public class StellaShip : BaseShipWithJumpEngineAndDeflector
 {
     public StellaShip(bool havePhotons)
     {
-        ShipHull = new HullFirst();
+        Hull = new HullFirst();
         ImpulseEngine = new CImpulseEngine();
         JumpEngine = new OmegaJumpEngine();
-        ShipDeflector = new DeflectorFirst(havePhotons);
-        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
+        Deflector = new DeflectorFirst(havePhotons);
+        Weight = Hull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + Deflector.PartWeight;
     }
 
-    public override int ShipJumpFuelConsumption(int distance)
+    public override int JumpFuelConsumption(int distance)
     {
         if (JumpEngine == null)
         {
@@ -30,13 +30,13 @@ public class StellaShip : BaseShipWithJumpEngineAndDeflector
         return (int)(JumpEngine.JumpFuelConsumption * distance * Math.Log2(distance));
     }
 
-    public override int ShipIJumpFuelCost(int distance)
+    public override int JumpFuelCost(int distance)
     {
         if (JumpEngine == null)
         {
             throw new PartOfShipNullException(nameof(JumpEngine));
         }
 
-        return ShipJumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
+        return JumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

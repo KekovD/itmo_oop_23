@@ -63,7 +63,7 @@ public abstract class LaunchShips : IServicesInterface
                 return true;
             }
 
-            ship.SetNoJumpStatus();
+            ship.SetFalseNoJumpStatus();
             return false;
         }
 
@@ -189,7 +189,7 @@ public abstract class LaunchShips : IServicesInterface
             int counterObstacles = 0;
             foreach (BaseObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
             {
-                if (ship.ShipAntiNitrinoEmitter == false && derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
+                if (ship.AntiNitrinoEmitter == false && derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
                 {
                     for (int i = 1; i < derivedSpaceThird.NumberOfObstaclesOnRoute[iterator]; i++)
                     {
@@ -226,27 +226,27 @@ public abstract class LaunchShips : IServicesInterface
     {
         if (space is NormalSpace)
         {
-            return ship.ShipImpulseFuelCost(distance);
+            return ship.ImpulseFuelConsumption(distance);
         }
 
         if (space is HighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
-                return derivedShip.ShipIJumpFuelCost(distance);
+                return derivedShip.JumpFuelCost(distance);
             }
 
-            return ship.ShipImpulseFuelCost(distance) * WrongTypeOfEngineRatio;
+            return ship.ImpulseFuelConsumption(distance) * WrongTypeOfEngineRatio;
         }
 
         if (space is NitrinoParticleNebulae)
         {
             if (ship.ImpulseEngine is CImpulseEngine)
             {
-                return ship.ShipImpulseFuelCost(distance) * WrongTypeOfEngineRatio;
+                return ship.ImpulseFuelConsumption(distance) * WrongTypeOfEngineRatio;
             }
 
-            return ship.ShipImpulseFuelCost(distance);
+            return ship.ImpulseFuelConsumption(distance);
         }
 
         throw new ServicesInvalidOperationException(nameof(GetSingleCostOfRoute));
@@ -276,17 +276,17 @@ public abstract class LaunchShips : IServicesInterface
 
     public WhatHappenedStatus CheckWhatHappened(BaseShip ship)
     {
-        if (!ship.ShipCrewAlive)
+        if (!ship.CrewAlive)
         {
             return WhatHappenedStatus.CrewKilled;
         }
 
-        if (ship.ShipHull == null)
+        if (ship.Hull == null)
         {
-            throw new PartOfShipNullException(nameof(ship.ShipHull));
+            throw new PartOfShipNullException(nameof(ship.Hull));
         }
 
-        if (!ship.ShipHull.Serviceability)
+        if (!ship.Hull.Serviceability)
         {
             return WhatHappenedStatus.ShipDestroyed;
         }
@@ -296,7 +296,7 @@ public abstract class LaunchShips : IServicesInterface
             return WhatHappenedStatus.ShortJumpRange;
         }
 
-        if (ship is BaseShipWithDeflector { ShipDeflector.Serviceability: false })
+        if (ship is BaseShipWithDeflector { Deflector.Serviceability: false })
         {
             return WhatHappenedStatus.DeflectorDestroyed;
         }

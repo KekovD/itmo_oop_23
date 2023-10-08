@@ -8,8 +8,8 @@ public class WalkingShuttleShip : BaseShip
 {
     public WalkingShuttleShip()
     {
-        ShipHull = new HullFirst();
+        Hull = new HullFirst();
         ImpulseEngine = new CImpulseEngine();
-        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight;
+        Weight = Hull.PartWeight + ImpulseEngine.PartWeight;
     }
 }

@@ -7,31 +7,31 @@ public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles
 {
     public override void DoingDamage(BaseShip ship)
     {
-        if (ship.ShipHull == null)
+        if (ship.Hull == null)
         {
-            throw new PartOfShipNullException(nameof(ship.ShipHull));
+            throw new PartOfShipNullException(nameof(ship.Hull));
         }
 
         if (ship is BaseShipWithDeflector derivedShip)
         {
-            if (derivedShip.ShipHull == null)
+            if (derivedShip.Hull == null)
             {
-                throw new PartOfShipNullException(nameof(ship.ShipHull));
+                throw new PartOfShipNullException(nameof(ship.Hull));
             }
 
-            if (derivedShip.ShipDeflector.Serviceability)
+            if (derivedShip.Deflector.Serviceability)
             {
-                derivedShip.ShipDeflector.SetHealthOfDeflector(derivedShip.ShipDeflector.HealthOfDeflector -
+                derivedShip.Deflector.SetHealthOfDeflector(derivedShip.Deflector.HealthOfDeflector -
                                                                StandardDamage);
                 return;
             }
 
-            derivedShip.ShipHull.SetHealthOfHull(derivedShip.ShipHull.HealthOfHull - StandardDamage);
+            derivedShip.Hull.SetHealthOfHull(derivedShip.Hull.HealthOfHull - StandardDamage);
             derivedShip.CheckShipAlive();
             return;
         }
 
-        ship.ShipHull.SetHealthOfHull(ship.ShipHull.HealthOfHull - StandardDamage);
+        ship.Hull.SetHealthOfHull(ship.Hull.HealthOfHull - StandardDamage);
         ship.CheckShipAlive();
     }
 }

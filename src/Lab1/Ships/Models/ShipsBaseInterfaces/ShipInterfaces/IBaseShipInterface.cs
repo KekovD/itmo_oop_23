@@ -5,15 +5,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.S
 
 public interface IBaseShipInterface
 {
-    BaseHull? ShipHull { get; }
+    BaseHull? Hull { get; }
     BaseImpulseEngines? ImpulseEngine { get; }
-    bool ShipAntiNitrinoEmitter { get; }
-    int ShipWeight { get; }
+    bool AntiNitrinoEmitter { get; }
+    int Weight { get; }
     bool ShipAlive { get; }
-    bool ShipCrewAlive { get; }
+    bool CrewAlive { get; }
     bool NoJumpEngineStatus { get; }
-    void SetNoJumpStatus();
+    void SetFalseNoJumpStatus();
     void CheckShipAlive();
-    int ShipImpulseFuelCost(int distance);
+    int ImpulseFuelConsumption(int distance);
     void KillCrew();
 }

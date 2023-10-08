@@ -9,10 +9,10 @@ public class MeredianShip : BaseShipWithDeflector
 {
     public MeredianShip(bool havePhotons)
     {
-        ShipHull = new HullSecond();
+        Hull = new HullSecond();
         ImpulseEngine = new EImpulseEngine();
-        ShipDeflector = new DeflectorSecond(havePhotons);
-        ShipAntiNitrinoEmitter = true;
-        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + ShipDeflector.PartWeight;
+        Deflector = new DeflectorSecond(havePhotons);
+        AntiNitrinoEmitter = true;
+        Weight = Hull.PartWeight + ImpulseEngine.PartWeight + Deflector.PartWeight;
     }
 }

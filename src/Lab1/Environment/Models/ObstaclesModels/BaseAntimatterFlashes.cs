@@ -6,9 +6,9 @@ public abstract class BaseAntimatterFlashes : BaseObstacles
 {
     public override void DoingDamage(BaseShip ship)
     {
-        if (ship is BaseShipWithDeflector { ShipDeflector.DeflectAntimatterFlares: true } derivedShip)
+        if (ship is BaseShipWithDeflector { Deflector.DeflectAntimatterFlares: true } derivedShip)
         {
-            derivedShip.ShipDeflector.SetHealthOfPhotonsDeflector(derivedShip.ShipDeflector.PhotonsHealth -
+            derivedShip.Deflector.SetHealthOfPhotonsDeflector(derivedShip.Deflector.PhotonsHealth -
                                                                   StandardDamage);
             return;
         }

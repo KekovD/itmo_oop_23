@@ -12,14 +12,14 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
 {
     public AugurShip(bool havePhotons)
     {
-        ShipHull = new HullThird();
+        Hull = new HullThird();
         ImpulseEngine = new EImpulseEngine();
         JumpEngine = new AlphaJumpEngine();
-        ShipDeflector = new DeflectorThird(havePhotons);
-        ShipWeight = ShipHull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + ShipDeflector.PartWeight;
+        Deflector = new DeflectorThird(havePhotons);
+        Weight = Hull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + Deflector.PartWeight;
     }
 
-    public override int ShipJumpFuelConsumption(int distance)
+    public override int JumpFuelConsumption(int distance)
     {
         if (JumpEngine == null)
         {
@@ -29,13 +29,13 @@ public class AugurShip : BaseShipWithJumpEngineAndDeflector
         return JumpEngine.JumpFuelConsumption * distance;
     }
 
-    public override int ShipIJumpFuelCost(int distance)
+    public override int JumpFuelCost(int distance)
     {
         if (JumpEngine == null)
         {
             throw new PartOfShipNullException(nameof(JumpEngine));
         }
 
-        return ShipJumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
+        return JumpFuelConsumption(distance) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

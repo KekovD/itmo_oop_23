@@ -8,44 +8,44 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 public abstract class BaseShip : IBaseShipInterface
 {
-    private const double ShipWeightRatio = 0.05;
+    private const double WeightRatio = 0.05;
     public bool ShipAlive { get; private set; } = true;
-    public bool ShipCrewAlive { get; private set; } = true;
+    public bool CrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
-    public BaseHull? ShipHull { get; protected init; }
-    public bool ShipAntiNitrinoEmitter { get; protected init; }
-    public int ShipWeight { get; protected init; }
+    public BaseHull? Hull { get; protected init; }
+    public bool AntiNitrinoEmitter { get; protected init; }
+    public int Weight { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
 
     public void CheckShipAlive()
     {
-        if (ShipHull == null)
+        if (Hull == null)
         {
-            throw new PartOfShipNullException(nameof(ShipHull));
+            throw new PartOfShipNullException(nameof(Hull));
         }
 
-        ShipAlive = ShipHull.Serviceability & ShipCrewAlive;
+        ShipAlive = Hull.Serviceability & CrewAlive;
     }
 
     public void KillCrew()
     {
-        ShipCrewAlive = false;
+        CrewAlive = false;
         CheckShipAlive();
     }
 
-    public void SetNoJumpStatus()
+    public void SetFalseNoJumpStatus()
     {
         NoJumpEngineStatus = false;
     }
 
-    public int ShipImpulseFuelCost(int distance)
+    public int ImpulseFuelConsumption(int distance)
     {
         if (ImpulseEngine == null)
         {
             throw new PartOfShipNullException(nameof(ImpulseEngine));
         }
 
-        int speed = ImpulseEngine.GetImpulseEngineSpeed(distance) - (int)(ShipWeightRatio * ShipWeight);
+        int speed = ImpulseEngine.GetImpulseEngineSpeed(distance) - (int)(WeightRatio * Weight);
         int time = (int)(speed / distance);
 
         return ((time * ImpulseEngine.FuelUsePerUnitTime) + ImpulseEngine.FuelUseAtStartup) * (int)PriceOfFuel.PriceStandardFuel;

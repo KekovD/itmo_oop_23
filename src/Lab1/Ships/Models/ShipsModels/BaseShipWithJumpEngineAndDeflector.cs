@@ -7,8 +7,8 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
 {
     public BaseJumpEngines? JumpEngine { get; protected init; }
     public bool EnoughDistanceJump { get; private set; } = true;
-    public abstract int ShipIJumpFuelCost(int distance);
-    public abstract int ShipJumpFuelConsumption(int distance);
+    public abstract int JumpFuelCost(int distance);
+    public abstract int JumpFuelConsumption(int distance);
 
     public void SetFalseEnoughDistanceJump()
     {

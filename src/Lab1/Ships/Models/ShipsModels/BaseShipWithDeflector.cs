@@ -5,5 +5,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 public abstract class BaseShipWithDeflector : BaseShip, IBaseShipWithDeflectorInterface
 {
-    public BaseDeflector ShipDeflector { get; protected init; } = new BaseDeflector(false);
+    public BaseDeflector Deflector { get; protected init; } = new BaseDeflector(false);
 }

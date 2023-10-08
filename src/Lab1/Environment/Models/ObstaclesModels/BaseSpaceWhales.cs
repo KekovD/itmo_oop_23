@@ -7,28 +7,28 @@ public abstract class BaseSpaceWhales : BaseObstacles
 {
     public override void DoingDamage(BaseShip ship)
     {
-        if (ship.ShipAntiNitrinoEmitter)
+        if (ship.AntiNitrinoEmitter)
         {
             return;
         }
 
         if (ship is BaseShipWithDeflector derivedShip)
         {
-            if (derivedShip.ShipDeflector.Serviceability)
+            if (derivedShip.Deflector.Serviceability)
             {
-                derivedShip.ShipDeflector.SetHealthOfDeflector(derivedShip.ShipDeflector.HealthOfDeflector -
+                derivedShip.Deflector.SetHealthOfDeflector(derivedShip.Deflector.HealthOfDeflector -
                                                                StandardDamage);
-                derivedShip.ShipDeflector.SetPartServiceability();
+                derivedShip.Deflector.SetPartServiceability();
                 return;
             }
         }
 
-        if (ship.ShipHull == null)
+        if (ship.Hull == null)
         {
-            throw new PartOfShipNullException(nameof(ship.ShipHull));
+            throw new PartOfShipNullException(nameof(ship.Hull));
         }
 
-        ship.ShipHull.SetHealthOfHull(ship.ShipHull.HealthOfHull - StandardDamage);
+        ship.Hull.SetHealthOfHull(ship.Hull.HealthOfHull - StandardDamage);
         ship.CheckShipAlive();
     }
 }
