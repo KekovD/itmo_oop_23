@@ -1,6 +1,6 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.PartInterfaces;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
 
-public interface IDeflectorInterface
+public interface IDeflector
 {
     int HealthOfDeflector { get; }
     bool DeflectAntimatterFlares { get; }

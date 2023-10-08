@@ -6,7 +6,7 @@ public class AlphaJumpEngine : BaseJumpEngines
 {
     public AlphaJumpEngine()
     {
-        JumpRage = AlphaDistance;
+        Rage = AlphaDistance;
         JumpFuelConsumption = AlphaFlowRate;
         PartWeight = AlphaWeight;
     }

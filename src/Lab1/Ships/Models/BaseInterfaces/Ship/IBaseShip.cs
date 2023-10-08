@@ -1,9 +1,9 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 
-public interface IBaseShipInterface
+public interface IBaseShip
 {
     BaseHull? Hull { get; }
     BaseImpulseEngines? ImpulseEngine { get; }

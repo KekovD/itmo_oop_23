@@ -54,7 +54,7 @@ public abstract class LaunchShips : IServicesInterface
                     throw new PartOfShipNullException(nameof(derivedShip.JumpEngine));
                 }
 
-                if (derivedShip.JumpEngine.JumpRage < distance)
+                if (derivedShip.JumpEngine.Rage < distance)
                 {
                     derivedShip.SetFalseEnoughDistanceJump();
                     return false;
@@ -69,7 +69,7 @@ public abstract class LaunchShips : IServicesInterface
 
         if (space is NitrinoParticleNebulae)
         {
-            if (ship.ImpulseEngine is CImpulseEngine)
+            if (ship.ImpulseEngine is not EImpulseEngine) ////todo: не ссылаться на конечные сущности
             {
                 return false;
             }
@@ -291,7 +291,7 @@ public abstract class LaunchShips : IServicesInterface
             return WhatHappenedStatus.ShipDestroyed;
         }
 
-        if (ship is BaseShipWithJumpEngineAndDeflector { EnoughDistanceJump: false })
+        if (ship is BaseShipWithJumpEngineAndDeflector { EnoughDistanceJumpStatus: false })
         {
             return WhatHappenedStatus.ShortJumpRange;
         }

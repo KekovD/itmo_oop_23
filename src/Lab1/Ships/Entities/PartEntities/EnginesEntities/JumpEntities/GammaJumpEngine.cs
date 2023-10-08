@@ -7,7 +7,7 @@ public class GammaJumpEngine : BaseJumpEngines
 {
     public GammaJumpEngine()
     {
-        JumpRage = GammaDistance;
+        Rage = GammaDistance;
         JumpFuelConsumption = GammaFlowRate;
         PartWeight = GammaWeight;
     }

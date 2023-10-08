@@ -1,18 +1,18 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.TankSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IBaseShipWithJumpEngineAndDeflectorInterface
+public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IBaseShipWithJumpEngineAndDeflector
 {
     public BaseJumpEngines? JumpEngine { get; protected init; }
-    public bool EnoughDistanceJump { get; private set; } = true;
+    public bool EnoughDistanceJumpStatus { get; private set; } = true;
 
     public void SetFalseEnoughDistanceJump()
     {
-        EnoughDistanceJump = false;
+        EnoughDistanceJumpStatus = false;
     }
 
     public int JumpFuelPrice(int distance)
@@ -22,6 +22,6 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
             throw new PartOfShipNullException(nameof(ImpulseEngine));
         }
 
-        return JumpEngine.GetEngineFuelConsumption(distance, Weight) * (int)PriceOfFuel.PriceStandardFuel;
+        return JumpEngine.GetEngineFuelConsumption(distance, Weight) * (int)PriceOfFuel.PriceJumpFuel;
     }
 }

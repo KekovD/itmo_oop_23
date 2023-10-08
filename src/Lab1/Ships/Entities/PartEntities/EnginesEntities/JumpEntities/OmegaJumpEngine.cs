@@ -7,7 +7,7 @@ public class OmegaJumpEngine : BaseJumpEngines
 {
     public OmegaJumpEngine()
     {
-        JumpRage = OmegaDistance;
+        Rage = OmegaDistance;
         JumpFuelConsumption = OmegaFlowRate;
         PartWeight = OmegaWeight;
     }

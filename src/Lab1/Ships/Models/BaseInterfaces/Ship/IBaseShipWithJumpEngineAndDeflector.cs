@@ -1,11 +1,11 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 
-public interface IBaseShipWithJumpEngineAndDeflectorInterface
+public interface IBaseShipWithJumpEngineAndDeflector
 {
     BaseJumpEngines? JumpEngine { get; }
-    bool EnoughDistanceJump { get; }
+    bool EnoughDistanceJumpStatus { get; }
     void SetFalseEnoughDistanceJump();
     int JumpFuelPrice(int distance);
 }

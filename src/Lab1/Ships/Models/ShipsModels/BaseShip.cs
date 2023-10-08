@@ -1,12 +1,12 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.HullModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.TankSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShip : IBaseShipInterface
+public abstract class BaseShip : IBaseShip
 {
     protected const double WeightRatio = 0.05;
     public bool ShipAlive { get; private set; } = true;

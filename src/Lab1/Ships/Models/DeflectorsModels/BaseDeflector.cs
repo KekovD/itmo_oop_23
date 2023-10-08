@@ -1,9 +1,9 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.PartInterfaces;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
-public class BaseDeflector : PartServiceability, IDeflectorInterface, IPartWeight
+public class BaseDeflector : PartServiceability, IDeflector, IPartWeight
 {
     protected const int DeflectorFirstHealth = 20;
     protected const int DeflectorSecondHealth = 100;

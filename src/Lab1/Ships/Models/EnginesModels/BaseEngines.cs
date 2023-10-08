@@ -1,8 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.PartInterfaces;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-public abstract class BaseEngines : IGetEngineFuelConsumption, IPartWeight
+public abstract class BaseEngines : IGetEngineFuel, IPartWeight
 {
     protected const double WeightRatio = 0.05;
     protected const int CLassWeight = 100;
