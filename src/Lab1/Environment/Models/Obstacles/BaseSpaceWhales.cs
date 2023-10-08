@@ -14,6 +14,11 @@ public abstract class BaseSpaceWhales : BaseObstacles
 
         if (ship is BaseShipWithDeflector derivedShip)
         {
+            if (derivedShip.Deflector == null)
+            {
+                throw new PartOfShipNullException(nameof(derivedShip.Deflector));
+            }
+
             if (derivedShip.Deflector.Serviceability)
             {
                 derivedShip.Deflector.DamagingDeflector(StandardDamage);

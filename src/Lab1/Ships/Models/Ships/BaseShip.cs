@@ -1,14 +1,13 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
+using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.TankSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 public abstract class BaseShip : IBaseShip
 {
-    protected const double WeightRatio = 0.05;
     public bool ShipAlive { get; private set; } = true;
     public bool CrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
@@ -45,6 +44,6 @@ public abstract class BaseShip : IBaseShip
             throw new PartOfShipNullException(nameof(ImpulseEngine));
         }
 
-        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * (int)PriceOfFuel.PriceStandardFuel;
+        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * new FuelExchange().ImpulseFuelPrice();
     }
 }

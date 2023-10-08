@@ -19,6 +19,11 @@ public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles
                 throw new PartOfShipNullException(nameof(ship.Hull));
             }
 
+            if (derivedShip.Deflector == null)
+            {
+                throw new PartOfShipNullException(nameof(derivedShip.Deflector));
+            }
+
             if (derivedShip.Deflector.Serviceability)
             {
                 derivedShip.Deflector.DamagingDeflector(StandardDamage);
