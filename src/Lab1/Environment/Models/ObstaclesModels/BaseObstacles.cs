@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class BaseObstacles : IDoingDamage, IMyStandardDamage
+public abstract class BaseObstacles : IObstaclesInterfaces
 {
     public int StandardDamage { get; protected init; }
     public abstract void DoingDamage(BaseShip ship);
