@@ -1,5 +1,4 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.EngineSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 
@@ -7,8 +6,8 @@ public class AlphaJumpEngine : BaseJumpEngines
 {
     public AlphaJumpEngine()
     {
-        JumpRage = (int)JumpEngineDistance.AlphaDistance;
-        JumpFuelConsumption = (int)JumpEngineFuelFlow.AlphaFlowRate;
-        PartWeight = (int)WeightOfEngine.AlphaWeight;
+        JumpRage = AlphaDistance;
+        JumpFuelConsumption = AlphaFlowRate;
+        PartWeight = AlphaWeight;
     }
 }
