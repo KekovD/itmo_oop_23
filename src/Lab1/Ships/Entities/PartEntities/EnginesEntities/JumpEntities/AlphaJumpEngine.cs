@@ -7,8 +7,6 @@ public class AlphaJumpEngine : BaseJumpEngines
 {
     public AlphaJumpEngine()
     {
-        TypeOfEngine = BaseEngineType.JumpEngine;
-        JumpType = JumpEngineType.AlphaType;
         JumpRage = (int)JumpEngineDistance.AlphaDistance;
         JumpFuelConsumption = (int)JumpEngineFuelFlow.AlphaFlowRate;
         PartWeight = (int)WeightOfEngine.AlphaWeight;

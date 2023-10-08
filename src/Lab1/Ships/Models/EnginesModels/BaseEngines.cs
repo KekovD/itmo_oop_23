@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
-public abstract class BaseEngines : EngineTypeIdentification, IPartWeight
+public abstract class BaseEngines : IPartWeight
 {
     public int PartWeight { get; protected init; }
 }

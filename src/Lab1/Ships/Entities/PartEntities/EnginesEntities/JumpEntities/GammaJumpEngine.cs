@@ -7,8 +7,6 @@ public class GammaJumpEngine : BaseJumpEngines
 {
     public GammaJumpEngine()
     {
-        TypeOfEngine = BaseEngineType.JumpEngine;
-        JumpType = JumpEngineType.GammaType;
         JumpRage = (int)JumpEngineDistance.GammaDistance;
         JumpFuelConsumption = (int)JumpEngineFuelFlow.GammaFlowRate;
         PartWeight = (int)WeightOfEngine.GammaWeight;

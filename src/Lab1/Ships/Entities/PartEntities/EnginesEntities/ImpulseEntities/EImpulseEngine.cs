@@ -8,8 +8,6 @@ public class EImpulseEngine : BaseImpulseEngines
 {
     public EImpulseEngine()
     {
-        TypeOfEngine = BaseEngineType.StandardEngine;
-        ImpulseType = ImpulseEngineType.EClassType;
         DesignSpeed = (int)StandardEngineSpeed.ESpeed;
         FuelUseAtStartup = (int)StandardEngineFuelFlow.EEngineConstantFuelFlow;
         FuelUsePerUnitTime = (int)StandardEngineFuelFlow.EEngineConstantFuelFlow;

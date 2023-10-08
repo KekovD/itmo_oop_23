@@ -7,8 +7,6 @@ public class CImpulseEngine : BaseImpulseEngines
 {
     public CImpulseEngine()
     {
-        TypeOfEngine = BaseEngineType.StandardEngine;
-        ImpulseType = ImpulseEngineType.CLassType;
         DesignSpeed = (int)StandardEngineSpeed.CSpeed;
         FuelUseAtStartup = (int)StandardEngineFuelFlow.CEngineConstantFuelFlow;
         FuelUsePerUnitTime = (int)StandardEngineFuelFlow.CEngineConstantFuelFlow;
