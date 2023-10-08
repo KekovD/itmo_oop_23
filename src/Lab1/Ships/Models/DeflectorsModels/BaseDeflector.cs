@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.De
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
-public class BaseDeflector : PartServiceability, IHealthPointsPhotonsDeflector, IClassOfDeflector, IPartWeight, ISetHealthOfDeflector
+public class BaseDeflector : PartServiceability, IDeflectorInterface, IPartWeight
 {
     public BaseDeflector(bool havePhotons)
     {
