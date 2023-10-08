@@ -4,7 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.ObstaclesEnti
 
 public class Meteorites : BaseSmallAsteroidsAndMeteorites
 {
-    private const int MeteoritesDamage = 40;
     public Meteorites()
     {
         StandardDamage = MeteoritesDamage;

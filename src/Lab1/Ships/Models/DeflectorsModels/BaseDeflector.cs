@@ -1,19 +1,27 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.PartInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.DeflectorSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
 
 public class BaseDeflector : PartServiceability, IDeflectorInterface, IPartWeight
 {
+    protected const int DeflectorFirstHealth = 20;
+    protected const int DeflectorSecondHealth = 100;
+    protected const int DeflectorThirdHealth = 400;
+    protected const int DeflectorFirstWeight = 100;
+    protected const int DeflectorSecondWeight = 200;
+    protected const int DeflectorThirdWeight = 300;
+    private const int PhotonsDeflectorBrokenOrBaseHealth = 0;
+    private const int PhotonsDeflectorsHealth = 3;
+    private const int DeflectorPhotonWeight = 250;
     public BaseDeflector(bool havePhotons)
     {
         DeflectAntimatterFlares = havePhotons;
-        PhotonsHealth = (int)HealthPointsPhotonsDeflector.PhotonsDeflectorBrokenOrBaseHealth;
+        PhotonsHealth = PhotonsDeflectorBrokenOrBaseHealth;
         if (havePhotons)
         {
-            PhotonsHealth = (int)HealthPointsPhotonsDeflector.PhotonsDeflectorsHealth;
-            PartWeight += (int)WeightOfDeflector.DeflectorPhotonWeight;
+            PhotonsHealth = PhotonsDeflectorsHealth;
+            PartWeight += DeflectorPhotonWeight;
         }
     }
 

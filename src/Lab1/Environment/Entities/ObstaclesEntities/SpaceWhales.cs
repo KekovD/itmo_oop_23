@@ -4,7 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.ObstaclesEnti
 
 public class SpaceWhales : BaseSpaceWhales
 {
-    private const int SpaceWhalesDamage = 1000;
     public SpaceWhales()
     {
         StandardDamage = SpaceWhalesDamage;

@@ -4,7 +4,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.ObstaclesEnti
 
 public class AntimatterFlash : BaseAntimatterFlashes
 {
-    private const int AntimatterFlashesDamage = 1;
     public AntimatterFlash()
     {
         StandardDamage = AntimatterFlashesDamage;
