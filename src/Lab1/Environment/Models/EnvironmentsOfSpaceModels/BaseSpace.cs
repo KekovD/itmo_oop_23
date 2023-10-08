@@ -11,7 +11,7 @@ public abstract class BaseSpace : ITypeOfSpace, IRouteCountLength, IHaveObstacle
     public ExistingTypesOfSpace TypeOfSpace { get; protected init; }
     public int RouteLength { get; protected init; }
     public IList<int>? NumberOfObstaclesOnRoute { get; protected init; }
-    public ICollection<BaseStandardObstacles>? TypeOfObstacles { get; protected init; }
+    public ICollection<BaseObstacles>? TypeOfObstacles { get; protected init; }
 
     public void SetNumberOfObstacles(int newValue, int index)
     {

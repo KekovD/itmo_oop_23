@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class BaseSmallAsteroidsAndMeteorites : BaseStandardObstacles
+public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles
 {
     public override void DoingDamage(BaseShip ship)
     {

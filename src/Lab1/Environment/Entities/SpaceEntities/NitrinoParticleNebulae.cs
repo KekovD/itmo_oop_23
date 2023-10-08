@@ -15,7 +15,7 @@ public class NitrinoParticleNebulae : BaseNitrinoParticleNebulae
         TypeOfSpace = ExistingTypesOfSpace.NitrinoParticleNebulae;
         RouteLength = routeLength;
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
-        TypeOfObstacles = new Collection<BaseStandardObstacles>();
+        TypeOfObstacles = new Collection<BaseObstacles>();
         var obstaclesFirst = new SpaceWhales();
         TypeOfObstacles.Add(obstaclesFirst);
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)

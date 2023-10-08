@@ -15,7 +15,7 @@ public class HighDensitySpaceNebulae : BaseHighDensitySpaceNebulae
         TypeOfSpace = ExistingTypesOfSpace.HighDensitySpaceNebulae;
         RouteLength = routeLength;
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
-        TypeOfObstacles = new Collection<BaseStandardObstacles>();
+        TypeOfObstacles = new Collection<BaseObstacles>();
         var obstaclesFirst = new AntimatterFlash();
         TypeOfObstacles.Add(obstaclesFirst);
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)

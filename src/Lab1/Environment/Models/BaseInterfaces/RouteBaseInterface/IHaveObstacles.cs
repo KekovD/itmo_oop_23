@@ -5,5 +5,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.
 
 public interface IHaveObstacles
 {
-    ICollection<BaseStandardObstacles>? TypeOfObstacles { get; }
+    ICollection<BaseObstacles>? TypeOfObstacles { get; }
 }

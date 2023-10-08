@@ -15,7 +15,7 @@ public class NormalSpace : BaseNormalSpace
         TypeOfSpace = ExistingTypesOfSpace.NormalSpace;
         RouteLength = routeLength;
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
-        TypeOfObstacles = new Collection<BaseStandardObstacles>();
+        TypeOfObstacles = new Collection<BaseObstacles>();
         var obstaclesFirst = new SmallAsteroids();
         var obstaclesSecond = new Meteorites();
         TypeOfObstacles.Add(obstaclesFirst);

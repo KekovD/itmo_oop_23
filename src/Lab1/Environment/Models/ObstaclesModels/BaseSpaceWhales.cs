@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 
-public abstract class BaseSpaceWhales : BaseAntimatterFlashes
+public abstract class BaseSpaceWhales : BaseObstacles
 {
     public override void DoingDamage(BaseShip ship)
     {

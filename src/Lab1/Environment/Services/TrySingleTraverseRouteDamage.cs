@@ -25,7 +25,7 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
 
             int iterator = 0;
             int counterObstacles = 0;
-            foreach (BaseStandardObstacles obstacles in derivedSpace.TypeOfObstacles)
+            foreach (BaseObstacles obstacles in derivedSpace.TypeOfObstacles)
             {
                 for (int i = 1; i < derivedSpace.NumberOfObstaclesOnRoute[iterator]; i++)
                 {
@@ -70,7 +70,7 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
 
                 int iterator = 0;
                 int counterObstacles = 0;
-                foreach (BaseStandardObstacles obstacles in derivedSpaceSecond.TypeOfObstacles)
+                foreach (BaseObstacles obstacles in derivedSpaceSecond.TypeOfObstacles)
                 {
                     for (int i = 1; i < derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator]; i++)
                     {
@@ -116,7 +116,7 @@ public abstract class TrySingleTraverseRouteDamage : WhatHappenedName, ITryTrave
 
             int iterator = 0;
             int counterObstacles = 0;
-            foreach (BaseStandardObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
+            foreach (BaseObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
             {
                 if (ship.ShipAntiNitrinoEmitter == false && derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
                 {
