@@ -1,6 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.DeflectorsInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.PartInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.DeflectorSpecifications;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.DeflectorsModels;
