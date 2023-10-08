@@ -226,27 +226,27 @@ public abstract class LaunchShips : IServicesInterface
     {
         if (space is NormalSpace)
         {
-            return ship.ImpulseFuelConsumption(distance);
+            return ship.ImpulseFuelPrice(distance);
         }
 
         if (space is HighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
-                return derivedShip.JumpFuelCost(distance);
+                return derivedShip.JumpFuelPrice(distance);
             }
 
-            return ship.ImpulseFuelConsumption(distance) * WrongTypeOfEngineRatio;
+            return ship.ImpulseFuelPrice(distance) * WrongTypeOfEngineRatio;
         }
 
         if (space is NitrinoParticleNebulae)
         {
             if (ship.ImpulseEngine is CImpulseEngine)
             {
-                return ship.ImpulseFuelConsumption(distance) * WrongTypeOfEngineRatio;
+                return ship.ImpulseFuelPrice(distance) * WrongTypeOfEngineRatio;
             }
 
-            return ship.ImpulseFuelConsumption(distance);
+            return ship.ImpulseFuelPrice(distance);
         }
 
         throw new ServicesInvalidOperationException(nameof(GetSingleCostOfRoute));

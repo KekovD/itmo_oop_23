@@ -10,4 +10,7 @@ public class AlphaJumpEngine : BaseJumpEngines
         JumpFuelConsumption = AlphaFlowRate;
         PartWeight = AlphaWeight;
     }
+
+    public override int GetEngineFuelConsumption(int distance, int weightShip) =>
+        (int)((JumpFuelConsumption * distance) * (WeightRatio * weightShip));
 }

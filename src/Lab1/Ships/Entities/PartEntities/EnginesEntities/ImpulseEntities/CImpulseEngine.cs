@@ -12,8 +12,11 @@ public class CImpulseEngine : BaseImpulseEngines
         PartWeight = CLassWeight;
     }
 
-    public override int GetImpulseEngineSpeed(int distance)
+    public override int GetEngineFuelConsumption(int distance, int weightShip)
     {
-        return DesignSpeed;
+        int speed = DesignSpeed - (int)(WeightRatio * weightShip);
+        int time = (int)(speed / distance);
+
+        return (time * FuelUsePerUnitTime) + FuelUseAtStartup;
     }
 }

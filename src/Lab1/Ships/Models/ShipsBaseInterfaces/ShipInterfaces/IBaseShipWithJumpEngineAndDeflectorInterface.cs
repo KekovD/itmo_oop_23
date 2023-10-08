@@ -6,7 +6,6 @@ public interface IBaseShipWithJumpEngineAndDeflectorInterface
 {
     BaseJumpEngines? JumpEngine { get; }
     bool EnoughDistanceJump { get; }
-    int JumpFuelConsumption(int distance);
-    int JumpFuelCost(int distance);
     void SetFalseEnoughDistanceJump();
+    int JumpFuelPrice(int distance);
 }

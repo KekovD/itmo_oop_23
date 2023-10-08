@@ -11,6 +11,4 @@ public abstract class BaseImpulseEngines : BaseEngines, IImpulseEngineInterfaces
     public int DesignSpeed { get; protected init; }
     public int FuelUseAtStartup { get; protected init; }
     public int FuelUsePerUnitTime { get; protected init; }
-
-    public abstract int GetImpulseEngineSpeed(int distance);
 }

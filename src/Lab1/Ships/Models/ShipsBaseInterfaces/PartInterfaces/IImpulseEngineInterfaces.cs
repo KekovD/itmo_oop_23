@@ -5,5 +5,4 @@ public interface IImpulseEngineInterfaces
     int DesignSpeed { get; }
     int FuelUseAtStartup { get; }
     int FuelUsePerUnitTime { get; }
-    int GetImpulseEngineSpeed(int distance);
 }

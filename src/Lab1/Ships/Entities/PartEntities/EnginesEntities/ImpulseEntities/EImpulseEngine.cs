@@ -13,8 +13,11 @@ public class EImpulseEngine : BaseImpulseEngines
         PartWeight = EClassWeight;
     }
 
-    public override int GetImpulseEngineSpeed(int distance)
+    public override int GetEngineFuelConsumption(int distance, int weightShip)
     {
-        return DesignSpeed + (int)Math.Exp(distance);
+        int speed = DesignSpeed + (int)Math.Exp(distance) - (int)(WeightRatio * weightShip);
+        int time = (int)(speed / distance);
+
+        return (time * FuelUsePerUnitTime) + FuelUseAtStartup;
     }
 }

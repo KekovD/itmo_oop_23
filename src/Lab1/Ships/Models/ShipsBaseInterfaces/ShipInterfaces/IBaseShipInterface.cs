@@ -14,6 +14,6 @@ public interface IBaseShipInterface
     bool NoJumpEngineStatus { get; }
     void SetFalseNoJumpStatus();
     void CheckShipAlive();
-    int ImpulseFuelConsumption(int distance);
+    int ImpulseFuelPrice(int distance);
     void KillCrew();
 }

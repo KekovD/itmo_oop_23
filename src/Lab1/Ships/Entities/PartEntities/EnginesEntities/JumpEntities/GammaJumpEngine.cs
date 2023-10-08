@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
+﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.EnginesModels;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.PartEntities.EnginesEntities.JumpEntities;
 
@@ -10,4 +11,7 @@ public class GammaJumpEngine : BaseJumpEngines
         JumpFuelConsumption = GammaFlowRate;
         PartWeight = GammaWeight;
     }
+
+    public override int GetEngineFuelConsumption(int distance, int weightShip) =>
+        (int)(JumpFuelConsumption * (int)Math.Pow(distance, 2) * (WeightRatio * weightShip));
 }
