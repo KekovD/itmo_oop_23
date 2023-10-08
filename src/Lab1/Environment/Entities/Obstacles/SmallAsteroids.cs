@@ -6,6 +6,6 @@ public class SmallAsteroids : BaseSmallAsteroidsAndMeteorites
 {
     public SmallAsteroids()
     {
-        StandardDamage = SmallAsteroidsDamage;
+        Damage = SmallAsteroidsDamage;
     }
 }

@@ -6,6 +6,6 @@ public class SpaceWhales : BaseSpaceWhales
 {
     public SpaceWhales()
     {
-        StandardDamage = SpaceWhalesDamage;
+        Damage = SpaceWhalesDamage;
     }
 }

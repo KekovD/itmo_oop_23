@@ -21,7 +21,7 @@ public abstract class BaseSpaceWhales : BaseObstacles
 
             if (derivedShip.Deflector.Serviceability)
             {
-                derivedShip.Deflector.DamagingDeflector(StandardDamage);
+                derivedShip.Deflector.DamagingDeflector(Damage);
                 derivedShip.Deflector.SetPartServiceability();
                 return;
             }
@@ -32,7 +32,7 @@ public abstract class BaseSpaceWhales : BaseObstacles
             throw new PartOfShipNullException(nameof(ship.Hull));
         }
 
-        ship.Hull.DamagingHull(StandardDamage);
+        ship.Hull.DamagingHull(Damage);
         ship.CheckShipAlive();
     }
 }

@@ -6,6 +6,6 @@ public class AntimatterFlash : BaseAntimatterFlashes
 {
     public AntimatterFlash()
     {
-        StandardDamage = AntimatterFlashesDamage;
+        Damage = AntimatterFlashesDamage;
     }
 }
