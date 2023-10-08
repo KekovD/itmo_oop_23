@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces.RouteBaseInterface;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.ObstaclesModels;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.EnvironmentsOfSpaceModels;
 
-public abstract class BaseSpace : IRouteCountLength, IHaveObstacles, ISetNumberOfObstaclesOnRoute
+public abstract class BaseSpace : IBaseSpaceInterface
 {
     public int RouteLength { get; protected init; }
     public IList<int>? NumberOfObstaclesOnRoute { get; protected init; }
