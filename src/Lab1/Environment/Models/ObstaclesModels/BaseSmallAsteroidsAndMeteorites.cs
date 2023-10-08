@@ -21,17 +21,16 @@ public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles
 
             if (derivedShip.Deflector.Serviceability)
             {
-                derivedShip.Deflector.SetHealthOfDeflector(derivedShip.Deflector.HealthOfDeflector -
-                                                               StandardDamage);
+                derivedShip.Deflector.DamagingDeflector(StandardDamage);
                 return;
             }
 
-            derivedShip.Hull.SetHealthOfHull(derivedShip.Hull.HealthOfHull - StandardDamage);
+            derivedShip.Hull.DamagingHull(StandardDamage);
             derivedShip.CheckShipAlive();
             return;
         }
 
-        ship.Hull.SetHealthOfHull(ship.Hull.HealthOfHull - StandardDamage);
+        ship.Hull.DamagingHull(StandardDamage);
         ship.CheckShipAlive();
     }
 }

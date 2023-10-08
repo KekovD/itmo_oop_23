@@ -13,9 +13,9 @@ public class BaseHull : PartServiceability, IHullHealthPoint, IPartWeight
     protected const int ThirdHullWeight = 2000;
     public int HealthOfHull { get; protected set; }
     public int PartWeight { get; protected init; }
-    public void SetHealthOfHull(int newValue)
+    public void DamagingHull(int damage)
     {
-        HealthOfHull = newValue;
+        HealthOfHull -= damage;
         SetPartServiceability();
     }
 

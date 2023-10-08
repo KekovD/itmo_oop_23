@@ -3,5 +3,5 @@
 public interface IHullHealthPoint
 {
     int HealthOfHull { get; }
-    void SetHealthOfHull(int newValue);
+    void DamagingHull(int damage);
 }

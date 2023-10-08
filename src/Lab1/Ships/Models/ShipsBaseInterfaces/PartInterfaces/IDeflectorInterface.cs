@@ -5,6 +5,6 @@ public interface IDeflectorInterface
     int HealthOfDeflector { get; }
     bool DeflectAntimatterFlares { get; }
     int PhotonsHealth { get; }
-    void SetHealthOfPhotonsDeflector(int newValue);
-    void SetHealthOfDeflector(int newValue);
+    void DamagingPhotonsDeflector(int damage);
+    void DamagingDeflector(int damage);
 }

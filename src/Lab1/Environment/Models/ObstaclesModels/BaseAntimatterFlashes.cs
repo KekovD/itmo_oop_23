@@ -8,8 +8,7 @@ public abstract class BaseAntimatterFlashes : BaseObstacles
     {
         if (ship is BaseShipWithDeflector { Deflector.DeflectAntimatterFlares: true } derivedShip)
         {
-            derivedShip.Deflector.SetHealthOfPhotonsDeflector(derivedShip.Deflector.PhotonsHealth -
-                                                                  StandardDamage);
+            derivedShip.Deflector.DamagingPhotonsDeflector(StandardDamage);
             return;
         }
 
