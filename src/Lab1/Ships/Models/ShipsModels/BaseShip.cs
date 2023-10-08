@@ -7,8 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.StandardSpecifications.Ta
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrinoEmitter, IShipWeight, IShipCrew, ICheckShipAlive,
-    IGetImpulseFuelCost
+public abstract class BaseShip : IBaseShipInterface
 {
     private const double ShipWeightRatio = 0.05;
     public bool ShipAlive { get; private set; } = true;
@@ -18,9 +17,9 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
     public StandardTank? ShipStandardTank { get; protected init; }
     public bool ShipAntiNitrinoEmitter { get; protected init; }
     public int ShipWeight { get; protected init; }
-    public bool NoJumpEngineCheck { get; private set; } = true;
+    public bool NoJumpEngineStatus { get; private set; } = true;
 
-    public void SetShipAlive()
+    public void CheckShipAlive()
     {
         ShipAlive = ShipHull.Serviceability & ShipCrewAlive;
     }
@@ -28,12 +27,12 @@ public abstract class BaseShip : IShipHull, IShipImpulseEngine, IShipAntiNitrino
     public void KillCrew()
     {
         ShipCrewAlive = false;
-        SetShipAlive();
+        CheckShipAlive();
     }
 
-    public void SetNoJumpEngine()
+    public void SetNoJumpStatus()
     {
-        NoJumpEngineCheck = false;
+        NoJumpEngineStatus = false;
     }
 
     public int ShipImpulseFuelCost(int distance)

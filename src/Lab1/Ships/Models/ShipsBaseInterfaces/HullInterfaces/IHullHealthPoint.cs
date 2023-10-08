@@ -1,6 +1,7 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.HullInterfaces;
 
-public interface IHullHealthPoint : ISetHealthOfHull
+public interface IHullHealthPoint
 {
     int HealthOfHull { get; }
+    void SetHealthOfHull(int newValue);
 }

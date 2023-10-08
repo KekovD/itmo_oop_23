@@ -39,7 +39,7 @@ public abstract class TrySingleTraverseRouteDistance : TrySingleTraverseRouteDam
                 return true;
             }
 
-            ship.SetNoJumpEngine();
+            ship.SetNoJumpStatus();
             return false;
         }
 

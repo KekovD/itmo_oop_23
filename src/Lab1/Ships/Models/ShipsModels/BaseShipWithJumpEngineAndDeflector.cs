@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipI
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IShipJumpEngine, IShipIJumpFuelCost, ISetEnoughDistanceJump
+public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector, IBaseShipWithJumpEngineAndDeflectorInterface
 {
     public BaseJumpEngines? JumpEngine { get; protected init; }
     public JumpTank? ShipJumpTank { get; protected init; }

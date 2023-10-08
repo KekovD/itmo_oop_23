@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipI
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsModels;
 
-public abstract class BaseShipWithDeflector : BaseShip, IShipDeflector
+public abstract class BaseShipWithDeflector : BaseShip, IBaseShipWithDeflectorInterface
 {
     public BaseDeflector ShipDeflector { get; protected init; } = new BaseDeflector(false);
 }

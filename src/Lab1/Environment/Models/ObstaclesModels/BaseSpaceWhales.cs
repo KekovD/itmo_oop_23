@@ -23,6 +23,6 @@ public abstract class BaseSpaceWhales : BaseAntimatterFlashes
         }
 
         ship.ShipHull.SetHealthOfHull(ship.ShipHull.HealthOfHull - StandardDamage);
-        ship.SetShipAlive();
+        ship.CheckShipAlive();
     }
 }

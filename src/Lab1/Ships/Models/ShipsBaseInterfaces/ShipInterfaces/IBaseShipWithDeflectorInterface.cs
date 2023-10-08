@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ShipsBaseInterfaces.ShipInterfaces;
 
-public interface IShipDeflector
+public interface IBaseShipWithDeflectorInterface
 {
     BaseDeflector ShipDeflector { get; }
 }

@@ -16,11 +16,11 @@ public abstract class BaseSmallAsteroidsAndMeteorites : BaseStandardObstacles
             }
 
             derivedShip.ShipHull.SetHealthOfHull(derivedShip.ShipHull.HealthOfHull - StandardDamage);
-            derivedShip.SetShipAlive();
+            derivedShip.CheckShipAlive();
             return;
         }
 
         ship.ShipHull.SetHealthOfHull(ship.ShipHull.HealthOfHull - StandardDamage);
-        ship.SetShipAlive();
+        ship.CheckShipAlive();
     }
 }

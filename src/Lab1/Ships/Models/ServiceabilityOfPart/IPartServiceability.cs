@@ -1,6 +1,7 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
 
-public interface IOperationalStatus
+public interface IPartServiceability
 {
     bool Serviceability { get; }
+    void SetPartServiceability();
 }
