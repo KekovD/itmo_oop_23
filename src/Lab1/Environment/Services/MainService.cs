@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class MainService : LaunchShips
 {
-    public override IEnumerable<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    public override (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
+        MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
-        var resultMainLaunch = new List<IList<string>>();
+        var resultMainLaunch = new List<WhatHappenedStatus>();
         var allShips = new List<BaseShip>(manyShips);
 
         int iterator = 0;
         foreach (bool shipResult in resultLaunch)
         {
-            string shipName = allShips[iterator].GetType().Name;
-            string shipResultString = GetWhatHappenedName(CheckWhatHappened(allShips[iterator]));
-            var shipInfo = new List<string> { shipName, shipResultString };
-
-            resultMainLaunch.Add(shipInfo);
+            resultMainLaunch.Add(CheckWhatHappened(allShips[iterator]));
 
             iterator++;
         }
@@ -38,25 +36,20 @@ public class MainService : LaunchShips
         }
 
         int countIteration = 0;
+        var survivorsShips = new List<BaseShip>(allShips);
         foreach (int i in falseIndex)
         {
-            allShips.RemoveAt(i - countIteration);
+            survivorsShips.RemoveAt(i - countIteration);
             countIteration++;
         }
 
-        if (allShips.Count == 0)
+        if (survivorsShips.Count == 0)
         {
-            const string noneShip = "None";
-            var shipInfoPreferNone = new List<string> { noneShip, noneShip };
-            resultMainLaunch.Add(shipInfoPreferNone);
-            return resultMainLaunch;
+            return (resultMainLaunch, WhatHappenedStatus.NoSurvivingShips, (int)WhatHappenedStatus.NoSurvivingShips);
         }
 
-        int resultPrefer = GetOptimumShip(allShips, manySpaces);
-        string shipNamePrefer = allShips[resultPrefer].GetType().Name;
-        var shipInfoPrefer = new List<string> { shipNamePrefer, shipNamePrefer };
-        resultMainLaunch.Add(shipInfoPrefer);
+        int resultPrefer = GetOptimumShip(survivorsShips, allShips, manySpaces);
 
-        return resultMainLaunch;
+        return (resultMainLaunch, WhatHappenedStatus.OptimalShipExists, resultPrefer);
     }
 }

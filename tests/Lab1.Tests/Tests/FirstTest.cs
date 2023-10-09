@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
@@ -20,12 +19,11 @@ public class FirstTest
     {
         var service = new MainService();
 
-        var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
-        const string checkFirst = "NoJumpEngine";
-        const string checkSecond = "ShortJumpRange";
+        (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
+            check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = checkFirst.Equals(checkList[0][1], StringComparison.Ordinal);
-        result &= checkSecond.Equals(checkList[1][1], StringComparison.Ordinal);
+        bool result = check.LaunchResults[0] == WhatHappenedStatus.NoJumpEngine &&
+                      check.LaunchResults[1] == WhatHappenedStatus.ShortJumpRange;
 
         return result;
     }

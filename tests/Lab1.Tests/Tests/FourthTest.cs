@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
@@ -20,10 +19,10 @@ public class FourthTest
     {
         var service = new MainService();
 
-        var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
-        const string check = "WalkingShuttleShip";
+        (IEnumerable<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
+            check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check.Equals(checkList[2][0], StringComparison.Ordinal);
+        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 0 };
 
         return result;
     }

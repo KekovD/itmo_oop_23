@@ -9,4 +9,6 @@ public enum WhatHappenedStatus
     DeflectorDestroyed,
     Successfully,
     NoJumpEngine,
+    NoSurvivingShips,
+    OptimalShipExists,
 }

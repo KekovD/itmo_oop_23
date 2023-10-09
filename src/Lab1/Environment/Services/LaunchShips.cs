@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
@@ -16,7 +15,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public abstract class LaunchShips : IServices
 {
-    private const int WrongTypeOfEngineRatio = 100000;
     public Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {
         var resultCollection = new Collection<bool>();
@@ -41,12 +39,12 @@ public abstract class LaunchShips : IServices
 
     public bool TryTraverseRouteDistance(BaseShip ship, BaseSpace space, int distance)
     {
-        if (space is NormalSpace)
+        if ((space is INormalSpace) && (ship is INormalSpace))
         {
             return true;
         }
 
-        if (space is HighDensitySpaceNebulae)
+        if (space is IHighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
@@ -68,7 +66,7 @@ public abstract class LaunchShips : IServices
             return false;
         }
 
-        if (space is NitrinoParticleNebulae)
+        if (space is INitrinoParticleNebulae)
         {
             if (ship is not INitrinoParticleNebulae)
             {
@@ -225,26 +223,27 @@ public abstract class LaunchShips : IServices
 
     public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, IFuelExchange fuelExchange)
     {
-        if (space is NormalSpace)
+        const int wrongTypeOfEngineRatio = 100000;
+        if (space is INormalSpace)
         {
             return ship.ImpulseFuelPrice(distance, fuelExchange);
         }
 
-        if (space is HighDensitySpaceNebulae)
+        if (space is IHighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
                 return derivedShip.JumpFuelPrice(distance, fuelExchange);
             }
 
-            return ship.ImpulseFuelPrice(distance, fuelExchange) * WrongTypeOfEngineRatio;
+            return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
         }
 
-        if (space is NitrinoParticleNebulae)
+        if (space is INitrinoParticleNebulae)
         {
             if (ship.ImpulseEngine is CImpulseEngine)
             {
-                return ship.ImpulseFuelPrice(distance, fuelExchange) * WrongTypeOfEngineRatio;
+                return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
             }
 
             return ship.ImpulseFuelPrice(distance, fuelExchange);
@@ -253,12 +252,13 @@ public abstract class LaunchShips : IServices
         throw new ServicesInvalidOperationException(nameof(GetSingleCostOfRoute));
     }
 
-    public int GetOptimumShip(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments)
     {
-        var resultList = new List<int>();
+        var survivorsCost = new List<int>();
+        var allCost = new List<int>();
         var fuelExchange = new FuelExchange();
 
-        foreach (BaseShip ship in manyShips)
+        foreach (BaseShip ship in survivorsShips)
         {
             int totalCost = 0;
 
@@ -268,11 +268,24 @@ public abstract class LaunchShips : IServices
                 totalCost += segmentCost;
             }
 
-            resultList.Add(totalCost);
+            survivorsCost.Add(totalCost);
         }
 
-        int minimumPrice = resultList.Min();
-        int minimumPriseIndex = resultList.IndexOf(minimumPrice);
+        foreach (BaseShip ship in allShips)
+        {
+            int totalCost = 0;
+
+            foreach (BaseSpace segment in manySegments)
+            {
+                int segmentCost = GetSingleCostOfRoute(ship, segment, segment.RouteLength, fuelExchange);
+                totalCost += segmentCost;
+            }
+
+            allCost.Add(totalCost);
+        }
+
+        int minimumPrice = survivorsCost.Min();
+        int minimumPriseIndex = allCost.IndexOf(minimumPrice);
         return minimumPriseIndex;
     }
 
@@ -311,22 +324,6 @@ public abstract class LaunchShips : IServices
         return WhatHappenedStatus.Successfully;
     }
 
-    public string GetWhatHappenedName(WhatHappenedStatus value)
-    {
-        string[] enumFieldNames = Enum.GetNames(typeof(WhatHappenedStatus));
-
-        foreach (string fieldName in enumFieldNames)
-        {
-            var enumValue = (WhatHappenedStatus)Enum.Parse(typeof(WhatHappenedStatus), fieldName);
-
-            if (enumValue == value)
-            {
-                return fieldName;
-            }
-        }
-
-        throw new ServicesInvalidOperationException(nameof(GetWhatHappenedName));
-    }
-
-    public abstract IEnumerable<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
+    public abstract (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int
+        OptimalShip) MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
 }

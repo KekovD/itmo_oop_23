@@ -10,10 +10,11 @@ public interface IServices
 {
     bool TryTraverseRouteDistance(BaseShip ship, BaseSpace space, int distance);
     bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance);
-    int GetOptimumShip(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
-    string GetWhatHappenedName(WhatHappenedStatus value);
+    int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments);
     WhatHappenedStatus CheckWhatHappened(BaseShip ship);
     int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, IFuelExchange fuelExchange);
     Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
-    IEnumerable<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
+
+    (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip) MainLaunch(
+        IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
 }
