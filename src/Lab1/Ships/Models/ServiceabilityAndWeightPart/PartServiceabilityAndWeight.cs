@@ -1,7 +1,8 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityAndWeightPart;
 
-public abstract class PartServiceability
+public abstract class PartServiceabilityAndWeight
 {
+    public int PartWeight { get; protected init; }
     public bool Serviceability { get; private set; } = true;
     protected int Health { get; set; }
 

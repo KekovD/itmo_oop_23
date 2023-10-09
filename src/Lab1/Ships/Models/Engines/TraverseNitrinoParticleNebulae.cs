@@ -7,5 +7,5 @@
 /// </summary>
 public class TraverseNitrinoParticleNebulae
 {
-    protected bool CanTraverseNitrinoParticleNebulae { get; init; }
+    public bool CanTraverseNitrinoParticleNebulae { get; protected init; }
 }

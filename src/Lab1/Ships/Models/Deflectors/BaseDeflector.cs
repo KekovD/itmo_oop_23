@@ -1,9 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityAndWeightPart;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Deflectors;
 
-public class BaseDeflector : PartServiceability, IPartWeight
+public class BaseDeflector : PartServiceabilityAndWeight
 {
     protected const int DeflectorFirstHealth = 20;
     protected const int DeflectorSecondHealth = 100;
@@ -26,7 +25,6 @@ public class BaseDeflector : PartServiceability, IPartWeight
     }
 
     public bool DeflectAntimatterFlares { get; private set; }
-    public int PartWeight { get; protected init; }
     private int PhotonsHealth { get; set; }
     public void DamagingPhotonsDeflector(int damage)
     {
