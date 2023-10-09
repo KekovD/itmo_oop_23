@@ -1,5 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 

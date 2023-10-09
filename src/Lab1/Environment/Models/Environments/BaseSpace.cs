@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
-using Itmo.ObjectOrientedProgramming.Lab1.MyException;
+using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.MyException;
+namespace Itmo.ObjectOrientedProgramming.Lab1.LabException;
 
 public class PartOfSpaceNullException : Exception
 {
