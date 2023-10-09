@@ -4,8 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Deflector;
 
 public class DeflectorThird : BaseDeflector
 {
-    public DeflectorThird(bool havePhotons)
-        : base(havePhotons)
+    public DeflectorThird()
     {
         Health = DeflectorThirdHealth;
         PartWeight += DeflectorThirdWeight;
