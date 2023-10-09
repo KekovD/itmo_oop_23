@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
@@ -36,7 +36,7 @@ public abstract class BaseShip
         NoJumpEngineStatus = false;
     }
 
-    public int ImpulseFuelPrice(int distance, IFuelExchange fuelExchange)
+    public int ImpulseFuelPrice(int distance, FuelExchange fuelExchange)
     {
         if (ImpulseEngine == null)
         {

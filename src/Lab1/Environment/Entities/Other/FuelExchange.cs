@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Security.Cryptography;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 
-public class FuelExchange : IFuelExchange
+public class FuelExchange
 {
     public int SaveImpulseFuelPrice { get; private set; }
     public int SaveJumpFuelPrice { get; private set; }

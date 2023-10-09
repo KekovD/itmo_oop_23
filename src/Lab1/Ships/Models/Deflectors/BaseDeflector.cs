@@ -10,13 +10,11 @@ public class BaseDeflector : PartServiceabilityAndWeight
     protected const int DeflectorFirstWeight = 100;
     protected const int DeflectorSecondWeight = 200;
     protected const int DeflectorThirdWeight = 300;
-    private const int PhotonsDeflectorBrokenOrWithoutHealth = 0;
     private const int PhotonsDeflectorsHealth = 3;
     private const int DeflectorPhotonWeight = 250;
     protected BaseDeflector(bool havePhotons)
     {
         DeflectAntimatterFlares = havePhotons;
-        PhotonsHealth = PhotonsDeflectorBrokenOrWithoutHealth;
         if (havePhotons)
         {
             PhotonsHealth = PhotonsDeflectorsHealth;

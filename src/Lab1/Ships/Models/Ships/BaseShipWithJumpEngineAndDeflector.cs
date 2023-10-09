@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
@@ -14,7 +14,7 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
         EnoughDistanceJumpStatus = false;
     }
 
-    public int JumpFuelPrice(int distance, IFuelExchange fuelExchange)
+    public int JumpFuelPrice(int distance, FuelExchange fuelExchange)
     {
         if (JumpEngine == null)
         {

@@ -221,7 +221,7 @@ public abstract class LaunchShips : IServices
         throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDamage));
     }
 
-    public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, IFuelExchange fuelExchange)
+    public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, FuelExchange fuelExchange)
     {
         const int wrongTypeOfEngineRatio = 100000;
         if (space is INormalSpace)
