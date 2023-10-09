@@ -1,5 +1,7 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+﻿using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
@@ -8,7 +10,7 @@ public abstract class BaseSpaceWhales : BaseObstacles, INitrinoParticleNebulae
 {
     public override void DoingDamage(BaseShip ship)
     {
-        if (ship.AntiNitrinoEmitter)
+        if (ship.AdditionalEquipment.Any(equipment => equipment is AntiNitrinoEmitter))
         {
             return;
         }

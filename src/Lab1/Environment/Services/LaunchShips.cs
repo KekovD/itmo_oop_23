@@ -8,6 +8,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
@@ -188,7 +189,8 @@ public abstract class LaunchShips : IServices
             int counterObstacles = 0;
             foreach (BaseObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
             {
-                if (ship.AntiNitrinoEmitter == false && derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
+                if (ship.AdditionalEquipment.Any(equipment => equipment is AntiNitrinoEmitter) == false &&
+                    derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
                 {
                     for (int i = 1; i < derivedSpaceThird.NumberOfObstaclesOnRoute[iterator]; i++)
                     {

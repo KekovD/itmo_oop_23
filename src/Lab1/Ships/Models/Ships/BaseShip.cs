@@ -1,5 +1,7 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 
@@ -11,9 +13,9 @@ public abstract class BaseShip
     public bool CrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
     public BaseHull? Hull { get; protected init; }
-    public bool AntiNitrinoEmitter { get; protected init; }
     public int Weight { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
+    public IEnumerable<IAdditionalEquipment> AdditionalEquipment { get; protected init; } = new List<IAdditionalEquipment>();
 
     public void CheckShipAlive()
     {
