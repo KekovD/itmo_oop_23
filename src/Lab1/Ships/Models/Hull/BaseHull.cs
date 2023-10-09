@@ -12,18 +12,4 @@ public class BaseHull : PartServiceability, IPartWeight
     protected const int SecondHullWeight = 1500;
     protected const int ThirdHullWeight = 2000;
     public int PartWeight { get; protected init; }
-    protected int HealthOfHull { get; set; }
-    public void DamagingHull(int damage)
-    {
-        HealthOfHull -= damage;
-        SetPartServiceability();
-    }
-
-    public override void SetPartServiceability()
-    {
-        if (HealthOfHull <= 0)
-        {
-            Serviceability = false;
-        }
-    }
 }

@@ -25,30 +25,17 @@ public class BaseDeflector : PartServiceability, IPartWeight
         }
     }
 
-    public int PartWeight { get; protected init; }
     public bool DeflectAntimatterFlares { get; private set; }
-    protected int HealthOfDeflector { get; set; }
+    public int PartWeight { get; protected init; }
     private int PhotonsHealth { get; set; }
-
-    public void DamagingDeflector(int damage)
-    {
-        HealthOfDeflector -= damage;
-        SetPartServiceability();
-    }
-
     public void DamagingPhotonsDeflector(int damage)
     {
         PhotonsHealth -= damage;
-        SetPartServiceability();
+        SetPhotonsServiceability();
     }
 
-    public override void SetPartServiceability()
+    private void SetPhotonsServiceability()
     {
-        if (HealthOfDeflector <= 0)
-        {
-            Serviceability = false;
-        }
-
         if (PhotonsHealth <= 0)
         {
             DeflectAntimatterFlares = false;

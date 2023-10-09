@@ -6,7 +6,7 @@ public class HullThird : BaseHull
 {
     public HullThird()
     {
-        HealthOfHull = HullThirdHealth;
+        Health = HullThirdHealth;
         PartWeight = ThirdHullWeight;
     }
 }

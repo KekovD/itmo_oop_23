@@ -7,7 +7,7 @@ public class DeflectorThird : BaseDeflector
     public DeflectorThird(bool havePhotons)
         : base(havePhotons)
     {
-        HealthOfDeflector = DeflectorThirdHealth;
+        Health = DeflectorThirdHealth;
         PartWeight += DeflectorThirdWeight;
     }
 }
