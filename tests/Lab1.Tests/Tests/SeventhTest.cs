@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
@@ -17,9 +19,12 @@ public class SeventhTest
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
+
         var checkList = new List<List<string>>(service.MainLaunch(manyShips, manySpaces).Select(x => x.ToList()));
         const string checkFirst = "MeredianShip";
+
         bool result = checkFirst.Equals(checkList[3][0], StringComparison.Ordinal);
+
         return result;
     }
 
@@ -34,16 +39,28 @@ public class SeventhTest
             meredianShip,
             stellaShip,
         };
-        var obstacles = new Collection<int>();
-        obstacles.Add(4);
-        obstacles.Add(2);
-        var space = new NormalSpace(1000, obstacles);
-        var obstaclesSecond = new Collection<int>();
-        obstaclesSecond.Add(3);
-        var spaceSecond = new NitrinoParticleNebulae(500, obstaclesSecond);
-        var manySpaces = new List<BaseSpace>();
-        manySpaces.Add(space);
-        manySpaces.Add(spaceSecond);
+
+        var obstaclesCounter = new Collection<int>
+        {
+            4,
+            2,
+        };
+
+        var obstacles = new Collection<BaseObstacles>
+        {
+            new SmallAsteroids(),
+            new Meteorites(),
+        };
+
+        var obstaclesSecondCounter = new Collection<int> { 3 };
+        var obstaclesSecond = new Collection<BaseObstacles> { new SpaceWhales() };
+
+        var manySpaces = new List<BaseSpace>
+        {
+            new NormalSpace(1000, obstaclesCounter, obstacles),
+            new NitrinoParticleNebulae(500, obstaclesSecondCounter, obstaclesSecond),
+        };
+
         Assert.True(CheckResult(manyShips, manySpaces));
     }
 
@@ -58,6 +75,7 @@ public class SeventhTest
                 new StellaShip(true),
             },
         };
+
         public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

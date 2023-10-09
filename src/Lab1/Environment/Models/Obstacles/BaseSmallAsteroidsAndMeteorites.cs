@@ -1,9 +1,10 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 
-public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles
+public abstract class BaseSmallAsteroidsAndMeteorites : BaseObstacles, INormalSpace
 {
     public override void DoingDamage(BaseShip ship)
     {

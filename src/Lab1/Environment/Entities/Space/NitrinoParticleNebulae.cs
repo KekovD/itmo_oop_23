@@ -4,19 +4,27 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
-using SpaceWhales = Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles.SpaceWhales;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
 public class NitrinoParticleNebulae : BaseSpace, INitrinoParticleNebulae
 {
-    public NitrinoParticleNebulae(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute)
+    public NitrinoParticleNebulae(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<BaseObstacles> manyObstacles)
+        : base(routeLength)
     {
-        RouteLength = routeLength;
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
         TypeOfObstacles = new Collection<BaseObstacles>();
-        var obstaclesFirst = new SpaceWhales();
-        TypeOfObstacles.Add(obstaclesFirst);
+
+        foreach (BaseObstacles obstacle in manyObstacles)
+        {
+            if (obstacle is not INitrinoParticleNebulae)
+            {
+                throw new ObstacleDoesNotMatchEnvironmentException(nameof(NitrinoParticleNebulae));
+            }
+
+            TypeOfObstacles.Add(obstacle);
+        }
+
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
         {
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NitrinoParticleNebulae));

@@ -6,6 +6,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 
 public abstract class BaseSpace
 {
+    protected BaseSpace(int routeLength)
+    {
+        RouteLength = routeLength;
+    }
+
     public int RouteLength { get; protected init; }
     public IList<int>? NumberOfObstaclesOnRoute { get; protected init; }
     public ICollection<BaseObstacles>? TypeOfObstacles { get; protected init; }

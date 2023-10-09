@@ -1,8 +1,9 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 
-public abstract class BaseAntimatterFlashes : BaseObstacles
+public abstract class BaseAntimatterFlashes : BaseObstacles, IHighDensitySpaceNebulae
 {
     public override void DoingDamage(BaseShip ship)
     {
