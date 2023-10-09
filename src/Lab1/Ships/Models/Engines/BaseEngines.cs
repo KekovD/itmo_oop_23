@@ -1,6 +1,6 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
-public abstract class BaseEngines : TraverseNitrinoParticleNebulae
+public abstract class BaseEngines
 {
     protected const double WeightRatio = 0.1;
     protected const int CLassWeight = 100;

@@ -70,12 +70,7 @@ public abstract class LaunchShips : IServices
 
         if (space is NitrinoParticleNebulae)
         {
-            if (ship.ImpulseEngine == null)
-            {
-                throw new PartOfShipNullException(nameof(ship.ImpulseEngine));
-            }
-
-            if (ship.ImpulseEngine.CanTraverseNitrinoParticleNebulae == false)
+            if (ship is not INitrinoParticleNebulae)
             {
                 return false;
             }

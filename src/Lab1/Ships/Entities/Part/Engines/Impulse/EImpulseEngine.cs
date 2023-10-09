@@ -11,7 +11,6 @@ public class EImpulseEngine : BaseImpulseEngines
         FuelUseAtStartup = EEngineFuelFlow;
         FuelUsePerUnitTime = EEngineFuelFlow;
         PartWeight = EClassWeight;
-        CanTraverseNitrinoParticleNebulae = true;
     }
 
     public override int GetEngineFuelConsumption(int distance, int weightShip)
