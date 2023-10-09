@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
 

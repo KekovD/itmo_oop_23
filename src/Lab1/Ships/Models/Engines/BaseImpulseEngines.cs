@@ -1,8 +1,6 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
-
-public abstract class BaseImpulseEngines : BaseEngines, IImpulseEngine
+public abstract class BaseImpulseEngines : BaseEngines
 {
     protected const int CSpeed = 20;
     protected const int ESpeed = 30;

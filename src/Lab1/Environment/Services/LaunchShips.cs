@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
@@ -16,7 +17,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 public abstract class LaunchShips : IServices
 {
     private const int WrongTypeOfEngineRatio = 100000;
-    public Collection<bool> TryLaunchShips(ICollection<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {
         var resultCollection = new Collection<bool>();
 
@@ -222,39 +223,40 @@ public abstract class LaunchShips : IServices
         throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDamage));
     }
 
-    public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance)
+    public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, IFuelExchange fuelExchange)
     {
         if (space is NormalSpace)
         {
-            return ship.ImpulseFuelPrice(distance);
+            return ship.ImpulseFuelPrice(distance, fuelExchange);
         }
 
         if (space is HighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
             {
-                return derivedShip.JumpFuelPrice(distance);
+                return derivedShip.JumpFuelPrice(distance, fuelExchange);
             }
 
-            return ship.ImpulseFuelPrice(distance) * WrongTypeOfEngineRatio;
+            return ship.ImpulseFuelPrice(distance, fuelExchange) * WrongTypeOfEngineRatio;
         }
 
         if (space is NitrinoParticleNebulae)
         {
             if (ship.ImpulseEngine is CImpulseEngine)
             {
-                return ship.ImpulseFuelPrice(distance) * WrongTypeOfEngineRatio;
+                return ship.ImpulseFuelPrice(distance, fuelExchange) * WrongTypeOfEngineRatio;
             }
 
-            return ship.ImpulseFuelPrice(distance);
+            return ship.ImpulseFuelPrice(distance, fuelExchange);
         }
 
         throw new ServicesInvalidOperationException(nameof(GetSingleCostOfRoute));
     }
 
-    public int GetOptimumShip(IList<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public int GetOptimumShip(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
     {
         var resultList = new List<int>();
+        var fuelExchange = new FuelExchange();
 
         foreach (BaseShip ship in manyShips)
         {
@@ -262,7 +264,7 @@ public abstract class LaunchShips : IServices
 
             foreach (BaseSpace segment in manySegments)
             {
-                int segmentCost = GetSingleCostOfRoute(ship, segment, segment.RouteLength);
+                int segmentCost = GetSingleCostOfRoute(ship, segment, segment.RouteLength, fuelExchange);
                 totalCost += segmentCost;
             }
 
@@ -326,5 +328,5 @@ public abstract class LaunchShips : IServices
         throw new ServicesInvalidOperationException(nameof(GetWhatHappenedName));
     }
 
-    public abstract IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
+    public abstract IEnumerable<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
 }

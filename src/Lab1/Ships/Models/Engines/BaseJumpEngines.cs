@@ -1,7 +1,6 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
-namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
-public abstract class BaseJumpEngines : BaseEngines, IJumpEngine
+public abstract class BaseJumpEngines : BaseEngines
 {
     protected const int AlphaDistance = 1000;
     protected const int OmegaDistance = 2500;
@@ -10,5 +9,5 @@ public abstract class BaseJumpEngines : BaseEngines, IJumpEngine
     protected const int OmegaFlowRate = 5;
     protected const int GammaFlowRate = 2;
     public int Rage { get; protected init; }
-    public int JumpFuelConsumption { get; protected init; }
+    protected int JumpFuelConsumption { get; init; }
 }

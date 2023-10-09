@@ -1,12 +1,11 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.MyException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Ship;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
-public abstract class BaseShip : IBaseShip
+public abstract class BaseShip
 {
     public bool ShipAlive { get; private set; } = true;
     public bool CrewAlive { get; private set; } = true;
@@ -37,13 +36,13 @@ public abstract class BaseShip : IBaseShip
         NoJumpEngineStatus = false;
     }
 
-    public int ImpulseFuelPrice(int distance)
+    public int ImpulseFuelPrice(int distance, IFuelExchange fuelExchange)
     {
         if (ImpulseEngine == null)
         {
             throw new PartOfShipNullException(nameof(ImpulseEngine));
         }
 
-        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * new FuelExchange().ImpulseFuelPrice();
+        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice();
     }
 }

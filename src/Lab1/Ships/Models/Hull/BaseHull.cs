@@ -1,9 +1,9 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces.Part;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.ServiceabilityOfPart;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 
-public class BaseHull : PartServiceability, IHullHealthPoint, IPartWeight
+public class BaseHull : PartServiceability, IPartWeight
 {
     protected const int HullFirstHealth = 15;
     protected const int HullSecondHealth = 85;
@@ -11,8 +11,8 @@ public class BaseHull : PartServiceability, IHullHealthPoint, IPartWeight
     protected const int FirstHullWeight = 1000;
     protected const int SecondHullWeight = 1500;
     protected const int ThirdHullWeight = 2000;
-    public int HealthOfHull { get; protected set; }
     public int PartWeight { get; protected init; }
+    protected int HealthOfHull { get; set; }
     public void DamagingHull(int damage)
     {
         HealthOfHull -= damage;

@@ -2,6 +2,8 @@
 
 public interface IFuelExchange
 {
+    int SaveImpulseFuelPrice { get; }
+    int SaveJumpFuelPrice { get; }
     int ImpulseFuelPrice();
     int JumpFuelPrice();
 }

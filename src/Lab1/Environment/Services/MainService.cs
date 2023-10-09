@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public class MainService : LaunchShips
 {
-    public override IList<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    public override IEnumerable<IList<string>> MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
         var resultMainLaunch = new List<IList<string>>();
