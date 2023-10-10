@@ -22,7 +22,7 @@ public abstract class LaunchShips : IServices
             bool checkAdd = true;
             foreach (BaseSpace segment in manySegments)
             {
-                segment.TryTraverseRouteDamage(ship);
+                segment.TraverseRouteDamage(ship);
                 if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
                 {
                     checkAdd = false;
