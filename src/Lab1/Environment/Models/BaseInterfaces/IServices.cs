@@ -9,5 +9,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 public interface IServices ////Methods are needed in this interface so that they are not static.
 {
     WhatHappenedStatus CheckWhatHappened(BaseShip ship);
+
+    int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments);
     Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
 }

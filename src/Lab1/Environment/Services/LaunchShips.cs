@@ -6,7 +6,6 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
@@ -35,31 +34,6 @@ public abstract class LaunchShips : IServices
         return resultCollection;
     }
 
-    public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, FuelExchange fuelExchange)
-    {
-        const int wrongTypeOfEngineRatio = 100000;
-        if (space is INormalSpace)
-            return ship.ImpulseFuelPrice(distance, fuelExchange);
-
-        if (space is IHighDensitySpaceNebulae)
-        {
-            if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
-                return derivedShip.JumpFuelPrice(distance, fuelExchange);
-
-            return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
-        }
-
-        if (space is INitrinoParticleNebulae)
-        {
-            if (ship.ImpulseEngine is CImpulseEngine)
-                return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
-
-            return ship.ImpulseFuelPrice(distance, fuelExchange);
-        }
-
-        throw new ServicesInvalidOperationException(nameof(GetSingleCostOfRoute));
-    }
-
     public int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments)
     {
         var survivorsCost = new List<int>();
@@ -72,7 +46,7 @@ public abstract class LaunchShips : IServices
 
             foreach (BaseSpace segment in manySegments)
             {
-                int segmentCost = GetSingleCostOfRoute(ship, segment, segment.RouteLength, fuelExchange);
+                int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
                 totalCost += segmentCost;
             }
 
@@ -85,7 +59,7 @@ public abstract class LaunchShips : IServices
 
             foreach (BaseSpace segment in manySegments)
             {
-                int segmentCost = GetSingleCostOfRoute(ship, segment, segment.RouteLength, fuelExchange);
+                int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
                 totalCost += segmentCost;
             }
 

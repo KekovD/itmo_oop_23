@@ -2,6 +2,7 @@
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
@@ -71,6 +72,18 @@ public abstract class BaseShip
 
         Hull.DamagingPart(obstacles.Damage);
         CheckShipAlive();
+    }
+
+    public int CostOfRoute(BaseSpace space, int distance, FuelExchange fuelExchange)
+    {
+        const int wrongTypeOfEngineRatio = 100000;
+        if (space is INormalSpace)
+            return ImpulseFuelPrice(distance, fuelExchange);
+
+        if (space is INitrinoParticleNebulae && ImpulseEngine is INitrinoParticleNebulae)
+            return ImpulseFuelPrice(distance, fuelExchange);
+
+        return ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
     }
 
     protected bool CheckAntiNitrinoEmitter()

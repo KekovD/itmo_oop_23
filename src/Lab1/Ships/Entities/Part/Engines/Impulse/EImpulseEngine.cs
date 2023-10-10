@@ -1,9 +1,10 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 
-public class EImpulseEngine : BaseImpulseEngines
+public class EImpulseEngine : BaseImpulseEngines, INitrinoParticleNebulae
 {
     public EImpulseEngine()
     {

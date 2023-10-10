@@ -1,4 +1,6 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
@@ -34,5 +36,15 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
         }
 
         return true;
+    }
+
+    public new int CostOfRoute(BaseSpace space, int distance, FuelExchange fuelExchange)
+    {
+        if (space is IHighDensitySpaceNebulae)
+        {
+            return JumpFuelPrice(distance, fuelExchange);
+        }
+
+        return base.CostOfRoute(space, distance, fuelExchange);
     }
 }
