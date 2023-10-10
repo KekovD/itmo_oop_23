@@ -11,19 +11,6 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
     public BaseJumpEngines? JumpEngine { get; protected init; }
     public bool EnoughDistanceJumpStatus { get; private set; } = true;
 
-    public void SetFalseEnoughDistanceJump()
-    {
-        EnoughDistanceJumpStatus = false;
-    }
-
-    public int JumpFuelPrice(int distance, FuelExchange fuelExchange)
-    {
-        if (JumpEngine == null)
-            throw new PartOfShipNullException(nameof(ImpulseEngine));
-
-        return JumpEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice();
-    }
-
     public override bool TryOvercomeJumpDistance(int distance)
     {
         if (JumpEngine == null)
@@ -41,10 +28,21 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
     public new int CostOfRoute(BaseSpace space, int distance, FuelExchange fuelExchange)
     {
         if (space is IHighDensitySpaceNebulae)
-        {
             return JumpFuelPrice(distance, fuelExchange);
-        }
 
         return base.CostOfRoute(space, distance, fuelExchange);
+    }
+
+    private int JumpFuelPrice(int distance, FuelExchange fuelExchange)
+    {
+        if (JumpEngine == null)
+            throw new PartOfShipNullException(nameof(ImpulseEngine));
+
+        return JumpEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice;
+    }
+
+    private void SetFalseEnoughDistanceJump()
+    {
+        EnoughDistanceJumpStatus = false;
     }
 }

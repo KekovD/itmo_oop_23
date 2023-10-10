@@ -18,37 +18,13 @@ public abstract class BaseShip
     public bool CrewAlive { get; private set; } = true;
     public BaseImpulseEngines? ImpulseEngine { get; protected init; }
     public BaseHull? Hull { get; protected init; }
-    public int Weight { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
-    public IEnumerable<IAdditionalEquipment> AdditionalEquipment { get; protected init; } = new List<IAdditionalEquipment>();
-
-    public void CheckShipAlive()
-    {
-        if (Hull == null)
-        {
-            throw new PartOfShipNullException(nameof(Hull));
-        }
-
-        ShipAlive = Hull.Serviceability & CrewAlive;
-    }
-
-    public void KillCrew()
-    {
-        CrewAlive = false;
-        CheckShipAlive();
-    }
+    protected int Weight { get; init; }
+    protected IEnumerable<IAdditionalEquipment> AdditionalEquipment { get; init; } = new List<IAdditionalEquipment>();
 
     public void SetFalseNoJumpStatus()
     {
         NoJumpEngineStatus = false;
-    }
-
-    public int ImpulseFuelPrice(int distance, FuelExchange fuelExchange)
-    {
-        if (ImpulseEngine == null)
-            throw new PartOfShipNullException(nameof(ImpulseEngine));
-
-        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice();
     }
 
     public virtual bool TryOvercomeJumpDistance(int distance)
@@ -86,8 +62,32 @@ public abstract class BaseShip
         return ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
     }
 
+    protected void CheckShipAlive()
+    {
+        if (Hull == null)
+        {
+            throw new PartOfShipNullException(nameof(Hull));
+        }
+
+        ShipAlive = Hull.Serviceability & CrewAlive;
+    }
+
+    protected void KillCrew()
+    {
+        CrewAlive = false;
+        CheckShipAlive();
+    }
+
     protected bool CheckAntiNitrinoEmitter()
     {
         return AdditionalEquipment.Any(equipment => equipment is AntiNitrinoEmitter);
+    }
+
+    private int ImpulseFuelPrice(int distance, FuelExchange fuelExchange)
+    {
+        if (ImpulseEngine == null)
+            throw new PartOfShipNullException(nameof(ImpulseEngine));
+
+        return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice;
     }
 }
