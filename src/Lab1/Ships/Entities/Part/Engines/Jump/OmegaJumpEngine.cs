@@ -5,6 +5,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Jump;
 
 public class OmegaJumpEngine : BaseJumpEngines
 {
+    private const int OmegaWeight = 250;
+    private const int OmegaDistance = 2500;
+    private const int OmegaFlowRate = 5;
+
     public OmegaJumpEngine()
     {
         Rage = OmegaDistance;

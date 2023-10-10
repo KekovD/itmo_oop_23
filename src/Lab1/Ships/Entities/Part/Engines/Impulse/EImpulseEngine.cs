@@ -6,6 +6,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impuls
 
 public class EImpulseEngine : BaseImpulseEngines, INitrinoParticleNebulae
 {
+    private const int EClassWeight = 150;
+    private const int ESpeed = 30;
+    private const int EEngineFuelFlow = 25;
+
     public EImpulseEngine()
     {
         DesignSpeed = ESpeed;
