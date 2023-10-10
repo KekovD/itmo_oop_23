@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class SecondTest
+public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoCompleteRoute
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
@@ -22,8 +22,8 @@ public class SecondTest
         (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check.LaunchResults[0] == WhatHappenedStatus.CrewKilled &&
-                      check.LaunchResults[1] == WhatHappenedStatus.Successfully;
+        bool result = check.LaunchResults[0] == WhatHappenedStatus.NoJumpEngine &&
+                      check.LaunchResults[1] == WhatHappenedStatus.ShortJumpRange;
 
         return result;
     }
@@ -31,17 +31,17 @@ public class SecondTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
+    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip augurShip)
     {
         var manyShips = new List<BaseShip>
         {
-            vaklasShipWithoutPhotons,
-            vaklasShipWithPhotons,
+            walkingShuttleShip,
+            augurShip,
         };
 
         var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 3 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(100, obstaclesCounter, obstacles) };
+        var obstaclesCounter = new Collection<int> { 1 };
+        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(10000, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -52,8 +52,8 @@ public class SecondTest
         {
             new object[]
             {
-                new VaklasShip(false),
-                new VaklasShip(true),
+                new WalkingShuttleShip(),
+                new AugurShip(false),
             },
         };
 

@@ -13,16 +13,18 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class FifthTest
+public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
 
-        (IEnumerable<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
+        (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 1 };
+        bool result = check.LaunchResults[0] == WhatHappenedStatus.ShipDestroyed &&
+                      check.LaunchResults[1] == WhatHappenedStatus.DeflectorDestroyed &&
+                      check.LaunchResults[2] == WhatHappenedStatus.Successfully;
 
         return result;
     }
@@ -30,17 +32,18 @@ public class FifthTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip augurShip, BaseShip stellaShip)
+    private void ConditionCheck(BaseShip vaklasShip, BaseShip augurShip, BaseShip meredianShip)
     {
         var manyShips = new List<BaseShip>
         {
+            vaklasShip,
             augurShip,
-            stellaShip,
+            meredianShip,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 2 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(2000, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<BaseObstacles> { new SpaceWhales() };
+        var obstaclesCounter = new Collection<int> { 4 };
+        var manySpaces = new List<BaseSpace> { new NitrinoParticleNebulae(10, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -51,8 +54,9 @@ public class FifthTest
         {
             new object[]
             {
-                new AugurShip(true),
-                new StellaShip(true),
+                new VaklasShip(false),
+                new AugurShip(false),
+                new MeredianShip(false),
             },
         };
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
@@ -13,18 +12,16 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class ThirdTest
+public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
         var service = new MainService();
 
-        (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
+        (IEnumerable<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check.LaunchResults[0] == WhatHappenedStatus.ShipDestroyed &&
-                      check.LaunchResults[1] == WhatHappenedStatus.DeflectorDestroyed &&
-                      check.LaunchResults[2] == WhatHappenedStatus.Successfully;
+        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 1 };
 
         return result;
     }
@@ -32,18 +29,17 @@ public class ThirdTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip vaklasShip, BaseShip augurShip, BaseShip meredianShip)
+    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip vaklasShip)
     {
         var manyShips = new List<BaseShip>
         {
+            walkingShuttleShip,
             vaklasShip,
-            augurShip,
-            meredianShip,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new SpaceWhales() };
-        var obstaclesCounter = new Collection<int> { 4 };
-        var manySpaces = new List<BaseSpace> { new NitrinoParticleNebulae(10, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<BaseObstacles>();
+        var obstaclesCounter = new Collection<int>();
+        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(500, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -54,9 +50,8 @@ public class ThirdTest
         {
             new object[]
             {
+                new WalkingShuttleShip(),
                 new VaklasShip(false),
-                new AugurShip(false),
-                new MeredianShip(false),
             },
         };
 

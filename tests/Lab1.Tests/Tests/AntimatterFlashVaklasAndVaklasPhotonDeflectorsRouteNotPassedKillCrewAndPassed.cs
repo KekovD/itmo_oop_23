@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class FirstTest
+public class AntimatterFlashVaklasAndVaklasPhotonDeflectorsRouteNotPassedKillCrewAndPassed
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
@@ -22,8 +22,8 @@ public class FirstTest
         (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check.LaunchResults[0] == WhatHappenedStatus.NoJumpEngine &&
-                      check.LaunchResults[1] == WhatHappenedStatus.ShortJumpRange;
+        bool result = check.LaunchResults[0] == WhatHappenedStatus.CrewKilled &&
+                      check.LaunchResults[1] == WhatHappenedStatus.Successfully;
 
         return result;
     }
@@ -31,17 +31,17 @@ public class FirstTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip augurShip)
+    private void ConditionCheck(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
     {
         var manyShips = new List<BaseShip>
         {
-            walkingShuttleShip,
-            augurShip,
+            vaklasShipWithoutPhotons,
+            vaklasShipWithPhotons,
         };
 
         var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 1 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(10000, obstaclesCounter, obstacles) };
+        var obstaclesCounter = new Collection<int> { 3 };
+        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(100, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -52,8 +52,8 @@ public class FirstTest
         {
             new object[]
             {
-                new WalkingShuttleShip(),
-                new AugurShip(false),
+                new VaklasShip(false),
+                new VaklasShip(true),
             },
         };
 

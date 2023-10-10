@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class FourthTest
+public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
@@ -22,7 +22,7 @@ public class FourthTest
         (IEnumerable<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 0 };
+        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 1 };
 
         return result;
     }
@@ -30,27 +30,17 @@ public class FourthTest
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip vaklasShip)
+    private void ConditionCheck(BaseShip augurShip, BaseShip stellaShip)
     {
         var manyShips = new List<BaseShip>
         {
-            walkingShuttleShip,
-            vaklasShip,
+            augurShip,
+            stellaShip,
         };
 
-        var obstacles = new Collection<BaseObstacles>
-        {
-            new SmallAsteroids(),
-            new Meteorites(),
-        };
-
-        var obstaclesCounter = new Collection<int>
-        {
-            2,
-            3,
-        };
-
-        var manySpaces = new List<BaseSpace> { new NormalSpace(100, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
+        var obstaclesCounter = new Collection<int> { 2 };
+        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(2000, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -61,8 +51,8 @@ public class FourthTest
         {
             new object[]
             {
-                new WalkingShuttleShip(),
-                new VaklasShip(false),
+                new AugurShip(true),
+                new StellaShip(true),
             },
         };
 

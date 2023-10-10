@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
@@ -12,7 +13,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
-public class SixthTest
+public class ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal
 {
     private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
     {
@@ -21,7 +22,7 @@ public class SixthTest
         (IEnumerable<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
             check = service.MainLaunch(manyShips, manySpaces);
 
-        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 1 };
+        bool result = check is { OptimumShipExists: WhatHappenedStatus.OptimalShipExists, OptimalShip: 0 };
 
         return result;
     }
@@ -37,9 +38,19 @@ public class SixthTest
             vaklasShip,
         };
 
-        var obstacles = new Collection<BaseObstacles>();
-        var obstaclesCounter = new Collection<int>();
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(500, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<BaseObstacles>
+        {
+            new SmallAsteroids(),
+            new Meteorites(),
+        };
+
+        var obstaclesCounter = new Collection<int>
+        {
+            2,
+            3,
+        };
+
+        var manySpaces = new List<BaseSpace> { new NormalSpace(100, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
