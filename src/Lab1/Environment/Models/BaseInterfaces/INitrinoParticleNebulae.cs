@@ -2,5 +2,5 @@
 
 public interface INitrinoParticleNebulae
 {
-    protected const bool NitrinoParticleNebulaeType = true;
+    protected const bool NitrinoParticleNebulaeType = true; ////Not to be empty
 }

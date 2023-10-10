@@ -2,5 +2,5 @@
 
 public interface IHighDensitySpaceNebulae
 {
-    protected const bool HighDensitySpaceNebulaeType = true;
+    protected const bool HighDensitySpaceNebulaeType = true; ////Not to be empty
 }

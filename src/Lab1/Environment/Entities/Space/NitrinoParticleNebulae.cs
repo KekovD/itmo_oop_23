@@ -19,25 +19,19 @@ public class NitrinoParticleNebulae : BaseSpace, INitrinoParticleNebulae
         foreach (BaseObstacles obstacle in manyObstacles)
         {
             if (obstacle is not INitrinoParticleNebulae)
-            {
                 throw new ObstacleDoesNotMatchEnvironmentException(nameof(NitrinoParticleNebulae));
-            }
 
             TypeOfObstacles.Add(obstacle);
         }
 
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
-        {
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NitrinoParticleNebulae));
-        }
     }
 
     public override bool TryTraverseRouteDistance(BaseShip ship, int distance)
     {
         if (ship is not INitrinoParticleNebulae)
-        {
             return false;
-        }
 
         return true;
     }

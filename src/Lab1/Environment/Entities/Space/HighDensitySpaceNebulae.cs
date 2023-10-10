@@ -19,17 +19,13 @@ public class HighDensitySpaceNebulae : BaseSpace, IHighDensitySpaceNebulae
         foreach (BaseObstacles obstacle in manyObstacles)
         {
             if (obstacle is not IHighDensitySpaceNebulae)
-            {
                 throw new ObstacleDoesNotMatchEnvironmentException(nameof(HighDensitySpaceNebulae));
-            }
 
             TypeOfObstacles.Add(obstacle);
         }
 
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
-        {
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(HighDensitySpaceNebulae));
-        }
     }
 
     public override bool TryTraverseRouteDistance(BaseShip ship, int distance)

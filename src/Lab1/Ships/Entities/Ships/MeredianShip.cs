@@ -18,6 +18,7 @@ public class MeredianShip : BaseShipWithDeflector, INormalSpace, INitrinoParticl
         Deflector = new DeflectorSecond();
         AdditionalEquipment = new List<IAdditionalEquipment> { new AntiNitrinoEmitter() };
         Weight = Hull.PartWeight + ImpulseEngine.PartWeight + Deflector.PartWeight;
+
         if (havePhotons)
         {
             AdditionalEquipment = new List<IAdditionalEquipment> { new PhotonsDeflectors(), new AntiNitrinoEmitter() };

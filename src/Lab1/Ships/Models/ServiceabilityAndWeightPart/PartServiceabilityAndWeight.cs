@@ -9,9 +9,7 @@ public abstract class PartServiceabilityAndWeight
     public void SetPartServiceability()
     {
         if (Health <= 0)
-        {
             Serviceability = false;
-        }
     }
 
     public void DamagingPart(int damage)

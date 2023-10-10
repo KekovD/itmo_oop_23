@@ -24,9 +24,7 @@ public abstract class BaseSpace
             throw new PartOfSpaceNullException(nameof(TypeOfObstacles));
 
         if (NumberOfObstaclesOnRoute == null)
-        {
             throw new PartOfSpaceNullException(nameof(NumberOfObstaclesOnRoute));
-        }
 
         int iterator = 0;
         int counterObstacles = 0;

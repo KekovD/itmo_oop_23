@@ -28,9 +28,7 @@ public class MainService : LaunchShips
         foreach (bool result in resultLaunch)
         {
             if (result == false)
-            {
                 falseIndex.Add(iteratorSecond);
-            }
 
             iteratorSecond++;
         }
@@ -44,9 +42,7 @@ public class MainService : LaunchShips
         }
 
         if (survivorsShips.Count == 0)
-        {
             return (resultMainLaunch, WhatHappenedStatus.NoSurvivingShips, (int)WhatHappenedStatus.NoSurvivingShips);
-        }
 
         int resultPrefer = GetOptimumShip(survivorsShips, allShips, manySpaces);
 

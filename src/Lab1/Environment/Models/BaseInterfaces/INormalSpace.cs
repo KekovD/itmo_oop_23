@@ -2,5 +2,5 @@
 
 public interface INormalSpace
 {
-    protected const bool NormalSpaceType = true;
+    protected const bool NormalSpaceType = true; ////Not to be empty
 }

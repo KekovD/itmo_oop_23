@@ -19,25 +19,19 @@ public class NormalSpace : BaseSpace, INormalSpace
         foreach (BaseObstacles obstacle in manyObstacles)
         {
             if (obstacle is not INormalSpace)
-            {
                 throw new ObstacleDoesNotMatchEnvironmentException(nameof(NormalSpace));
-            }
 
             TypeOfObstacles.Add(obstacle);
         }
 
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
-        {
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NormalSpace));
-        }
     }
 
     public override bool TryTraverseRouteDistance(BaseShip ship, int distance)
     {
         if (ship is INormalSpace)
-        {
             return true;
-        }
 
         return false;
     }

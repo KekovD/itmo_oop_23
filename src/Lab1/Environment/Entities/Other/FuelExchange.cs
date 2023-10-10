@@ -10,9 +10,7 @@ public class FuelExchange
     public int ImpulseFuelPrice()
     {
         if (SaveImpulseFuelPrice != 0)
-        {
             return SaveImpulseFuelPrice;
-        }
 
         using var randomNumberGenerator = RandomNumberGenerator.Create();
         byte[] randomNumber = new byte[4];
@@ -25,9 +23,7 @@ public class FuelExchange
     public int JumpFuelPrice()
     {
         if (SaveJumpFuelPrice != 0)
-        {
             return SaveJumpFuelPrice;
-        }
 
         using var randomNumberGenerator = RandomNumberGenerator.Create();
         byte[] randomNumber = new byte[4];

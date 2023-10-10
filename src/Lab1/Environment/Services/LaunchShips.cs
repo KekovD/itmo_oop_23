@@ -39,16 +39,12 @@ public abstract class LaunchShips : IServices
     {
         const int wrongTypeOfEngineRatio = 100000;
         if (space is INormalSpace)
-        {
             return ship.ImpulseFuelPrice(distance, fuelExchange);
-        }
 
         if (space is IHighDensitySpaceNebulae)
         {
             if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
-            {
                 return derivedShip.JumpFuelPrice(distance, fuelExchange);
-            }
 
             return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
         }
@@ -56,9 +52,7 @@ public abstract class LaunchShips : IServices
         if (space is INitrinoParticleNebulae)
         {
             if (ship.ImpulseEngine is CImpulseEngine)
-            {
                 return ship.ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;
-            }
 
             return ship.ImpulseFuelPrice(distance, fuelExchange);
         }
@@ -105,35 +99,19 @@ public abstract class LaunchShips : IServices
 
     public WhatHappenedStatus CheckWhatHappened(BaseShip ship)
     {
-        if (!ship.CrewAlive)
-        {
-            return WhatHappenedStatus.CrewKilled;
-        }
+        if (!ship.CrewAlive) return WhatHappenedStatus.CrewKilled;
 
-        if (ship.Hull == null)
-        {
-            throw new PartOfShipNullException(nameof(ship.Hull));
-        }
+        if (ship.Hull == null) throw new PartOfShipNullException(nameof(ship.Hull));
 
-        if (!ship.Hull.Serviceability)
-        {
-            return WhatHappenedStatus.ShipDestroyed;
-        }
+        if (!ship.Hull.Serviceability) return WhatHappenedStatus.ShipDestroyed;
 
         if (ship is BaseShipWithJumpEngineAndDeflector { EnoughDistanceJumpStatus: false })
-        {
             return WhatHappenedStatus.ShortJumpRange;
-        }
 
         if (ship is BaseShipWithDeflector { Deflector.Serviceability: false })
-        {
             return WhatHappenedStatus.DeflectorDestroyed;
-        }
 
-        if (ship.NoJumpEngineStatus == false)
-        {
-            return WhatHappenedStatus.NoJumpEngine;
-        }
+        if (ship.NoJumpEngineStatus == false) return WhatHappenedStatus.NoJumpEngine;
 
         return WhatHappenedStatus.Successfully;
     }
