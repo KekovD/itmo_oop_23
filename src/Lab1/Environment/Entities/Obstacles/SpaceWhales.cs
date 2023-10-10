@@ -5,6 +5,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
 public class SpaceWhales : BaseObstacles, INitrinoParticleNebulae
 {
+    private const int SpaceWhalesDamage = 1000;
+
     public SpaceWhales()
     {
         Damage = SpaceWhalesDamage;

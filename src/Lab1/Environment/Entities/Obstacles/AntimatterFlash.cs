@@ -5,6 +5,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
 public class AntimatterFlash : BaseObstacles, IHighDensitySpaceNebulae
 {
+    private const int AntimatterFlashesDamage = 1;
+
     public AntimatterFlash()
     {
         Damage = AntimatterFlashesDamage;
