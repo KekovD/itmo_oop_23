@@ -41,4 +41,45 @@ public class NormalSpace : BaseSpace, INormalSpace
 
         return false;
     }
+
+    public override bool TryTraverseRouteDamage(BaseShip ship)
+    {
+        if (TypeOfObstacles == null)
+        {
+            throw new PartOfSpaceNullException(nameof(TypeOfObstacles));
+        }
+
+        if (NumberOfObstaclesOnRoute == null)
+        {
+            throw new PartOfSpaceNullException(nameof(NumberOfObstaclesOnRoute));
+        }
+
+        int iterator = 0;
+        int counterObstacles = 0;
+        foreach (BaseObstacles obstacles in TypeOfObstacles)
+        {
+            for (int i = 1; i < NumberOfObstaclesOnRoute[iterator]; i++)
+            {
+                ship.TakingDamage(obstacles);
+                counterObstacles++;
+                if (ship.ShipAlive == false)
+                {
+                    SetNumberOfObstacles(NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                    return false;
+                }
+            }
+
+            SetNumberOfObstacles(NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+            counterObstacles = 0;
+
+            iterator++;
+        }
+
+        if (ship.ShipAlive == false)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

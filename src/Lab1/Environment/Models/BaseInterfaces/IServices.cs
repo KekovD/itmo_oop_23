@@ -9,7 +9,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 
 public interface IServices
 {
-    bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance);
     int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments);
     WhatHappenedStatus CheckWhatHappened(BaseShip ship);
     int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, FuelExchange fuelExchange);

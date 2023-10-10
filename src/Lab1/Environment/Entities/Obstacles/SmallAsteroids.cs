@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class SmallAsteroids : BaseSmallAsteroidsAndMeteorites
+public class SmallAsteroids : BaseObstacles
 {
     public SmallAsteroids()
     {

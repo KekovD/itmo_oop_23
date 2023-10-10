@@ -1,6 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
-
-namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 
 public abstract class BaseObstacles
 {
@@ -9,5 +7,4 @@ public abstract class BaseObstacles
     protected const int MeteoritesDamage = 40;
     protected const int SpaceWhalesDamage = 1000;
     public int Damage { get; protected init; }
-    public abstract void DoingDamage(BaseShip ship);
 }

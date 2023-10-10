@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class AntimatterFlash : BaseAntimatterFlashes
+public class AntimatterFlash : BaseObstacles
 {
     public AntimatterFlash()
     {

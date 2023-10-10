@@ -27,4 +27,5 @@ public abstract class BaseSpace
     }
 
     public abstract bool TryTraverseRouteDistance(BaseShip ship, int distance);
+    public abstract bool TryTraverseRouteDamage(BaseShip ship);
 }

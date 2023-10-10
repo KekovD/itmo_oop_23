@@ -2,13 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
@@ -25,7 +22,7 @@ public abstract class LaunchShips : IServices
             bool checkAdd = true;
             foreach (BaseSpace segment in manySegments)
             {
-                TryTraverseRouteDamage(ship, segment, segment.RouteLength);
+                segment.TryTraverseRouteDamage(ship);
                 if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
                 {
                     checkAdd = false;
@@ -36,149 +33,6 @@ public abstract class LaunchShips : IServices
         }
 
         return resultCollection;
-    }
-
-    public bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance)
-    {
-        if (space is NormalSpace derivedSpace)
-        {
-            if (derivedSpace.TypeOfObstacles == null)
-            {
-                throw new PartOfSpaceNullException(nameof(derivedSpace.TypeOfObstacles));
-            }
-
-            if (derivedSpace.NumberOfObstaclesOnRoute == null)
-            {
-                throw new PartOfSpaceNullException(nameof(derivedSpace.NumberOfObstaclesOnRoute));
-            }
-
-            int iterator = 0;
-            int counterObstacles = 0;
-            foreach (BaseObstacles obstacles in derivedSpace.TypeOfObstacles)
-            {
-                for (int i = 1; i < derivedSpace.NumberOfObstaclesOnRoute[iterator]; i++)
-                {
-                    obstacles.DoingDamage(ship);
-                    counterObstacles++;
-                    if (ship.ShipAlive == false)
-                    {
-                        derivedSpace.SetNumberOfObstacles(
-                            derivedSpace.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                        return false;
-                    }
-                }
-
-                derivedSpace.SetNumberOfObstacles(
-                    derivedSpace.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                counterObstacles = 0;
-
-                iterator++;
-            }
-
-            if (ship.ShipAlive == false)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        if (space is HighDensitySpaceNebulae derivedSpaceSecond)
-        {
-            if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
-            {
-                if (derivedSpaceSecond.TypeOfObstacles == null)
-                {
-                    throw new PartOfSpaceNullException(nameof(derivedSpaceSecond.TypeOfObstacles));
-                }
-
-                if (derivedSpaceSecond.NumberOfObstaclesOnRoute == null)
-                {
-                    throw new PartOfSpaceNullException(nameof(derivedSpace.NumberOfObstaclesOnRoute));
-                }
-
-                int iterator = 0;
-                int counterObstacles = 0;
-                foreach (BaseObstacles obstacles in derivedSpaceSecond.TypeOfObstacles)
-                {
-                    for (int i = 1; i < derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator]; i++)
-                    {
-                        obstacles.DoingDamage(derivedShip);
-                        counterObstacles++;
-                        if (ship.ShipAlive == false)
-                        {
-                            derivedSpaceSecond.SetNumberOfObstacles(
-                                derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                            return false;
-                        }
-                    }
-
-                    derivedSpaceSecond.SetNumberOfObstacles(
-                        derivedSpaceSecond.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                    counterObstacles = 0;
-
-                    iterator++;
-                }
-
-                if (derivedShip.ShipAlive == false)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        if (space is NitrinoParticleNebulae derivedSpaceThird)
-        {
-            if (derivedSpaceThird.TypeOfObstacles == null)
-            {
-                throw new PartOfSpaceNullException(nameof(derivedSpaceThird.TypeOfObstacles));
-            }
-
-            if (derivedSpaceThird.NumberOfObstaclesOnRoute == null)
-            {
-                throw new PartOfSpaceNullException(nameof(derivedSpaceThird.NumberOfObstaclesOnRoute));
-            }
-
-            int iterator = 0;
-            int counterObstacles = 0;
-            foreach (BaseObstacles obstacles in derivedSpaceThird.TypeOfObstacles)
-            {
-                if (ship.AdditionalEquipment.Any(equipment => equipment is AntiNitrinoEmitter) == false &&
-                    derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] != 0)
-                {
-                    for (int i = 1; i < derivedSpaceThird.NumberOfObstaclesOnRoute[iterator]; i++)
-                    {
-                        obstacles.DoingDamage(ship);
-                        counterObstacles++;
-                        if (ship.ShipAlive == false)
-                        {
-                            derivedSpaceThird.SetNumberOfObstacles(
-                                derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                            return false;
-                        }
-                    }
-
-                    derivedSpaceThird.SetNumberOfObstacles(
-                        derivedSpaceThird.NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
-                    counterObstacles = 0;
-                }
-
-                iterator++;
-            }
-
-            if (ship.ShipAlive == false)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDamage));
     }
 
     public int GetSingleCostOfRoute(BaseShip ship, BaseSpace space, int distance, FuelExchange fuelExchange)

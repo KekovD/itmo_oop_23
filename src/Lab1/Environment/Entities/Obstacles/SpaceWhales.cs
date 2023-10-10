@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class SpaceWhales : BaseSpaceWhales
+public class SpaceWhales : BaseObstacles
 {
     public SpaceWhales()
     {

@@ -42,4 +42,50 @@ public class HighDensitySpaceNebulae : BaseSpace, IHighDensitySpaceNebulae
 
         return ship.TryOvercomeJumpDistance(distance);
     }
+
+    public override bool TryTraverseRouteDamage(BaseShip ship)
+    {
+        if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
+        {
+            if (TypeOfObstacles == null)
+            {
+                throw new PartOfSpaceNullException(nameof(TypeOfObstacles));
+            }
+
+            if (NumberOfObstaclesOnRoute == null)
+            {
+                throw new PartOfSpaceNullException(nameof(NumberOfObstaclesOnRoute));
+            }
+
+            int iterator = 0;
+            int counterObstacles = 0;
+            foreach (BaseObstacles obstacles in TypeOfObstacles)
+            {
+                for (int i = 1; i < NumberOfObstaclesOnRoute[iterator]; i++)
+                {
+                    ship.TakingDamage(obstacles);
+                    counterObstacles++;
+                    if (ship.ShipAlive == false)
+                    {
+                        SetNumberOfObstacles(NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                        return false;
+                    }
+                }
+
+                SetNumberOfObstacles(NumberOfObstaclesOnRoute[iterator] - counterObstacles, iterator);
+                counterObstacles = 0;
+
+                iterator++;
+            }
+
+            if (derivedShip.ShipAlive == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }
