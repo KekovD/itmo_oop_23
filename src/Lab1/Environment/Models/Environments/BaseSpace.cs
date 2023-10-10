@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 
@@ -24,4 +25,6 @@ public abstract class BaseSpace
 
         NumberOfObstaclesOnRoute[index] = newValue;
     }
+
+    public abstract bool TryTraverseRouteDistance(BaseShip ship, int distance);
 }

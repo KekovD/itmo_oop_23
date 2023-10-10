@@ -47,4 +47,9 @@ public abstract class BaseShip
 
         return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice();
     }
+
+    public virtual bool TryOvercomeJumpDistance(int distance)
+    {
+        return false;
+    }
 }

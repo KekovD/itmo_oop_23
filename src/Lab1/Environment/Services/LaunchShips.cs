@@ -26,7 +26,7 @@ public abstract class LaunchShips : IServices
             foreach (BaseSpace segment in manySegments)
             {
                 TryTraverseRouteDamage(ship, segment, segment.RouteLength);
-                if (!TryTraverseRouteDistance(ship, segment, segment.RouteLength))
+                if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
                 {
                     checkAdd = false;
                 }
@@ -36,48 +36,6 @@ public abstract class LaunchShips : IServices
         }
 
         return resultCollection;
-    }
-
-    public bool TryTraverseRouteDistance(BaseShip ship, BaseSpace space, int distance)
-    {
-        if ((space is INormalSpace) && (ship is INormalSpace))
-        {
-            return true;
-        }
-
-        if (space is IHighDensitySpaceNebulae)
-        {
-            if (ship is BaseShipWithJumpEngineAndDeflector derivedShip)
-            {
-                if (derivedShip.JumpEngine == null)
-                {
-                    throw new PartOfShipNullException(nameof(derivedShip.JumpEngine));
-                }
-
-                if (derivedShip.JumpEngine.Rage < distance)
-                {
-                    derivedShip.SetFalseEnoughDistanceJump();
-                    return false;
-                }
-
-                return true;
-            }
-
-            ship.SetFalseNoJumpStatus();
-            return false;
-        }
-
-        if (space is INitrinoParticleNebulae)
-        {
-            if (ship is not INitrinoParticleNebulae)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        throw new ServicesInvalidOperationException(nameof(TryTraverseRouteDistance));
     }
 
     public bool TryTraverseRouteDamage(BaseShip ship, BaseSpace space, int distance)

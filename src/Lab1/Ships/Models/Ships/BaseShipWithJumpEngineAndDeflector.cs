@@ -23,4 +23,20 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
 
         return JumpEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice();
     }
+
+    public override bool TryOvercomeJumpDistance(int distance)
+    {
+        if (JumpEngine == null)
+        {
+            throw new PartOfShipNullException(nameof(JumpEngine));
+        }
+
+        if (JumpEngine.Rage < distance)
+        {
+            SetFalseEnoughDistanceJump();
+            return false;
+        }
+
+        return true;
+    }
 }

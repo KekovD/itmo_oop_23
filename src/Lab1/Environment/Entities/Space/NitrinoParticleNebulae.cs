@@ -4,6 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
@@ -29,5 +30,15 @@ public class NitrinoParticleNebulae : BaseSpace, INitrinoParticleNebulae
         {
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NitrinoParticleNebulae));
         }
+    }
+
+    public override bool TryTraverseRouteDistance(BaseShip ship, int distance)
+    {
+        if (ship is not INitrinoParticleNebulae)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
