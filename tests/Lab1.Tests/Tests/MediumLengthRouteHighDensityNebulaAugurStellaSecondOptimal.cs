@@ -7,6 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
+using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 using Xunit;
@@ -51,8 +52,8 @@ public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
         {
             new object[]
             {
-                new AugurShip(true),
-                new StellaShip(true),
+                new AugurShip(new PhotonsDeflectors()),
+                new StellaShip(new PhotonsDeflectors()),
             },
         };
 

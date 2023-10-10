@@ -54,9 +54,9 @@ public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
         {
             new object[]
             {
-                new VaklasShip(false),
-                new AugurShip(false),
-                new MeredianShip(false),
+                new VaklasShip(null),
+                new AugurShip(null),
+                new MeredianShip(null),
             },
         };
 

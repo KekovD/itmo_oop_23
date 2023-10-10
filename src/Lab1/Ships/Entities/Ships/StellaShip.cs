@@ -12,11 +12,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
 public class StellaShip : BaseShipWithJumpEngineAndDeflector, INormalSpace, IHighDensitySpaceNebulae
 {
-    public StellaShip(bool havePhotons)
+    public StellaShip(IAdditionalEquipment? additionalEquipment)
     {
-        if (havePhotons)
+        if (additionalEquipment is PhotonsDeflectors)
         {
-            AdditionalEquipment = new List<IAdditionalEquipment> { new PhotonsDeflectors() };
+            AdditionalEquipment = new List<IAdditionalEquipment> { additionalEquipment };
         }
 
         Hull = new HullFirst();

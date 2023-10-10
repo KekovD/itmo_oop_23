@@ -62,7 +62,7 @@ public class ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal
             new object[]
             {
                 new WalkingShuttleShip(),
-                new VaklasShip(false),
+                new VaklasShip(null),
             },
         };
 

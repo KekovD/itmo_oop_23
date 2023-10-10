@@ -51,7 +51,7 @@ public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
             new object[]
             {
                 new WalkingShuttleShip(),
-                new VaklasShip(false),
+                new VaklasShip(null),
             },
         };
 

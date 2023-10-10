@@ -11,7 +11,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
 public class MeredianShip : BaseShipWithDeflector, INormalSpace, INitrinoParticleNebulae
 {
-    public MeredianShip(bool havePhotons)
+    public MeredianShip(IAdditionalEquipment? additionalEquipment)
     {
         Hull = new HullSecond();
         ImpulseEngine = new EImpulseEngine();
@@ -19,9 +19,9 @@ public class MeredianShip : BaseShipWithDeflector, INormalSpace, INitrinoParticl
         AdditionalEquipment = new List<IAdditionalEquipment> { new AntiNitrinoEmitter() };
         Weight = Hull.PartWeight + ImpulseEngine.PartWeight + Deflector.PartWeight;
 
-        if (havePhotons)
+        if (additionalEquipment is PhotonsDeflectors)
         {
-            AdditionalEquipment = new List<IAdditionalEquipment> { new PhotonsDeflectors(), new AntiNitrinoEmitter() };
+            AdditionalEquipment = new List<IAdditionalEquipment> { additionalEquipment, new AntiNitrinoEmitter() };
         }
     }
 }

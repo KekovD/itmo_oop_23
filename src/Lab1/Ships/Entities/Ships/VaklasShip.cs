@@ -12,11 +12,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
 public class VaklasShip : BaseShipWithJumpEngineAndDeflector, INormalSpace, INitrinoParticleNebulae, IHighDensitySpaceNebulae
 {
-    public VaklasShip(bool havePhotons)
+    public VaklasShip(IAdditionalEquipment? additionalEquipment)
     {
-        if (havePhotons)
+        if (additionalEquipment is PhotonsDeflectors)
         {
-            AdditionalEquipment = new List<IAdditionalEquipment> { new PhotonsDeflectors() };
+            AdditionalEquipment = new List<IAdditionalEquipment> { additionalEquipment };
         }
 
         Hull = new HullSecond();

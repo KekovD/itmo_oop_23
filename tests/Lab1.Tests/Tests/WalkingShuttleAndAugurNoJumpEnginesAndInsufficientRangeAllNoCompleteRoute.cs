@@ -53,7 +53,7 @@ public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoComplet
             new object[]
             {
                 new WalkingShuttleShip(),
-                new AugurShip(false),
+                new AugurShip(null),
             },
         };
 
