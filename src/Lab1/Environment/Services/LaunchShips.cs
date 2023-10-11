@@ -13,70 +13,47 @@ public abstract class LaunchShips : IServices
 {
     public IEnumerable<bool> TryLaunchShips(IEnumerable<ShipBase> manyShips, ICollection<SpaceBase> manySegments)
     {
-        var resultList = new List<bool>();
-
-        foreach (ShipBase ship in manyShips)
-        {
-            bool checkDistanceAdd = true;
-            foreach (SpaceBase segment in manySegments)
+        return manyShips.Select(ship => manySegments
+                .All(segment =>
             {
                 segment.TraverseRouteDamage(ship);
-                if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
-                {
-                    checkDistanceAdd = false;
-                }
-            }
-
-            resultList.Add(checkDistanceAdd);
-        }
-
-        return resultList;
+                return segment.TryTraverseRouteDistance(ship, segment.RouteLength);
+            }))
+            .ToList();
     }
 
     public int GetOptimumShip(IEnumerable<ShipBase> survivorsShips, IEnumerable<ShipBase> allShips, ICollection<SpaceBase> manySegments)
     {
-        var survivorsCost = new List<int>();
-        var allCost = new List<int>();
         var fuelExchange = new FuelExchange();
 
-        foreach (ShipBase ship in survivorsShips)
-        {
-            int totalCost = 0;
+        var survivorsCost = survivorsShips
+            .Select(ship => manySegments
+                .Sum(segment =>
+                    ship.CostOfRoute(segment, segment.RouteLength, fuelExchange)))
+            .ToList();
 
-            foreach (SpaceBase segment in manySegments)
-            {
-                int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
-                totalCost += segmentCost;
-            }
-
-            survivorsCost.Add(totalCost);
-        }
-
-        foreach (ShipBase ship in allShips)
-        {
-            int totalCost = 0;
-
-            foreach (SpaceBase segment in manySegments)
-            {
-                int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
-                totalCost += segmentCost;
-            }
-
-            allCost.Add(totalCost);
-        }
+        var allCost = allShips
+            .Select(ship => manySegments
+                .Sum(segment => ship
+                    .CostOfRoute(segment, segment.RouteLength, fuelExchange)))
+            .ToList();
 
         int minimumPrice = survivorsCost.Min();
         int minimumPriseIndex = allCost.IndexOf(minimumPrice);
+
         return minimumPriseIndex;
     }
 
     public WhatHappenedStatus CheckWhatHappened(ShipBase ship)
     {
-        if (!ship.CrewAlive) return WhatHappenedStatus.CrewKilled;
+        if (!ship.CrewAlive)
+            return WhatHappenedStatus.CrewKilled;
 
-        if (ship.Hull == null) throw new PartOfShipNullException(nameof(ship.Hull));
+        if (ship.Hull == null)
+            throw new PartOfShipNullException(nameof(ship.Hull));
 
-        if (!ship.Hull.Serviceability) return WhatHappenedStatus.ShipDestroyed;
+        if (!ship.Hull.Serviceability)
+            return WhatHappenedStatus.ShipDestroyed;
 
         if (ship is ShipWithJumpEngineAndDeflectorBase { EnoughDistanceJumpStatus: false })
             return WhatHappenedStatus.ShortJumpRange;
@@ -84,7 +61,8 @@ public abstract class LaunchShips : IServices
         if (ship is ShipWithDeflectorBase { Deflector.Serviceability: false })
             return WhatHappenedStatus.DeflectorDestroyed;
 
-        if (ship.NoJumpEngineStatus == false) return WhatHappenedStatus.NoJumpEngine;
+        if (ship.NoJumpEngineStatus == false)
+            return WhatHappenedStatus.NoJumpEngine;
 
         return WhatHappenedStatus.Successfully;
     }
