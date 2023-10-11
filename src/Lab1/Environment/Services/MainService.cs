@@ -9,11 +9,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 public class MainService : LaunchShips
 {
     public override (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
-        MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+        MainLaunch(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
         var resultMainLaunch = new List<WhatHappenedStatus>();
-        var allShips = new List<BaseShip>(manyShips);
+        var allShips = new List<ShipBase>(manyShips);
 
         int iterator = 0;
         foreach (bool shipResult in resultLaunch)
@@ -34,7 +34,7 @@ public class MainService : LaunchShips
         }
 
         int countIteration = 0;
-        var survivorsShips = new List<BaseShip>(allShips);
+        var survivorsShips = new List<ShipBase>(allShips);
         foreach (int i in falseIndex)
         {
             survivorsShips.RemoveAt(i - countIteration);

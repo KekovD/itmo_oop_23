@@ -12,14 +12,14 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public abstract class LaunchShips : IServices
 {
-    public Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments)
+    public Collection<bool> TryLaunchShips(IEnumerable<ShipBase> manyShips, ICollection<SpaceBase> manySegments)
     {
         var resultCollection = new Collection<bool>();
 
-        foreach (BaseShip ship in manyShips)
+        foreach (ShipBase ship in manyShips)
         {
             bool checkAdd = true;
-            foreach (BaseSpace segment in manySegments)
+            foreach (SpaceBase segment in manySegments)
             {
                 segment.TraverseRouteDamage(ship);
                 if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
@@ -34,17 +34,17 @@ public abstract class LaunchShips : IServices
         return resultCollection;
     }
 
-    public int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments)
+    public int GetOptimumShip(IEnumerable<ShipBase> survivorsShips, IEnumerable<ShipBase> allShips, ICollection<SpaceBase> manySegments)
     {
         var survivorsCost = new List<int>();
         var allCost = new List<int>();
         var fuelExchange = new FuelExchange();
 
-        foreach (BaseShip ship in survivorsShips)
+        foreach (ShipBase ship in survivorsShips)
         {
             int totalCost = 0;
 
-            foreach (BaseSpace segment in manySegments)
+            foreach (SpaceBase segment in manySegments)
             {
                 int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
                 totalCost += segmentCost;
@@ -53,11 +53,11 @@ public abstract class LaunchShips : IServices
             survivorsCost.Add(totalCost);
         }
 
-        foreach (BaseShip ship in allShips)
+        foreach (ShipBase ship in allShips)
         {
             int totalCost = 0;
 
-            foreach (BaseSpace segment in manySegments)
+            foreach (SpaceBase segment in manySegments)
             {
                 int segmentCost = ship.CostOfRoute(segment, segment.RouteLength, fuelExchange);
                 totalCost += segmentCost;
@@ -71,7 +71,7 @@ public abstract class LaunchShips : IServices
         return minimumPriseIndex;
     }
 
-    public WhatHappenedStatus CheckWhatHappened(BaseShip ship)
+    public WhatHappenedStatus CheckWhatHappened(ShipBase ship)
     {
         if (!ship.CrewAlive) return WhatHappenedStatus.CrewKilled;
 
@@ -79,10 +79,10 @@ public abstract class LaunchShips : IServices
 
         if (!ship.Hull.Serviceability) return WhatHappenedStatus.ShipDestroyed;
 
-        if (ship is BaseShipWithJumpEngineAndDeflector { EnoughDistanceJumpStatus: false })
+        if (ship is ShipWithJumpEngineAndDeflectorBase { EnoughDistanceJumpStatus: false })
             return WhatHappenedStatus.ShortJumpRange;
 
-        if (ship is BaseShipWithDeflector { Deflector.Serviceability: false })
+        if (ship is ShipWithDeflectorBase { Deflector.Serviceability: false })
             return WhatHappenedStatus.DeflectorDestroyed;
 
         if (ship.NoJumpEngineStatus == false) return WhatHappenedStatus.NoJumpEngine;
@@ -91,5 +91,5 @@ public abstract class LaunchShips : IServices
     }
 
     public abstract (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int
-        OptimalShip) MainLaunch(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces);
+        OptimalShip) MainLaunch(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces);
 }

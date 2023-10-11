@@ -10,19 +10,19 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
-public class VaklasShip : BaseShipWithJumpEngineAndDeflector, INormalSpace, INitrinoParticleNebulae, IHighDensitySpaceNebulae
+public class Vaklas : ShipWithJumpEngineAndDeflectorBase, INormalSpace, INitrinoParticleNebulae, IHighDensitySpaceNebulae
 {
-    public VaklasShip(IAdditionalEquipment? additionalEquipment)
+    public Vaklas(IAdditionalEquipment? additionalEquipment)
     {
         if (additionalEquipment is PhotonsDeflectors)
         {
             AdditionalEquipment = new List<IAdditionalEquipment> { additionalEquipment };
         }
 
-        Hull = new HullSecond();
-        ImpulseEngine = new EImpulseEngine();
-        JumpEngine = new GammaJumpEngine();
-        Deflector = new DeflectorFirst();
+        Hull = new ThirdHull();
+        ImpulseEngine = new EImpulse();
+        JumpEngine = new GammaJump();
+        Deflector = new FirstDeflector();
         Weight = Hull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + Deflector.PartWeight;
     }
 }

@@ -15,7 +15,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoCompleteRoute
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -31,17 +31,17 @@ public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoComplet
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip augurShip)
+    private void ConditionCheck(ShipBase walkingShuttle, ShipBase augur)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            walkingShuttleShip,
-            augurShip,
+            walkingShuttle,
+            augur,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
         var obstaclesCounter = new Collection<int> { 1 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(10000, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(10000, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -52,8 +52,8 @@ public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoComplet
         {
             new object[]
             {
-                new WalkingShuttleShip(),
-                new AugurShip(null),
+                new WalkingShuttle(),
+                new Augur(null),
             },
         };
 

@@ -12,12 +12,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
-public abstract class BaseShip
+public abstract class ShipBase
 {
     public bool ShipAlive { get; private set; } = true;
     public bool CrewAlive { get; private set; } = true;
-    public BaseImpulseEngines? ImpulseEngine { get; protected init; }
-    public BaseHull? Hull { get; protected init; }
+    public EnginesImpulseBase? ImpulseEngine { get; protected init; }
+    public HullBase? Hull { get; protected init; }
     public bool NoJumpEngineStatus { get; private set; } = true;
     protected int Weight { get; init; }
     protected IEnumerable<IAdditionalEquipment> AdditionalEquipment { get; init; } = new List<IAdditionalEquipment>();
@@ -32,7 +32,7 @@ public abstract class BaseShip
         return false;
     }
 
-    public virtual void TakingDamage(BaseObstacles obstacles)
+    public virtual void TakingDamage(ObstaclesBase obstacles)
     {
         if (obstacles is IHighDensitySpaceNebulae)
             KillCrew();
@@ -50,7 +50,7 @@ public abstract class BaseShip
         CheckShipAlive();
     }
 
-    public int CostOfRoute(BaseSpace space, int distance, FuelExchange fuelExchange)
+    public int CostOfRoute(SpaceBase space, int distance, FuelExchange fuelExchange)
     {
         const int wrongTypeOfEngineRatio = 100000;
         if (space is INormalSpace)

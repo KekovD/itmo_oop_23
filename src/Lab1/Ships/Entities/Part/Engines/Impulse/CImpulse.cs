@@ -2,13 +2,13 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 
-public class CImpulseEngine : BaseImpulseEngines
+public class CImpulse : EnginesImpulseBase
 {
     private const int CLassWeight = 100;
     private const int CSpeed = 20;
     private const int CEngineFuelFlow = 10;
 
-    public CImpulseEngine()
+    public CImpulse()
     {
         DesignSpeed = CSpeed;
         FuelUseAtStartup = CEngineFuelFlow;

@@ -8,27 +8,27 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
-public class NormalSpace : BaseSpace, INormalSpace
+public class Normal : SpaceBase, INormalSpace
 {
-    public NormalSpace(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<BaseObstacles> manyObstacles)
+    public Normal(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<ObstaclesBase> manyObstacles)
         : base(routeLength)
     {
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
-        TypeOfObstacles = new Collection<BaseObstacles>();
+        TypeOfObstacles = new Collection<ObstaclesBase>();
 
-        foreach (BaseObstacles obstacle in manyObstacles)
+        foreach (ObstaclesBase obstacle in manyObstacles)
         {
             if (obstacle is not INormalSpace)
-                throw new ObstacleDoesNotMatchEnvironmentException(nameof(NormalSpace));
+                throw new ObstacleDoesNotMatchEnvironmentException(nameof(Normal));
 
             TypeOfObstacles.Add(obstacle);
         }
 
         if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
-            throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NormalSpace));
+            throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(Normal));
     }
 
-    public override bool TryTraverseRouteDistance(BaseShip ship, int distance)
+    public override bool TryTraverseRouteDistance(ShipBase ship, int distance)
     {
         if (ship is INormalSpace)
             return true;

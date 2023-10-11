@@ -16,7 +16,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class AntimatterFlashVaklasAndVaklasPhotonDeflectorsRouteNotPassedKillCrewAndPassed
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -32,17 +32,17 @@ public class AntimatterFlashVaklasAndVaklasPhotonDeflectorsRouteNotPassedKillCre
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip vaklasShipWithoutPhotons, BaseShip vaklasShipWithPhotons)
+    private void ConditionCheck(ShipBase vaklasWithoutPhotons, ShipBase vaklasWithPhotons)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            vaklasShipWithoutPhotons,
-            vaklasShipWithPhotons,
+            vaklasWithoutPhotons,
+            vaklasWithPhotons,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
         var obstaclesCounter = new Collection<int> { 3 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(100, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(100, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -53,8 +53,8 @@ public class AntimatterFlashVaklasAndVaklasPhotonDeflectorsRouteNotPassedKillCre
         {
             new object[]
             {
-                new VaklasShip(null),
-                new VaklasShip(new PhotonsDeflectors()),
+                new Vaklas(null),
+                new Vaklas(new PhotonsDeflectors()),
             },
         };
 

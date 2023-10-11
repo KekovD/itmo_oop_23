@@ -7,11 +7,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Deflectors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
-public abstract class BaseShipWithDeflector : BaseShip
+public abstract class ShipWithDeflectorBase : ShipBase
 {
-    public BaseDeflector? Deflector { get; protected init; }
+    public DeflectorBase? Deflector { get; protected init; }
 
-    public override void TakingDamage(BaseObstacles obstacles)
+    public override void TakingDamage(ObstaclesBase obstacles)
     {
         if (obstacles is IHighDensitySpaceNebulae)
         {

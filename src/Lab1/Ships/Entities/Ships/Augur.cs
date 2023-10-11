@@ -10,19 +10,19 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
-public class StellaShip : BaseShipWithJumpEngineAndDeflector, INormalSpace, IHighDensitySpaceNebulae
+public class Augur : ShipWithJumpEngineAndDeflectorBase, INormalSpace, INitrinoParticleNebulae, IHighDensitySpaceNebulae
 {
-    public StellaShip(IAdditionalEquipment? additionalEquipment)
+    public Augur(IAdditionalEquipment? additionalEquipment)
     {
         if (additionalEquipment is PhotonsDeflectors)
         {
             AdditionalEquipment = new List<IAdditionalEquipment> { additionalEquipment };
         }
 
-        Hull = new HullFirst();
-        ImpulseEngine = new CImpulseEngine();
-        JumpEngine = new OmegaJumpEngine();
-        Deflector = new DeflectorFirst();
+        Hull = new ThirdHull();
+        ImpulseEngine = new EImpulse();
+        JumpEngine = new AlphaJump();
+        Deflector = new ThirdDeflector();
         Weight = Hull.PartWeight + ImpulseEngine.PartWeight + JumpEngine.PartWeight + Deflector.PartWeight;
     }
 }

@@ -6,9 +6,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
-public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
+public abstract class ShipWithJumpEngineAndDeflectorBase : ShipWithDeflectorBase
 {
-    public BaseJumpEngines? JumpEngine { get; protected init; }
+    public EnginesBaseJump? JumpEngine { get; protected init; }
     public bool EnoughDistanceJumpStatus { get; private set; } = true;
 
     public override bool TryOvercomeJumpDistance(int distance)
@@ -25,7 +25,7 @@ public abstract class BaseShipWithJumpEngineAndDeflector : BaseShipWithDeflector
         return true;
     }
 
-    public new int CostOfRoute(BaseSpace space, int distance, FuelExchange fuelExchange)
+    public new int CostOfRoute(SpaceBase space, int distance, FuelExchange fuelExchange)
     {
         if (space is IHighDensitySpaceNebulae)
             return JumpFuelPrice(distance, fuelExchange);

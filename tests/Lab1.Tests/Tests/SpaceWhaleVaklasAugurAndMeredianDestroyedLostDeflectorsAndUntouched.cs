@@ -15,7 +15,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -32,18 +32,18 @@ public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip vaklasShip, BaseShip augurShip, BaseShip meredianShip)
+    private void ConditionCheck(ShipBase vaklas, ShipBase augur, ShipBase meredian)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            vaklasShip,
-            augurShip,
-            meredianShip,
+            vaklas,
+            augur,
+            meredian,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new SpaceWhales() };
+        var obstacles = new Collection<ObstaclesBase> { new SpaceWhales() };
         var obstaclesCounter = new Collection<int> { 4 };
-        var manySpaces = new List<BaseSpace> { new NitrinoParticleNebulae(10, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new NitrinoParticleNebulae(10, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -54,9 +54,9 @@ public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
         {
             new object[]
             {
-                new VaklasShip(null),
-                new AugurShip(null),
-                new MeredianShip(null),
+                new Vaklas(null),
+                new Augur(null),
+                new Meredian(null),
             },
         };
 

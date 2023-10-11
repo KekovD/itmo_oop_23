@@ -4,13 +4,13 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 
-public class EImpulseEngine : BaseImpulseEngines, INitrinoParticleNebulae
+public class EImpulse : EnginesImpulseBase, INitrinoParticleNebulae
 {
     private const int EClassWeight = 150;
     private const int ESpeed = 30;
     private const int EEngineFuelFlow = 25;
 
-    public EImpulseEngine()
+    public EImpulse()
     {
         DesignSpeed = ESpeed;
         FuelUseAtStartup = EEngineFuelFlow;

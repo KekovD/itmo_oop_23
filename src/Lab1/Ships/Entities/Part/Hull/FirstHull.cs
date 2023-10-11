@@ -2,12 +2,12 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Hull;
 
-public class HullFirst : BaseHull
+public class FirstHull : HullBase
 {
     private const int HullFirstHealth = 15;
     private const int FirstHullWeight = 1000;
 
-    public HullFirst()
+    public FirstHull()
     {
         Health = HullFirstHealth;
         PartWeight = FirstHullWeight;

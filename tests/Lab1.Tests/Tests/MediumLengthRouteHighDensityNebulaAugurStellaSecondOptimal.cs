@@ -16,7 +16,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -31,17 +31,17 @@ public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip augurShip, BaseShip stellaShip)
+    private void ConditionCheck(ShipBase augur, ShipBase stella)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            augurShip,
-            stellaShip,
+            augur,
+            stella,
         };
 
-        var obstacles = new Collection<BaseObstacles> { new AntimatterFlash() };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
         var obstaclesCounter = new Collection<int> { 2 };
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(2000, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(2000, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -52,8 +52,8 @@ public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
         {
             new object[]
             {
-                new AugurShip(new PhotonsDeflectors()),
-                new StellaShip(new PhotonsDeflectors()),
+                new Augur(new PhotonsDeflectors()),
+                new Stella(new PhotonsDeflectors()),
             },
         };
 

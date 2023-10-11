@@ -5,20 +5,20 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 
-public abstract class BaseSpace
+public abstract class SpaceBase
 {
-    protected BaseSpace(int routeLength)
+    protected SpaceBase(int routeLength)
     {
         RouteLength = routeLength;
     }
 
     public int RouteLength { get; }
     public IList<int>? NumberOfObstaclesOnRoute { get; protected init; }
-    public ICollection<BaseObstacles>? TypeOfObstacles { get; protected init; }
+    public ICollection<ObstaclesBase>? TypeOfObstacles { get; protected init; }
 
-    public abstract bool TryTraverseRouteDistance(BaseShip ship, int distance);
+    public abstract bool TryTraverseRouteDistance(ShipBase ship, int distance);
 
-    public void TraverseRouteDamage(BaseShip ship)
+    public void TraverseRouteDamage(ShipBase ship)
     {
         if (TypeOfObstacles == null)
             throw new PartOfSpaceNullException(nameof(TypeOfObstacles));
@@ -28,7 +28,7 @@ public abstract class BaseSpace
 
         int iterator = 0;
         int counterObstacles = 0;
-        foreach (BaseObstacles obstacles in TypeOfObstacles)
+        foreach (ObstaclesBase obstacles in TypeOfObstacles)
         {
             for (int i = 1; i < NumberOfObstaclesOnRoute[iterator]; i++)
             {

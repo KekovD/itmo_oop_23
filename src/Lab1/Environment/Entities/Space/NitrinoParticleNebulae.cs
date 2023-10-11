@@ -8,15 +8,15 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
-public class NitrinoParticleNebulae : BaseSpace, INitrinoParticleNebulae
+public class NitrinoParticleNebulae : SpaceBase, INitrinoParticleNebulae
 {
-    public NitrinoParticleNebulae(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<BaseObstacles> manyObstacles)
+    public NitrinoParticleNebulae(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<ObstaclesBase> manyObstacles)
         : base(routeLength)
     {
         NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
-        TypeOfObstacles = new Collection<BaseObstacles>();
+        TypeOfObstacles = new Collection<ObstaclesBase>();
 
-        foreach (BaseObstacles obstacle in manyObstacles)
+        foreach (ObstaclesBase obstacle in manyObstacles)
         {
             if (obstacle is not INitrinoParticleNebulae)
                 throw new ObstacleDoesNotMatchEnvironmentException(nameof(NitrinoParticleNebulae));
@@ -28,7 +28,7 @@ public class NitrinoParticleNebulae : BaseSpace, INitrinoParticleNebulae
             throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(NitrinoParticleNebulae));
     }
 
-    public override bool TryTraverseRouteDistance(BaseShip ship, int distance)
+    public override bool TryTraverseRouteDistance(ShipBase ship, int distance)
     {
         if (ship is not INitrinoParticleNebulae)
             return false;

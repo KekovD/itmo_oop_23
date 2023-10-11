@@ -5,12 +5,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
-public class WalkingShuttleShip : BaseShip, INormalSpace
+public class WalkingShuttle : ShipBase, INormalSpace
 {
-    public WalkingShuttleShip()
+    public WalkingShuttle()
     {
-        Hull = new HullFirst();
-        ImpulseEngine = new CImpulseEngine();
+        Hull = new FirstHull();
+        ImpulseEngine = new CImpulse();
         Weight = Hull.PartWeight + ImpulseEngine.PartWeight;
     }
 }

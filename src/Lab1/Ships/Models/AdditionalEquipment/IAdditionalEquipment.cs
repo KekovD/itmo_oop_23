@@ -2,5 +2,5 @@
 
 public interface IAdditionalEquipment
 {
-    public const bool ImAdditionalEquipment = true; ////Not to be empty.
+    public const bool ImAdditionalEquipment = true;
 }

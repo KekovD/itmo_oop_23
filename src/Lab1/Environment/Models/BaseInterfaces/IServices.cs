@@ -8,8 +8,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 
 public interface IServices ////Methods are needed in this interface so that they are not static.
 {
-    WhatHappenedStatus CheckWhatHappened(BaseShip ship);
+    WhatHappenedStatus CheckWhatHappened(ShipBase ship);
 
-    int GetOptimumShip(IEnumerable<BaseShip> survivorsShips, IEnumerable<BaseShip> allShips, ICollection<BaseSpace> manySegments);
-    Collection<bool> TryLaunchShips(IEnumerable<BaseShip> manyShips, ICollection<BaseSpace> manySegments);
+    int GetOptimumShip(IEnumerable<ShipBase> survivorsShips, IEnumerable<ShipBase> allShips, ICollection<SpaceBase> manySegments);
+    Collection<bool> TryLaunchShips(IEnumerable<ShipBase> manyShips, ICollection<SpaceBase> manySegments);
 }

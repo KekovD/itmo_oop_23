@@ -2,13 +2,13 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Jump;
 
-public class AlphaJumpEngine : BaseJumpEngines
+public class AlphaJump : EnginesBaseJump
 {
     private const int AlphaWeight = 200;
     private const int AlphaDistance = 1000;
     private const int AlphaFlowRate = 10;
 
-    public AlphaJumpEngine()
+    public AlphaJump()
     {
         Rage = AlphaDistance;
         JumpFuelConsumption = AlphaFlowRate;

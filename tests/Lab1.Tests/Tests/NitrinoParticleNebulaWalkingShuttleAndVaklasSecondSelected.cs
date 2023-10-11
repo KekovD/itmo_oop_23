@@ -14,7 +14,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -29,17 +29,17 @@ public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip vaklasShip)
+    private void ConditionCheck(ShipBase walkingShuttle, ShipBase vaklas)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            walkingShuttleShip,
-            vaklasShip,
+            walkingShuttle,
+            vaklas,
         };
 
-        var obstacles = new Collection<BaseObstacles>();
+        var obstacles = new Collection<ObstaclesBase>();
         var obstaclesCounter = new Collection<int>();
-        var manySpaces = new List<BaseSpace> { new HighDensitySpaceNebulae(500, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(500, obstaclesCounter, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
@@ -50,8 +50,8 @@ public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
         {
             new object[]
             {
-                new WalkingShuttleShip(),
-                new VaklasShip(null),
+                new WalkingShuttle(),
+                new Vaklas(null),
             },
         };
 

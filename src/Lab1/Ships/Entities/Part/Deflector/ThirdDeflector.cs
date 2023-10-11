@@ -2,12 +2,12 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Deflector;
 
-public class DeflectorThird : BaseDeflector
+public class ThirdDeflector : DeflectorBase
 {
     private const int DeflectorThirdHealth = 400;
     private const int DeflectorThirdWeight = 300;
 
-    public DeflectorThird()
+    public ThirdDeflector()
     {
         Health = DeflectorThirdHealth;
         PartWeight += DeflectorThirdWeight;

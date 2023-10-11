@@ -16,7 +16,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSecondSelected
 {
-    private static bool CheckResult(IList<BaseShip> manyShips, IList<BaseSpace> manySpaces)
+    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -31,13 +31,13 @@ public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSec
     [Theory]
     [ClassData(typeof(ParameterizedTests))]
 
-    private void ConditionCheck(BaseShip walkingShuttleShip, BaseShip meredianShip, BaseShip stellaShip)
+    private void ConditionCheck(ShipBase walkingShuttle, ShipBase meredian, ShipBase stella)
     {
-        var manyShips = new List<BaseShip>
+        var manyShips = new List<ShipBase>
         {
-            walkingShuttleShip,
-            meredianShip,
-            stellaShip,
+            walkingShuttle,
+            meredian,
+            stella,
         };
 
         var obstaclesCounter = new Collection<int>
@@ -46,18 +46,18 @@ public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSec
             2,
         };
 
-        var obstacles = new Collection<BaseObstacles>
+        var obstacles = new Collection<ObstaclesBase>
         {
             new SmallAsteroids(),
             new Meteorites(),
         };
 
         var obstaclesSecondCounter = new Collection<int> { 3 };
-        var obstaclesSecond = new Collection<BaseObstacles> { new SpaceWhales() };
+        var obstaclesSecond = new Collection<ObstaclesBase> { new SpaceWhales() };
 
-        var manySpaces = new List<BaseSpace>
+        var manySpaces = new List<SpaceBase>
         {
-            new NormalSpace(1000, obstaclesCounter, obstacles),
+            new Normal(1000, obstaclesCounter, obstacles),
             new NitrinoParticleNebulae(500, obstaclesSecondCounter, obstaclesSecond),
         };
 
@@ -70,9 +70,9 @@ public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSec
         {
             new object[]
             {
-                new WalkingShuttleShip(),
-                new MeredianShip(null),
-                new StellaShip(new PhotonsDeflectors()),
+                new WalkingShuttle(),
+                new Meredian(null),
+                new Stella(new PhotonsDeflectors()),
             },
         };
 
