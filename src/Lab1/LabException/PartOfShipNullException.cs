@@ -2,6 +2,9 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.LabException;
 
+/// <summary>
+/// This exception is needed because the properties in "ShipsBase" are nullable. And their types are abstract classes.
+/// </summary>
 public class PartOfShipNullException : Exception
 {
     public PartOfShipNullException()
