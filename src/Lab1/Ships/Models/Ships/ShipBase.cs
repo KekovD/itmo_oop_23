@@ -39,7 +39,7 @@ public abstract class ShipBase
 
         if (obstacles is INitrinoParticleNebulae)
         {
-            if (CheckAntiNitrinoEmitter())
+            if (CheckAvailabilityAdditionalEquipment(new AntiNitrinoEmitter()))
                 return;
         }
 
@@ -53,6 +53,7 @@ public abstract class ShipBase
     public int CostOfRoute(SpaceBase space, int distance, FuelExchange fuelExchange)
     {
         const int wrongTypeOfEngineRatio = 100000;
+
         if (space is INormalSpace)
             return ImpulseFuelPrice(distance, fuelExchange);
 
@@ -78,9 +79,9 @@ public abstract class ShipBase
         CheckShipAlive();
     }
 
-    protected bool CheckAntiNitrinoEmitter()
+    protected bool CheckAvailabilityAdditionalEquipment(IAdditionalEquipment additionalEquipment)
     {
-        return AdditionalEquipment.Any(equipment => equipment is AntiNitrinoEmitter);
+        return AdditionalEquipment.Contains(additionalEquipment);
     }
 
     private int ImpulseFuelPrice(int distance, FuelExchange fuelExchange)

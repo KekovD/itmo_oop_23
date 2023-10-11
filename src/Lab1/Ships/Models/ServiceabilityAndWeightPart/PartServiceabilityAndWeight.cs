@@ -6,7 +6,7 @@ public abstract class PartServiceabilityAndWeight
     public bool Serviceability { get; private set; } = true;
     protected int Health { get; set; }
 
-    public void SetPartServiceability()
+    public void CheckPartServiceability()
     {
         if (Health <= 0)
             Serviceability = false;
@@ -15,6 +15,6 @@ public abstract class PartServiceabilityAndWeight
     public void DamagingPart(int damage)
     {
         Health -= damage;
-        SetPartServiceability();
+        CheckPartServiceability();
     }
 }

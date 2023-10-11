@@ -1,8 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+﻿using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Deflectors;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
@@ -15,13 +15,14 @@ public abstract class ShipWithDeflectorBase : ShipBase
     {
         if (obstacles is IHighDensitySpaceNebulae)
         {
-            foreach (IAdditionalEquipment equipment in AdditionalEquipment)
+            PhotonsDeflectors? photonsDeflector = AdditionalEquipment
+                .OfType<PhotonsDeflectors>()
+                .FirstOrDefault(equipment => equipment.Serviceability);
+
+            if (photonsDeflector is not null)
             {
-                if (equipment is PhotonsDeflectors photonsDeflectors)
-                {
-                    photonsDeflectors.DamagingPart(obstacles.Damage);
-                    return;
-                }
+                photonsDeflector.DamagingPart(obstacles.Damage);
+                return;
             }
 
             KillCrew();
@@ -30,7 +31,7 @@ public abstract class ShipWithDeflectorBase : ShipBase
 
         if (obstacles is INitrinoParticleNebulae)
         {
-            if (CheckAntiNitrinoEmitter())
+            if (CheckAvailabilityAdditionalEquipment(new AntiNitrinoEmitter()))
                 return;
         }
 
@@ -39,7 +40,7 @@ public abstract class ShipWithDeflectorBase : ShipBase
         if (Deflector.Serviceability)
         {
             Deflector.DamagingPart(obstacles.Damage);
-            Deflector.SetPartServiceability();
+            Deflector.CheckPartServiceability();
             return;
         }
 
