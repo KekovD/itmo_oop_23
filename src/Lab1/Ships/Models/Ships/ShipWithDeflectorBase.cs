@@ -35,7 +35,8 @@ public abstract class ShipWithDeflectorBase : ShipBase
                 return;
         }
 
-        if (Deflector == null) throw new PartOfShipNullException(nameof(Deflector));
+        if (Deflector is null)
+            throw new PartOfShipNullException(nameof(Deflector));
 
         if (Deflector.Serviceability)
         {
@@ -44,7 +45,8 @@ public abstract class ShipWithDeflectorBase : ShipBase
             return;
         }
 
-        if (Hull == null) throw new PartOfShipNullException(nameof(Hull));
+        if (Hull is null)
+            throw new PartOfShipNullException(nameof(Hull));
 
         Hull.DamagingPart(obstacles.Damage);
         CheckShipAlive();

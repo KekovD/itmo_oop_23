@@ -43,7 +43,7 @@ public abstract class ShipBase
                 return;
         }
 
-        if (Hull == null)
+        if (Hull is null)
             throw new PartOfShipNullException(nameof(Hull));
 
         Hull.DamagingPart(obstacles.Damage);
@@ -65,10 +65,8 @@ public abstract class ShipBase
 
     protected void CheckShipAlive()
     {
-        if (Hull == null)
-        {
+        if (Hull is null)
             throw new PartOfShipNullException(nameof(Hull));
-        }
 
         ShipAlive = Hull.Serviceability & CrewAlive;
     }
@@ -86,7 +84,7 @@ public abstract class ShipBase
 
     private int ImpulseFuelPrice(int distance, FuelExchange fuelExchange)
     {
-        if (ImpulseEngine == null)
+        if (ImpulseEngine is null)
             throw new PartOfShipNullException(nameof(ImpulseEngine));
 
         return ImpulseEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice;

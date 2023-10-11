@@ -13,7 +13,7 @@ public abstract class ShipWithJumpEngineAndDeflectorBase : ShipWithDeflectorBase
 
     public override bool TryOvercomeJumpDistance(int distance)
     {
-        if (JumpEngine == null)
+        if (JumpEngine is null)
             throw new PartOfShipNullException(nameof(JumpEngine));
 
         if (JumpEngine.Rage < distance)
@@ -27,15 +27,14 @@ public abstract class ShipWithJumpEngineAndDeflectorBase : ShipWithDeflectorBase
 
     public new int CostOfRoute(SpaceBase space, int distance, FuelExchange fuelExchange)
     {
-        if (space is IHighDensitySpaceNebulae)
-            return JumpFuelPrice(distance, fuelExchange);
-
-        return base.CostOfRoute(space, distance, fuelExchange);
+        return space is IHighDensitySpaceNebulae
+            ? JumpFuelPrice(distance, fuelExchange)
+            : base.CostOfRoute(space, distance, fuelExchange);
     }
 
     private int JumpFuelPrice(int distance, FuelExchange fuelExchange)
     {
-        if (JumpEngine == null)
+        if (JumpEngine is null)
             throw new PartOfShipNullException(nameof(ImpulseEngine));
 
         return JumpEngine.GetEngineFuelConsumption(distance, Weight) * fuelExchange.ImpulseFuelPrice;

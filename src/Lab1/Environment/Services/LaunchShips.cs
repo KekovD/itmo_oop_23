@@ -49,7 +49,7 @@ public abstract class LaunchShips : IServices
         if (!ship.CrewAlive)
             return WhatHappenedStatus.CrewKilled;
 
-        if (ship.Hull == null)
+        if (ship.Hull is null)
             throw new PartOfShipNullException(nameof(ship.Hull));
 
         if (!ship.Hull.Serviceability)
