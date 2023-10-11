@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
@@ -34,10 +35,10 @@ public abstract class ShipBase
 
     public virtual void TakingDamage(ObstaclesBase obstacles)
     {
-        if (obstacles is IHighDensitySpaceNebulae)
+        if (obstacles is AntimatterFlash)
             KillCrew();
 
-        if (obstacles is INitrinoParticleNebulae)
+        if (obstacles is SpaceWhales)
         {
             if (CheckAvailabilityAdditionalEquipment(new AntiNitrinoEmitter()))
                 return;
@@ -54,10 +55,10 @@ public abstract class ShipBase
     {
         const int wrongTypeOfEngineRatio = 100000;
 
-        if (space is INormalSpace)
+        if (space is NormalSpace)
             return ImpulseFuelPrice(distance, fuelExchange);
 
-        if (space is INitrinoParticleNebulae && ImpulseEngine is INitrinoParticleNebulae)
+        if (space is NitrinoParticleNebulaeSpace && ImpulseEngine is EnginesImpulseBase)
             return ImpulseFuelPrice(distance, fuelExchange);
 
         return ImpulseFuelPrice(distance, fuelExchange) * wrongTypeOfEngineRatio;

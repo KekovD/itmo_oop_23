@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.LabException;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
@@ -13,7 +13,7 @@ public abstract class ShipWithDeflectorBase : ShipBase
 
     public override void TakingDamage(ObstaclesBase obstacles)
     {
-        if (obstacles is IHighDensitySpaceNebulae)
+        if (obstacles is AntimatterFlash)
         {
             PhotonsDeflectors? photonsDeflector = AdditionalEquipment
                 .OfType<PhotonsDeflectors>()
@@ -29,7 +29,7 @@ public abstract class ShipWithDeflectorBase : ShipBase
             return;
         }
 
-        if (obstacles is INitrinoParticleNebulae)
+        if (obstacles is SpaceWhales)
         {
             if (CheckAvailabilityAdditionalEquipment(new AntiNitrinoEmitter()))
                 return;

@@ -1,9 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Obstacles;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class SpaceWhales : ObstaclesBase, INitrinoParticleNebulae
+public class SpaceWhales : ObstaclesBase
 {
     private const int SpaceWhalesDamage = 1000;
 

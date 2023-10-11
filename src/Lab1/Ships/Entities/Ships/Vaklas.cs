@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.AdditionalEquipment;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Deflector;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
@@ -10,7 +9,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Ships;
 
-public class Vaklas : ShipWithJumpEngineAndDeflectorBase, INormalSpace, INitrinoParticleNebulae, IHighDensitySpaceNebulae
+public class Vaklas : ShipWithJumpEngineAndDeflectorBase
 {
     public Vaklas(IAdditionalEquipment? additionalEquipment)
     {

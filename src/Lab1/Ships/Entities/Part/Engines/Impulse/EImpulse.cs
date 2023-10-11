@@ -1,10 +1,9 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Engines;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities.Part.Engines.Impulse;
 
-public class EImpulse : EnginesImpulseBase, INitrinoParticleNebulae
+public class EImpulse : EnginesImpulseBase
 {
     private const int EClassWeight = 150;
     private const int ESpeed = 30;
