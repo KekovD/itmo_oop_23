@@ -2,6 +2,6 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Hull;
 
-public class HullBase : PartServiceabilityAndWeight
+public abstract class HullBase : PartServiceabilityAndWeight
 {
 }

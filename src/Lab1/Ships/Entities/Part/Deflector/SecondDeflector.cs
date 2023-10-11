@@ -10,6 +10,6 @@ public class SecondDeflector : DeflectorBase
     public SecondDeflector()
     {
         Health = DeflectorSecondHealth;
-        PartWeight += DeflectorSecondWeight;
+        PartWeight = DeflectorSecondWeight;
     }
 }

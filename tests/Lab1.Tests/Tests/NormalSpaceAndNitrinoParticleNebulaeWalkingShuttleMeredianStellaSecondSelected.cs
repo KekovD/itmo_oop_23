@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
@@ -16,7 +15,35 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSecondSelected
 {
-    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
+    public static IEnumerable<object[]> GetShipsAndSpaces
+    {
+        get
+        {
+            yield return new object[]
+            {
+                new List<ShipBase>
+                {
+                    new WalkingShuttle(),
+                    new Meredian(null),
+                    new Stella(new PhotonsDeflectors()),
+                },
+                new List<SpaceBase>
+                {
+                    new NormalSpace(1000, new Collection<ObstaclesBase>
+                    {
+                        new SmallAsteroids(4),
+                        new Meteorites(2),
+                    }),
+                    new NitrinoParticleNebulaeSpace(500, new Collection<ObstaclesBase>
+                    {
+                        new SpaceWhales(3),
+                    }),
+                },
+            };
+        }
+    }
+
+    private static bool CheckLaunchResults(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -29,48 +56,10 @@ public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSec
     }
 
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShipsAndSpaces), MemberType = typeof(NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSecondSelected))]
 
-    private void ConditionCheck(ShipBase walkingShuttle, ShipBase meredian, ShipBase stella)
+    private void ConditionCheck(List<ShipBase> manyShips, List<SpaceBase> manySpaces)
     {
-        var manyShips = new List<ShipBase>
-        {
-            walkingShuttle,
-            meredian,
-            stella,
-        };
-
-        var obstacles = new Collection<ObstaclesBase>
-        {
-            new SmallAsteroids(4),
-            new Meteorites(2),
-        };
-
-        var obstaclesSecond = new Collection<ObstaclesBase> { new SpaceWhales(3) };
-
-        var manySpaces = new List<SpaceBase>
-        {
-            new NormalSpace(1000, obstacles),
-            new NitrinoParticleNebulaeSpace(500, obstaclesSecond),
-        };
-
-        Assert.True(CheckResult(manyShips, manySpaces));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new WalkingShuttle(),
-                new Meredian(null),
-                new Stella(new PhotonsDeflectors()),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        Assert.True(CheckLaunchResults(manyShips, manySpaces));
     }
 }

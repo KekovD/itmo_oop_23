@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
@@ -16,7 +15,29 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
 {
-    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
+    public static IEnumerable<object[]> GetShipsAndSpaces
+    {
+        get
+        {
+            yield return new object[]
+            {
+                new List<ShipBase>
+                {
+                    new Augur(new PhotonsDeflectors()),
+                    new Stella(new PhotonsDeflectors()),
+                },
+                new List<SpaceBase>
+                {
+                    new HighDensityNebulaeSpace(2000, new Collection<ObstaclesBase>
+                    {
+                        new AntimatterFlash(2),
+                    }),
+                },
+            };
+        }
+    }
+
+    private static bool CheckLaunchResults(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -29,35 +50,10 @@ public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
     }
 
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShipsAndSpaces), MemberType = typeof(MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal))]
 
-    private void ConditionCheck(ShipBase augur, ShipBase stella)
+    private void ConditionCheck(List<ShipBase> manyShips, List<SpaceBase> manySpaces)
     {
-        var manyShips = new List<ShipBase>
-        {
-            augur,
-            stella,
-        };
-
-        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash(2) };
-        var manySpaces = new List<SpaceBase> { new HighDensityNebulaeSpace(2000, obstacles) };
-
-        Assert.True(CheckResult(manyShips, manySpaces));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new Augur(new PhotonsDeflectors()),
-                new Stella(new PhotonsDeflectors()),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        Assert.True(CheckLaunchResults(manyShips, manySpaces));
     }
 }

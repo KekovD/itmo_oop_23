@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
@@ -15,7 +14,30 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 
 public class ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal
 {
-    private static bool CheckResult(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
+    public static IEnumerable<object[]> GetShipsAndSpaces
+    {
+        get
+        {
+            yield return new object[]
+            {
+                new List<ShipBase>
+                {
+                    new WalkingShuttle(),
+                    new Vaklas(null),
+                },
+                new List<SpaceBase>
+                {
+                    new NormalSpace(100, new Collection<ObstaclesBase>
+                    {
+                        new SmallAsteroids(2),
+                        new Meteorites(3),
+                    }),
+                },
+            };
+        }
+    }
+
+    private static bool CheckLaunchResults(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
         var service = new MainService();
 
@@ -28,40 +50,10 @@ public class ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal
     }
 
     [Theory]
-    [ClassData(typeof(ParameterizedTests))]
+    [MemberData(nameof(GetShipsAndSpaces), MemberType = typeof(ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal))]
 
-    private void ConditionCheck(ShipBase walkingShuttle, ShipBase vaklas)
+    private void ConditionCheck(List<ShipBase> manyShips, List<SpaceBase> manySpaces)
     {
-        var manyShips = new List<ShipBase>
-        {
-            walkingShuttle,
-            vaklas,
-        };
-
-        var obstacles = new Collection<ObstaclesBase>
-        {
-            new SmallAsteroids(2),
-            new Meteorites(3),
-        };
-
-        var manySpaces = new List<SpaceBase> { new NormalSpace(100, obstacles) };
-
-        Assert.True(CheckResult(manyShips, manySpaces));
-    }
-
-    private class ParameterizedTests : IEnumerable<object[]>
-    {
-        private readonly List<object[]> _data = new List<object[]>
-        {
-            new object[]
-            {
-                new WalkingShuttle(),
-                new Vaklas(null),
-            },
-        };
-
-        public IEnumerator<object[]> GetEnumerator() => _data.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        Assert.True(CheckLaunchResults(manyShips, manySpaces));
     }
 }

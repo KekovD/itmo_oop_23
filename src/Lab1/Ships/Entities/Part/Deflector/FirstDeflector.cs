@@ -10,6 +10,6 @@ public class FirstDeflector : DeflectorBase
     public FirstDeflector()
     {
         Health = DeflectorFirstHealth;
-        PartWeight += DeflectorFirstWeight;
+        PartWeight = DeflectorFirstWeight;
     }
 }
