@@ -40,9 +40,8 @@ public class AntimatterFlashVaklasAndVaklasPhotonDeflectorsRouteNotPassedKillCre
             vaklasWithPhotons,
         };
 
-        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 3 };
-        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(100, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash(3) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulaeSpace(100, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }

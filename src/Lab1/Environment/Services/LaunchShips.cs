@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Other;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.BaseInterfaces;
@@ -12,26 +11,26 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Services;
 
 public abstract class LaunchShips : IServices
 {
-    public Collection<bool> TryLaunchShips(IEnumerable<ShipBase> manyShips, ICollection<SpaceBase> manySegments)
+    public IEnumerable<bool> TryLaunchShips(IEnumerable<ShipBase> manyShips, ICollection<SpaceBase> manySegments)
     {
-        var resultCollection = new Collection<bool>();
+        var resultList = new List<bool>();
 
         foreach (ShipBase ship in manyShips)
         {
-            bool checkAdd = true;
+            bool checkDistanceAdd = true;
             foreach (SpaceBase segment in manySegments)
             {
                 segment.TraverseRouteDamage(ship);
                 if (!segment.TryTraverseRouteDistance(ship, segment.RouteLength))
                 {
-                    checkAdd = false;
+                    checkDistanceAdd = false;
                 }
             }
 
-            resultCollection.Add(checkAdd);
+            resultList.Add(checkDistanceAdd);
         }
 
-        return resultCollection;
+        return resultList;
     }
 
     public int GetOptimumShip(IEnumerable<ShipBase> survivorsShips, IEnumerable<ShipBase> allShips, ICollection<SpaceBase> manySegments)

@@ -41,9 +41,8 @@ public class SpaceWhaleVaklasAugurAndMeredianDestroyedLostDeflectorsAndUntouched
             meredian,
         };
 
-        var obstacles = new Collection<ObstaclesBase> { new SpaceWhales() };
-        var obstaclesCounter = new Collection<int> { 4 };
-        var manySpaces = new List<SpaceBase> { new NitrinoParticleNebulae(10, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<ObstaclesBase> { new SpaceWhales(4) };
+        var manySpaces = new List<SpaceBase> { new NitrinoParticleNebulaeSpace(10, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }

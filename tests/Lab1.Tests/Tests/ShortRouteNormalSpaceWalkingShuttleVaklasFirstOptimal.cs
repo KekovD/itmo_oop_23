@@ -40,17 +40,11 @@ public class ShortRouteNormalSpaceWalkingShuttleVaklasFirstOptimal
 
         var obstacles = new Collection<ObstaclesBase>
         {
-            new SmallAsteroids(),
-            new Meteorites(),
+            new SmallAsteroids(2),
+            new Meteorites(3),
         };
 
-        var obstaclesCounter = new Collection<int>
-        {
-            2,
-            3,
-        };
-
-        var manySpaces = new List<SpaceBase> { new Normal(100, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new NormalSpace(100, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }

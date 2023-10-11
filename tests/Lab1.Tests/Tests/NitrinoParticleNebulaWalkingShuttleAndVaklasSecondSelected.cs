@@ -38,8 +38,7 @@ public class NitrinoParticleNebulaWalkingShuttleAndVaklasSecondSelected
         };
 
         var obstacles = new Collection<ObstaclesBase>();
-        var obstaclesCounter = new Collection<int>();
-        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(500, obstaclesCounter, obstacles) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulaeSpace(500, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }

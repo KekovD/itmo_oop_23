@@ -7,7 +7,8 @@ public class Meteorites : ObstaclesBase, INormalSpace
 {
     private const int MeteoritesDamage = 40;
 
-    public Meteorites()
+    public Meteorites(int obstaclesCounter)
+        : base(obstaclesCounter)
     {
         Damage = MeteoritesDamage;
     }

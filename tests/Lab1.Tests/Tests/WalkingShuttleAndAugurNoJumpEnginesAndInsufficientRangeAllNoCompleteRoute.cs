@@ -39,9 +39,8 @@ public class WalkingShuttleAndAugurNoJumpEnginesAndInsufficientRangeAllNoComplet
             augur,
         };
 
-        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 1 };
-        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(10000, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash(1) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulaeSpace(10000, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }

@@ -7,7 +7,8 @@ public class SpaceWhales : ObstaclesBase, INitrinoParticleNebulae
 {
     private const int SpaceWhalesDamage = 1000;
 
-    public SpaceWhales()
+    public SpaceWhales(int obstaclesCounter)
+        : base(obstaclesCounter)
     {
         Damage = SpaceWhalesDamage;
     }

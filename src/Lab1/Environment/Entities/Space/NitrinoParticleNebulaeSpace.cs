@@ -8,34 +8,27 @@ using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Space;
 
-public class HighDensityNebulae : SpaceBase, IHighDensitySpaceNebulae
+public class NitrinoParticleNebulaeSpace : SpaceBase, INitrinoParticleNebulae
 {
-    public HighDensityNebulae(int routeLength, IEnumerable<int> numberOfObstaclesOnRoute, IEnumerable<ObstaclesBase> manyObstacles)
+    public NitrinoParticleNebulaeSpace(int routeLength, IEnumerable<ObstaclesBase> manyObstacles)
         : base(routeLength)
     {
-        NumberOfObstaclesOnRoute = new List<int>(numberOfObstaclesOnRoute);
         TypeOfObstacles = new Collection<ObstaclesBase>();
 
         foreach (ObstaclesBase obstacle in manyObstacles)
         {
-            if (obstacle is not IHighDensitySpaceNebulae)
-                throw new ObstacleDoesNotMatchEnvironmentException(nameof(HighDensityNebulae));
+            if (obstacle is not INitrinoParticleNebulae)
+                throw new ObstacleDoesNotMatchEnvironmentException(nameof(NitrinoParticleNebulaeSpace));
 
             TypeOfObstacles.Add(obstacle);
         }
-
-        if (NumberOfObstaclesOnRoute.Count != TypeOfObstacles.Count)
-            throw new DifferentLengthCollectionsWhenCreatingSpaceException(nameof(HighDensityNebulae));
     }
 
     public override bool TryTraverseRouteDistance(ShipBase ship, int distance)
     {
-        if (ship is not IHighDensitySpaceNebulae)
-        {
-            ship.SetFalseNoJumpStatus();
+        if (ship is not INitrinoParticleNebulae)
             return false;
-        }
 
-        return ship.TryOvercomeJumpDistance(distance);
+        return true;
     }
 }

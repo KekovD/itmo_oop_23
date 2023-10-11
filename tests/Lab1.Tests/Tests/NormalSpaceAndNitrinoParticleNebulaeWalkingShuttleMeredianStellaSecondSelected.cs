@@ -40,25 +40,18 @@ public class NormalSpaceAndNitrinoParticleNebulaeWalkingShuttleMeredianStellaSec
             stella,
         };
 
-        var obstaclesCounter = new Collection<int>
-        {
-            4,
-            2,
-        };
-
         var obstacles = new Collection<ObstaclesBase>
         {
-            new SmallAsteroids(),
-            new Meteorites(),
+            new SmallAsteroids(4),
+            new Meteorites(2),
         };
 
-        var obstaclesSecondCounter = new Collection<int> { 3 };
-        var obstaclesSecond = new Collection<ObstaclesBase> { new SpaceWhales() };
+        var obstaclesSecond = new Collection<ObstaclesBase> { new SpaceWhales(3) };
 
         var manySpaces = new List<SpaceBase>
         {
-            new Normal(1000, obstaclesCounter, obstacles),
-            new NitrinoParticleNebulae(500, obstaclesSecondCounter, obstaclesSecond),
+            new NormalSpace(1000, obstacles),
+            new NitrinoParticleNebulaeSpace(500, obstaclesSecond),
         };
 
         Assert.True(CheckResult(manyShips, manySpaces));

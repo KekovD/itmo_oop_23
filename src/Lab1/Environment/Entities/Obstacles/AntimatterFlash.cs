@@ -7,7 +7,8 @@ public class AntimatterFlash : ObstaclesBase, IHighDensitySpaceNebulae
 {
     private const int AntimatterFlashesDamage = 1;
 
-    public AntimatterFlash()
+    public AntimatterFlash(int obstaclesCounter)
+        : base(obstaclesCounter)
     {
         Damage = AntimatterFlashesDamage;
     }

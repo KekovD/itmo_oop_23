@@ -7,7 +7,8 @@ public class SmallAsteroids : ObstaclesBase, INormalSpace
 {
     private const int SmallAsteroidsDamage = 10;
 
-    public SmallAsteroids()
+    public SmallAsteroids(int obstaclesCounter)
+        : base(obstaclesCounter)
     {
         Damage = SmallAsteroidsDamage;
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.Environments;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Models.StandardSpecifications;
 using Itmo.ObjectOrientedProgramming.Lab1.Ships.Models.Ships;
@@ -11,7 +10,7 @@ public class MainService : LaunchShips
     public override (IList<WhatHappenedStatus> LaunchResults, WhatHappenedStatus OptimumShipExists, int OptimalShip)
         MainLaunch(IList<ShipBase> manyShips, IList<SpaceBase> manySpaces)
     {
-        Collection<bool> resultLaunch = TryLaunchShips(manyShips, manySpaces);
+        var resultLaunch = new List<bool>(TryLaunchShips(manyShips, manySpaces));
         var resultMainLaunch = new List<WhatHappenedStatus>();
         var allShips = new List<ShipBase>(manyShips);
 

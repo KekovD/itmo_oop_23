@@ -39,9 +39,8 @@ public class MediumLengthRouteHighDensityNebulaAugurStellaSecondOptimal
             stella,
         };
 
-        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash() };
-        var obstaclesCounter = new Collection<int> { 2 };
-        var manySpaces = new List<SpaceBase> { new HighDensityNebulae(2000, obstaclesCounter, obstacles) };
+        var obstacles = new Collection<ObstaclesBase> { new AntimatterFlash(2) };
+        var manySpaces = new List<SpaceBase> { new HighDensityNebulaeSpace(2000, obstacles) };
 
         Assert.True(CheckResult(manyShips, manySpaces));
     }
