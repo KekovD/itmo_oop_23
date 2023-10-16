@@ -4,4 +4,17 @@
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab2</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="AbstractFactory\Entity\" />
+      <Folder Include="Bios\" />
+      <Folder Include="GraphicsCard\" />
+      <Folder Include="HardDrive\" />
+      <Folder Include="Motherboard\Models\" />
+      <Folder Include="PowerSupplyUnit\Models\" />
+      <Folder Include="Ram\" />
+      <Folder Include="ProcessorCoolingSystem\" />
+      <Folder Include="SSD\" />
+      <Folder Include="Сase\" />
+    </ItemGroup>
+
 </Project>
