@@ -4,6 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcBuilder.Models;
 
 public interface IPersonalComputerBuilder
 {
+    //// Todo refactor return types
     IPersonalComputerBuilder AddCase();
 
     IPersonalComputerBuilder AddPowerSupplyUnit();

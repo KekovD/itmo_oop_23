@@ -1,21 +1,23 @@
 ﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Entity.Lga1200;
+using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Entity.Lga1700;
+using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models.Cpu;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entity;
 
-public class CentralProcessorRepository : IRepository<CentralProcessorTemplate>
+public class CentralProcessorRepository : IRepository<CentralProcessorBase>
 {
-    public CentralProcessorRepository()
+    public IReadOnlyList<CentralProcessorBase> Repository { get; private set; } = new List<CentralProcessorBase>
     {
-        Parts = new List<CentralProcessorTemplate>();
-    }
+        new IntelPentiumGoldG6405(),
+        new IntelCorei312100(),
+        new IntelCorei511400(),
+        new IntelCorei713700F(),
+    };
 
-    public IReadOnlyList<CentralProcessorTemplate> Parts { get; private set; }
-
-    public void Add(CentralProcessorTemplate newPart)
+    public void Add(CentralProcessorBase newItem)
     {
-        var newRepository = new List<CentralProcessorTemplate>(Parts) { newPart };
-        Parts = newRepository;
+        Repository = new List<CentralProcessorBase>(Repository) { newItem };
     }
 }

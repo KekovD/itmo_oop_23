@@ -7,6 +7,7 @@
     <ItemGroup>
       <Folder Include="AbstractFactory\Entity\" />
       <Folder Include="Bios\" />
+      <Folder Include="Cpu\Entity\" />
       <Folder Include="GraphicsCard\" />
       <Folder Include="HardDrive\" />
       <Folder Include="Motherboard\Models\" />

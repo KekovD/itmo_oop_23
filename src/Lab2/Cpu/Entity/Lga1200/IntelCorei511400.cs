@@ -1,8 +1,9 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entity;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entity;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models.Cpu.Lga1200;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Cpu.Entity.Lga1200;
 
-public class IntelCorei511400 : CentralProcessorTemplate, ILga1200
+public class IntelCorei511400 : CentralProcessorBase, ILga1200
 {
     private const string? NameConst = "IntelCorei511400";
     private const int MemoryFrequenciesConst = 3200;

@@ -4,7 +4,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 public interface IRepository<T>
 {
-    IReadOnlyList<T> Parts { get; }
+    IReadOnlyList<T> Repository { get; }
 
-    void Add(T newPart);
+    void Add(T newItem);
 }
