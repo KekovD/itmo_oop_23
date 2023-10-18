@@ -1,6 +1,8 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Entity;
 
-public interface IFactory<out T>
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+
+public interface IFactory
 {
-    T Create();
+    IPart CreateByName(string name);
 }

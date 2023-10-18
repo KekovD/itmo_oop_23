@@ -2,6 +2,10 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Socket.Entity;
 
-public interface ILga1200 : ISocket
+public class Socket : SocketBase
 {
+    public Socket(string name)
+    {
+        Name = name;
+    }
 }

@@ -4,7 +4,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 public interface IRepository<T>
 {
-    IReadOnlyList<T> Repository { get; }
-
     void Add(T newItem);
+
+    IList<object> GetByName(string name);
+
+    void AddList(IList<object> newItem);
 }

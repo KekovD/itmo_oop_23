@@ -5,13 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="AbstractFactory\Entity\" />
-      <Folder Include="Bios\" />
-      <Folder Include="Cpu\Entity\" />
       <Folder Include="GraphicsCard\" />
       <Folder Include="HardDrive\" />
       <Folder Include="Motherboard\Models\" />
       <Folder Include="PowerSupplyUnit\Models\" />
+      <Folder Include="Prototype\Entity\" />
       <Folder Include="Ram\" />
       <Folder Include="ProcessorCoolingSystem\" />
       <Folder Include="SSD\" />
