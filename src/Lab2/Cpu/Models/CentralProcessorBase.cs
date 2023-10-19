@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Entity;
-using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Model;
+using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
@@ -46,24 +46,87 @@ public abstract class CentralProcessorBase : IPart, IPrototype<CentralProcessorB
 
     public bool PartValid { get; private set; } = true;
     public bool WarrantyDisclaimer { get; private set; }
-    public string Name { get; protected set; }
-    public SocketBase Socket { get; protected set; }
-    public BiosBase Bios { get; protected set; }
-    public int MemoryFrequencies { get; protected set; }
-    public int CoreFrequency { get; protected set; }
-    public int CoresNumber { get; protected set; }
-    public IntegratedVideoCoreBase IntegratedVideoCore { get; protected set; }
-    public int ThermalDesignPower { get; protected set; }
-    public int PowerConsumption { get; protected set; }
+    public string Name { get; private set; }
+    public SocketBase Socket { get; private set; }
+    public BiosBase Bios { get; private set; }
+    public int MemoryFrequencies { get; private set; }
+    public int CoreFrequency { get; private set; }
+    public int CoresNumber { get; private set; }
+    public IntegratedVideoCoreBase IntegratedVideoCore { get; private set; }
+    public int ThermalDesignPower { get; private set; }
+    public int PowerConsumption { get; private set; }
 
     public abstract CentralProcessorBase Clone();
-    public abstract CentralProcessorBase CloneWithNewName(string name);
-    public abstract CentralProcessorBase CloneWithNewSocket(SocketBase socket);
-    public abstract CentralProcessorBase CloneWithNewBios(BiosBase bios);
-    public abstract CentralProcessorBase CloneWithNewMemoryFrequencies(int memoryFrequencies);
-    public abstract CentralProcessorBase CloneWithNewCoreFrequency(int coreFrequency);
-    public abstract CentralProcessorBase CloneWithNewCoreCoresNumber(int coresNumber);
-    public abstract CentralProcessorBase CloneWithNewIntegratedVideoCore(IntegratedVideoCoreBase integratedVideoCore);
-    public abstract CentralProcessorBase CloneWithNewThermalDesignPower(int thermalDesignPower);
-    public abstract CentralProcessorBase CloneWithNewPowerConsumption(int powerConsumption);
+
+    public CentralProcessorBase CloneWithNewName(string name)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.Name = name;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewSocket(SocketBase socket)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.Socket = socket;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewBios(BiosBase bios)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.Bios = bios;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewMemoryFrequencies(int memoryFrequencies)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.MemoryFrequencies = memoryFrequencies;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewCoreFrequency(int coreFrequency)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.CoreFrequency = coreFrequency;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewCoreCoresNumber(int coresNumber)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.CoresNumber = coresNumber;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewIntegratedVideoCore(IntegratedVideoCoreBase integratedVideoCore)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.IntegratedVideoCore = integratedVideoCore;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewThermalDesignPower(int thermalDesignPower)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.ThermalDesignPower = thermalDesignPower;
+
+        return clone;
+    }
+
+    public CentralProcessorBase CloneWithNewPowerConsumption(int powerConsumption)
+    {
+        CentralProcessorBase clone = Clone();
+        clone.PowerConsumption = powerConsumption;
+
+        return clone;
+    }
 }

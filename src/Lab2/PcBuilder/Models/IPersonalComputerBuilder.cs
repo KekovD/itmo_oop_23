@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Entity;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PcBuilder.Models;
 

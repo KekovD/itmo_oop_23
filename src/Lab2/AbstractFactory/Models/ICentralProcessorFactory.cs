@@ -1,6 +1,6 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Entity;
+using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
