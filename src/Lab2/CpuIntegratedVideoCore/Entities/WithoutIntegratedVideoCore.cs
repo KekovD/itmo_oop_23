@@ -2,14 +2,14 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Entities;
 
-public class NoIntegratedVideoCore : IntegratedVideoCoreBase
+public class WithoutIntegratedVideoCore : IntegratedVideoCoreBase
 {
     private const string NameConst = "NoIntegratedVideoCore";
 
-    public NoIntegratedVideoCore()
+    public WithoutIntegratedVideoCore()
     {
         Name = NameConst;
     }
 
-    public override IntegratedVideoCoreBase Clone() => new NoIntegratedVideoCore();
+    public override IntegratedVideoCoreBase Clone() => new WithoutIntegratedVideoCore();
 }

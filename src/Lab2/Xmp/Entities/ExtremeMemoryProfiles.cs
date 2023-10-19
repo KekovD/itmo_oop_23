@@ -26,7 +26,7 @@ public class ExtremeMemoryProfiles : ExtremeMemoryProfilesBase
         Frequency = frequency;
     }
 
-    protected ExtremeMemoryProfiles(
+    private ExtremeMemoryProfiles(
         IReadOnlyList<int> timings,
         int voltage,
         int frequency)

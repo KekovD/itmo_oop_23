@@ -8,7 +8,6 @@
       <Folder Include="GraphicsCard\" />
       <Folder Include="HardDrive\" />
       <Folder Include="PowerSupplyUnit\Models\" />
-      <Folder Include="ProcessorCoolingSystem\" />
       <Folder Include="SSD\" />
       <Folder Include="Сase\" />
     </ItemGroup>

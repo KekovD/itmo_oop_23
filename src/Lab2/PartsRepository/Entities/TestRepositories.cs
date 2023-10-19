@@ -5,13 +5,14 @@ using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
 public static class TestRepositories
 {
-    public static void AddObjectsForTest()
+    public static void AddObjects()
     {
         AddProcessors();
         AddMotherboards();
@@ -89,7 +90,7 @@ public static class TestRepositories
             fourthName,                     new Lga1700(),
             new Intel64(fourthBiosVersion), fourthMemoryFrequencies,
             fourthCoreFrequency,            fourthCoresNumber,
-            new NoIntegratedVideoCore(),    fourthThermalDesignPower,
+            new WithoutIntegratedVideoCore(),    fourthThermalDesignPower,
             fourthPowerConsumption,
         };
 
@@ -109,7 +110,7 @@ public static class TestRepositories
         {
             firstName,              new Lga1200(),
             firstPciENumber,        firstSataNumber,
-            firstMemoryFrequencies, new NoExtremeMemoryProfiles(),
+            firstMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),  firstRamTablesNumber,
             new MicroAtx(),         new Intel64(firstBios),
         };
@@ -127,7 +128,7 @@ public static class TestRepositories
         {
             secondName,              new Lga1700(),
             secondPciENumber,        secondSataNumber,
-            secondMemoryFrequencies, new NoExtremeMemoryProfiles(),
+            secondMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),   secondRamTablesNumber,
             new MiniItx(),           new Intel64(secondBios),
         };
@@ -168,5 +169,40 @@ public static class TestRepositories
         };
 
         Table.AddList(motherboard);
+    }
+
+    private static void AddCoolingSystem()
+    {
+        const string firstName = "CoolerMasterHyperT200";
+        const int firstHeight = 137;
+        const int firstWidth = 112;
+        const int firstLength = 84;
+        const int firstThermalDesignPower = 100;
+
+        var coolingSystem = new List<object>
+        {
+            firstName,
+            new List<int> { firstHeight, firstWidth, firstLength },
+            new List<SocketBase> { new Lga1200() },
+            firstThermalDesignPower,
+        };
+
+        Table.AddList(coolingSystem);
+
+        const string secondName = "DeepCoolAlta9";
+        const int secondHeight = 59;
+        const int secondWidth = 113;
+        const int secondLength = 113;
+        const int secondThermalDesignPower = 65;
+
+        coolingSystem = new List<object>
+        {
+            secondName,
+            new List<int> { secondHeight, secondWidth, secondLength },
+            new List<SocketBase> { new Lga1700() },
+            secondThermalDesignPower,
+        };
+
+        Table.AddList(coolingSystem);
     }
 }
