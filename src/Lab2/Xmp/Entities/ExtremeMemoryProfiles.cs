@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 public class ExtremeMemoryProfiles : ExtremeMemoryProfilesBase
 {
-    protected ExtremeMemoryProfiles(
+    public ExtremeMemoryProfiles(
         int rasToCas,
         int rasPrecharge,
         int tRas,

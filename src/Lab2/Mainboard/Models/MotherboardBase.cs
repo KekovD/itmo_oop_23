@@ -16,7 +16,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         SocketBase socket,
         int pciENumber,
         int sataNumber,
-        IList<int> memoryFrequencies,
+        int memoryFrequencies,
         ExtremeMemoryProfilesBase extremeMemoryProfiles,
         DdrMotherboardBase ddrMotherboard,
         int ramTablesNumber,
@@ -27,12 +27,26 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         Socket = socket;
         PciENumber = pciENumber;
         SataNumber = sataNumber;
-        MemoryFrequencies = new List<int>(memoryFrequencies);
+        MemoryFrequencies = memoryFrequencies;
         ExtremeMemoryProfiles = extremeMemoryProfiles;
         DdrMotherboard = ddrMotherboard;
         RamTablesNumber = ramTablesNumber;
         FormFactor = formFactor;
         Bios = bios;
+    }
+
+    protected MotherboardBase(IList<object> characteristics)
+    {
+        Name = (string)characteristics[0];
+        Socket = (SocketBase)characteristics[1];
+        PciENumber = (int)characteristics[2];
+        SataNumber = (int)characteristics[3];
+        MemoryFrequencies = (int)characteristics[4];
+        ExtremeMemoryProfiles = (ExtremeMemoryProfilesBase)characteristics[5];
+        DdrMotherboard = (DdrMotherboardBase)characteristics[6];
+        RamTablesNumber = (int)characteristics[7];
+        FormFactor = (FormFactorMotherboardBase)characteristics[8];
+        Bios = (BiosBase)characteristics[9];
     }
 
     public bool PartValid { get; protected set; } = true;
@@ -41,7 +55,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     public SocketBase Socket { get; private set; }
     public int PciENumber { get; private set; }
     public int SataNumber { get; private set; }
-    public IReadOnlyList<int> MemoryFrequencies { get; private set; }
+    public int MemoryFrequencies { get; private set; }
     public ExtremeMemoryProfilesBase ExtremeMemoryProfiles { get; private set; }
     public DdrMotherboardBase DdrMotherboard { get; private set; }
     public int RamTablesNumber { get; private set; }
@@ -82,10 +96,10 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         return clone;
     }
 
-    public MotherboardBase CloneWithNewMemoryFrequencies(IList<int> memoryFrequencies)
+    public MotherboardBase CloneWithNewMemoryFrequencies(int memoryFrequencies)
     {
         MotherboardBase clone = Clone();
-        clone.MemoryFrequencies = new List<int>(memoryFrequencies);
+        clone.MemoryFrequencies = memoryFrequencies;
 
         return clone;
     }

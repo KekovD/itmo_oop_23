@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
 
-public class Motherboard : MotherboardBase
+public class MotherboardFactory : IMotherboardFactory
 {
-    public Motherboard(
+    public IPart CreateByName(string name) =>
+        new Motherboard(new MotherboardRepository().GetByName(name));
+
+    public IPart CreateCustom(
         string name,
         SocketBase socket,
         int pciENumber,
@@ -21,7 +26,8 @@ public class Motherboard : MotherboardBase
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
         BiosBase bios)
-        : base(
+    {
+        return new Motherboard(
             name,
             socket,
             pciENumber,
@@ -31,27 +37,6 @@ public class Motherboard : MotherboardBase
             ddrMotherboard,
             ramTablesNumber,
             formFactor,
-            bios)
-    {
-    }
-
-    public Motherboard(IList<object> characteristics)
-        : base(characteristics)
-    {
-    }
-
-    public override MotherboardBase Clone()
-    {
-        return new Motherboard(
-            (string)Name.Clone(),
-            Socket.Clone(),
-            PciENumber,
-            SataNumber,
-            MemoryFrequencies,
-            ExtremeMemoryProfiles.Clone(),
-            DdrMotherboard.Clone(),
-            RamTablesNumber,
-            FormFactor.Clone(),
-            Bios.Clone());
+            bios);
     }
 }

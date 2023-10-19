@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
@@ -10,6 +14,7 @@ public static class TestRepositories
     public static void AddObjectsForTest()
     {
         AddProcessors();
+        AddMotherboards();
     }
 
     private static void AddProcessors()
@@ -22,32 +27,6 @@ public static class TestRepositories
         const int firstThermalDesignPower = 58;
         const int firstPowerConsumption = 58;
 
-        const string secondName = "IntelCorei511400";
-        const int secondBiosVersion = 3;
-        const int secondMemoryFrequencies = 3200;
-        const int secondCoreFrequency = 2600;
-        const int secondCoresNumber = 6;
-        const int secondThermalDesignPower = 65;
-        const int secondPowerConsumption = 65;
-
-        const string thirdName = "IntelCorei312100";
-        const int thirdBiosVersion = 4;
-        const int thirdMemoryFrequencies = 4800;
-        const int thirdCoreFrequency = 3300;
-        const int thirdCoresNumber = 4;
-        const int thirdThermalDesignPower = 89;
-        const int thirdPowerConsumption = 89;
-
-        const string fourthName = "IntelCorei713700F";
-        const int fourthBiosVersion = 7;
-        const int fourthMemoryFrequencies = 5600;
-        const int fourthCoreFrequency = 2100;
-        const int fourthCoresNumber = 8;
-        const int fourthThermalDesignPower = 219;
-        const int fourthPowerConsumption = 219;
-
-        var repository = new CentralProcessorRepository();
-
         var processor = new List<object>
         {
             firstName,                     new Lga1200(),
@@ -57,7 +36,15 @@ public static class TestRepositories
             firstPowerConsumption,
         };
 
-        repository.AddList(processor);
+        Table.AddList(processor);
+
+        const string secondName = "IntelCorei511400";
+        const int secondBiosVersion = 3;
+        const int secondMemoryFrequencies = 3200;
+        const int secondCoreFrequency = 2600;
+        const int secondCoresNumber = 6;
+        const int secondThermalDesignPower = 65;
+        const int secondPowerConsumption = 65;
 
         processor = new List<object>
         {
@@ -68,7 +55,15 @@ public static class TestRepositories
             secondPowerConsumption,
         };
 
-        repository.AddList(processor);
+        Table.AddList(processor);
+
+        const string thirdName = "IntelCorei312100";
+        const int thirdBiosVersion = 4;
+        const int thirdMemoryFrequencies = 4800;
+        const int thirdCoreFrequency = 3300;
+        const int thirdCoresNumber = 4;
+        const int thirdThermalDesignPower = 89;
+        const int thirdPowerConsumption = 89;
 
         processor = new List<object>
         {
@@ -79,7 +74,15 @@ public static class TestRepositories
             thirdPowerConsumption,
         };
 
-        repository.AddList(processor);
+        Table.AddList(processor);
+
+        const string fourthName = "IntelCorei713700F";
+        const int fourthBiosVersion = 7;
+        const int fourthMemoryFrequencies = 5600;
+        const int fourthCoreFrequency = 2100;
+        const int fourthCoresNumber = 8;
+        const int fourthThermalDesignPower = 219;
+        const int fourthPowerConsumption = 219;
 
         processor = new List<object>
         {
@@ -90,6 +93,80 @@ public static class TestRepositories
             fourthPowerConsumption,
         };
 
-        repository.AddList(processor);
+        Table.AddList(processor);
+    }
+
+    private static void AddMotherboards()
+    {
+        const string firstName = "GigabyteB560MH";
+        const int firstPciENumber = 1;
+        const int firstSataNumber = 4;
+        const int firstMemoryFrequencies = 3200;
+        const int firstRamTablesNumber = 2;
+        const int firstBios = 6;
+
+        var motherboard = new List<object>
+        {
+            firstName,              new Lga1200(),
+            firstPciENumber,        firstSataNumber,
+            firstMemoryFrequencies, new NoExtremeMemoryProfiles(),
+            new Ddr4Motherboard(),  firstRamTablesNumber,
+            new MicroAtx(),         new Intel64(firstBios),
+        };
+
+        Table.AddList(motherboard);
+
+        const string secondName = "MSIH610TIS01";
+        const int secondPciENumber = 0;
+        const int secondSataNumber = 2;
+        const int secondMemoryFrequencies = 3200;
+        const int secondRamTablesNumber = 2;
+        const int secondBios = 5;
+
+        motherboard = new List<object>
+        {
+            secondName,              new Lga1700(),
+            secondPciENumber,        secondSataNumber,
+            secondMemoryFrequencies, new NoExtremeMemoryProfiles(),
+            new Ddr4Motherboard(),   secondRamTablesNumber,
+            new MiniItx(),           new Intel64(secondBios),
+        };
+
+        Table.AddList(motherboard);
+
+        const string thirdName = "GigabyteZ790AorusMaster";
+        const int thirdPciENumber = 3;
+        const int thirdSataNumber = 4;
+        const int thirdMemoryFrequencies = 5600;
+        const int thirdRamTablesNumber = 4;
+        const int thirdBios = 7;
+        const int thirdRasToCas = 16;
+        const int thirdRasPrecharge = 16;
+        const int thirdTRas = 30;
+        const int thirdTRc = 50;
+        const int thirdVoltage = 2;
+        const int thirdXmpFrequency = 6000;
+
+        motherboard = new List<object>
+        {
+            thirdName,
+            new Lga1700(),
+            thirdPciENumber,
+            thirdSataNumber,
+            thirdMemoryFrequencies,
+            new ExtremeMemoryProfiles(
+                thirdRasToCas,
+                thirdRasPrecharge,
+                thirdTRas,
+                thirdTRc,
+                thirdVoltage,
+                thirdXmpFrequency),
+            new Ddr5Motherboard(),
+            thirdRamTablesNumber,
+            new Eatx(),
+            new Intel64(thirdBios),
+        };
+
+        Table.AddList(motherboard);
     }
 }
