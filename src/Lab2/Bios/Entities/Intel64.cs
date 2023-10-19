@@ -11,4 +11,6 @@ public class Intel64 : BiosBase
     {
         Name = Intel64Name;
     }
+
+    public override BiosBase Clone() => new Intel64(Version);
 }

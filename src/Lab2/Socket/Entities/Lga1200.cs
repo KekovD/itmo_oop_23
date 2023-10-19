@@ -10,4 +10,6 @@ public class Lga1200 : SocketBase
     {
         Name = Lga1200Name;
     }
+
+    public override SocketBase Clone() => new Lga1200();
 }

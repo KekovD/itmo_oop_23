@@ -30,14 +30,14 @@ public class CentralProcessor : CentralProcessorBase
     public override CentralProcessorBase Clone()
     {
         return new CentralProcessor(
-            this.Name,
-            this.Socket.Clone(),
-            this.Bios.Clone(),
-            this.MemoryFrequencies,
-            this.CoreFrequency,
-            this.CoresNumber,
-            this.IntegratedVideoCore.Clone(),
-            this.ThermalDesignPower,
-            this.PowerConsumption);
+            Name,
+            Socket.Clone(),
+            Bios.Clone(),
+            MemoryFrequencies,
+            CoreFrequency,
+            CoresNumber,
+            IntegratedVideoCore.Clone(),
+            ThermalDesignPower,
+            PowerConsumption);
     }
 }

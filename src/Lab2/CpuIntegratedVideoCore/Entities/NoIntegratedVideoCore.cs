@@ -10,4 +10,6 @@ public class NoIntegratedVideoCore : IntegratedVideoCoreBase
     {
         Name = NameConst;
     }
+
+    public override IntegratedVideoCoreBase Clone() => new NoIntegratedVideoCore();
 }

@@ -27,8 +27,8 @@ public class ExtremeMemoryProfiles : ExtremeMemoryProfilesBase
     public override ExtremeMemoryProfilesBase Clone()
     {
         return new ExtremeMemoryProfiles(
-            this.Timings,
-            this.Voltage,
-            this.Frequency);
+            Timings,
+            Voltage,
+            Frequency);
     }
 }

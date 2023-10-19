@@ -10,4 +10,6 @@ public class IntelUHDGraphics610 : IntegratedVideoCoreBase
     {
         Name = NameConst;
     }
+
+    public override IntegratedVideoCoreBase Clone() => new IntelUHDGraphics610();
 }

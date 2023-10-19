@@ -1,4 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
@@ -14,4 +15,6 @@ public abstract class MotherboardBase : IPart
     public int SataNumber { get; protected set; }
     public int MemoryFrequencies { get; protected set; }
     public ExtremeMemoryProfilesBase extremeMemoryProfiles { get; protected set; }
+    public DdrMotherboardBase ddrMotherboard { get; protected set; }
+    public int ramTablesNumber { get; protected set; }
 }

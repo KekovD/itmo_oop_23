@@ -40,7 +40,36 @@ public abstract class ExtremeMemoryProfilesBase : IPrototype<ExtremeMemoryProfil
     public int Frequency { get; protected set; }
 
     public abstract ExtremeMemoryProfilesBase Clone();
-    public abstract ExtremeMemoryProfilesBase CloneWithNewTimings(int rasToCas, int rasPrecharge, int tRas, int tRc);
-    public abstract ExtremeMemoryProfilesBase CloneWithNewVoltage(int voltage);
-    public abstract ExtremeMemoryProfilesBase CloneWithNewFrequency(int frequency); //// Todo продолжить здесь, эти 3 реализовать тут же
+
+    public ExtremeMemoryProfilesBase CloneWithNewTimings(int rasToCas, int rasPrecharge, int tRas, int tRc)
+    {
+        var newTimings = new List<int>
+        {
+            rasToCas,
+            rasPrecharge,
+            tRas,
+            tRc,
+        };
+
+        ExtremeMemoryProfilesBase clone = Clone();
+        clone.Timings = newTimings;
+
+        return clone;
+    }
+
+    public ExtremeMemoryProfilesBase CloneWithNewVoltage(int voltage)
+    {
+        ExtremeMemoryProfilesBase clone = Clone();
+        clone.Voltage = voltage;
+
+        return clone;
+    }
+
+    public ExtremeMemoryProfilesBase CloneWithNewFrequency(int frequency)
+    {
+        ExtremeMemoryProfilesBase clone = Clone();
+        clone.Frequency = frequency;
+
+        return clone;
+    }
 }
