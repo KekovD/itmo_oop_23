@@ -30,7 +30,7 @@ public class CentralProcessor : CentralProcessorBase
     public override CentralProcessorBase Clone()
     {
         return new CentralProcessor(
-            Name,
+            (string)Name.Clone(),
             Socket.Clone(),
             Bios.Clone(),
             MemoryFrequencies,

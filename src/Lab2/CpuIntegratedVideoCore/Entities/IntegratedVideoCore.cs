@@ -10,6 +10,13 @@ public class IntegratedVideoCore : IntegratedVideoCoreBase
         Name = name;
     }
 
-    public override IntegratedVideoCoreBase Clone() =>
-        new IntegratedVideoCore(Name ?? throw new CloneNullException(nameof(IntegratedVideoCore)));
+    public override IntegratedVideoCoreBase Clone()
+    {
+        if (Name is null)
+        {
+            throw new CloneNullException(nameof(IntegratedVideoCore));
+        }
+
+        return new IntegratedVideoCore((string)Name.Clone());
+    }
 }

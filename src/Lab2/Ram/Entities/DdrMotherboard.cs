@@ -10,6 +10,11 @@ public class DdrMotherboard : DdrMotherboardBase
         Name = name;
     }
 
-    public override DdrMotherboardBase Clone() =>
-        new DdrMotherboard(Name ?? throw new CloneNullException(nameof(DdrMotherboard)));
+    public override DdrMotherboardBase Clone()
+    {
+        if (Name is null)
+            throw new CloneNullException(nameof(DdrMotherboard));
+
+        return new DdrMotherboard((string)Name.Clone());
+    }
 }

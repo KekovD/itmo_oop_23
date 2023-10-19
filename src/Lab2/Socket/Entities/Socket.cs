@@ -10,6 +10,11 @@ public class Socket : SocketBase
         Name = name;
     }
 
-    public override SocketBase Clone() =>
-        new Socket(Name ?? throw new CloneNullException(nameof(SocketBase)));
+    public override SocketBase Clone()
+    {
+        if (Name is null)
+            throw new CloneNullException(nameof(SocketBase));
+
+        return new Socket((string)Name.Clone());
+    }
 }

@@ -11,7 +11,7 @@ public abstract class BiosBase : IPrototype<BiosBase>
 
     public bool BiosValid { get; protected set; } = true;
     public string? Name { get; protected set; }
-    public int Version { get; protected set; }
+    public int Version { get; private set; }
 
     public abstract BiosBase Clone();
 

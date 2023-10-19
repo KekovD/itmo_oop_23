@@ -11,8 +11,15 @@ public class Bios : BiosBase
         Name = name;
     }
 
-    public override BiosBase Clone() =>
-        new Bios(
-            Name ?? throw new CloneNullException(nameof(BiosBase)),
+    public override BiosBase Clone()
+    {
+        if (Name is null)
+            throw new CloneNullException(nameof(BiosBase));
+
+        return new Bios(
+            (string)Name.Clone(),
             Version);
+    }
+
+    public BiosBase CloneWithNewName(string name) => new Bios(name, Version);
 }
