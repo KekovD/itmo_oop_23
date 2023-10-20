@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="HardDrive\" />
       <Folder Include="PowerSupplyUnit\Models\" />
       <Folder Include="Сase\" />
     </ItemGroup>

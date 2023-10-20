@@ -22,6 +22,8 @@ public static class TestRepositories
         AddCoolingSystem();
         AddRam();
         AddGraphicsCard();
+        AddSsd();
+        AddHdd();
     }
 
     private static void AddProcessors()
@@ -358,5 +360,34 @@ public static class TestRepositories
         };
 
         Table.AddList(ssd);
+    }
+
+    private static void AddHdd()
+    {
+        const string firstName = "ToshibaDT01";
+        const int firstCapacity = 1000;
+        const int firstSpindleSpeed = 7200;
+        const int firstPowerConsumption = 7;
+
+        var hdd = new List<object>
+        {
+            firstName,         firstCapacity,
+            firstSpindleSpeed, firstPowerConsumption,
+        };
+
+        Table.AddList(hdd);
+
+        const string secondName = "WDPurple";
+        const int secondCapacity = 1000;
+        const int secondSpindleSpeed = 5400;
+        const int secondPowerConsumption = 4;
+
+        hdd = new List<object>
+        {
+            secondName,         secondCapacity,
+            secondSpindleSpeed, secondPowerConsumption,
+        };
+
+        Table.AddList(hdd);
     }
 }
