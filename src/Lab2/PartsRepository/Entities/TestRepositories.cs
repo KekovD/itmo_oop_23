@@ -2,6 +2,7 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
@@ -24,6 +25,7 @@ public static class TestRepositories
         AddGraphicsCard();
         AddSsd();
         AddHdd();
+        AddCase();
     }
 
     private static void AddProcessors()
@@ -389,5 +391,42 @@ public static class TestRepositories
         };
 
         Table.AddList(hdd);
+    }
+
+    private static void AddCase()
+    {
+        const string firstName = "DeepcoolMatrexx30";
+        const int firstMaximumLength = 250;
+        const int firstMaximumWidth = 151;
+        const int firstLength = 406;
+        const int firstWidth = 193;
+        const int firstHeight = 379;
+
+        var pcCase = new List<object>
+        {
+            firstName,         firstMaximumLength,
+            firstMaximumWidth, new List<FormFactorMotherboardBase> { new MicroAtx(), new MiniItx() },
+            firstLength,       firstWidth,
+            firstHeight,
+        };
+
+        Table.AddList(pcCase);
+
+        const string secondName = "AeroCoolCS-1101";
+        const int secondMaximumLength = 375;
+        const int secondMaximumWidth = 150;
+        const int secondLength = 411;
+        const int secondWidth = 195;
+        const int secondHeight = 410;
+
+        pcCase = new List<object>
+        {
+            secondName,         secondMaximumLength,
+            secondMaximumWidth, new List<FormFactorMotherboardBase> { new MicroAtx(), new MiniItx(), new Atx() },
+            secondLength,       secondWidth,
+            secondHeight,
+        };
+
+        Table.AddList(pcCase);
     }
 }

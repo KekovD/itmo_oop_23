@@ -5,8 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="PowerSupplyUnit\Models\" />
-      <Folder Include="Сase\" />
+      <Folder Include="PowerSupplyUnit\Entities\" />
     </ItemGroup>
 
 </Project>
