@@ -8,6 +8,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -20,6 +21,7 @@ public static class TestRepositories
         AddMotherboards();
         AddCoolingSystem();
         AddRam();
+        AddGraphicsCard();
     }
 
     private static void AddProcessors()
@@ -136,7 +138,7 @@ public static class TestRepositories
             secondMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),   secondRamTablesNumber,
             new MiniItx(),           new Intel64(secondBios),
-            new PciE4(),
+            new WithoutPciE(),
         };
 
         Table.AddList(motherboard);
@@ -325,5 +327,36 @@ public static class TestRepositories
         };
 
         Table.AddList(graphicsCard);
+    }
+
+    private static void AddSsd()
+    {
+        const string firstName = "CrucialBX500";
+        const int firstCapacity = 1000;
+        const int firstMaximumSpeed = 540;
+        const int firstPowerConsumption = 1;
+
+        var ssd = new List<object>
+        {
+            firstName,             new SsdSata(),
+            firstCapacity,         firstMaximumSpeed,
+            firstPowerConsumption,
+        };
+
+        Table.AddList(ssd);
+
+        const string secondName = "Samsung980";
+        const int secondCapacity = 1000;
+        const int secondMaximumSpeed = 3500;
+        const int secondPowerConsumption = 3;
+
+        ssd = new List<object>
+        {
+            secondName,             new SsdPciE(),
+            secondCapacity,         secondMaximumSpeed,
+            secondPowerConsumption,
+        };
+
+        Table.AddList(ssd);
     }
 }
