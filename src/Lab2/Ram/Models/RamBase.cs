@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
@@ -26,6 +27,18 @@ public abstract class RamBase : IPart, IPrototype<RamBase>
         RamFormFactor = ramFormFactor;
         DdrType = ddrType;
         PowerConsumption = powerConsumption;
+    }
+
+    protected RamBase(IList<object> characteristics)
+    {
+        Name = (string)characteristics[0];
+        MemorySize = (int)characteristics[1];
+        CardsNumber = (int)characteristics[2];
+        JedecProfile = (Jedec)characteristics[3];
+        ExtremeMemoryProfile = (XmpJedecBase)characteristics[4];
+        RamFormFactor = (RamFormFactorBase)characteristics[5];
+        DdrType = (DdrMotherboardBase)characteristics[6];
+        PowerConsumption = (int)characteristics[7];
     }
 
     public bool PartValid { get; protected set; } = true;

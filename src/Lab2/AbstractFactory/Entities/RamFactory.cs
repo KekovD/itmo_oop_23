@@ -1,14 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
 
-public class Ram : RamBase
+public class RamFactory : IRamFactory
 {
-    public Ram(
+    public IPart CreateByName(string name) =>
+        new Ram.Entities.Ram(new RamRepository().GetByName(name));
+
+    public IPart CreateCustom(
         string name,
         int memorySize,
         int cardsNumber,
@@ -17,7 +22,8 @@ public class Ram : RamBase
         RamFormFactorBase ramFormFactor,
         DdrMotherboardBase ddrType,
         int powerConsumption)
-        : base(
+    {
+        return new Ram.Entities.Ram(
             name,
             memorySize,
             cardsNumber,
@@ -25,25 +31,6 @@ public class Ram : RamBase
             extremeMemoryProfile,
             ramFormFactor,
             ddrType,
-            powerConsumption)
-    {
-    }
-
-    public Ram(IList<object> characteristics)
-        : base(characteristics)
-    {
-    }
-
-    public override RamBase Clone()
-    {
-        return new Ram(
-            (string)Name.Clone(),
-            MemorySize,
-            CardsNumber,
-            (Jedec)JedecProfile.Clone(),
-            ExtremeMemoryProfile.Clone(),
-            RamFormFactor.Clone(),
-            DdrType.Clone(),
-            PowerConsumption);
+            powerConsumption);
     }
 }

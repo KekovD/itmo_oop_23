@@ -43,10 +43,10 @@ public abstract class CoolingSystemBase : IPart, IPrototype<CoolingSystemBase>
 
     public bool PartValid { get; protected set; } = true;
     public bool WarrantyDisclaimer { get; protected set; }
-    public string Name { get; protected set; }
-    public IReadOnlyList<int> Dimensions { get; protected set; }
-    public IReadOnlyList<SocketBase> SupportedSockets { get; protected set; }
-    public int ThermalDesignPower { get; protected set; }
+    public string Name { get; private set; }
+    public IReadOnlyList<int> Dimensions { get; private set; }
+    public IReadOnlyList<SocketBase> SupportedSockets { get; private set; }
+    public int ThermalDesignPower { get; private set; }
 
     public abstract CoolingSystemBase Clone();
 
