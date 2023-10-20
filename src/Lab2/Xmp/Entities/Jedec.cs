@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
-public class ExtremeMemoryProfiles : XmpJedecBase
+public class Jedec : XmpJedecBase
 {
-    public ExtremeMemoryProfiles(
+    public Jedec(
         int rasToCas,
         int rasPrecharge,
         int tRas,
@@ -26,7 +26,7 @@ public class ExtremeMemoryProfiles : XmpJedecBase
         Frequency = frequency;
     }
 
-    private ExtremeMemoryProfiles(
+    private Jedec(
         IReadOnlyList<int> timings,
         int voltage,
         int frequency)
@@ -38,7 +38,7 @@ public class ExtremeMemoryProfiles : XmpJedecBase
 
     public override XmpJedecBase Clone()
     {
-        return new ExtremeMemoryProfiles(
+        return new Jedec(
             Timings ?? throw new CloneNullException(nameof(XmpJedecBase)),
             Voltage,
             Frequency);

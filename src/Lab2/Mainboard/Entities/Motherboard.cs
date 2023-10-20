@@ -16,7 +16,7 @@ public class Motherboard : MotherboardBase
         int pciENumber,
         int sataNumber,
         int memoryFrequencies,
-        ExtremeMemoryProfilesBase extremeMemoryProfiles,
+        XmpJedecBase extremeMemoryProfiles,
         DdrMotherboardBase ddrMotherboard,
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,

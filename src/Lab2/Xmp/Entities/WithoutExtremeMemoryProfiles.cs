@@ -2,7 +2,7 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
-public class WithoutExtremeMemoryProfiles : ExtremeMemoryProfilesBase
+public class WithoutExtremeMemoryProfiles : XmpJedecBase
 {
-    public override ExtremeMemoryProfilesBase Clone() => new WithoutExtremeMemoryProfiles();
+    public override XmpJedecBase Clone() => new WithoutExtremeMemoryProfiles();
 }

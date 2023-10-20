@@ -17,7 +17,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         int pciENumber,
         int sataNumber,
         int memoryFrequencies,
-        ExtremeMemoryProfilesBase extremeMemoryProfiles,
+        XmpJedecBase extremeMemoryProfiles,
         DdrMotherboardBase ddrMotherboard,
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
@@ -42,7 +42,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         PciENumber = (int)characteristics[2];
         SataNumber = (int)characteristics[3];
         MemoryFrequencies = (int)characteristics[4];
-        ExtremeMemoryProfiles = (ExtremeMemoryProfilesBase)characteristics[5];
+        ExtremeMemoryProfiles = (XmpJedecBase)characteristics[5];
         DdrMotherboard = (DdrMotherboardBase)characteristics[6];
         RamTablesNumber = (int)characteristics[7];
         FormFactor = (FormFactorMotherboardBase)characteristics[8];
@@ -56,7 +56,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     public int PciENumber { get; private set; }
     public int SataNumber { get; private set; }
     public int MemoryFrequencies { get; private set; }
-    public ExtremeMemoryProfilesBase ExtremeMemoryProfiles { get; private set; }
+    public XmpJedecBase ExtremeMemoryProfiles { get; private set; }
     public DdrMotherboardBase DdrMotherboard { get; private set; }
     public int RamTablesNumber { get; private set; }
     public FormFactorMotherboardBase FormFactor { get; private set; }
@@ -104,7 +104,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         return clone;
     }
 
-    public MotherboardBase CloneWithNewExtremeMemoryProfiles(ExtremeMemoryProfilesBase extremeMemoryProfiles)
+    public MotherboardBase CloneWithNewExtremeMemoryProfiles(XmpJedecBase extremeMemoryProfiles)
     {
         MotherboardBase clone = Clone();
         clone.ExtremeMemoryProfiles = extremeMemoryProfiles;
