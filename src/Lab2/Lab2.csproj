@@ -4,8 +4,4 @@
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab2</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Folder Include="PowerSupplyUnit\Entities\" />
-    </ItemGroup>
-
 </Project>

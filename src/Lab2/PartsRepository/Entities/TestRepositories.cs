@@ -429,4 +429,29 @@ public static class TestRepositories
 
         Table.AddList(pcCase);
     }
+
+    private static void AddPowerSupply()
+    {
+        const string firstName = "AeroCoolECO600W";
+        const int firstPeakLoad = 600;
+
+        var powerSupply = new List<object>
+        {
+            firstName,
+            firstPeakLoad,
+        };
+
+        Table.AddList(powerSupply);
+
+        const string secondName = "DeepCoolPX1000G";
+        const int secondPeakLoad = 1000;
+
+        powerSupply = new List<object>
+        {
+            secondName,
+            secondPeakLoad,
+        };
+
+        Table.AddList(powerSupply);
+    }
 }
