@@ -1,4 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
@@ -21,5 +22,6 @@ public interface IMotherboardFactory : IFactory
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
         BiosBase bios,
-        PciEVersionBase pciEVersion);
+        PciEVersionBase pciEVersion,
+        IIntegratedWiFi integratedWiFi);
 }

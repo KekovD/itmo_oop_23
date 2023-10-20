@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
@@ -23,7 +24,8 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
         BiosBase bios,
-        PciEVersionBase pciEVersion)
+        PciEVersionBase pciEVersion,
+        IIntegratedWiFi integratedWiFi)
     {
         Name = name;
         Socket = socket;
@@ -36,6 +38,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         FormFactor = formFactor;
         Bios = bios;
         PciEVersion = pciEVersion;
+        IntegratedWiFi = integratedWiFi;
     }
 
     protected MotherboardBase(IList<object> characteristics)
@@ -51,6 +54,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         FormFactor = (FormFactorMotherboardBase)characteristics[8];
         Bios = (BiosBase)characteristics[9];
         PciEVersion = (PciEVersionBase)characteristics[10];
+        IntegratedWiFi = (IIntegratedWiFi)characteristics[11];
     }
 
     public bool PartValid { get; protected set; } = true;
@@ -66,6 +70,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     public FormFactorMotherboardBase FormFactor { get; private set; }
     public BiosBase Bios { get; private set; }
     public PciEVersionBase PciEVersion { get; private set; }
+    public IIntegratedWiFi IntegratedWiFi { get; private set; }
 
     public abstract MotherboardBase Clone();
 

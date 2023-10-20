@@ -21,6 +21,7 @@ public class MotherboardRepository : RepositoryBase<MotherboardBase>
             newItem.FormFactor,
             newItem.Bios,
             newItem.PciEVersion,
+            newItem.IntegratedWiFi,
         };
 
         Table.AddList(newItemList);

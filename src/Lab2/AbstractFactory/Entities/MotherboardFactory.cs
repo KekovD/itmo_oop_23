@@ -1,5 +1,6 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -27,7 +28,8 @@ public class MotherboardFactory : IMotherboardFactory
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
         BiosBase bios,
-        PciEVersionBase pciEVersion)
+        PciEVersionBase pciEVersion,
+        IIntegratedWiFi integratedWiFi)
     {
         return new Motherboard(
             name,
@@ -40,6 +42,7 @@ public class MotherboardFactory : IMotherboardFactory
             ramTablesNumber,
             formFactor,
             bios,
-            pciEVersion);
+            pciEVersion,
+            integratedWiFi);
     }
 }

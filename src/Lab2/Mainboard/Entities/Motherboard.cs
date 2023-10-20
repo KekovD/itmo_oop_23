@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
@@ -22,7 +23,8 @@ public class Motherboard : MotherboardBase
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
         BiosBase bios,
-        PciEVersionBase pciEVersion)
+        PciEVersionBase pciEVersion,
+        IIntegratedWiFi integratedWiFi)
         : base(
             name,
             socket,
@@ -34,7 +36,8 @@ public class Motherboard : MotherboardBase
             ramTablesNumber,
             formFactor,
             bios,
-            pciEVersion)
+            pciEVersion,
+            integratedWiFi)
     {
     }
 
@@ -56,6 +59,7 @@ public class Motherboard : MotherboardBase
             RamTablesNumber,
             FormFactor.Clone(),
             Bios.Clone(),
-            PciEVersion.Clone());
+            PciEVersion.Clone(),
+            IntegratedWiFi.Clone());
     }
 }

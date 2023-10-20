@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
@@ -10,6 +11,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.WiFiBuiltInBluetooth.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -26,6 +28,8 @@ public static class TestRepositories
         AddSsd();
         AddHdd();
         AddCase();
+        AddPowerSupply();
+        AddWiFiModule();
     }
 
     private static void AddProcessors()
@@ -123,7 +127,7 @@ public static class TestRepositories
             firstMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),  firstRamTablesNumber,
             new MicroAtx(),         new Intel64(firstBios),
-            new PciE4(),
+            new PciE4(),            new WithoutIntegratedWiFi(),
         };
 
         Table.AddList(motherboard);
@@ -142,7 +146,7 @@ public static class TestRepositories
             secondMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),   secondRamTablesNumber,
             new MiniItx(),           new Intel64(secondBios),
-            new WithoutPciE(),
+            new WithoutPciE(),       new WithoutIntegratedWiFi(),
         };
 
         Table.AddList(motherboard);
@@ -179,6 +183,7 @@ public static class TestRepositories
             new Eatx(),
             new Intel64(thirdBios),
             new PciE4(),
+            new IntegratedWiFi(),
         };
 
         Table.AddList(motherboard);
@@ -453,5 +458,21 @@ public static class TestRepositories
         };
 
         Table.AddList(powerSupply);
+    }
+
+    private static void AddWiFiModule()
+    {
+        const string firstName = "BluetoothAsusPCEAX3000";
+        const string firstStandardVersion = "802.11n";
+        const int firstPowerConsumption = 3;
+
+        var wiFiModule = new List<object>
+        {
+            firstName,             firstStandardVersion,
+            new PciE4(),           new BuiltInBluetooth(),
+            firstPowerConsumption,
+        };
+
+        Table.AddList(wiFiModule);
     }
 }
