@@ -10,7 +10,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class MotherboardFactory : IMotherboardFactory
 {

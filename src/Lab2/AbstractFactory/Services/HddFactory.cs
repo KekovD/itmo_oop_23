@@ -3,7 +3,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class HddFactory : IHddFactory
 {

@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class SsdFactory : ISsdFactory
 {

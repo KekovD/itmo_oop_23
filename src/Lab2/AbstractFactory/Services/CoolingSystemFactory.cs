@@ -5,7 +5,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.ProcessorCoolingSystem.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class CoolingSystemFactory : ICoolingSystemFactory
 {

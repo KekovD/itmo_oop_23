@@ -6,7 +6,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class RamFactory : IRamFactory
 {

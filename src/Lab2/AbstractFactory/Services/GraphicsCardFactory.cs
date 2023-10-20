@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class GraphicsCardFactory : IGraphicsCardFactory
 {
