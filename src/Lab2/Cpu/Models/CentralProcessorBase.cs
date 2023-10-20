@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 
-public abstract class CentralProcessorBase : IPart, IPrototype<CentralProcessorBase>
+public abstract class CentralProcessorBase : IPowerConsumption, IPrototype<CentralProcessorBase>
 {
     protected CentralProcessorBase(IList<object> characteristics)
     {

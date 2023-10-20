@@ -2,6 +2,7 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
@@ -21,7 +22,8 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         DdrMotherboardBase ddrMotherboard,
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
-        BiosBase bios)
+        BiosBase bios,
+        PciEVersionBase pciEVersion)
     {
         Name = name;
         Socket = socket;
@@ -33,6 +35,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         RamTablesNumber = ramTablesNumber;
         FormFactor = formFactor;
         Bios = bios;
+        PciEVersion = pciEVersion;
     }
 
     protected MotherboardBase(IList<object> characteristics)
@@ -47,6 +50,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         RamTablesNumber = (int)characteristics[7];
         FormFactor = (FormFactorMotherboardBase)characteristics[8];
         Bios = (BiosBase)characteristics[9];
+        PciEVersion = (PciEVersionBase)characteristics[10];
     }
 
     public bool PartValid { get; protected set; } = true;
@@ -61,6 +65,7 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     public int RamTablesNumber { get; private set; }
     public FormFactorMotherboardBase FormFactor { get; private set; }
     public BiosBase Bios { get; private set; }
+    public PciEVersionBase PciEVersion { get; private set; }
 
     public abstract MotherboardBase Clone();
 
@@ -140,6 +145,14 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     {
         MotherboardBase clone = Clone();
         clone.Bios = bios;
+
+        return clone;
+    }
+
+    public MotherboardBase CloneWithNewPciEVersion(PciEVersionBase pciEVersion)
+    {
+        MotherboardBase clone = Clone();
+        clone.PciEVersion = pciEVersion;
 
         return clone;
     }

@@ -5,10 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="GraphicsCard\" />
       <Folder Include="HardDrive\" />
       <Folder Include="PowerSupplyUnit\Models\" />
-      <Folder Include="SSD\" />
+      <Folder Include="SsdType\Entities\" />
+      <Folder Include="Ssd\" />
       <Folder Include="Сase\" />
     </ItemGroup>
 

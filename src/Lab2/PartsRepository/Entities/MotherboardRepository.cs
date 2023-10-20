@@ -20,6 +20,7 @@ public class MotherboardRepository : RepositoryBase<MotherboardBase>
             newItem.RamTablesNumber,
             newItem.FormFactor,
             newItem.Bios,
+            newItem.PciEVersion,
         };
 
         Table.AddList(newItemList);

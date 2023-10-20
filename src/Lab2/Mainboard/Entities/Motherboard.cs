@@ -2,6 +2,7 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
@@ -20,7 +21,8 @@ public class Motherboard : MotherboardBase
         DdrMotherboardBase ddrMotherboard,
         int ramTablesNumber,
         FormFactorMotherboardBase formFactor,
-        BiosBase bios)
+        BiosBase bios,
+        PciEVersionBase pciEVersion)
         : base(
             name,
             socket,
@@ -31,7 +33,8 @@ public class Motherboard : MotherboardBase
             ddrMotherboard,
             ramTablesNumber,
             formFactor,
-            bios)
+            bios,
+            pciEVersion)
     {
     }
 
@@ -52,6 +55,7 @@ public class Motherboard : MotherboardBase
             DdrMotherboard.Clone(),
             RamTablesNumber,
             FormFactor.Clone(),
-            Bios.Clone());
+            Bios.Clone(),
+            PciEVersion.Clone());
     }
 }

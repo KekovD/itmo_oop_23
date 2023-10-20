@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 
-public abstract class RamBase : IPart, IPrototype<RamBase>
+public abstract class RamBase : IPowerConsumption, IPrototype<RamBase>
 {
     protected RamBase(
         string name,

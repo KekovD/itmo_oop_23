@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
 public interface ICoolingSystemFactory : IFactory
 {
-    IPart CreateCustom(
+    public IPart CreateCustom(
         string name,
         int height,
         int width,

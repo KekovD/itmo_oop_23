@@ -3,7 +3,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Bios.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
@@ -16,6 +18,8 @@ public static class TestRepositories
     {
         AddProcessors();
         AddMotherboards();
+        AddCoolingSystem();
+        AddRam();
     }
 
     private static void AddProcessors()
@@ -113,6 +117,7 @@ public static class TestRepositories
             firstMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),  firstRamTablesNumber,
             new MicroAtx(),         new Intel64(firstBios),
+            new PciE4(),
         };
 
         Table.AddList(motherboard);
@@ -131,6 +136,7 @@ public static class TestRepositories
             secondMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
             new Ddr4Motherboard(),   secondRamTablesNumber,
             new MiniItx(),           new Intel64(secondBios),
+            new PciE4(),
         };
 
         Table.AddList(motherboard);
@@ -166,6 +172,7 @@ public static class TestRepositories
             thirdRamTablesNumber,
             new Eatx(),
             new Intel64(thirdBios),
+            new PciE4(),
         };
 
         Table.AddList(motherboard);
@@ -173,17 +180,17 @@ public static class TestRepositories
 
     private static void AddCoolingSystem()
     {
-        const string firstName = "CoolerMasterHyperT200";
-        const int firstHeight = 137;
-        const int firstWidth = 112;
-        const int firstLength = 84;
-        const int firstThermalDesignPower = 100;
+        const string firstName = "DeepcoolGammaxx300";
+        const int firstHeight = 136;
+        const int firstWidth = 121;
+        const int firstLength = 76;
+        const int firstThermalDesignPower = 130;
 
         var coolingSystem = new List<object>
         {
             firstName,
             new List<int> { firstHeight, firstWidth, firstLength },
-            new List<SocketBase> { new Lga1200() },
+            new List<SocketBase> { new Lga1200(), new Lga1700() },
             firstThermalDesignPower,
         };
 
@@ -204,5 +211,119 @@ public static class TestRepositories
         };
 
         Table.AddList(coolingSystem);
+    }
+
+    private static void AddRam()
+    {
+        const string firstName = "DEXP8GD4UD32";
+        const int firstMemorySize = 8;
+        const int firstCardsNumber = 2;
+        const int firstRasToCasJedec = 22;
+        const int firstRasPrechargeJedec = 22;
+        const int firstTRasJedec = 22;
+        const int firstTRcJedec = 52;
+        const int firstVoltageJedec = 2;
+        const int firstFrequencyJedec = 3200;
+        const int firstPowerConsumption = 8;
+
+        var ram = new List<object>
+        {
+            firstName,
+            firstMemorySize,
+            firstCardsNumber,
+            new Jedec(
+                firstRasToCasJedec,
+                firstRasPrechargeJedec,
+                firstTRasJedec,
+                firstTRcJedec,
+                firstVoltageJedec,
+                firstFrequencyJedec),
+            new WithoutExtremeMemoryProfiles(),
+            new Dimm(),
+            new Ddr4Motherboard(),
+            firstPowerConsumption,
+        };
+
+        Table.AddList(ram);
+
+        const string secondName = "KingstonFURYRenegadePro";
+        const int secondMemorySize = 16;
+        const int secondCardsNumber = 4;
+        const int secondRasToCasJedec = 36;
+        const int secondRasPrechargeJedec = 38;
+        const int secondTRasJedec = 38;
+        const int secondTRcJedec = 38;
+        const int secondVoltageJedec = 1;
+        const int secondFrequencyJedec = 4800;
+        const int secondRasToCasXmp = 36;
+        const int secondRasPrechargeXmp = 38;
+        const int secondTRasXmp = 38;
+        const int secondTRcXmp = 38;
+        const int secondVoltageXmp = 1;
+        const int secondFrequencyXmp = 4800;
+        const int secondPowerConsumption = 7;
+
+        ram = new List<object>
+        {
+            secondName,
+            secondMemorySize,
+            secondCardsNumber,
+            new Jedec(
+                secondRasToCasJedec,
+                secondRasPrechargeJedec,
+                secondTRasJedec,
+                secondTRcJedec,
+                secondVoltageJedec,
+                secondFrequencyJedec),
+            new ExtremeMemoryProfiles(
+                secondRasToCasXmp,
+                secondRasPrechargeXmp,
+                secondTRasXmp,
+                secondTRcXmp,
+                secondVoltageXmp,
+                secondFrequencyXmp),
+            new RDimm(),
+            new Ddr5Motherboard(),
+            secondPowerConsumption,
+        };
+
+        Table.AddList(ram);
+    }
+
+    private static void AddGraphicsCard()
+    {
+        const string firstName = "PalitGeForceRTX3050Dual";
+        const int firstHeight = 120;
+        const int firstWidth = 172;
+        const int firstVideoMemoryNumber = 8;
+        const int firstChipFrequency = 1552;
+        const int firstPowerConsumption = 115;
+
+        var graphicsCard = new List<object>
+        {
+            firstName,             firstHeight,
+            firstWidth,            firstVideoMemoryNumber,
+            new PciE4(),           firstChipFrequency,
+            firstPowerConsumption,
+        };
+
+        Table.AddList(graphicsCard);
+
+        const string secondName = "ASUSGeForceRTX3060TiDual";
+        const int secondHeight = 120;
+        const int secondWidth = 230;
+        const int secondVideoMemoryNumber = 8;
+        const int secondChipFrequency = 1410;
+        const int secondPowerConsumption = 110;
+
+        graphicsCard = new List<object>
+        {
+            secondName,             secondHeight,
+            secondWidth,            secondVideoMemoryNumber,
+            new PciE4(),            secondChipFrequency,
+            secondPowerConsumption,
+        };
+
+        Table.AddList(graphicsCard);
     }
 }
