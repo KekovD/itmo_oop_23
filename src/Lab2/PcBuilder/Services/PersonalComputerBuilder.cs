@@ -40,6 +40,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
     public IMotherboardBuilder WithCase(CaseBase caseBase)
     {
         _pcCase = caseBase;
+
         return this;
     }
 
@@ -157,6 +158,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
     public IPersonalComputerBuilder WithPowerSupplyUnit(PowerSupplyBase powerSupply)
     {
         _powerSupplyUnit = powerSupply;
+
         return this;
     }
 

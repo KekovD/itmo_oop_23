@@ -16,9 +16,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public static class TestRepositories
+public class TestRepositories : ITestRepository
 {
-    public static void AddObjects()
+    public void AddObjects()
     {
         AddProcessors();
         AddMotherboards();
@@ -54,7 +54,7 @@ public static class TestRepositories
         Table.AddList(processor);
 
         const string secondName = "IntelCorei511400";
-        const int secondBiosVersion = 3;
+        const int secondBiosVersion = 6;
         const int secondMemoryFrequencies = 3200;
         const int secondCoreFrequency = 2600;
         const int secondCoresNumber = 6;

@@ -16,7 +16,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PC.Entities;
 
 public class PersonalComputer : IPrototype<PersonalComputer>
 {
-    private IList<BuildStatus> _message;
     private CaseBase? _pcCase;
     private MotherboardBase? _motherboard;
     private CentralProcessorBase? _centralProcessor;
@@ -41,7 +40,7 @@ public class PersonalComputer : IPrototype<PersonalComputer>
         SsdBase? solidStateDrive,
         PowerSupplyBase? powerSupplyUnit)
     {
-        _message = message;
+        Message = message;
         _pcCase = pcCase;
         _motherboard = motherboard;
         _centralProcessor = centralProcessor;
@@ -53,6 +52,8 @@ public class PersonalComputer : IPrototype<PersonalComputer>
         _solidStateDrive = solidStateDrive;
         _powerSupplyUnit = powerSupplyUnit;
     }
+
+    public IList<BuildStatus> Message { get; private set; }
 
     public PersonalComputer Clone()
     {

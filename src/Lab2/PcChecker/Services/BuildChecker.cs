@@ -57,7 +57,7 @@ public class BuildChecker : IBuildChecker
 
     public void CheckHeightCoolingSystem(in CoolingSystemBase coolingSystem, in CaseBase pcCase, IList<BuildStatus> result)
     {
-        if (pcCase.MaximumWidth < coolingSystem.Dimensions[0])
+        if (pcCase.MaximumWidth > coolingSystem.Dimensions[0])
             return;
 
         result.Add(BuildStatus.CoolerIsTooHigh);
