@@ -7,4 +7,6 @@ public abstract class IntegratedVideoCoreBase : IPrototype<IntegratedVideoCoreBa
     public string? Name { get; protected init; }
 
     public abstract IntegratedVideoCoreBase Clone();
+
+    public abstract bool HaveIntegratedVideoCore();
 }

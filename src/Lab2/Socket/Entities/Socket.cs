@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.LabException;
+﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
@@ -16,5 +17,16 @@ public class Socket : SocketBase
             throw new CloneNullException(nameof(SocketBase));
 
         return new Socket((string)Name.Clone());
+    }
+
+    public override bool CompareSocket(SocketBase socket)
+    {
+        if (socket.Name is null)
+            throw new CheckerNullException(nameof(CompareSocket));
+
+        if (socket.Name.Equals(Name, StringComparison.Ordinal))
+            return true;
+
+        return false;
     }
 }

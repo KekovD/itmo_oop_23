@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcBuilder.Models;
 
 public interface IСentralProcessorBuilder
 {
-    ICoolingSystemBuilder WithСentralProcessor(CentralProcessorBase centralProcessor);
+    ICoolingSystemBuilder WithCentralProcessor(CentralProcessorBase centralProcessor);
 }

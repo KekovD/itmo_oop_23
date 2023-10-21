@@ -12,4 +12,6 @@ public class WithoutIntegratedVideoCore : IntegratedVideoCoreBase
     }
 
     public override IntegratedVideoCoreBase Clone() => new WithoutIntegratedVideoCore();
+
+    public override bool HaveIntegratedVideoCore() => false;
 }

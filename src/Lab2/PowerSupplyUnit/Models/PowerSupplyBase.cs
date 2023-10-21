@@ -18,8 +18,6 @@ public abstract class PowerSupplyBase : IPart, IPrototype<PowerSupplyBase>
         PeakLoad = (int)characteristics[1];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public int PeakLoad { get; private set; }
 

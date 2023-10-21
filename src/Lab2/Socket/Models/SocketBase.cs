@@ -8,4 +8,6 @@ public abstract class SocketBase : IPrototype<SocketBase>
     public string? Name { get; protected set; }
 
     public abstract SocketBase Clone();
+
+    public abstract bool CompareSocket(SocketBase socket);
 }

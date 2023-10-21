@@ -13,4 +13,12 @@ public class Intel64 : BiosBase
     }
 
     public override BiosBase Clone() => new Intel64(Version);
+
+    public override bool CompareBios(BiosBase bios)
+    {
+        if (bios is Intel64 && Version >= bios.Version)
+            return true;
+
+        return false;
+    }
 }

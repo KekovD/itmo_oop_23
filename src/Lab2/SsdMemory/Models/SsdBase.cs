@@ -30,8 +30,6 @@ public abstract class SsdBase : IPowerConsumption, IPrototype<SsdBase>
         PowerConsumption = (int)characteristics[4];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public SsdTypeBase ConnectionOption { get; private set; }
     public int Capacity { get; private set; }

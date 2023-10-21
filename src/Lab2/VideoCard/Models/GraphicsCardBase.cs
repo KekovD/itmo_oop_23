@@ -36,8 +36,6 @@ public abstract class GraphicsCardBase : IPowerConsumption, IPrototype<GraphicsC
         PowerConsumption = (int)characteristics[6];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public int Height { get; private set; }
     public int Width { get; private set; }

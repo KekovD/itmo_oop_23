@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.LabException;
+﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Entities;
@@ -25,4 +26,15 @@ public class FormFactorMotherboard : FormFactorMotherboardBase
 
     public FormFactorMotherboardBase CloneWithNewName(string name)
         => new FormFactorMotherboard(name, SideFirst, SideSecond);
+
+    public override bool CompareFormFactor(FormFactorMotherboardBase formFactor)
+    {
+        if (formFactor.Name is null)
+            throw new CheckerNullException(nameof(CompareFormFactor));
+
+        if (formFactor.Name.Equals(Name, StringComparison.Ordinal))
+            return true;
+
+        return false;
+    }
 }

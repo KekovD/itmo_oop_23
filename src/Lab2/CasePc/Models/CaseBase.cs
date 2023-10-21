@@ -36,8 +36,6 @@ public abstract class CaseBase : IPart, IPrototype<CaseBase>
         Height = (int)characteristics[6];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public int MaximumLength { get; private set; }
     public int MaximumWidth { get; protected set; }

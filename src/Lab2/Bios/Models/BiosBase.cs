@@ -22,4 +22,6 @@ public abstract class BiosBase : IPrototype<BiosBase>
 
         return clone;
     }
+
+    public abstract bool CompareBios(BiosBase bios);
 }

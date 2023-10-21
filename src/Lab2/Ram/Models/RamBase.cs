@@ -41,8 +41,6 @@ public abstract class RamBase : IPowerConsumption, IPrototype<RamBase>
         PowerConsumption = (int)characteristics[7];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public int MemorySize { get; private set; }
     public int CardsNumber { get; private set; }

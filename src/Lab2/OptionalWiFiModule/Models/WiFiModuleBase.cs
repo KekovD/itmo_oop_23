@@ -31,8 +31,6 @@ public abstract class WiFiModuleBase : IPowerConsumption, IPrototype<WiFiModuleB
         PowerConsumption = (int)characteristics[4];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public string StandardVersion { get; private set; }
     public PciEVersionBase PciEVersion { get; private set; }

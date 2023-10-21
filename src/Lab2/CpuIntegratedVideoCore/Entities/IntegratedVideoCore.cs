@@ -19,4 +19,6 @@ public class IntegratedVideoCore : IntegratedVideoCoreBase
 
         return new IntegratedVideoCore((string)Name.Clone());
     }
+
+    public override bool HaveIntegratedVideoCore() => true;
 }

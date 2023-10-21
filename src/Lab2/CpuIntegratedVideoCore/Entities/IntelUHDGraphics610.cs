@@ -12,4 +12,6 @@ public class IntelUHDGraphics610 : IntegratedVideoCoreBase
     }
 
     public override IntegratedVideoCoreBase Clone() => new IntelUHDGraphics610();
+
+    public override bool HaveIntegratedVideoCore() => true;
 }

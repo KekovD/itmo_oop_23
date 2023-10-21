@@ -12,4 +12,12 @@ public class Ddr3Motherboard : DdrMotherboardBase
     }
 
     public override DdrMotherboardBase Clone() => new Ddr3Motherboard();
+
+    public override bool CompareDdrType(DdrMotherboardBase ddrOther)
+    {
+        if (ddrOther is Ddr3Motherboard)
+            return true;
+
+        return false;
+    }
 }

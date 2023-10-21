@@ -16,4 +16,12 @@ public class MicroAtx : FormFactorMotherboardBase
     }
 
     public override FormFactorMotherboardBase Clone() => new MicroAtx();
+
+    public override bool CompareFormFactor(FormFactorMotherboardBase formFactor)
+    {
+        if (formFactor is MicroAtx)
+            return true;
+
+        return false;
+    }
 }

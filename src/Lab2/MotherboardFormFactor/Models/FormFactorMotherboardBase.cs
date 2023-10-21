@@ -9,4 +9,6 @@ public abstract class FormFactorMotherboardBase : IPrototype<FormFactorMotherboa
     public int SideSecond { get; protected set; }
 
     public abstract FormFactorMotherboardBase Clone();
+
+    public abstract bool CompareFormFactor(FormFactorMotherboardBase formFactor);
 }

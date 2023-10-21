@@ -16,4 +16,12 @@ public class MiniItx : FormFactorMotherboardBase
     }
 
     public override FormFactorMotherboardBase Clone() => new MiniItx();
+
+    public override bool CompareFormFactor(FormFactorMotherboardBase formFactor)
+    {
+        if (formFactor is MiniItx)
+            return true;
+
+        return false;
+    }
 }

@@ -41,8 +41,6 @@ public abstract class CoolingSystemBase : IPart, IPrototype<CoolingSystemBase>
         ThermalDesignPower = (int)characteristics[3];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public IReadOnlyList<int> Dimensions { get; private set; }
     public IReadOnlyList<SocketBase> SupportedSockets { get; private set; }

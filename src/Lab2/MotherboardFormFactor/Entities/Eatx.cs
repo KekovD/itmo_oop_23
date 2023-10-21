@@ -16,4 +16,12 @@ public class Eatx : FormFactorMotherboardBase
     }
 
     public override FormFactorMotherboardBase Clone() => new Eatx();
+
+    public override bool CompareFormFactor(FormFactorMotherboardBase formFactor)
+    {
+        if (formFactor is Eatx)
+            return true;
+
+        return false;
+    }
 }

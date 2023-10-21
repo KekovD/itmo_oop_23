@@ -44,8 +44,6 @@ public abstract class CentralProcessorBase : IPowerConsumption, IPrototype<Centr
         PowerConsumption = powerConsumption;
     }
 
-    public bool PartValid { get; private set; } = true;
-    public bool WarrantyDisclaimer { get; private set; }
     public string Name { get; private set; }
     public SocketBase Socket { get; private set; }
     public BiosBase Bios { get; private set; }

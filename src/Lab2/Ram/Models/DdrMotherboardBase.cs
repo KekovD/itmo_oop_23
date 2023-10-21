@@ -7,4 +7,6 @@ public abstract class DdrMotherboardBase : IPrototype<DdrMotherboardBase>
     public string? Name { get; protected set; }
 
     public abstract DdrMotherboardBase Clone();
+
+    public abstract bool CompareDdrType(DdrMotherboardBase ddrOther);
 }

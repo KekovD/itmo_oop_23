@@ -57,8 +57,6 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         IntegratedWiFi = (IIntegratedWiFi)characteristics[11];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public SocketBase Socket { get; private set; }
     public int PciENumber { get; private set; }

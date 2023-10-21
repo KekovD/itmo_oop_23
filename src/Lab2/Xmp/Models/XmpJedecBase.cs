@@ -42,4 +42,6 @@ public abstract class XmpJedecBase : IPrototype<XmpJedecBase>
 
         return clone;
     }
+
+    public abstract bool HaveXmp();
 }

@@ -12,4 +12,12 @@ public class Ddr5Motherboard : DdrMotherboardBase
     }
 
     public override DdrMotherboardBase Clone() => new Ddr5Motherboard();
+
+    public override bool CompareDdrType(DdrMotherboardBase ddrOther)
+    {
+        if (ddrOther is Ddr4Motherboard)
+            return true;
+
+        return false;
+    }
 }

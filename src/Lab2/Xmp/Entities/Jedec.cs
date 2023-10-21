@@ -43,4 +43,6 @@ public class Jedec : XmpJedecBase
             Voltage,
             Frequency);
     }
+
+    public override bool HaveXmp() => false;
 }

@@ -12,4 +12,12 @@ public class Lga1700 : SocketBase
     }
 
     public override SocketBase Clone() => new Lga1700();
+
+    public override bool CompareSocket(SocketBase socket)
+    {
+        if (socket is Lga1700)
+            return true;
+
+        return false;
+    }
 }

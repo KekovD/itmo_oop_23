@@ -26,8 +26,6 @@ public abstract class HddBase : IPowerConsumption, IPrototype<HddBase>
         PowerConsumption = (int)characteristics[3];
     }
 
-    public bool PartValid { get; protected set; } = true;
-    public bool WarrantyDisclaimer { get; protected set; }
     public string Name { get; private set; }
     public int Capacity { get; private set; }
     public int SpindleSpeed { get; private set; }

@@ -43,4 +43,6 @@ public class ExtremeMemoryProfiles : XmpJedecBase
             Voltage,
             Frequency);
     }
+
+    public override bool HaveXmp() => true;
 }

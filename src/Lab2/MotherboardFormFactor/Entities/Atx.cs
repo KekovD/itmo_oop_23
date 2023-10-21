@@ -16,4 +16,12 @@ public class Atx : FormFactorMotherboardBase
     }
 
     public override FormFactorMotherboardBase Clone() => new Atx();
+
+    public override bool CompareFormFactor(FormFactorMotherboardBase formFactor)
+    {
+        if (formFactor is Atx)
+            return true;
+
+        return false;
+    }
 }

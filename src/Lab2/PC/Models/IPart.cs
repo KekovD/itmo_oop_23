@@ -2,7 +2,5 @@
 
 public interface IPart
 {
-    bool PartValid { get; }
-    bool WarrantyDisclaimer { get; }
     string Name { get; }
 }
