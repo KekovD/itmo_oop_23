@@ -17,7 +17,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Tests.Tests;
 
-public class SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors
+public class BuildWithClaimedConsumptionGreaterThanTheMaximumAvailableConsumption
 {
     public static IEnumerable<object[]> GetParts
     {
@@ -42,14 +42,14 @@ public class SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors
 
     private static bool CheckBuildingResults(PersonalComputer builder)
     {
-        if (builder.Message.Count == 1 && builder.Message[0] == BuildStatus.Successfully)
+        if (builder.Message.Count == 2 && builder.Message[0] == BuildStatus.Successfully && builder.Message[1] == BuildStatus.InsufficientPowerSupplyCapacity)
             return true;
 
         return false;
     }
 
     [Theory]
-    [MemberData(nameof(GetParts), MemberType = typeof(SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors))]
+    [MemberData(nameof(GetParts), MemberType = typeof(BuildWithClaimedConsumptionGreaterThanTheMaximumAvailableConsumption))]
     private void ConditionCheck(IList<string> parts)
     {
         new TestRepositories().AddObjects();
@@ -61,6 +61,7 @@ public class SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors
         IPart graphics = new GraphicsCardFactory().CreateByName(parts[5]);
         IPart ssd = new SsdFactory().CreateByName(parts[6]);
         IPart powerSupply = new PowerSupplyFactory().CreateByName(parts[7]);
+        var powerSupplyCloned = (PowerSupplyBase)powerSupply;
 
         PersonalComputer builder = new PersonalComputerBuilder()
             .Builder()
@@ -71,7 +72,7 @@ public class SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors
             .WithOperatingMemory((RamBase)ram)
             .WithGraphicsCard((GraphicsCardBase)graphics)
             .WithSolidStateDrive((SsdBase)ssd)
-            .WithPowerSupplyUnit((PowerSupplyBase)powerSupply)
+            .WithPowerSupplyUnit((PowerSupplyBase)powerSupplyCloned.CloneWithNewPeakLoad(180))
             .Build();
 
         Assert.True(CheckBuildingResults(builder));

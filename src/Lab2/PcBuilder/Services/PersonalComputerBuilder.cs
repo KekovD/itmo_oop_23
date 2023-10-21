@@ -183,7 +183,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
             _hardDriver,
             _operatingMemory,
             _wiFiModule,
-            _buildResult);
+            _warrantyDisclaimer);
 
         return new PersonalComputer(
             _checker.ReportWriting(_buildResult, _warrantyDisclaimer),
