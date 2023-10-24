@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Models;
@@ -10,12 +9,6 @@ public abstract class PowerSupplyBase : IPart, IPrototype<PowerSupplyBase>
     {
         Name = name;
         PeakLoad = peakLoad;
-    }
-
-    protected PowerSupplyBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        PeakLoad = (int)characteristics[1];
     }
 
     public string Name { get; private set; }

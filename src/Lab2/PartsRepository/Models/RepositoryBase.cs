@@ -8,7 +8,7 @@ public abstract class RepositoryBase<T>
 {
     public abstract void Add(T newItem);
 
-    public IList<object> GetByName(string name)
+    public IList<object>? GetByName(string name)
     {
         if (Table.Repository is not null)
         {
@@ -20,7 +20,7 @@ public abstract class RepositoryBase<T>
                 }
             }
 
-            throw new NameNotFoundException(nameof(GetByName));
+            return null;
         }
 
         throw new RepositoryNullException(nameof(GetByName));

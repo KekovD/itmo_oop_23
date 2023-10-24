@@ -1,5 +1,6 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
@@ -10,10 +11,30 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class RamFactory : IRamFactory
 {
-    public IPart CreateByName(string name) =>
-        new Ram.Entities.Ram(new RamRepository().GetByName(name));
+    private string? _name;
+    private int _memorySize;
+    private int _cardsNumber;
+    private Jedec? _jedecProfile;
+    private XmpJedecBase? _extremeMemoryProfile;
+    private RamFormFactorBase? _ramFormFactor;
+    private DdrMotherboardBase? _ddrType;
+    private int _powerConsumption;
 
-    public IPart CreateCustom(
+    public IFactory RepositoryInstances(IList<object> instances)
+    {
+        _name = (string)instances[0];
+        _memorySize = (int)instances[1];
+        _cardsNumber = (int)instances[2];
+        _jedecProfile = (Jedec)instances[3];
+        _extremeMemoryProfile = (XmpJedecBase)instances[4];
+        _ramFormFactor = (RamFormFactorBase)instances[5];
+        _ddrType = (DdrMotherboardBase)instances[6];
+        _powerConsumption = (int)instances[7];
+
+        return this;
+    }
+
+    public IFactory CustomInstances(
         string name,
         int memorySize,
         int cardsNumber,
@@ -23,14 +44,28 @@ public class RamFactory : IRamFactory
         DdrMotherboardBase ddrType,
         int powerConsumption)
     {
+        _name = name;
+        _memorySize = memorySize;
+        _cardsNumber = cardsNumber;
+        _jedecProfile = jedecProfile;
+        _extremeMemoryProfile = extremeMemoryProfile;
+        _ramFormFactor = ramFormFactor;
+        _ddrType = ddrType;
+        _powerConsumption = powerConsumption;
+
+        return this;
+    }
+
+    public IPart Crate()
+    {
         return new Ram.Entities.Ram(
-            name,
-            memorySize,
-            cardsNumber,
-            jedecProfile,
-            extremeMemoryProfile,
-            ramFormFactor,
-            ddrType,
-            powerConsumption);
+            _name ?? throw new CrateNullException(nameof(RamFactory)),
+            _memorySize,
+            _cardsNumber,
+            _jedecProfile ?? throw new CrateNullException(nameof(RamFactory)),
+            _extremeMemoryProfile ?? throw new CrateNullException(nameof(RamFactory)),
+            _ramFormFactor ?? throw new CrateNullException(nameof(RamFactory)),
+            _ddrType ?? throw new CrateNullException(nameof(RamFactory)),
+            _powerConsumption);
     }
 }

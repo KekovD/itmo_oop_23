@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Entities;
 
@@ -11,11 +10,6 @@ public class Hdd : HddBase
         int spindleSpeed,
         int powerConsumption)
         : base(name, capacity, spindleSpeed, powerConsumption)
-    {
-    }
-
-    public Hdd(IList<object> characteristics)
-        : base(characteristics)
     {
     }
 

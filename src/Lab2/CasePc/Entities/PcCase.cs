@@ -19,11 +19,6 @@ public class PcCase : CaseBase
     {
     }
 
-    public PcCase(IList<object> characteristics)
-        : base(characteristics)
-    {
-    }
-
     public override CaseBase Clone()
     {
         var clonedMotherboardFormFactors = MotherboardFormFactors

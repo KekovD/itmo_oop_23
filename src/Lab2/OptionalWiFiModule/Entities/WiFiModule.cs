@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.OptionalWiFiModule.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.OptionalWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.WiFiBuiltInBluetooth.Models;
 
@@ -14,11 +13,6 @@ public class WiFiModule : WiFiModuleBase
         IBuiltInBluetooth builtInBluetooth,
         int powerConsumption)
         : base(name, standardVersion, pciEVersion, builtInBluetooth, powerConsumption)
-    {
-    }
-
-    public WiFiModule(IList<object> characteristics)
-        : base(characteristics)
     {
     }
 

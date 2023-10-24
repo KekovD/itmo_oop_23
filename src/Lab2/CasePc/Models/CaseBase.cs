@@ -25,17 +25,6 @@ public abstract class CaseBase : IPart, IPrototype<CaseBase>
         Height = height;
     }
 
-    protected CaseBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        MaximumLength = (int)characteristics[1];
-        MaximumWidth = (int)characteristics[2];
-        MotherboardFormFactors = (IReadOnlyList<FormFactorMotherboardBase>)characteristics[3];
-        Length = (int)characteristics[4];
-        Width = (int)characteristics[5];
-        Height = (int)characteristics[6];
-    }
-
     public string Name { get; private set; }
     public int MaximumLength { get; private set; }
     public int MaximumWidth { get; protected set; }

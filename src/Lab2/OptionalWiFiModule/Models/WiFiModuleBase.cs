@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.WiFiBuiltInBluetooth.Models;
@@ -20,15 +19,6 @@ public abstract class WiFiModuleBase : IPowerConsumption, IPrototype<WiFiModuleB
         PciEVersion = pciEVersion;
         BuiltInBluetooth = builtInBluetooth;
         PowerConsumption = powerConsumption;
-    }
-
-    protected WiFiModuleBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        StandardVersion = (string)characteristics[1];
-        PciEVersion = (PciEVersionBase)characteristics[2];
-        BuiltInBluetooth = (IBuiltInBluetooth)characteristics[3];
-        PowerConsumption = (int)characteristics[4];
     }
 
     public string Name { get; private set; }

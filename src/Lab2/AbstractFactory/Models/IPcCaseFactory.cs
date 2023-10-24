@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
-
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
 public interface IPcCaseFactory : IFactory
 {
-    public IPart CreateCustom(
+    public IFactory CustomInstances(
         string name,
         int maximumLength,
         int maximumWidth,

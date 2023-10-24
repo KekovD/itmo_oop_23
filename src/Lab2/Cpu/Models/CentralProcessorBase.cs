@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
@@ -9,19 +8,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 
 public abstract class CentralProcessorBase : IPowerConsumption, IPrototype<CentralProcessorBase>
 {
-    protected CentralProcessorBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        Socket = (SocketBase)characteristics[1];
-        Bios = (BiosBase)characteristics[2];
-        MemoryFrequencies = (int)characteristics[3];
-        CoreFrequency = (int)characteristics[4];
-        CoresNumber = (int)characteristics[5];
-        IntegratedVideoCore = (IntegratedVideoCoreBase)characteristics[6];
-        ThermalDesignPower = (int)characteristics[7];
-        PowerConsumption = (int)characteristics[8];
-    }
-
     protected CentralProcessorBase(
         string name,
         SocketBase socket,

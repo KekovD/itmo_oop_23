@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
@@ -38,11 +37,6 @@ public class Motherboard : MotherboardBase
             bios,
             pciEVersion,
             integratedWiFi)
-    {
-    }
-
-    public Motherboard(IList<object> characteristics)
-        : base(characteristics)
     {
     }
 

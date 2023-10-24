@@ -1,5 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
@@ -8,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
 public interface IRamFactory : IFactory
 {
-    public IPart CreateCustom(
+    public IFactory CustomInstances(
         string name,
         int memorySize,
         int cardsNumber,

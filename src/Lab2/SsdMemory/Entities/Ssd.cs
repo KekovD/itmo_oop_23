@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Entities;
@@ -13,11 +12,6 @@ public class Ssd : SsdBase
         int maximumSpeed,
         int powerConsumption)
         : base(name, connectionOption, capacity, maximumSpeed, powerConsumption)
-    {
-    }
-
-    public Ssd(IList<object> characteristics)
-        : base(characteristics)
     {
     }
 

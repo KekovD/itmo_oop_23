@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Models;
 
@@ -19,15 +18,6 @@ public abstract class SsdBase : IPowerConsumption, IPrototype<SsdBase>
         Capacity = capacity;
         MaximumSpeed = maximumSpeed;
         PowerConsumption = powerConsumption;
-    }
-
-    protected SsdBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        ConnectionOption = (SsdTypeBase)characteristics[1];
-        Capacity = (int)characteristics[2];
-        MaximumSpeed = (int)characteristics[3];
-        PowerConsumption = (int)characteristics[4];
     }
 
     public string Name { get; private set; }

@@ -33,14 +33,6 @@ public abstract class CoolingSystemBase : IPart, IPrototype<CoolingSystemBase>
         ThermalDesignPower = thermalDesignPower;
     }
 
-    protected CoolingSystemBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        Dimensions = (List<int>)characteristics[1];
-        SupportedSockets = (List<SocketBase>)characteristics[2];
-        ThermalDesignPower = (int)characteristics[3];
-    }
-
     public string Name { get; private set; }
     public IReadOnlyList<int> Dimensions { get; private set; }
     public IReadOnlyList<SocketBase> SupportedSockets { get; private set; }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
@@ -39,22 +38,6 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
         Bios = bios;
         PciEVersion = pciEVersion;
         IntegratedWiFi = integratedWiFi;
-    }
-
-    protected MotherboardBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        Socket = (SocketBase)characteristics[1];
-        PciENumber = (int)characteristics[2];
-        SataNumber = (int)characteristics[3];
-        MemoryFrequencies = (int)characteristics[4];
-        ExtremeMemoryProfiles = (XmpJedecBase)characteristics[5];
-        DdrMotherboard = (DdrMotherboardBase)characteristics[6];
-        RamTablesNumber = (int)characteristics[7];
-        FormFactor = (FormFactorMotherboardBase)characteristics[8];
-        Bios = (BiosBase)characteristics[9];
-        PciEVersion = (PciEVersionBase)characteristics[10];
-        IntegratedWiFi = (IIntegratedWiFi)characteristics[11];
     }
 
     public string Name { get; private set; }

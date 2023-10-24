@@ -1,5 +1,6 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Entities;
 
@@ -7,11 +8,29 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
 public class PowerSupplyFactory : IPowerSupplyFactory
 {
-    public IPart CreateByName(string name) =>
-        new PowerSupply(new PowerSupplyRepository().GetByName(name));
+    private string? _name;
+    private int _peakLoad;
 
-    public IPart CreateCustom(string name, int peakLoad)
+    public IFactory RepositoryInstances(IList<object> instances)
     {
-        return new PowerSupply(name, peakLoad);
+        _name = (string)instances[0];
+        _peakLoad = (int)instances[1];
+
+        return this;
+    }
+
+    public IFactory CustomInstances(string name, int peakLoad)
+    {
+        _name = name;
+        _peakLoad = peakLoad;
+
+        return this;
+    }
+
+    public IPart Crate()
+    {
+        return new PowerSupply(
+            _name ?? throw new CrateNullException(nameof(PowerSupplyFactory)),
+            _peakLoad);
     }
 }

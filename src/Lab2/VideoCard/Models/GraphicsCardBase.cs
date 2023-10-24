@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Prototype.Models;
 
@@ -23,17 +22,6 @@ public abstract class GraphicsCardBase : IPowerConsumption, IPrototype<GraphicsC
         PciEVersion = pciEVersion;
         ChipFrequency = chipFrequency;
         PowerConsumption = powerConsumption;
-    }
-
-    protected GraphicsCardBase(IList<object> characteristics)
-    {
-        Name = (string)characteristics[0];
-        Height = (int)characteristics[1];
-        Width = (int)characteristics[2];
-        VideoMemoryNumber = (int)characteristics[3];
-        PciEVersion = (PciEVersionBase)characteristics[4];
-        ChipFrequency = (int)characteristics[5];
-        PowerConsumption = (int)characteristics[6];
     }
 
     public string Name { get; private set; }

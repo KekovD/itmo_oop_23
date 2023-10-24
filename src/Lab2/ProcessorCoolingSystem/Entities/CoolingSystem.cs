@@ -18,11 +18,6 @@ public class CoolingSystem : CoolingSystemBase
     {
     }
 
-    public CoolingSystem(IList<object> characteristics)
-        : base(characteristics)
-    {
-    }
-
     private CoolingSystem(
         string name,
         IReadOnlyList<int> dimensions,

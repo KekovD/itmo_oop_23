@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Models;
@@ -26,11 +25,6 @@ public class Ram : RamBase
             ramFormFactor,
             ddrType,
             powerConsumption)
-    {
-    }
-
-    public Ram(IList<object> characteristics)
-        : base(characteristics)
     {
     }
 
