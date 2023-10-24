@@ -2,7 +2,7 @@
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.OptionalWiFiModule.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.OptionalWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.WiFiBuiltInBluetooth.Models;
 
@@ -16,7 +16,7 @@ public class WiFiModuleFactory : IWiFiModuleFactory
     private IBuiltInBluetooth? _builtInBluetooth;
     private int _powerConsumption;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public IWiFiModuleFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _standardVersion = (string)instances[1];
@@ -27,7 +27,7 @@ public class WiFiModuleFactory : IWiFiModuleFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public IWiFiModuleFactory CustomInstances(
         string name,
         string standardVersion,
         PciEVersionBase pciEVersion,
@@ -43,7 +43,7 @@ public class WiFiModuleFactory : IWiFiModuleFactory
         return this;
     }
 
-    public IPart Crate()
+    public WiFiModuleBase Crate()
     {
         return new WiFiModule(
             _name ?? throw new CrateNullException(nameof(WiFiModuleFactory)),

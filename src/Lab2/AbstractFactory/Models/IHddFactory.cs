@@ -1,8 +1,14 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Models;
 
-public interface IHddFactory : IFactory
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+
+public interface IHddFactory
 {
-    public IFactory CustomInstances(
+    public IHddFactory RepositoryInstances(IList<object> instances);
+    public HddBase Crate();
+
+    public IHddFactory CustomInstances(
         string name,
         int capacity,
         int spindleSpeed,

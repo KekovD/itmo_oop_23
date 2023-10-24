@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class GraphicsCardRepository : RepositoryBase<GraphicsCardBase>
+public static class GraphicsCardRepository
 {
-    public override void Add(GraphicsCardBase newItem)
+    public static void Add(GraphicsCardBase newItem)
     {
         var newItemList = new List<object>
         {

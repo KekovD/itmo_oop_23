@@ -1,12 +1,17 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
-public interface ICentralProcessorFactory : IFactory
+public interface ICentralProcessorFactory
 {
-    public IFactory CustomInstances(
+    public ICentralProcessorFactory RepositoryInstances(IList<object> instances);
+    public CentralProcessorBase Crate();
+
+    public ICentralProcessorFactory CustomInstances(
         string name,
         SocketBase socket,
         BiosBase bios,

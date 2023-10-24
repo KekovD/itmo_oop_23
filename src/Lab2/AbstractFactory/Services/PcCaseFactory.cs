@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
@@ -17,7 +17,7 @@ public class PcCaseFactory : IPcCaseFactory
     private int _width;
     private int _height;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public IPcCaseFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _maximumLength = (int)instances[1];
@@ -30,7 +30,7 @@ public class PcCaseFactory : IPcCaseFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public IPcCaseFactory CustomInstances(
         string name,
         int maximumLength,
         int maximumWidth,
@@ -50,7 +50,7 @@ public class PcCaseFactory : IPcCaseFactory
         return this;
     }
 
-    public IPart Crate()
+    public CaseBase Crate()
     {
         return new PcCase(
             _name ?? throw new CrateNullException(nameof(PcCaseFactory)),

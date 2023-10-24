@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class CaseRepository : RepositoryBase<PcCase>
+public static class CaseRepository
 {
-    public override void Add(PcCase newItem)
+    public static void Add(PcCase newItem)
     {
         var newItemList = new List<object>
         {

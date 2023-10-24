@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class HddRepository : RepositoryBase<HddBase>
+public static class HddRepository
 {
-    public override void Add(HddBase newItem)
+    public static void Add(HddBase newItem)
     {
         var newItemList = new List<object>
         {

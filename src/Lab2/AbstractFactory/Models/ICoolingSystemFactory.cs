@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.ProcessorCoolingSystem.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
-public interface ICoolingSystemFactory : IFactory
+public interface ICoolingSystemFactory
 {
-    public IFactory CustomInstances(
+    public ICoolingSystemFactory RepositoryInstances(IList<object> instances);
+    public CoolingSystemBase Crate();
+
+    public ICoolingSystemFactory CustomInstances(
         string name,
         int height,
         int width,

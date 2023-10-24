@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class WiFiModuleRepository : RepositoryBase<WiFiModuleBase>
+public static class WiFiModuleRepository
 {
-    public override void Add(WiFiModuleBase newItem)
+    public static void Add(WiFiModuleBase newItem)
     {
         var newItemList = new List<object>
         {

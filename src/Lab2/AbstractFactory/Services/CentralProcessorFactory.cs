@@ -2,9 +2,9 @@
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.CpuIntegratedVideoCore.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
@@ -21,7 +21,7 @@ public class CentralProcessorFactory : ICentralProcessorFactory
     private int _thermalDesignPower;
     private int _powerConsumption;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public ICentralProcessorFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _socket = (SocketBase)instances[1];
@@ -36,7 +36,7 @@ public class CentralProcessorFactory : ICentralProcessorFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public ICentralProcessorFactory CustomInstances(
         string name,
         SocketBase socket,
         BiosBase bios,
@@ -60,7 +60,7 @@ public class CentralProcessorFactory : ICentralProcessorFactory
         return this;
     }
 
-    public IPart Crate()
+    public CentralProcessorBase Crate()
     {
         return new CentralProcessor(
             _name ?? throw new CrateNullException(nameof(CentralProcessorFactory)),

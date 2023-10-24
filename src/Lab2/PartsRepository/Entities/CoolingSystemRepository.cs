@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.ProcessorCoolingSystem.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class CoolingSystemRepository : RepositoryBase<CoolingSystemBase>
+public static class CoolingSystemRepository
 {
-    public override void Add(CoolingSystemBase newItem)
+    public static void Add(CoolingSystemBase newItem)
     {
         var newItemList = new List<object>
         {

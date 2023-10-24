@@ -1,6 +1,12 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Models;
 
-public interface IPowerSupplyFactory : IFactory
+namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
+
+public interface IPowerSupplyFactory
 {
-    public IFactory CustomInstances(string name, int peakLoad);
+    public IPowerSupplyFactory RepositoryInstances(IList<object> instances);
+    public PowerSupplyBase Crate();
+
+    public IPowerSupplyFactory CustomInstances(string name, int peakLoad);
 }

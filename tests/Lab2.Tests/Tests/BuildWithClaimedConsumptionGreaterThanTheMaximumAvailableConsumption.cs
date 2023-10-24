@@ -4,8 +4,8 @@ using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcBuilder.Services;
 using Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 using Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Models;
@@ -53,26 +53,36 @@ public class BuildWithClaimedConsumptionGreaterThanTheMaximumAvailableConsumptio
     private void ConditionCheck(IList<string> parts)
     {
         new TestRepositories().AddObjects();
-        IPart casePc = new PcCaseFactory().CreateByName(parts[0]);
-        IPart motherboard = new MotherboardFactory().CreateByName(parts[1]);
-        IPart centralProcessor = new CentralProcessorFactory().CreateByName(parts[2]);
-        IPart coolingSystem = new CoolingSystemFactory().CreateByName(parts[3]);
-        IPart ram = new RamFactory().CreateByName(parts[4]);
-        IPart graphics = new GraphicsCardFactory().CreateByName(parts[5]);
-        IPart ssd = new SsdFactory().CreateByName(parts[6]);
-        IPart powerSupply = new PowerSupplyFactory().CreateByName(parts[7]);
-        var powerSupplyCloned = (PowerSupplyBase)powerSupply;
+
+        IList<object> casePcInstance = Table.GetByName(parts[0]);
+        IList<object> motherboardInstance = Table.GetByName(parts[1]);
+        IList<object> centralProcessorInstance = Table.GetByName(parts[2]);
+        IList<object> coolingSystemInstance = Table.GetByName(parts[3]);
+        IList<object> ramInstance = Table.GetByName(parts[4]);
+        IList<object> graphicsInstance = Table.GetByName(parts[5]);
+        IList<object> ssdInstance = Table.GetByName(parts[6]);
+        IList<object> powerSupplyInstance = Table.GetByName(parts[7]);
+
+        CaseBase casePc = new PcCaseFactory().RepositoryInstances(casePcInstance).Crate();
+        MotherboardBase motherboard = new MotherboardFactory().RepositoryInstances(motherboardInstance).Crate();
+        CentralProcessorBase centralProcessor =
+            new CentralProcessorFactory().RepositoryInstances(centralProcessorInstance).Crate();
+        CoolingSystemBase coolingSystem = new CoolingSystemFactory().RepositoryInstances(coolingSystemInstance).Crate();
+        RamBase ram = new RamFactory().RepositoryInstances(ramInstance).Crate();
+        GraphicsCardBase graphicsCard = new GraphicsCardFactory().RepositoryInstances(graphicsInstance).Crate();
+        SsdBase ssd = new SsdFactory().RepositoryInstances(ssdInstance).Crate();
+        PowerSupplyBase powerSupply = new PowerSupplyFactory().RepositoryInstances(powerSupplyInstance).Crate();
 
         PersonalComputer builder = new PersonalComputerBuilder()
             .Builder()
-            .WithCase((CaseBase)casePc)
-            .WithMotherboard((MotherboardBase)motherboard)
-            .WithCentralProcessor((CentralProcessorBase)centralProcessor)
-            .WithCoolingSystem((CoolingSystemBase)coolingSystem)
-            .WithOperatingMemory((RamBase)ram)
-            .WithGraphicsCard((GraphicsCardBase)graphics)
-            .WithSolidStateDrive((SsdBase)ssd)
-            .WithPowerSupplyUnit((PowerSupplyBase)powerSupplyCloned.CloneWithNewPeakLoad(180))
+            .WithCase(casePc)
+            .WithMotherboard(motherboard)
+            .WithCentralProcessor(centralProcessor)
+            .WithCoolingSystem(coolingSystem)
+            .WithOperatingMemory(ram)
+            .WithGraphicsCard(graphicsCard)
+            .WithSolidStateDrive(ssd)
+            .WithPowerSupplyUnit(powerSupply.CloneWithNewPeakLoad(180))
             .Build();
 
         Assert.True(CheckBuildingResults(builder));

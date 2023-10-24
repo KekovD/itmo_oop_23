@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class SsdRepository : RepositoryBase<SsdBase>
+public static class SsdRepository
 {
-    public override void Add(SsdBase newItem)
+    public static void Add(SsdBase newItem)
     {
         var newItemList = new List<object>
         {

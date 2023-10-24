@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class CentralProcessorRepository : RepositoryBase<CentralProcessorBase>
+public static class CentralProcessorRepository
 {
-    public override void Add(CentralProcessorBase newItem)
+    public static void Add(CentralProcessorBase newItem)
     {
         var newItemList = new List<object>
         {

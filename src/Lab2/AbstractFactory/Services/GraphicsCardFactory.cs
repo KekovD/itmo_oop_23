@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
 
@@ -17,7 +17,7 @@ public class GraphicsCardFactory : IGraphicsCardFactory
     private int _chipFrequency;
     private int _powerConsumption;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public IGraphicsCardFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _height = (int)instances[1];
@@ -30,7 +30,7 @@ public class GraphicsCardFactory : IGraphicsCardFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public IGraphicsCardFactory CustomInstances(
         string name,
         int height,
         int width,
@@ -50,7 +50,7 @@ public class GraphicsCardFactory : IGraphicsCardFactory
         return this;
     }
 
-    public IPart Crate()
+    public GraphicsCardBase Crate()
     {
         return new GraphicsCard(
             _name ?? throw new CrateNullException(nameof(GraphicsCardFactory)),

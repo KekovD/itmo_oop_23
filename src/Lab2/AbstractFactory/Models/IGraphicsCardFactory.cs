@@ -1,10 +1,15 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 
-public interface IGraphicsCardFactory : IFactory
+public interface IGraphicsCardFactory
 {
-    public IFactory CustomInstances(
+    public IGraphicsCardFactory RepositoryInstances(IList<object> instances);
+    public GraphicsCardBase Crate();
+
+    public IGraphicsCardFactory CustomInstances(
         string name,
         int height,
         int width,

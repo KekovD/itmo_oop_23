@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class MotherboardRepository : RepositoryBase<MotherboardBase>
+public static class MotherboardRepository
 {
-    public override void Add(MotherboardBase newItem)
+    public static void Add(MotherboardBase newItem)
     {
         var newItemList = new List<object>
         {

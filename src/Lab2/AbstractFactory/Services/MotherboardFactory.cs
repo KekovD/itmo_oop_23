@@ -4,8 +4,8 @@ using Itmo.ObjectOrientedProgramming.Lab2.Bios.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.IntegratedWiFiModule.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
@@ -28,7 +28,7 @@ public class MotherboardFactory : IMotherboardFactory
     private PciEVersionBase? _pciEVersion;
     private IIntegratedWiFi? _integratedWiFi;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public IMotherboardFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _socket = (SocketBase)instances[1];
@@ -46,7 +46,7 @@ public class MotherboardFactory : IMotherboardFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public IMotherboardFactory CustomInstances(
         string name,
         SocketBase socket,
         int pciENumber,
@@ -76,7 +76,7 @@ public class MotherboardFactory : IMotherboardFactory
         return this;
     }
 
-    public IPart Crate()
+    public MotherboardBase Crate()
     {
         return new Motherboard(
             _name ?? throw new CrateNullException(nameof(MotherboardFactory)),

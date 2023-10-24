@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Entities;
+using Itmo.ObjectOrientedProgramming.Lab2.SsdMemory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Services;
@@ -15,7 +15,7 @@ public class SsdFactory : ISsdFactory
     private int _maximumSpeed;
     private int _powerConsumption;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public ISsdFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _connectionOption = (SsdTypeBase)instances[1];
@@ -26,7 +26,7 @@ public class SsdFactory : ISsdFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public ISsdFactory CustomInstances(
         string name,
         SsdTypeBase connectionOption,
         int capacity,
@@ -42,7 +42,7 @@ public class SsdFactory : ISsdFactory
         return this;
     }
 
-    public IPart Crate()
+    public SsdBase Crate()
     {
         return new Ssd(
             _name ?? throw new CrateNullException(nameof(SsdFactory)),

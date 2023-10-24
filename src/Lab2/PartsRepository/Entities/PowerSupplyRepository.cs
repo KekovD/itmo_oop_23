@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class PowerSupplyRepository : RepositoryBase<PowerSupplyBase>
+public static class PowerSupplyRepository
 {
-    public override void Add(PowerSupplyBase newItem)
+    public static void Add(PowerSupplyBase newItem)
     {
         var newItemList = new List<object>
         {

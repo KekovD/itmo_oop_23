@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
-public class RamRepository : RepositoryBase<RamBase>
+public static class RamRepository
 {
-    public override void Add(RamBase newItem)
+    public static void Add(RamBase newItem)
     {
         var newItemList = new List<object>
         {

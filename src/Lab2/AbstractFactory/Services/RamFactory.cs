@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.AbstractFactory.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.LabException;
-using Itmo.ObjectOrientedProgramming.Lab2.PC.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Xmp.Entities;
@@ -20,7 +19,7 @@ public class RamFactory : IRamFactory
     private DdrMotherboardBase? _ddrType;
     private int _powerConsumption;
 
-    public IFactory RepositoryInstances(IList<object> instances)
+    public IRamFactory RepositoryInstances(IList<object> instances)
     {
         _name = (string)instances[0];
         _memorySize = (int)instances[1];
@@ -34,7 +33,7 @@ public class RamFactory : IRamFactory
         return this;
     }
 
-    public IFactory CustomInstances(
+    public IRamFactory CustomInstances(
         string name,
         int memorySize,
         int cardsNumber,
@@ -56,7 +55,7 @@ public class RamFactory : IRamFactory
         return this;
     }
 
-    public IPart Crate()
+    public RamBase Crate()
     {
         return new Ram.Entities.Ram(
             _name ?? throw new CrateNullException(nameof(RamFactory)),
