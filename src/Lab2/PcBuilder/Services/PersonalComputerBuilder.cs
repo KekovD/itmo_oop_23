@@ -20,9 +20,8 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
     ICoolingSystemBuilder, IOperatingMemoryBuilder, IAdditionalComponentsAndMemoryBuilder, IPowerSupplyUnitBuilder,
     IPersonalComputerBuilder
 {
-    private BuildChecker _checker = new BuildChecker();
-    private List<BuildStatus> _buildResult = new List<BuildStatus>();
-    private List<BuildStatus> _warrantyDisclaimer = new List<BuildStatus>();
+    private readonly List<BuildStatus> _buildResult = new List<BuildStatus>();
+    private readonly List<BuildStatus> _warrantyDisclaimer = new List<BuildStatus>();
 
     private CaseBase? _pcCase;
     private MotherboardBase? _motherboard;
@@ -51,7 +50,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_pcCase is null)
             throw new CheckerNullException(nameof(WithMotherboard));
 
-        _checker.CheckMotherboardFormFactor(_pcCase, _motherboard, _buildResult);
+        new MotherboardValidator().CheckMotherboardFormFactor(_pcCase, _motherboard, _buildResult);
 
         return this;
     }
@@ -63,8 +62,9 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithCentralProcessor));
 
-        _checker.CheckSocket(_centralProcessor, _motherboard, _buildResult);
-        _checker.CheckProcessorBios(_centralProcessor, _motherboard, _buildResult);
+        new CentralProcessorValidator()
+            .CheckSocket(_centralProcessor, _motherboard, _buildResult)
+            .CheckProcessorBios(_centralProcessor, _motherboard, _buildResult);
 
         return this;
     }
@@ -76,17 +76,16 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithCoolingSystem));
 
-        _checker.CheckSocketCoolingSystem(_coolingSystem, _motherboard, _buildResult);
-
         if (_pcCase is null)
             throw new CheckerNullException(nameof(WithCoolingSystem));
-
-        _checker.CheckHeightCoolingSystem(_coolingSystem, _pcCase, _buildResult);
 
         if (_centralProcessor is null)
             throw new CheckerNullException(nameof(WithCoolingSystem));
 
-        _checker.CheckTdpCoolingSystem(_coolingSystem, _centralProcessor, _warrantyDisclaimer);
+        new CoolingSystemValidator()
+            .CheckSocketCoolingSystem(_coolingSystem, _motherboard, _buildResult)
+            .CheckHeightCoolingSystem(_coolingSystem, _pcCase, _buildResult)
+            .CheckTdpCoolingSystem(_coolingSystem, _centralProcessor, _warrantyDisclaimer);
 
         return this;
     }
@@ -98,10 +97,11 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithOperatingMemory));
 
-        _checker.CheckDdrType(_operatingMemory, _motherboard, _buildResult);
-        _checker.CheckFrequencyOperationMemory(_operatingMemory, _motherboard, _buildResult);
-        _checker.CheckDdrPortsNumber(_operatingMemory, _motherboard, _buildResult);
-        _checker.CheckXmp(_operatingMemory, _motherboard, _buildResult);
+        new OperationMemoryValidator()
+            .CheckDdrType(_operatingMemory, _motherboard, _buildResult)
+            .CheckFrequencyOperationMemory(_operatingMemory, _motherboard, _buildResult)
+            .CheckDdrPortsNumber(_operatingMemory, _motherboard, _buildResult)
+            .CheckXmp(_operatingMemory, _motherboard, _buildResult);
 
         return this;
     }
@@ -113,8 +113,13 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithGraphicsCard));
 
-        _checker.CheckPciENumberGraphicsCard(_graphicsCard, ref _motherboard, _buildResult);
-        _checker.CheckPciEVersionGraphicsCard(_graphicsCard, _motherboard, _buildResult);
+        new GraphicsCardValidator()
+            .CheckDimensionsGraphicsCard(
+                _graphicsCard,
+                _pcCase ?? throw new CheckerNullException(nameof(WithGraphicsCard)),
+                _buildResult)
+            .CheckPciENumberGraphicsCard(_graphicsCard, ref _motherboard, _buildResult)
+            .CheckPciEVersionGraphicsCard(_graphicsCard, _motherboard, _buildResult);
 
         return this;
     }
@@ -126,7 +131,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithWiFiModule));
 
-        _checker.CheckBuiltInWiFiModule(_motherboard, _buildResult);
+        new WiFiModuleValidator().CheckBuiltInWiFiModule(_motherboard, _buildResult);
 
         return this;
     }
@@ -138,7 +143,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithWiFiModule));
 
-        _checker.CheckSataNumber(ref _motherboard, _buildResult);
+        new HardDriveValidator().CheckSataNumber(ref _motherboard, _buildResult);
 
         return this;
     }
@@ -150,7 +155,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_motherboard is null)
             throw new CheckerNullException(nameof(WithSolidStateDrive));
 
-        _checker.CheckPortsSolidStateDrive(_solidStateDrive, ref _motherboard, _buildResult);
+        new SolidStateDriveValidator().CheckPortsSolidStateDrive(_solidStateDrive, ref _motherboard, _buildResult);
 
         return this;
     }
@@ -167,7 +172,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_centralProcessor is null)
             throw new CheckerNullException(nameof(Build));
 
-        _checker.CheckVideoCoreAvailability(_centralProcessor, _graphicsCard, _buildResult);
+        new VideoCoreValidator().CheckVideoCoreAvailability(_centralProcessor, _graphicsCard, _buildResult);
 
         if (_powerSupplyUnit is null)
             throw new CheckerNullException(nameof(Build));
@@ -175,7 +180,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
         if (_operatingMemory is null)
             throw new CheckerNullException(nameof(Build));
 
-        _checker.CheckPowerConsumption(
+        new PowerConsumptionValidator().CheckPowerConsumption(
             _powerSupplyUnit,
             _centralProcessor,
             _graphicsCard,
@@ -186,7 +191,7 @@ public class PersonalComputerBuilder : IStartBuilding, ICaseBuilder, IMotherboar
             _warrantyDisclaimer);
 
         return new PersonalComputer(
-            _checker.ReportWriting(_buildResult, _warrantyDisclaimer),
+            new ReportWriting().ReportCompilation(_buildResult, _warrantyDisclaimer),
             _pcCase,
             _motherboard,
             _centralProcessor,
