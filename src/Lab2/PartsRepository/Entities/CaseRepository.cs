@@ -19,6 +19,6 @@ public static class CaseRepository
             newItem.Height,
         };
 
-        Table.AddList(newItemList);
+        Repository.AddList(newItemList);
     }
 }

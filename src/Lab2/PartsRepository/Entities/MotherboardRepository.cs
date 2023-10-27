@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
@@ -24,6 +23,6 @@ public static class MotherboardRepository
             newItem.IntegratedWiFi,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

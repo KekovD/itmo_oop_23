@@ -7,7 +7,6 @@ using Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcieVersion.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.RamFormFactor.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.SsdType.Entities;
@@ -34,7 +33,8 @@ public class TestRepositories : ITestRepository
 
     private static void AddProcessors()
     {
-        const string firstName = "IntelPentiumGoldG6405";
+        var repository = new Repository();
+
         const int firstBiosVersion = 2;
         const int firstMemoryFrequencies = 2666;
         const int firstCoreFrequency = 4100;
@@ -44,16 +44,15 @@ public class TestRepositories : ITestRepository
 
         var processor = new List<object>
         {
-            firstName,                     new Lga1200(),
-            new Intel64(firstBiosVersion), firstMemoryFrequencies,
-            firstCoreFrequency,            firstCoresNumber,
-            new IntelUHDGraphics610(),     firstThermalDesignPower,
+            "IntelPentiumGoldG6405",                                  new SocketPc("Lga1200"),
+            new Bios.Entities.BiosPc("Intel64", firstBiosVersion), firstMemoryFrequencies,
+            firstCoreFrequency,                                       firstCoresNumber,
+            new IntegratedVideoCore("IntelUHDGraphics610"),      firstThermalDesignPower,
             firstPowerConsumption,
         };
 
-        Table.AddList(processor);
+        repository.AddList(processor);
 
-        const string secondName = "IntelCorei511400";
         const int secondBiosVersion = 6;
         const int secondMemoryFrequencies = 3200;
         const int secondCoreFrequency = 2600;
@@ -63,16 +62,15 @@ public class TestRepositories : ITestRepository
 
         processor = new List<object>
         {
-            secondName,                     new Lga1200(),
-            new Intel64(secondBiosVersion), secondMemoryFrequencies,
-            secondCoreFrequency,            secondCoresNumber,
-            new IntelUHDGraphics730(),      secondThermalDesignPower,
+            "IntelCorei511400",                                        new SocketPc("Lga1200"),
+            new Bios.Entities.BiosPc("Intel64", secondBiosVersion), secondMemoryFrequencies,
+            secondCoreFrequency,                                       secondCoresNumber,
+            new IntegratedVideoCore("IntelUHDGraphics730"),       secondThermalDesignPower,
             secondPowerConsumption,
         };
 
-        Table.AddList(processor);
+        repository.AddList(processor);
 
-        const string thirdName = "IntelCorei312100";
         const int thirdBiosVersion = 4;
         const int thirdMemoryFrequencies = 4800;
         const int thirdCoreFrequency = 3300;
@@ -82,16 +80,15 @@ public class TestRepositories : ITestRepository
 
         processor = new List<object>
         {
-            thirdName,                     new Lga1700(),
-            new Intel64(thirdBiosVersion), thirdMemoryFrequencies,
-            thirdCoreFrequency,            thirdCoresNumber,
-            new IntelUHDGraphics730(),     thirdThermalDesignPower,
+            "IntelCorei312100",                                  new SocketPc("Lga1700"),
+            new BiosPc("Intel64", thirdBiosVersion),        thirdMemoryFrequencies,
+            thirdCoreFrequency,                                  thirdCoresNumber,
+            new IntegratedVideoCore("IntelUHDGraphics730"), thirdThermalDesignPower,
             thirdPowerConsumption,
         };
 
-        Table.AddList(processor);
+        repository.AddList(processor);
 
-        const string fourthName = "IntelCorei713700F";
         const int fourthBiosVersion = 7;
         const int fourthMemoryFrequencies = 5600;
         const int fourthCoreFrequency = 2100;
@@ -101,19 +98,20 @@ public class TestRepositories : ITestRepository
 
         processor = new List<object>
         {
-            fourthName,                     new Lga1700(),
-            new Intel64(fourthBiosVersion), fourthMemoryFrequencies,
-            fourthCoreFrequency,            fourthCoresNumber,
-            new WithoutIntegratedVideoCore(),    fourthThermalDesignPower,
+            "IntelCorei713700F",                           new SocketPc("Lga1700"),
+            new BiosPc("Intel64", fourthBiosVersion), fourthMemoryFrequencies,
+            fourthCoreFrequency,                           fourthCoresNumber,
+            new WithoutIntegratedVideoCore(),              fourthThermalDesignPower,
             fourthPowerConsumption,
         };
 
-        Table.AddList(processor);
+        repository.AddList(processor);
     }
 
     private static void AddMotherboards()
     {
-        const string firstName = "GigabyteB560MH";
+        var repository = new Repository();
+
         const int firstPciENumber = 1;
         const int firstSataNumber = 4;
         const int firstMemoryFrequencies = 3200;
@@ -122,17 +120,16 @@ public class TestRepositories : ITestRepository
 
         var motherboard = new List<object>
         {
-            firstName,              new Lga1200(),
-            firstPciENumber,        firstSataNumber,
-            firstMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
-            new Ddr4Motherboard(),  firstRamTablesNumber,
-            new MicroAtx(),         new Intel64(firstBios),
-            new PciE4(),            new WithoutIntegratedWiFi(),
+            "GigabyteB560MH",                           new SocketPc("Lga1200"),
+            firstPciENumber,                            firstSataNumber,
+            firstMemoryFrequencies,                     new WithoutExtremeMemoryProfiles(),
+            new DdrMotherboard("Ddr4"),            firstRamTablesNumber,
+            new FormFactorMotherboard("MicroAtx"), new BiosPc("Intel64", firstBios),
+            new PciE("PciE4"),                     new WithoutIntegratedWiFi(),
         };
 
-        Table.AddList(motherboard);
+        repository.AddList(motherboard);
 
-        const string secondName = "MSIH610TIS01";
         const int secondPciENumber = 0;
         const int secondSataNumber = 2;
         const int secondMemoryFrequencies = 3200;
@@ -141,17 +138,16 @@ public class TestRepositories : ITestRepository
 
         motherboard = new List<object>
         {
-            secondName,              new Lga1700(),
-            secondPciENumber,        secondSataNumber,
-            secondMemoryFrequencies, new WithoutExtremeMemoryProfiles(),
-            new Ddr4Motherboard(),   secondRamTablesNumber,
-            new MiniItx(),           new Intel64(secondBios),
-            new WithoutPciE(),       new WithoutIntegratedWiFi(),
+            "MSIH610TIS01",                                new SocketPc("Lga1700"),
+            secondPciENumber,                          secondSataNumber,
+            secondMemoryFrequencies,                   new WithoutExtremeMemoryProfiles(),
+            new DdrMotherboard("Ddr4"),           secondRamTablesNumber,
+            new FormFactorMotherboard("MiniItx"), new BiosPc("Intel64", secondBios),
+            new WithoutPciE(),                         new WithoutIntegratedWiFi(),
         };
 
-        Table.AddList(motherboard);
+        repository.AddList(motherboard);
 
-        const string thirdName = "GigabyteZ790AorusMaster";
         const int thirdPciENumber = 3;
         const int thirdSataNumber = 4;
         const int thirdMemoryFrequencies = 5600;
@@ -166,8 +162,8 @@ public class TestRepositories : ITestRepository
 
         motherboard = new List<object>
         {
-            thirdName,
-            new Lga1700(),
+            "GigabyteZ790AorusMaster",
+            new SocketPc("Lga1700"),
             thirdPciENumber,
             thirdSataNumber,
             thirdMemoryFrequencies,
@@ -178,20 +174,21 @@ public class TestRepositories : ITestRepository
                 thirdTRc,
                 thirdVoltage,
                 thirdXmpFrequency),
-            new Ddr5Motherboard(),
+            new DdrMotherboard("Ddr5"),
             thirdRamTablesNumber,
-            new Eatx(),
-            new Intel64(thirdBios),
-            new PciE4(),
+            new FormFactorMotherboard("EAtx"),
+            new BiosPc("Intel64", thirdBios),
+            new PciE("PciE4"),
             new IntegratedWiFi(),
         };
 
-        Table.AddList(motherboard);
+        repository.AddList(motherboard);
     }
 
     private static void AddCoolingSystem()
     {
-        const string firstName = "DeepcoolGammaxx300";
+        var repository = new Repository();
+
         const int firstHeight = 136;
         const int firstWidth = 121;
         const int firstLength = 76;
@@ -199,15 +196,14 @@ public class TestRepositories : ITestRepository
 
         var coolingSystem = new List<object>
         {
-            firstName,
+            "DeepcoolGammaxx300",
             new List<int> { firstHeight, firstWidth, firstLength },
-            new List<SocketBase> { new Lga1200(), new Lga1700() },
+            new List<SocketBase> { new SocketPc("Lga1200"), new SocketPc("Lga1700") },
             firstThermalDesignPower,
         };
 
-        Table.AddList(coolingSystem);
+        repository.AddList(coolingSystem);
 
-        const string secondName = "DeepCoolAlta9";
         const int secondHeight = 59;
         const int secondWidth = 113;
         const int secondLength = 113;
@@ -215,18 +211,19 @@ public class TestRepositories : ITestRepository
 
         coolingSystem = new List<object>
         {
-            secondName,
+            "DeepCoolAlta9",
             new List<int> { secondHeight, secondWidth, secondLength },
-            new List<SocketBase> { new Lga1700() },
+            new List<SocketBase> { new SocketPc("Lga1700") },
             secondThermalDesignPower,
         };
 
-        Table.AddList(coolingSystem);
+        repository.AddList(coolingSystem);
     }
 
     private static void AddRam()
     {
-        const string firstName = "DEXP8GD4UD32";
+        var repository = new Repository();
+
         const int firstMemorySize = 8;
         const int firstCardsNumber = 2;
         const int firstRasToCasJedec = 22;
@@ -239,7 +236,7 @@ public class TestRepositories : ITestRepository
 
         var ram = new List<object>
         {
-            firstName,
+            "DEXP8GD4UD32",
             firstMemorySize,
             firstCardsNumber,
             new Jedec(
@@ -250,14 +247,13 @@ public class TestRepositories : ITestRepository
                 firstVoltageJedec,
                 firstFrequencyJedec),
             new WithoutExtremeMemoryProfiles(),
-            new Dimm(),
-            new Ddr4Motherboard(),
+            new RamFormFactor.Entities.RamFormFactor("Dimm"),
+            new DdrMotherboard("Ddr4"),
             firstPowerConsumption,
         };
 
-        Table.AddList(ram);
+        repository.AddList(ram);
 
-        const string secondName = "KingstonFURYRenegadePro";
         const int secondMemorySize = 16;
         const int secondCardsNumber = 4;
         const int secondRasToCasJedec = 36;
@@ -276,7 +272,7 @@ public class TestRepositories : ITestRepository
 
         ram = new List<object>
         {
-            secondName,
+            "KingstonFURYRenegadePro",
             secondMemorySize,
             secondCardsNumber,
             new Jedec(
@@ -293,17 +289,18 @@ public class TestRepositories : ITestRepository
                 secondTRcXmp,
                 secondVoltageXmp,
                 secondFrequencyXmp),
-            new RDimm(),
-            new Ddr5Motherboard(),
+            new RamFormFactor.Entities.RamFormFactor("RDimm"),
+            new DdrMotherboard("Ddr5"),
             secondPowerConsumption,
         };
 
-        Table.AddList(ram);
+        repository.AddList(ram);
     }
 
     private static void AddGraphicsCard()
     {
-        const string firstName = "PalitGeForceRTX3050Dual";
+        var repository = new Repository();
+
         const int firstHeight = 120;
         const int firstWidth = 172;
         const int firstVideoMemoryNumber = 8;
@@ -312,15 +309,14 @@ public class TestRepositories : ITestRepository
 
         var graphicsCard = new List<object>
         {
-            firstName,             firstHeight,
-            firstWidth,            firstVideoMemoryNumber,
-            new PciE4(),           firstChipFrequency,
+            "PalitGeForceRTX3050Dual", firstHeight,
+            firstWidth,                firstVideoMemoryNumber,
+            new PciE("PciE4"),    firstChipFrequency,
             firstPowerConsumption,
         };
 
-        Table.AddList(graphicsCard);
+        repository.AddList(graphicsCard);
 
-        const string secondName = "ASUSGeForceRTX3060TiDual";
         const int secondHeight = 120;
         const int secondWidth = 230;
         const int secondVideoMemoryNumber = 8;
@@ -329,78 +325,79 @@ public class TestRepositories : ITestRepository
 
         graphicsCard = new List<object>
         {
-            secondName,             secondHeight,
-            secondWidth,            secondVideoMemoryNumber,
-            new PciE4(),            secondChipFrequency,
+            "ASUSGeForceRTX3060TiDual", secondHeight,
+            secondWidth,                secondVideoMemoryNumber,
+            new PciE("PciE4"),     secondChipFrequency,
             secondPowerConsumption,
         };
 
-        Table.AddList(graphicsCard);
+        repository.AddList(graphicsCard);
     }
 
     private static void AddSsd()
     {
-        const string firstName = "CrucialBX500";
+        var repository = new Repository();
+
         const int firstCapacity = 1000;
         const int firstMaximumSpeed = 540;
         const int firstPowerConsumption = 1;
 
         var ssd = new List<object>
         {
-            firstName,             new SsdSata(),
+            "CrucialBX500",        new SsdSata(),
             firstCapacity,         firstMaximumSpeed,
             firstPowerConsumption,
         };
 
-        Table.AddList(ssd);
+        repository.AddList(ssd);
 
-        const string secondName = "Samsung980";
         const int secondCapacity = 1000;
         const int secondMaximumSpeed = 3500;
         const int secondPowerConsumption = 3;
 
         ssd = new List<object>
         {
-            secondName,             new SsdPciE(),
+            "Samsung980",           new SsdPciE(),
             secondCapacity,         secondMaximumSpeed,
             secondPowerConsumption,
         };
 
-        Table.AddList(ssd);
+        repository.AddList(ssd);
     }
 
     private static void AddHdd()
     {
-        const string firstName = "ToshibaDT01";
+        var repository = new Repository();
+
         const int firstCapacity = 1000;
         const int firstSpindleSpeed = 7200;
         const int firstPowerConsumption = 7;
 
         var hdd = new List<object>
         {
-            firstName,         firstCapacity,
+            "ToshibaDT01",         firstCapacity,
             firstSpindleSpeed, firstPowerConsumption,
         };
 
-        Table.AddList(hdd);
+        repository.AddList(hdd);
 
-        const string secondName = "WDPurple";
         const int secondCapacity = 1000;
         const int secondSpindleSpeed = 5400;
         const int secondPowerConsumption = 4;
 
         hdd = new List<object>
         {
-            secondName,         secondCapacity,
+            "WDPurple",         secondCapacity,
             secondSpindleSpeed, secondPowerConsumption,
         };
 
-        Table.AddList(hdd);
+        repository.AddList(hdd);
     }
 
     private static void AddCase()
     {
-        const string firstName = "DeepcoolMatrexx30";
+        var repository = new Repository();
+
         const int firstMaximumLength = 250;
         const int firstMaximumWidth = 151;
         const int firstLength = 406;
@@ -409,15 +406,21 @@ public class TestRepositories : ITestRepository
 
         var pcCase = new List<object>
         {
-            firstName,         firstMaximumLength,
-            firstMaximumWidth, new List<FormFactorMotherboardBase> { new MicroAtx(), new MiniItx() },
-            firstLength,       firstWidth,
+            "DeepcoolMatrexx30",
+            firstMaximumLength,
+            firstMaximumWidth,
+            new List<FormFactorMotherboardBase>
+            {
+                new FormFactorMotherboard("MicroAtx"),
+                new FormFactorMotherboard("MiniItx"),
+            },
+            firstLength,
+            firstWidth,
             firstHeight,
         };
 
-        Table.AddList(pcCase);
+        repository.AddList(pcCase);
 
-        const string secondName = "AeroCoolCS-1101";
         const int secondMaximumLength = 375;
         const int secondMaximumWidth = 150;
         const int secondLength = 411;
@@ -426,17 +429,27 @@ public class TestRepositories : ITestRepository
 
         pcCase = new List<object>
         {
-            secondName,         secondMaximumLength,
-            secondMaximumWidth, new List<FormFactorMotherboardBase> { new MicroAtx(), new MiniItx(), new Atx() },
-            secondLength,       secondWidth,
+            "AeroCoolCS-1101",
+            secondMaximumLength,
+            secondMaximumWidth,
+            new List<FormFactorMotherboardBase>
+            {
+                new FormFactorMotherboard("MicroAtx"),
+                new FormFactorMotherboard("MiniItx"),
+                new FormFactorMotherboard("Atx"),
+            },
+            secondLength,
+            secondWidth,
             secondHeight,
         };
 
-        Table.AddList(pcCase);
+        repository.AddList(pcCase);
     }
 
     private static void AddPowerSupply()
     {
+        var repository = new Repository();
+
         const string firstName = "AeroCoolECO600W";
         const int firstPeakLoad = 600;
 
@@ -446,7 +459,7 @@ public class TestRepositories : ITestRepository
             firstPeakLoad,
         };
 
-        Table.AddList(powerSupply);
+        repository.AddList(powerSupply);
 
         const string secondName = "DeepCoolPX1000G";
         const int secondPeakLoad = 1000;
@@ -457,22 +470,24 @@ public class TestRepositories : ITestRepository
             secondPeakLoad,
         };
 
-        Table.AddList(powerSupply);
+        repository.AddList(powerSupply);
     }
 
     private static void AddWiFiModule()
     {
+        var repository = new Repository();
+
         const string firstName = "BluetoothAsusPCEAX3000";
         const string firstStandardVersion = "802.11n";
         const int firstPowerConsumption = 3;
 
         var wiFiModule = new List<object>
         {
-            firstName,             firstStandardVersion,
-            new PciE4(),           new BuiltInBluetooth(),
+            firstName,              firstStandardVersion,
+            new PciE("PciE4"), new BuiltInBluetooth(),
             firstPowerConsumption,
         };
 
-        Table.AddList(wiFiModule);
+        repository.AddList(wiFiModule);
     }
 }

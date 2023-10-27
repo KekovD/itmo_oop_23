@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.HardDrive.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
@@ -16,6 +15,6 @@ public static class HddRepository
             newItem.PowerConsumption,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

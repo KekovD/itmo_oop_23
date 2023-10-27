@@ -4,11 +4,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.MotherboardFormFactor.Models;
 
 public abstract class FormFactorMotherboardBase : IPrototype<FormFactorMotherboardBase>
 {
-    public string? Name { get; protected set; }
-    public int SideFirst { get; protected set; }
-    public int SideSecond { get; protected set; }
+    protected FormFactorMotherboardBase(string name)
+    {
+        Name = name;
+    }
+
+    public string Name { get; protected init; }
 
     public abstract FormFactorMotherboardBase Clone();
 
     public abstract bool CompareFormFactor(FormFactorMotherboardBase formFactor);
+    public abstract FormFactorMotherboardBase CloneWithNewName(string name);
 }

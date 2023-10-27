@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.LabException;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Bios.Entities;
 
-public class Bios : BiosBase
+public class BiosPc : BiosBase
 {
-    public Bios(string name, int version)
+    public BiosPc(string name, int version)
         : base(version)
     {
         Name = name;
@@ -17,12 +17,12 @@ public class Bios : BiosBase
         if (Name is null)
             throw new CloneNullException(nameof(BiosBase));
 
-        return new Bios(
+        return new BiosPc(
             (string)Name.Clone(),
             Version);
     }
 
-    public BiosBase CloneWithNewName(string name) => new Bios(name, Version);
+    public BiosBase CloneWithNewName(string name) => new BiosPc(name, Version);
 
     public override bool CompareBios(BiosBase bios)
     {

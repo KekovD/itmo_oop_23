@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Ram.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -20,6 +19,6 @@ public static class RamRepository
             newItem.PowerConsumption,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

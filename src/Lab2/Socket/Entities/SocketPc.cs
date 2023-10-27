@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Socket.Entities;
 
-public class Socket : SocketBase
+public class SocketPc : SocketBase
 {
-    public Socket(string name)
+    public SocketPc(string name)
     {
         Name = name;
     }
@@ -16,7 +16,7 @@ public class Socket : SocketBase
         if (Name is null)
             throw new CloneNullException(nameof(SocketBase));
 
-        return new Socket((string)Name.Clone());
+        return new SocketPc((string)Name.Clone());
     }
 
     public override bool CompareSocket(SocketBase socket)

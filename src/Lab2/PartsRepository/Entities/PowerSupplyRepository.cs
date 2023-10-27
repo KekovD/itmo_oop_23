@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PowerSupplyUnit.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -14,6 +13,6 @@ public static class PowerSupplyRepository
             newItem.PeakLoad,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

@@ -54,14 +54,14 @@ public class SuccessfulAssemblyWithoutWarrantyDisclaimersAndErrors
     {
         new TestRepositories().AddObjects();
 
-        IList<object> casePcInstance = Table.GetByName(parts[0]);
-        IList<object> motherboardInstance = Table.GetByName(parts[1]);
-        IList<object> centralProcessorInstance = Table.GetByName(parts[2]);
-        IList<object> coolingSystemInstance = Table.GetByName(parts[3]);
-        IList<object> ramInstance = Table.GetByName(parts[4]);
-        IList<object> graphicsInstance = Table.GetByName(parts[5]);
-        IList<object> ssdInstance = Table.GetByName(parts[6]);
-        IList<object> powerSupplyInstance = Table.GetByName(parts[7]);
+        IList<object> casePcInstance = Repository.Find(parts[0]);
+        IList<object> motherboardInstance = Repository.Find(parts[1]);
+        IList<object> centralProcessorInstance = Repository.Find(parts[2]);
+        IList<object> coolingSystemInstance = Repository.Find(parts[3]);
+        IList<object> ramInstance = Repository.Find(parts[4]);
+        IList<object> graphicsInstance = Repository.Find(parts[5]);
+        IList<object> ssdInstance = Repository.Find(parts[6]);
+        IList<object> powerSupplyInstance = Repository.Find(parts[7]);
 
         CaseBase casePc = new PcCaseFactory().RepositoryInstances(casePcInstance).Crate();
         MotherboardBase motherboard = new MotherboardFactory().RepositoryInstances(motherboardInstance).Crate();

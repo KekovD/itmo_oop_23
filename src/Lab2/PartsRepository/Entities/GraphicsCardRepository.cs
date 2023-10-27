@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.VideoCard.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
@@ -19,6 +18,6 @@ public static class GraphicsCardRepository
             newItem.PowerConsumption,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

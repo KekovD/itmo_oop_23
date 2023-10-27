@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
@@ -21,6 +20,6 @@ public static class CentralProcessorRepository
             newItem.PowerConsumption,
         };
 
-        Table.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }
