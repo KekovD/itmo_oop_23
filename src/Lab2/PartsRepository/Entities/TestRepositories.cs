@@ -35,24 +35,6 @@ public class TestRepositories : ITestRepository
     {
         var repository = new Repository();
 
-        const int firstBiosVersion = 2;
-        const int firstMemoryFrequencies = 2666;
-        const int firstCoreFrequency = 4100;
-        const int firstCoresNumber = 2;
-        const int firstThermalDesignPower = 58;
-        const int firstPowerConsumption = 58;
-
-        var processor = new List<object>
-        {
-            "IntelPentiumGoldG6405",                                  new SocketPc("Lga1200"),
-            new Bios.Entities.BiosPc("Intel64", firstBiosVersion), firstMemoryFrequencies,
-            firstCoreFrequency,                                       firstCoresNumber,
-            new IntegratedVideoCore("IntelUHDGraphics610"),      firstThermalDesignPower,
-            firstPowerConsumption,
-        };
-
-        repository.AddList(processor);
-
         const int secondBiosVersion = 6;
         const int secondMemoryFrequencies = 3200;
         const int secondCoreFrequency = 2600;
@@ -60,7 +42,7 @@ public class TestRepositories : ITestRepository
         const int secondThermalDesignPower = 65;
         const int secondPowerConsumption = 65;
 
-        processor = new List<object>
+        var processor = new List<object>
         {
             "IntelCorei511400",                                        new SocketPc("Lga1200"),
             new Bios.Entities.BiosPc("Intel64", secondBiosVersion), secondMemoryFrequencies,
@@ -88,24 +70,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(processor);
-
-        const int fourthBiosVersion = 7;
-        const int fourthMemoryFrequencies = 5600;
-        const int fourthCoreFrequency = 2100;
-        const int fourthCoresNumber = 8;
-        const int fourthThermalDesignPower = 219;
-        const int fourthPowerConsumption = 219;
-
-        processor = new List<object>
-        {
-            "IntelCorei713700F",                           new SocketPc("Lga1700"),
-            new BiosPc("Intel64", fourthBiosVersion), fourthMemoryFrequencies,
-            fourthCoreFrequency,                           fourthCoresNumber,
-            new WithoutIntegratedVideoCore(),              fourthThermalDesignPower,
-            fourthPowerConsumption,
-        };
-
-        repository.AddList(processor);
     }
 
     private static void AddMotherboards()
@@ -130,61 +94,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(motherboard);
-
-        const int secondPciENumber = 0;
-        const int secondSataNumber = 2;
-        const int secondMemoryFrequencies = 3200;
-        const int secondRamTablesNumber = 2;
-        const int secondBios = 5;
-
-        motherboard = new List<object>
-        {
-            "MSIH610TIS01",                                new SocketPc("Lga1700"),
-            secondPciENumber,                          secondSataNumber,
-            secondMemoryFrequencies,                   new WithoutExtremeMemoryProfiles(),
-            new DdrMotherboard("Ddr4"),           secondRamTablesNumber,
-            new FormFactorMotherboard("MiniItx"), new BiosPc("Intel64", secondBios),
-            new WithoutPciE(),                         new WithoutIntegratedWiFi(),
-        };
-
-        repository.AddList(motherboard);
-
-        const int thirdPciENumber = 3;
-        const int thirdSataNumber = 4;
-        const int thirdMemoryFrequencies = 5600;
-        const int thirdRamTablesNumber = 4;
-        const int thirdBios = 7;
-        const int thirdRasToCas = 16;
-        const int thirdRasPrecharge = 16;
-        const int thirdTRas = 30;
-        const int thirdTRc = 50;
-        const int thirdVoltage = 2;
-        const int thirdXmpFrequency = 6000;
-        const int secondPciE = 4;
-
-        motherboard = new List<object>
-        {
-            "GigabyteZ790AorusMaster",
-            new SocketPc("Lga1700"),
-            thirdPciENumber,
-            thirdSataNumber,
-            thirdMemoryFrequencies,
-            new ExtremeMemoryProfiles(
-                thirdRasToCas,
-                thirdRasPrecharge,
-                thirdTRas,
-                thirdTRc,
-                thirdVoltage,
-                thirdXmpFrequency),
-            new DdrMotherboard("Ddr5"),
-            thirdRamTablesNumber,
-            new FormFactorMotherboard("EAtx"),
-            new BiosPc("Intel64", thirdBios),
-            new PciE(secondPciE),
-            new IntegratedWiFi(),
-        };
-
-        repository.AddList(motherboard);
     }
 
     private static void AddCoolingSystem()
@@ -202,21 +111,6 @@ public class TestRepositories : ITestRepository
             new List<int> { firstHeight, firstWidth, firstLength },
             new List<SocketBase> { new SocketPc("Lga1200"), new SocketPc("Lga1700") },
             firstThermalDesignPower,
-        };
-
-        repository.AddList(coolingSystem);
-
-        const int secondHeight = 59;
-        const int secondWidth = 113;
-        const int secondLength = 113;
-        const int secondThermalDesignPower = 65;
-
-        coolingSystem = new List<object>
-        {
-            "DeepCoolAlta9",
-            new List<int> { secondHeight, secondWidth, secondLength },
-            new List<SocketBase> { new SocketPc("Lga1700") },
-            secondThermalDesignPower,
         };
 
         repository.AddList(coolingSystem);
@@ -255,48 +149,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(ram);
-
-        const int secondMemorySize = 16;
-        const int secondCardsNumber = 4;
-        const int secondRasToCasJedec = 36;
-        const int secondRasPrechargeJedec = 38;
-        const int secondTRasJedec = 38;
-        const int secondTRcJedec = 38;
-        const int secondVoltageJedec = 1;
-        const int secondFrequencyJedec = 4800;
-        const int secondRasToCasXmp = 36;
-        const int secondRasPrechargeXmp = 38;
-        const int secondTRasXmp = 38;
-        const int secondTRcXmp = 38;
-        const int secondVoltageXmp = 1;
-        const int secondFrequencyXmp = 4800;
-        const int secondPowerConsumption = 7;
-
-        ram = new List<object>
-        {
-            "KingstonFURYRenegadePro",
-            secondMemorySize,
-            secondCardsNumber,
-            new Jedec(
-                secondRasToCasJedec,
-                secondRasPrechargeJedec,
-                secondTRasJedec,
-                secondTRcJedec,
-                secondVoltageJedec,
-                secondFrequencyJedec),
-            new ExtremeMemoryProfiles(
-                secondRasToCasXmp,
-                secondRasPrechargeXmp,
-                secondTRasXmp,
-                secondTRcXmp,
-                secondVoltageXmp,
-                secondFrequencyXmp),
-            new RamFormFactor.Entities.RamFormFactor("RDimm"),
-            new DdrMotherboard("Ddr5"),
-            secondPowerConsumption,
-        };
-
-        repository.AddList(ram);
     }
 
     private static void AddGraphicsCard()
@@ -319,23 +171,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(graphicsCard);
-
-        const int secondHeight = 120;
-        const int secondWidth = 230;
-        const int secondVideoMemoryNumber = 8;
-        const int secondChipFrequency = 1410;
-        const int secondPowerConsumption = 110;
-        const int secondPciE = 4;
-
-        graphicsCard = new List<object>
-        {
-            "ASUSGeForceRTX3060TiDual", secondHeight,
-            secondWidth,                secondVideoMemoryNumber,
-            new PciE(secondPciE),       secondChipFrequency,
-            secondPowerConsumption,
-        };
-
-        repository.AddList(graphicsCard);
     }
 
     private static void AddSsd()
@@ -354,19 +189,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(ssd);
-
-        const int secondCapacity = 1000;
-        const int secondMaximumSpeed = 3500;
-        const int secondPowerConsumption = 3;
-
-        ssd = new List<object>
-        {
-            "Samsung980",           new SsdPciE(),
-            secondCapacity,         secondMaximumSpeed,
-            secondPowerConsumption,
-        };
-
-        repository.AddList(ssd);
     }
 
     private static void AddHdd()
@@ -381,18 +203,6 @@ public class TestRepositories : ITestRepository
         {
             "ToshibaDT01",         firstCapacity,
             firstSpindleSpeed, firstPowerConsumption,
-        };
-
-        repository.AddList(hdd);
-
-        const int secondCapacity = 1000;
-        const int secondSpindleSpeed = 5400;
-        const int secondPowerConsumption = 4;
-
-        hdd = new List<object>
-        {
-            "WDPurple",         secondCapacity,
-            secondSpindleSpeed, secondPowerConsumption,
         };
 
         repository.AddList(hdd);
@@ -424,30 +234,6 @@ public class TestRepositories : ITestRepository
         };
 
         repository.AddList(pcCase);
-
-        const int secondMaximumLength = 375;
-        const int secondMaximumWidth = 150;
-        const int secondLength = 411;
-        const int secondWidth = 195;
-        const int secondHeight = 410;
-
-        pcCase = new List<object>
-        {
-            "AeroCoolCS-1101",
-            secondMaximumLength,
-            secondMaximumWidth,
-            new List<FormFactorMotherboardBase>
-            {
-                new FormFactorMotherboard("MicroAtx"),
-                new FormFactorMotherboard("MiniItx"),
-                new FormFactorMotherboard("Atx"),
-            },
-            secondLength,
-            secondWidth,
-            secondHeight,
-        };
-
-        repository.AddList(pcCase);
     }
 
     private static void AddPowerSupply()
@@ -461,17 +247,6 @@ public class TestRepositories : ITestRepository
         {
             firstName,
             firstPeakLoad,
-        };
-
-        repository.AddList(powerSupply);
-
-        const string secondName = "DeepCoolPX1000G";
-        const int secondPeakLoad = 1000;
-
-        powerSupply = new List<object>
-        {
-            secondName,
-            secondPeakLoad,
         };
 
         repository.AddList(powerSupply);
