@@ -24,9 +24,6 @@ public class SocketPc : SocketBase
         if (socket.Name is null)
             throw new CheckerNullException(nameof(CompareSocket));
 
-        if (socket.Name.Equals(Name, StringComparison.Ordinal))
-            return true;
-
-        return false;
+        return socket.Name.Equals(Name, StringComparison.Ordinal);
     }
 }

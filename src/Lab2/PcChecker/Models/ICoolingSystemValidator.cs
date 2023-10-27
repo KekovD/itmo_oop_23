@@ -9,9 +9,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface ICoolingSystemValidator
 {
-    ICoolingSystemValidator CheckSocketCoolingSystem(in CoolingSystemBase coolingSystem, in MotherboardBase motherboard, IList<BuildStatus> result);
+    ICoolingSystemValidator CheckSocketCoolingSystem(CoolingSystemBase coolingSystem, MotherboardBase motherboard, IList<BuildStatus> result);
 
-    ICoolingSystemValidator CheckHeightCoolingSystem(in CoolingSystemBase coolingSystem, in CaseBase pcCase, IList<BuildStatus> result);
+    ICoolingSystemValidator CheckHeightCoolingSystem(CoolingSystemBase coolingSystem, CaseBase pcCase, IList<BuildStatus> result);
 
-    ICoolingSystemValidator CheckTdpCoolingSystem(in CoolingSystemBase coolingSystem, in CentralProcessorBase processor, IList<BuildStatus> result);
+    ICoolingSystemValidator CheckTdpCoolingSystem(CoolingSystemBase coolingSystem, CentralProcessorBase processor, IList<BuildStatus> result);
 }

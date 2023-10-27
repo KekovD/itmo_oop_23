@@ -34,44 +34,4 @@ public abstract class CaseBase : IPart, IPrototype<CaseBase>
     public int Height { get; private set; }
 
     public abstract CaseBase Clone();
-
-    public CaseBase CloneWithNewName(string name)
-    {
-        CaseBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public CaseBase CloneWithNewMotherboardFormFactors(IList<FormFactorMotherboardBase> motherboardFormFactors)
-    {
-        CaseBase clone = Clone();
-        clone.MotherboardFormFactors = new List<FormFactorMotherboardBase>(motherboardFormFactors);
-
-        return clone;
-    }
-
-    public CaseBase CloneWithAddMotherboardFormFactor(FormFactorMotherboardBase motherboardFormFactor)
-    {
-        CaseBase clone = Clone();
-        clone.MotherboardFormFactors = new List<FormFactorMotherboardBase>(clone.MotherboardFormFactors) { motherboardFormFactor };
-
-        return clone;
-    }
-
-    public CaseBase CloneWithNewDimensions(int length, int width, int height, int maximumLength, int maximumWidth)
-    {
-        CaseBase clone = Clone();
-
-        if (maximumLength >= length || maximumWidth >= width)
-            return clone;
-
-        clone.Length = length;
-        clone.Width = width;
-        clone.Height = height;
-        clone.MaximumLength = maximumLength;
-        clone.MaximumWidth = maximumWidth;
-
-        return clone;
-    }
 }

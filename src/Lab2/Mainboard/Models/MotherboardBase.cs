@@ -55,22 +55,6 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
 
     public abstract MotherboardBase Clone();
 
-    public MotherboardBase CloneWithNewName(string name)
-    {
-        MotherboardBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewSocket(SocketBase socket)
-    {
-        MotherboardBase clone = Clone();
-        clone.Socket = socket;
-
-        return clone;
-    }
-
     public MotherboardBase CloneWithNewPciENumber(int pciENumber)
     {
         MotherboardBase clone = Clone();
@@ -83,62 +67,6 @@ public abstract class MotherboardBase : IPart, IPrototype<MotherboardBase>
     {
         MotherboardBase clone = Clone();
         clone.SataNumber = sataNumber;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewMemoryFrequencies(int memoryFrequencies)
-    {
-        MotherboardBase clone = Clone();
-        clone.MemoryFrequencies = memoryFrequencies;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewExtremeMemoryProfiles(XmpJedecBase extremeMemoryProfiles)
-    {
-        MotherboardBase clone = Clone();
-        clone.ExtremeMemoryProfiles = extremeMemoryProfiles;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewDdrMotherboard(DdrMotherboardBase ddrMotherboard)
-    {
-        MotherboardBase clone = Clone();
-        clone.DdrMotherboard = ddrMotherboard;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewRamTablesNumber(int ramTablesNumber)
-    {
-        MotherboardBase clone = Clone();
-        clone.RamTablesNumber = ramTablesNumber;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewFormFactor(FormFactorMotherboardBase formFactor)
-    {
-        MotherboardBase clone = Clone();
-        clone.FormFactor = formFactor;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewBios(BiosBase bios)
-    {
-        MotherboardBase clone = Clone();
-        clone.Bios = bios;
-
-        return clone;
-    }
-
-    public MotherboardBase CloneWithNewPciEVersion(PciEVersionBase pciEVersion)
-    {
-        MotherboardBase clone = Clone();
-        clone.PciEVersion = pciEVersion;
 
         return clone;
     }

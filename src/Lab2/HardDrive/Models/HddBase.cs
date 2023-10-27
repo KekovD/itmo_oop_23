@@ -17,42 +17,10 @@ public abstract class HddBase : IPowerConsumption, IPrototype<HddBase>
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; private set; }
+    public string Name { get; }
     public int Capacity { get; private set; }
     public int SpindleSpeed { get; private set; }
-    public int PowerConsumption { get; private set; }
+    public int PowerConsumption { get; }
 
     public abstract HddBase Clone();
-
-    public HddBase CloneWithNewName(string name)
-    {
-        HddBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public HddBase CloneWithNewCapacity(int capacity)
-    {
-        HddBase clone = Clone();
-        clone.Capacity = capacity;
-
-        return clone;
-    }
-
-    public HddBase CloneWithNewSpindleSpeed(int spindleSpeed)
-    {
-        HddBase clone = Clone();
-        clone.SpindleSpeed = spindleSpeed;
-
-        return clone;
-    }
-
-    public HddBase CloneWithNewPowerConsumption(int powerConsumption)
-    {
-        HddBase clone = Clone();
-        clone.PowerConsumption = powerConsumption;
-
-        return clone;
-    }
 }

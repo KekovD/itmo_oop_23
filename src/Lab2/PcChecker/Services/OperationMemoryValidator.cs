@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class OperationMemoryValidator : IOperationMemoryValidator
 {
-    public IOperationMemoryValidator CheckDdrType(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IOperationMemoryValidator CheckDdrType(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (operationMemory.DdrType.CompareDdrType(motherboard.DdrMotherboard))
             return this;
@@ -17,7 +17,7 @@ public class OperationMemoryValidator : IOperationMemoryValidator
         return this;
     }
 
-    public IOperationMemoryValidator CheckXmp(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IOperationMemoryValidator CheckXmp(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (operationMemory.ExtremeMemoryProfile.HaveXmp() && motherboard.ExtremeMemoryProfiles.HaveXmp())
             return this;
@@ -30,7 +30,7 @@ public class OperationMemoryValidator : IOperationMemoryValidator
         return this;
     }
 
-    public IOperationMemoryValidator CheckFrequencyOperationMemory(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IOperationMemoryValidator CheckFrequencyOperationMemory(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (operationMemory.JedecProfile.Frequency >= motherboard.MemoryFrequencies)
             return this;
@@ -40,7 +40,7 @@ public class OperationMemoryValidator : IOperationMemoryValidator
         return this;
     }
 
-    public IOperationMemoryValidator CheckDdrPortsNumber(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IOperationMemoryValidator CheckDdrPortsNumber(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (operationMemory.CardsNumber <= motherboard.RamTablesNumber)
             return this;

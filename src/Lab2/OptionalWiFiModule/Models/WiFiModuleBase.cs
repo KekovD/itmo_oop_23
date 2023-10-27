@@ -21,51 +21,11 @@ public abstract class WiFiModuleBase : IPowerConsumption, IPrototype<WiFiModuleB
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; private set; }
+    public string Name { get; }
     public string StandardVersion { get; private set; }
     public PciEVersionBase PciEVersion { get; private set; }
     public IBuiltInBluetooth BuiltInBluetooth { get; private set; }
-    public int PowerConsumption { get; private set; }
+    public int PowerConsumption { get; }
 
     public abstract WiFiModuleBase Clone();
-
-    public WiFiModuleBase CloneWithNewName(string name)
-    {
-        WiFiModuleBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public WiFiModuleBase CloneWithNewStandardVersion(string standardVersion)
-    {
-        WiFiModuleBase clone = Clone();
-        clone.StandardVersion = standardVersion;
-
-        return clone;
-    }
-
-    public WiFiModuleBase CloneWithNewPciEVersion(PciEVersionBase pciEVersion)
-    {
-        WiFiModuleBase clone = Clone();
-        clone.PciEVersion = pciEVersion;
-
-        return clone;
-    }
-
-    public WiFiModuleBase CloneWithNewBuiltInBluetooth(IBuiltInBluetooth builtInBluetooth)
-    {
-        WiFiModuleBase clone = Clone();
-        clone.BuiltInBluetooth = builtInBluetooth;
-
-        return clone;
-    }
-
-    public WiFiModuleBase CloneWithNewPowerConsumption(int powerConsumption)
-    {
-        WiFiModuleBase clone = Clone();
-        clone.PowerConsumption = powerConsumption;
-
-        return clone;
-    }
 }

@@ -7,5 +7,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface ISolidStateDriveValidator
 {
-    ISolidStateDriveValidator CheckPortsSolidStateDrive(in SsdBase solidStateDrive, ref MotherboardBase motherboard, IList<BuildStatus> result);
+    ISolidStateDriveValidator CheckPortsSolidStateDrive(SsdBase solidStateDrive, ref MotherboardBase motherboard, IList<BuildStatus> result);
 }

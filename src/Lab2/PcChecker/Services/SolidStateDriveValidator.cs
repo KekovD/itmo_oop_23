@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class SolidStateDriveValidator : ISolidStateDriveValidator
 {
-    public ISolidStateDriveValidator CheckPortsSolidStateDrive(in SsdBase solidStateDrive, ref MotherboardBase motherboard, IList<BuildStatus> result)
+    public ISolidStateDriveValidator CheckPortsSolidStateDrive(SsdBase solidStateDrive, ref MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (solidStateDrive.ConnectionOption.InstallingSsd(ref motherboard))
             return this;

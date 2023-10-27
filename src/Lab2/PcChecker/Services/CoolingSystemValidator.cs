@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.ProcessorCoolingSystem.Models;
-using Itmo.ObjectOrientedProgramming.Lab2.Socket.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class CoolingSystemValidator : ICoolingSystemValidator
 {
-    public ICoolingSystemValidator CheckSocketCoolingSystem(in CoolingSystemBase coolingSystem, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public ICoolingSystemValidator CheckSocketCoolingSystem(CoolingSystemBase coolingSystem, MotherboardBase motherboard, IList<BuildStatus> result)
     {
-        foreach (SocketBase socket in coolingSystem.SupportedSockets)
+        if (coolingSystem.SupportedSockets.Any(socket => socket.CompareSocket(motherboard.Socket)))
         {
-            if (socket.CompareSocket(motherboard.Socket))
-                return this;
+            return this;
         }
 
         result.Add(BuildStatus.CoolingSystemDoesNotSupportDesiredSocket);
@@ -23,7 +22,7 @@ public class CoolingSystemValidator : ICoolingSystemValidator
         return this;
     }
 
-    public ICoolingSystemValidator CheckHeightCoolingSystem(in CoolingSystemBase coolingSystem, in CaseBase pcCase, IList<BuildStatus> result)
+    public ICoolingSystemValidator CheckHeightCoolingSystem(CoolingSystemBase coolingSystem, CaseBase pcCase, IList<BuildStatus> result)
     {
         if (pcCase.MaximumWidth > coolingSystem.Dimensions[0])
             return this;
@@ -33,7 +32,7 @@ public class CoolingSystemValidator : ICoolingSystemValidator
         return this;
     }
 
-    public ICoolingSystemValidator CheckTdpCoolingSystem(in CoolingSystemBase coolingSystem, in CentralProcessorBase processor, IList<BuildStatus> result)
+    public ICoolingSystemValidator CheckTdpCoolingSystem(CoolingSystemBase coolingSystem, CentralProcessorBase processor, IList<BuildStatus> result)
     {
         if (coolingSystem.ThermalDesignPower > processor.ThermalDesignPower)
             return this;

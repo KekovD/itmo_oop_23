@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class WiFiModuleValidator : IWiFiModuleValidator
 {
-    public IWiFiModuleValidator CheckBuiltInWiFiModule(in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IWiFiModuleValidator CheckBuiltInWiFiModule(MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (!motherboard.IntegratedWiFi.HaveIntegratedWiFi())
             return this;

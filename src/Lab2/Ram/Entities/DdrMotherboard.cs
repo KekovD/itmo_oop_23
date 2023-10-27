@@ -24,9 +24,6 @@ public class DdrMotherboard : DdrMotherboardBase
         if (ddrOther.Name is null)
             throw new CheckerNullException(nameof(CompareDdrType));
 
-        if (ddrOther.Name.Equals(Name, StringComparison.Ordinal))
-            return true;
-
-        return false;
+        return ddrOther.Name.Equals(Name, StringComparison.Ordinal);
     }
 }

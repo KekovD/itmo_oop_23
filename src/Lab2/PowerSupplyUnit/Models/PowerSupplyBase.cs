@@ -16,14 +16,6 @@ public abstract class PowerSupplyBase : IPart, IPrototype<PowerSupplyBase>
 
     public abstract PowerSupplyBase Clone();
 
-    public PowerSupplyBase CloneWithNewName(string name)
-    {
-        PowerSupplyBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
     public PowerSupplyBase CloneWithNewPeakLoad(int peakLoad)
     {
         PowerSupplyBase clone = Clone();

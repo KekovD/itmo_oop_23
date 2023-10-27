@@ -9,10 +9,9 @@ public abstract class FormFactorMotherboardBase : IPrototype<FormFactorMotherboa
         Name = name;
     }
 
-    public string Name { get; protected init; }
+    public string Name { get; }
 
     public abstract FormFactorMotherboardBase Clone();
 
     public abstract bool CompareFormFactor(FormFactorMotherboardBase formFactor);
-    public abstract FormFactorMotherboardBase CloneWithNewName(string name);
 }

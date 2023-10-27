@@ -20,51 +20,11 @@ public abstract class SsdBase : IPowerConsumption, IPrototype<SsdBase>
         PowerConsumption = powerConsumption;
     }
 
-    public string Name { get; private set; }
+    public string Name { get; }
     public SsdTypeBase ConnectionOption { get; private set; }
     public int Capacity { get; private set; }
     public int MaximumSpeed { get; private set; }
-    public int PowerConsumption { get; private set; }
+    public int PowerConsumption { get; }
 
     public abstract SsdBase Clone();
-
-    public SsdBase CloneWithNewName(string name)
-    {
-        SsdBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public SsdBase CloneWithNewConnectionOption(SsdTypeBase connectionOption)
-    {
-        SsdBase clone = Clone();
-        clone.ConnectionOption = connectionOption;
-
-        return clone;
-    }
-
-    public SsdBase CloneWithNewCapacity(int capacity)
-    {
-        SsdBase clone = Clone();
-        clone.Capacity = capacity;
-
-        return clone;
-    }
-
-    public SsdBase CloneWithNewMaximumSpeed(int maximumSpeed)
-    {
-        SsdBase clone = Clone();
-        clone.MaximumSpeed = maximumSpeed;
-
-        return clone;
-    }
-
-    public SsdBase CloneWithNewPowerConsumption(int powerConsumption)
-    {
-        SsdBase clone = Clone();
-        clone.PowerConsumption = powerConsumption;
-
-        return clone;
-    }
 }

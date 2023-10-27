@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface IWiFiModuleValidator
 {
-    IWiFiModuleValidator CheckBuiltInWiFiModule(in MotherboardBase motherboard, IList<BuildStatus> result);
+    IWiFiModuleValidator CheckBuiltInWiFiModule(MotherboardBase motherboard, IList<BuildStatus> result);
 }

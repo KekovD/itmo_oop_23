@@ -7,5 +7,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface IMotherboardValidator
 {
-    IMotherboardValidator CheckMotherboardFormFactor(in CaseBase pcCase, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IMotherboardValidator CheckMotherboardFormFactor(CaseBase pcCase, MotherboardBase motherboard, IList<BuildStatus> result);
 }

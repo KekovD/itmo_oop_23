@@ -10,18 +10,10 @@ public abstract class BiosBase : IPrototype<BiosBase>
     }
 
     public bool BiosValid { get; protected set; } = true;
-    public string? Name { get; protected set; }
+    public string? Name { get; protected init; }
     public int Version { get; private set; }
 
     public abstract BiosBase Clone();
-
-    public BiosBase CloneWithNewVersion(int version)
-    {
-        BiosBase clone = Clone();
-        clone.Version = version;
-
-        return clone;
-    }
 
     public abstract bool CompareBios(BiosBase bios);
 }

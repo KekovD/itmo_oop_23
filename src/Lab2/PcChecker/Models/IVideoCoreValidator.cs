@@ -7,5 +7,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface IVideoCoreValidator
 {
-    IVideoCoreValidator CheckVideoCoreAvailability(in CentralProcessorBase processor, GraphicsCardBase? graphicsCard, IList<BuildStatus> result);
+    IVideoCoreValidator CheckVideoCoreAvailability(CentralProcessorBase processor, GraphicsCardBase? graphicsCard, IList<BuildStatus> result);
 }

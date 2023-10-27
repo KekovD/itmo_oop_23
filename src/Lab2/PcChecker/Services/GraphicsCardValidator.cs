@@ -8,7 +8,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class GraphicsCardValidator : IGraphicsCardValidator
 {
-    public IGraphicsCardValidator CheckDimensionsGraphicsCard(in GraphicsCardBase graphicsCard, in CaseBase pcCase, IList<BuildStatus> result)
+    public IGraphicsCardValidator CheckDimensionsGraphicsCard(GraphicsCardBase graphicsCard, CaseBase pcCase, IList<BuildStatus> result)
     {
         if (graphicsCard.Height <= pcCase.MaximumWidth && graphicsCard.Width <= pcCase.MaximumLength)
             return this;
@@ -18,7 +18,7 @@ public class GraphicsCardValidator : IGraphicsCardValidator
         return this;
     }
 
-    public IGraphicsCardValidator CheckPciENumberGraphicsCard(in GraphicsCardBase graphicsCard, ref MotherboardBase motherboard, IList<BuildStatus> result)
+    public IGraphicsCardValidator CheckPciENumberGraphicsCard(GraphicsCardBase graphicsCard, ref MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (motherboard.PciENumber > 0)
         {
@@ -32,7 +32,7 @@ public class GraphicsCardValidator : IGraphicsCardValidator
         return this;
     }
 
-    public IGraphicsCardValidator CheckPciEVersionGraphicsCard(in GraphicsCardBase graphicsCard, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public IGraphicsCardValidator CheckPciEVersionGraphicsCard(GraphicsCardBase graphicsCard, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (graphicsCard.PciEVersion.Version >= motherboard.PciEVersion.Version)
             return this;

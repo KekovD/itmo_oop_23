@@ -9,7 +9,7 @@ public abstract class RamFormFactorBase : IPrototype<RamFormFactorBase>
         Name = name;
     }
 
-    public string Name { get; protected set; }
+    protected string Name { get; }
 
     public abstract RamFormFactorBase Clone();
 }

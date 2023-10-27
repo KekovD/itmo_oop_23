@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class VideoCoreValidator : IVideoCoreValidator
 {
-    public IVideoCoreValidator CheckVideoCoreAvailability(in CentralProcessorBase processor, GraphicsCardBase? graphicsCard, IList<BuildStatus> result)
+    public IVideoCoreValidator CheckVideoCoreAvailability(CentralProcessorBase processor, GraphicsCardBase? graphicsCard, IList<BuildStatus> result)
     {
         if (processor.IntegratedVideoCore.HaveIntegratedVideoCore() || graphicsCard is not null)
             return this;

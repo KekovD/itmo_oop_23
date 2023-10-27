@@ -4,7 +4,6 @@ using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Cpu.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Mainboard.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.PC.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.PcBuilder.Services;
 using Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
@@ -42,10 +41,7 @@ public class BuildWithClaimedConsumptionGreaterThanTheMaximumAvailableConsumptio
 
     private static bool CheckBuildingResults(PersonalComputer builder)
     {
-        if (builder.Message.Count == 2 && builder.Message[0] == BuildStatus.Successfully && builder.Message[1] == BuildStatus.InsufficientPowerSupplyCapacity)
-            return true;
-
-        return false;
+        return builder.Message is [BuildStatus.Successfully, BuildStatus.InsufficientPowerSupplyCapacity];
     }
 
     [Theory]
@@ -53,15 +49,16 @@ public class BuildWithClaimedConsumptionGreaterThanTheMaximumAvailableConsumptio
     private void ConditionCheck(IList<string> parts)
     {
         new TestRepositories().AddObjects();
+        var repository = new Repository();
 
-        IList<object> casePcInstance = Repository.Find(parts[0]);
-        IList<object> motherboardInstance = Repository.Find(parts[1]);
-        IList<object> centralProcessorInstance = Repository.Find(parts[2]);
-        IList<object> coolingSystemInstance = Repository.Find(parts[3]);
-        IList<object> ramInstance = Repository.Find(parts[4]);
-        IList<object> graphicsInstance = Repository.Find(parts[5]);
-        IList<object> ssdInstance = Repository.Find(parts[6]);
-        IList<object> powerSupplyInstance = Repository.Find(parts[7]);
+        IList<object> casePcInstance = repository.Find(parts[0]);
+        IList<object> motherboardInstance = repository.Find(parts[1]);
+        IList<object> centralProcessorInstance = repository.Find(parts[2]);
+        IList<object> coolingSystemInstance = repository.Find(parts[3]);
+        IList<object> ramInstance = repository.Find(parts[4]);
+        IList<object> graphicsInstance = repository.Find(parts[5]);
+        IList<object> ssdInstance = repository.Find(parts[6]);
+        IList<object> powerSupplyInstance = repository.Find(parts[7]);
 
         CaseBase casePc = new PcCaseFactory().RepositoryInstances(casePcInstance).Crate();
         MotherboardBase motherboard = new MotherboardFactory().RepositoryInstances(motherboardInstance).Crate();

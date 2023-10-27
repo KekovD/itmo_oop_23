@@ -117,6 +117,7 @@ public class TestRepositories : ITestRepository
         const int firstMemoryFrequencies = 3200;
         const int firstRamTablesNumber = 2;
         const int firstBios = 6;
+        const int firstPciE = 4;
 
         var motherboard = new List<object>
         {
@@ -125,7 +126,7 @@ public class TestRepositories : ITestRepository
             firstMemoryFrequencies,                     new WithoutExtremeMemoryProfiles(),
             new DdrMotherboard("Ddr4"),            firstRamTablesNumber,
             new FormFactorMotherboard("MicroAtx"), new BiosPc("Intel64", firstBios),
-            new PciE("PciE4"),                     new WithoutIntegratedWiFi(),
+            new PciE(firstPciE),                        new WithoutIntegratedWiFi(),
         };
 
         repository.AddList(motherboard);
@@ -159,6 +160,7 @@ public class TestRepositories : ITestRepository
         const int thirdTRc = 50;
         const int thirdVoltage = 2;
         const int thirdXmpFrequency = 6000;
+        const int secondPciE = 4;
 
         motherboard = new List<object>
         {
@@ -178,7 +180,7 @@ public class TestRepositories : ITestRepository
             thirdRamTablesNumber,
             new FormFactorMotherboard("EAtx"),
             new BiosPc("Intel64", thirdBios),
-            new PciE("PciE4"),
+            new PciE(secondPciE),
             new IntegratedWiFi(),
         };
 
@@ -306,12 +308,13 @@ public class TestRepositories : ITestRepository
         const int firstVideoMemoryNumber = 8;
         const int firstChipFrequency = 1552;
         const int firstPowerConsumption = 115;
+        const int firstPciE = 4;
 
         var graphicsCard = new List<object>
         {
             "PalitGeForceRTX3050Dual", firstHeight,
             firstWidth,                firstVideoMemoryNumber,
-            new PciE("PciE4"),    firstChipFrequency,
+            new PciE(firstPciE),       firstChipFrequency,
             firstPowerConsumption,
         };
 
@@ -322,12 +325,13 @@ public class TestRepositories : ITestRepository
         const int secondVideoMemoryNumber = 8;
         const int secondChipFrequency = 1410;
         const int secondPowerConsumption = 110;
+        const int secondPciE = 4;
 
         graphicsCard = new List<object>
         {
             "ASUSGeForceRTX3060TiDual", secondHeight,
             secondWidth,                secondVideoMemoryNumber,
-            new PciE("PciE4"),     secondChipFrequency,
+            new PciE(secondPciE),       secondChipFrequency,
             secondPowerConsumption,
         };
 
@@ -480,11 +484,12 @@ public class TestRepositories : ITestRepository
         const string firstName = "BluetoothAsusPCEAX3000";
         const string firstStandardVersion = "802.11n";
         const int firstPowerConsumption = 3;
+        const int firstPcie = 4;
 
         var wiFiModule = new List<object>
         {
             firstName,              firstStandardVersion,
-            new PciE("PciE4"), new BuiltInBluetooth(),
+            new PciE(firstPcie), new BuiltInBluetooth(),
             firstPowerConsumption,
         };
 

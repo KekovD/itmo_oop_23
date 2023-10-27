@@ -8,9 +8,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface IGraphicsCardValidator
 {
-    IGraphicsCardValidator CheckDimensionsGraphicsCard(in GraphicsCardBase graphicsCard, in CaseBase pcCase, IList<BuildStatus> result);
+    IGraphicsCardValidator CheckDimensionsGraphicsCard(GraphicsCardBase graphicsCard, CaseBase pcCase, IList<BuildStatus> result);
 
-    IGraphicsCardValidator CheckPciENumberGraphicsCard(in GraphicsCardBase graphicsCard, ref MotherboardBase motherboard, IList<BuildStatus> result);
+    IGraphicsCardValidator CheckPciENumberGraphicsCard(GraphicsCardBase graphicsCard, ref MotherboardBase motherboard, IList<BuildStatus> result);
 
-    IGraphicsCardValidator CheckPciEVersionGraphicsCard(in GraphicsCardBase graphicsCard, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IGraphicsCardValidator CheckPciEVersionGraphicsCard(GraphicsCardBase graphicsCard, MotherboardBase motherboard, IList<BuildStatus> result);
 }

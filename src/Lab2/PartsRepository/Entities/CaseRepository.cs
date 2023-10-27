@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab2.CasePc.Entities;
-using Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.PartsRepository.Entities;
 
@@ -19,6 +18,6 @@ public static class CaseRepository
             newItem.Height,
         };
 
-        Repository.AddList(newItemList);
+        new Repository().AddList(newItemList);
     }
 }

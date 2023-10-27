@@ -22,16 +22,11 @@ public class BiosPc : BiosBase
             Version);
     }
 
-    public BiosBase CloneWithNewName(string name) => new BiosPc(name, Version);
-
     public override bool CompareBios(BiosBase bios)
     {
         if (bios.Name is null)
             throw new CheckerNullException(nameof(CompareBios));
 
-        if (bios.Name.Equals(Name, StringComparison.Ordinal) && Version >= bios.Version)
-            return true;
-
-        return false;
+        return bios.Name.Equals(Name, StringComparison.Ordinal) && Version >= bios.Version;
     }
 }

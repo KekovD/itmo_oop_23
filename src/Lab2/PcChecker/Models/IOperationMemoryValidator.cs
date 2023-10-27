@@ -7,11 +7,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface IOperationMemoryValidator
 {
-    IOperationMemoryValidator CheckDdrType(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IOperationMemoryValidator CheckDdrType(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result);
 
-    IOperationMemoryValidator CheckXmp(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IOperationMemoryValidator CheckXmp(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result);
 
-    IOperationMemoryValidator CheckFrequencyOperationMemory(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IOperationMemoryValidator CheckFrequencyOperationMemory(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result);
 
-    IOperationMemoryValidator CheckDdrPortsNumber(in RamBase operationMemory, in MotherboardBase motherboard, IList<BuildStatus> result);
+    IOperationMemoryValidator CheckDdrPortsNumber(RamBase operationMemory, MotherboardBase motherboard, IList<BuildStatus> result);
 }

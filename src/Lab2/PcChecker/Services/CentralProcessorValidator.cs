@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Services;
 
 public class CentralProcessorValidator : ICentralProcessorValidator
 {
-    public ICentralProcessorValidator CheckSocket(in CentralProcessorBase processor, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public ICentralProcessorValidator CheckSocket(CentralProcessorBase processor, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (processor.Socket.CompareSocket(motherboard.Socket))
             return this;
@@ -17,7 +17,7 @@ public class CentralProcessorValidator : ICentralProcessorValidator
         return this;
     }
 
-    public ICentralProcessorValidator CheckProcessorBios(in CentralProcessorBase processor, in MotherboardBase motherboard, IList<BuildStatus> result)
+    public ICentralProcessorValidator CheckProcessorBios(CentralProcessorBase processor, MotherboardBase motherboard, IList<BuildStatus> result)
     {
         if (processor.Bios.CompareBios(motherboard.Bios))
             return this;

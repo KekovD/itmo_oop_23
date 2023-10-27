@@ -7,6 +7,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.PcChecker.Models;
 
 public interface ICentralProcessorValidator
 {
-    ICentralProcessorValidator CheckSocket(in CentralProcessorBase processor, in MotherboardBase motherboard, IList<BuildStatus> result);
-    ICentralProcessorValidator CheckProcessorBios(in CentralProcessorBase processor, in MotherboardBase motherboard, IList<BuildStatus> result);
+    ICentralProcessorValidator CheckSocket(CentralProcessorBase processor, MotherboardBase motherboard, IList<BuildStatus> result);
+    ICentralProcessorValidator CheckProcessorBios(CentralProcessorBase processor, MotherboardBase motherboard, IList<BuildStatus> result);
 }

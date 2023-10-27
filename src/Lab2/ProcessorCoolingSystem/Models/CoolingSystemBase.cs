@@ -33,44 +33,12 @@ public abstract class CoolingSystemBase : IPart, IPrototype<CoolingSystemBase>
         ThermalDesignPower = thermalDesignPower;
     }
 
-    public string Name { get; private set; }
+    public string Name { get; }
     public IReadOnlyList<int> Dimensions { get; private set; }
     public IReadOnlyList<SocketBase> SupportedSockets { get; private set; }
     public int ThermalDesignPower { get; private set; }
 
     public abstract CoolingSystemBase Clone();
-
-    public CoolingSystemBase CloneWithNewName(string name)
-    {
-        CoolingSystemBase clone = Clone();
-        clone.Name = name;
-
-        return clone;
-    }
-
-    public CoolingSystemBase CloneWithNewDimensions(int height, int width, int length)
-    {
-        CoolingSystemBase clone = Clone();
-        clone.Dimensions = new List<int> { height, width, length };
-
-        return clone;
-    }
-
-    public CoolingSystemBase CloneWithNewSupportedSockets(IList<SocketBase> supportedSockets)
-    {
-        CoolingSystemBase clone = Clone();
-        clone.SupportedSockets = new List<SocketBase>(supportedSockets);
-
-        return clone;
-    }
-
-    public CoolingSystemBase CloneWithAddSupportedSocket(SocketBase supportedSocket)
-    {
-        CoolingSystemBase clone = Clone();
-        clone.SupportedSockets = new List<SocketBase>(SupportedSockets) { supportedSocket };
-
-        return clone;
-    }
 
     public CoolingSystemBase CloneWithNewThermalDesignPower(int thermalDesignPower)
     {
