@@ -5,8 +5,8 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messages.Models;
 
 public interface IMessageBuilder
 {
-    IMessageBuilder ChangeTitle(IRenderable title);
-    IMessageBuilder ChangeBody(IRenderable body);
+    IMessageBuilder ChangeTitleBeforeBuild(IRenderable title);
+    IMessageBuilder ChangeBodyBeforeBuild(IRenderable body);
 
     Message Build();
 }
