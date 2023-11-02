@@ -10,5 +10,5 @@ public abstract class AddresseeBase : IMessageHandling
 
     public abstract IMessageHandling MessageHandling(Message message);
 
-    public void LogMessage(Message message) => _messageLog.Add(message);
+    protected void LogMessage(Message message) => _messageLog.Add(message);
 }

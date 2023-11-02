@@ -29,18 +29,6 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
         return this;
     }
 
-    public IMessageBuilder ChangeTitleBeforeBuild(IRenderable title)
-    {
-        _title = title;
-        return this;
-    }
-
-    public IMessageBuilder ChangeBodyBeforeBuild(IRenderable body)
-    {
-        _body = body;
-        return this;
-    }
-
     public Message Build() =>
         Create(
             _title ?? throw new BuilderNullException(nameof(_title)),

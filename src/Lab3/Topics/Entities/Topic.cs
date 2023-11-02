@@ -22,14 +22,12 @@ public class Topic : TopicBase
         public ITopicAddresseeBuilder WithName(string name)
         {
             _name = name;
-
             return this;
         }
 
         public ITopicBuilder WithAddressee(AddresseeBase addressee)
         {
             _addressee = addressee;
-
             return this;
         }
 
