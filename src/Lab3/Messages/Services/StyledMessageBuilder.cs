@@ -1,11 +1,12 @@
 ﻿using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Entities;
+using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Services;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
 
 public class StyledMessageBuilder : MessageBuilderBase, IColorBuilder
 {
@@ -19,7 +20,7 @@ public class StyledMessageBuilder : MessageBuilderBase, IColorBuilder
         return this;
     }
 
-    protected override Message Crate(
+    protected override Message Create(
         IRenderable title,
         IRenderable body,
         IImportanceLevel importance)

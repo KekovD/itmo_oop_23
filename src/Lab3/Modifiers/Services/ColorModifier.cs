@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Services;
 
 public class ColorModifier : IRenderableModifier
 {

@@ -1,7 +1,8 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.Renderables.Entities;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Renderables.Services;
 
 public static class RenderableExtensions
 {

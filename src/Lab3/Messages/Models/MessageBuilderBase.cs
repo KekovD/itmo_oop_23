@@ -43,13 +43,13 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
 
     public Message Build()
     {
-        return Crate(
+        return Create(
             _title ?? throw new BuilderNullException(nameof(_title)),
             _body ?? throw new BuilderNullException(nameof(_body)),
             _importance ?? throw new BuilderNullException(nameof(_importance)));
     }
 
-    protected abstract Message Crate(
+    protected abstract Message Create(
         IRenderable title,
         IRenderable body,
         IImportanceLevel importance);
