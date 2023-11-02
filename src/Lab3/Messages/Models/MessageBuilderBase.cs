@@ -41,13 +41,11 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
         return this;
     }
 
-    public Message Build()
-    {
-        return Create(
+    public Message Build() =>
+        Create(
             _title ?? throw new BuilderNullException(nameof(_title)),
             _body ?? throw new BuilderNullException(nameof(_body)),
             _importance ?? throw new BuilderNullException(nameof(_importance)));
-    }
 
     protected abstract Message Create(
         IRenderable title,
