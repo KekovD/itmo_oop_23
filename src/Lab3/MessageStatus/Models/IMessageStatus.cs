@@ -1,10 +1,6 @@
-﻿using System;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab3.MessageStatus.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.MessageStatus.Models;
-
-public interface IMessageStatus : ICloneable
+public interface IMessageStatus
 {
     bool CheckReadMessage();
-
-    IMessageStatus CloneWithChangeStatus();
 }
