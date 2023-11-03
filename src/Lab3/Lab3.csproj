@@ -8,4 +8,9 @@
       <PackageReference Include="Crayon" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Displays\Entities\" />
+      <Folder Include="Displays\Services\" />
+    </ItemGroup>
+
 </Project>
