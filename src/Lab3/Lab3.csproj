@@ -8,9 +8,4 @@
       <PackageReference Include="Crayon" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ExtensionAdapters\Entities\" />
-      <Folder Include="ExtensionAdapters\Models\" />
-    </ItemGroup>
-
 </Project>
