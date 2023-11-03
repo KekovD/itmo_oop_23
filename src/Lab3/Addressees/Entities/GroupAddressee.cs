@@ -1,24 +1,36 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 
-public class GroupAddressee : AddresseeBase
+public class GroupAddressee : IAddresseeType
 {
-    private readonly IList<AddresseeBase> _concreteAddressees = new List<AddresseeBase>();
+    private readonly IList<AddresseeBase> _addresseesGroup = new List<AddresseeBase>();
+    public ILogger MessageLog { get; } = new Logger();
 
-    public GroupAddressee AddAddressee(AddresseeBase addressee)
+    public GroupAddressee AddAddresses(AddresseeBase addresseeBase)
     {
-        _concreteAddressees.Add(addressee);
+        _addresseesGroup.Add(addresseeBase);
         return this;
     }
 
-    public override IMessageHandling MessageHandling(Message message)
+    public IMessageHandling MessageHandling(Message message)
     {
-        foreach (AddresseeBase addressee in _concreteAddressees)
+        foreach (AddresseeBase addressee in _addresseesGroup)
+        {
+            if (addressee.ImportanceFilterProxy is null) continue;
+
             addressee.MessageHandling(message);
+
+            if (addressee.ImportanceFilterProxy.TrySendMessage(message))
+            {
+                MessageLog.Save(message);
+            }
+        }
 
         return this;
     }

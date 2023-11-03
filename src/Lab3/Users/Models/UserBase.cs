@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageStatus.Entities;
@@ -6,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab3.MessageStatus.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Users.Models;
 
-public abstract class UserBase : IMessageHandling
+public abstract class UserBase : IAddressee
 {
     private readonly IDictionary<Message, IMessageStatus> _receivedMessages = new Dictionary<Message, IMessageStatus>();
 
