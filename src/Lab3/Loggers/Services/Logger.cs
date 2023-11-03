@@ -6,11 +6,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Loggers.Services;
 
 public class Logger : ILogger
 {
-    public IList<Message> Log { get; } = new List<Message>();
+    private readonly IList<Message> _log = new List<Message>();
 
     public ILogger Save(Message message)
     {
-        Log.Add(message);
+        _log.Add(message);
         return this;
     }
 }
