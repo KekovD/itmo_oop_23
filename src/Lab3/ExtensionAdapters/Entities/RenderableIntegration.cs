@@ -1,11 +1,12 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
 
-public class RenderableIntegration : IMessageHandling
+public class RenderableIntegration : IAddressee
 {
     private readonly IRenderableMessageHandling _renderableAddressee;
 
