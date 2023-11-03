@@ -9,8 +9,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Displays\Entities\" />
-      <Folder Include="Displays\Services\" />
+      <Folder Include="ExtensionAdapters\Entities\" />
+      <Folder Include="ExtensionAdapters\Models\" />
     </ItemGroup>
 
 </Project>
