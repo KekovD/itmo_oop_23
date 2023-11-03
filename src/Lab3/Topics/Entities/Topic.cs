@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Topics.Entities;
 
 public class Topic : TopicBase
 {
-    private Topic(string name, AddresseeBase addressee)
+    public Topic(string name, IAddresseeType addressee)
         : base(name, addressee)
     {
     }

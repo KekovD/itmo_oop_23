@@ -4,5 +4,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.MessageStatus.Entities;
 
 public class UnreadMessageStatus : IMessageStatus
 {
-    public bool CheckReadMessage() => false;
+    public bool CheckReadStatusMessage() => false;
 }

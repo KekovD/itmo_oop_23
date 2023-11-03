@@ -2,5 +2,5 @@
 
 public interface IMessageStatus
 {
-    bool CheckReadMessage();
+    bool CheckReadStatusMessage();
 }

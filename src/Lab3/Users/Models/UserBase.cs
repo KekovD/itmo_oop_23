@@ -25,11 +25,13 @@ public abstract class UserBase : IAddressee
         return this;
     }
 
+    public bool CheckMessageStatus(Message message) => _receivedMessages.ContainsKey(message) && _receivedMessages[message].CheckReadStatusMessage();
+
     public ReadStatus ReadMessage(Message message)
     {
         if (!_receivedMessages.ContainsKey(message)) return ReadStatus.ErrorMessageNotFound;
 
-        if (_receivedMessages[message].CheckReadMessage())
+        if (_receivedMessages[message].CheckReadStatusMessage())
         {
             return ReadStatus.ErrorMessageWasAlreadyRead;
         }

@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
 
 public class MessageBuilder : MessageBuilderBase
 {
-    public static ITitleBuilder Builder => new MessageBuilder();
+    public static ITitleBuilder Builder() => new MessageBuilder();
 
     protected override Message Create(
         string title,

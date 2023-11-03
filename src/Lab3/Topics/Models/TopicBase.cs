@@ -6,9 +6,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Topics.Models;
 
 public abstract class TopicBase : IMessageHandling
 {
-    private readonly AddresseeBase _addressee;
+    private readonly IAddresseeType _addressee;
 
-    protected TopicBase(string name, AddresseeBase addressee)
+    protected TopicBase(string name, IAddresseeType addressee)
     {
         Name = name;
         _addressee = addressee;
