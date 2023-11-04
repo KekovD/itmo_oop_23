@@ -52,6 +52,6 @@ public class FilterAddresseeNotMissedLowImportanceMessage
 
         topic.MessageHandling(message);
 
-        messageLogMock.Verify(log => log.Save(It.IsAny<Message>()), Times.Never());
+        messageLogMock.Verify(log => log.Save(It.IsAny<IList<Message>>(), It.IsAny<Message>()), Times.Never());
     }
 }

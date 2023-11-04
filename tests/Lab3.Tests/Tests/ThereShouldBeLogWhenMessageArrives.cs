@@ -52,6 +52,6 @@ public class ThereShouldBeLogWhenMessageArrives
 
         topic.MessageHandling(message);
 
-        messageLogMock.Verify(log => log.Save(message), Times.Once());
+        messageLogMock.Verify(log => log.Save(It.IsAny<IList<Message>>(), It.IsAny<Message>()), Times.Once());
     }
 }

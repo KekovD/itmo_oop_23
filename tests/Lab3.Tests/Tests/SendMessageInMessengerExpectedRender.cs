@@ -67,6 +67,6 @@ public class SendMessageInMessengerExpectedRender
         string result = messenger.Render();
 
         Assert.Equal(expectedOutput, result);
-        messageLogMock.Verify(log => log.Save(message), Times.Once());
+        messageLogMock.Verify(log => log.Save(It.IsAny<IList<Message>>(), It.IsAny<Message>()), Times.Once());
     }
 }
