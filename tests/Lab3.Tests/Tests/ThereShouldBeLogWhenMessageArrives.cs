@@ -48,7 +48,7 @@ public class ThereShouldBeLogWhenMessageArrives
             new RenderableIntegration(new Messenger("Messenger")),
             new LowImportance(),
             messageLogMock.Object);
-        TopicBase topic = new Topic("Topic", addressee);
+        TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(addressee).Build();
 
         topic.MessageHandling(message);
 

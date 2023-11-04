@@ -48,7 +48,7 @@ public class FilterAddresseeNotMissedLowImportanceMessage
             new RenderableIntegration(new Messenger("Messenger")),
             new HighImportance(),
             messageLogMock.Object);
-        TopicBase topic = new Topic("Topic", addressee);
+        TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(addressee).Build();
 
         topic.MessageHandling(message);
 

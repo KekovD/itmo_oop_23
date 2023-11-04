@@ -49,7 +49,7 @@ public class AnAttemptToMarkUsersMessageInReadStatusAsReadReturnedAnError
 
         UserBase user = new User("User");
         IAddresseeType userAddressee = new UserAddressee(user, new LowImportance(), new Logger());
-        TopicBase topic = new Topic("Topic", userAddressee);
+        TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(userAddressee).Build();
         topic.MessageHandling(message);
 
         user.ReadMessage(message);

@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Topics.Entities;
 
 public class Topic : TopicBase
 {
-    public Topic(string name, IAddresseeType addressee)
+    private Topic(string name, IAddresseeType addressee)
         : base(name, addressee)
     {
     }
@@ -17,7 +17,7 @@ public class Topic : TopicBase
     private class TopicBuilder : ITopicBuilder, ITopicNameBuilder, ITopicAddresseeBuilder
     {
         private string? _name;
-        private AddresseeBase? _addressee;
+        private IAddresseeType? _addressee;
 
         public ITopicAddresseeBuilder WithName(string name)
         {
@@ -25,7 +25,7 @@ public class Topic : TopicBase
             return this;
         }
 
-        public ITopicBuilder WithAddressee(AddresseeBase addressee)
+        public ITopicBuilder WithAddressee(IAddresseeType addressee)
         {
             _addressee = addressee;
             return this;
