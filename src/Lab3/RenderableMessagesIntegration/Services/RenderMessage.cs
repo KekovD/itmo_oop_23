@@ -17,9 +17,9 @@ public class RenderMessage : IRenderable
     {
         var builder = new StringBuilder();
 
-        builder.Append(_renderableMessage.Title)
+        builder.Append(_renderableMessage.Title.Render())
             .Append('\n')
-            .Append(_renderableMessage.Body);
+            .Append(_renderableMessage.Body.Render());
 
         return builder.ToString();
     }

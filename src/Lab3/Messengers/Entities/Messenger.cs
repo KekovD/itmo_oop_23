@@ -32,5 +32,5 @@ public class Messenger : IMessenger
         return this;
     }
 
-    private void DrawMessage() => Console.WriteLine($"Messenger {Name}:\n{Render()}");
+    public void DrawMessage() => Console.WriteLine($"Messenger {Name}:\n{Render()}");
 }
