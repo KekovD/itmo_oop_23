@@ -1,6 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.LabException;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
@@ -12,7 +13,8 @@ public class RenderableAddressee : AddresseeBase
 {
     private readonly RenderableIntegration _concreteAddressee;
 
-    public RenderableAddressee(RenderableIntegration renderable, IImportanceLevel importanceLevel)
+    public RenderableAddressee(RenderableIntegration renderable, IImportanceLevel importanceLevel, ILogger logger)
+        : base(logger)
     {
         _concreteAddressee = renderable;
         ImportanceFilterProxy = new Proxy(_concreteAddressee, importanceLevel);

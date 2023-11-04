@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Services;
+using Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
+using Itmo.ObjectOrientedProgramming.Lab3.Messengers.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Topics.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Topics.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Users.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.Users.Models;
+using Moq;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests.Tests;
 
-public class MarkingUsersMessageAsReadChangesItsStatus
+public class FilterAddresseeNotMissedLowImportanceMessage
 {
     public static IEnumerable<object[]> GetMessageData
     {
@@ -26,38 +26,32 @@ public class MarkingUsersMessageAsReadChangesItsStatus
                 {
                     "Title",
                     "Body",
-                    new HighImportance(),
+                    new LowImportance(),
                 },
             };
         }
     }
 
-    private static bool CheckSendMessageResults(UserBase user, Message message)
-    {
-        return user.CheckMessageStatus(message);
-    }
-
     [Theory]
-    [MemberData(nameof(GetMessageData), MemberType = typeof(MarkingUsersMessageAsReadChangesItsStatus))]
+    [MemberData(nameof(GetMessageData), MemberType = typeof(FilterAddresseeNotMissedLowImportanceMessage))]
     private void ConditionCheck(IList<object> messageData)
     {
+        var messageLogMock = new Mock<ILogger>();
+
         Message message = MessageBuilder.Builder()
             .WithTitle((string)messageData[0])
             .WithBody((string)messageData[1])
             .WithImportance((IImportanceLevel)messageData[2])
             .Build();
 
-        UserBase user = new User("User");
-        IAddresseeType userAddressee = new UserAddressee(user, new LowImportance(), new Logger());
-        TopicBase topic = new Topic("Topic", userAddressee);
+        var addressee = new RenderableAddressee(
+            new RenderableIntegration(new Messenger("Messenger")),
+            new HighImportance(),
+            messageLogMock.Object);
+        TopicBase topic = new Topic("Topic", addressee);
+
         topic.MessageHandling(message);
 
-        bool result = !CheckSendMessageResults(user, message);
-
-        user.ReadMessage(message);
-
-        result &= CheckSendMessageResults(user, message);
-
-        Assert.True(result);
+        messageLogMock.Verify(log => log.Save(It.IsAny<Message>()), Times.Never());
     }
 }

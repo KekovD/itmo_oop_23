@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
@@ -47,7 +48,7 @@ public class AnAttemptToMarkUsersMessageInReadStatusAsReadReturnedAnError
             .Build();
 
         UserBase user = new User("User");
-        IAddresseeType userAddressee = new UserAddressee(user, new LowImportance());
+        IAddresseeType userAddressee = new UserAddressee(user, new LowImportance(), new Logger());
         TopicBase topic = new Topic("Topic", userAddressee);
         topic.MessageHandling(message);
 

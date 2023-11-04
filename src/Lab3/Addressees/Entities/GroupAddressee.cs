@@ -10,7 +10,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 public class GroupAddressee : IAddresseeType
 {
     private readonly IList<AddresseeBase> _addresseesGroup = new List<AddresseeBase>();
-    public ILogger MessageLog { get; } = new Logger();
+    public ILogger MessageLog { get; protected set; } = new Logger();
 
     public GroupAddressee AddAddresses(AddresseeBase addresseeBase)
     {

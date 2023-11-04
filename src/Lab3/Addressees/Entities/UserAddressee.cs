@@ -1,5 +1,6 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.LabException;
+using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
@@ -12,7 +13,8 @@ public class UserAddressee : AddresseeBase
 {
     private readonly UserBase _concreteAddressee;
 
-    public UserAddressee(UserBase user, IImportanceLevel importanceLevel)
+    public UserAddressee(UserBase user, IImportanceLevel importanceLevel, ILogger logger)
+        : base(logger)
     {
         _concreteAddressee = user;
         ImportanceFilterProxy = new Proxy(_concreteAddressee, importanceLevel);
