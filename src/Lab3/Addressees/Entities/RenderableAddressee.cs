@@ -1,9 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
+using Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.LabException;
-using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.MessageHandlers.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Proxies.Services;
 
@@ -13,8 +11,7 @@ public class RenderableAddressee : AddresseeBase
 {
     private readonly RenderableIntegration _concreteAddressee;
 
-    public RenderableAddressee(RenderableIntegration renderable, IImportanceLevel importanceLevel, ILogger logger)
-        : base(logger)
+    public RenderableAddressee(RenderableIntegration renderable, int importanceLevel)
     {
         _concreteAddressee = renderable;
         ImportanceFilterProxy = new Proxy(_concreteAddressee, importanceLevel);
@@ -26,7 +23,6 @@ public class RenderableAddressee : AddresseeBase
             throw new ProxyNullException(nameof(UserAddressee));
 
         ImportanceFilterProxy.MessageHandling(message);
-        SaveLog(message);
 
         return this;
     }

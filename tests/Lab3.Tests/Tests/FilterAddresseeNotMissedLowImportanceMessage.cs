@@ -2,8 +2,6 @@
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Messengers.Entities;
@@ -26,7 +24,7 @@ public class FilterAddresseeNotMissedLowImportanceMessage
                 {
                     "Title",
                     "Body",
-                    new LowImportance(),
+                    1,
                 },
             };
         }
@@ -41,17 +39,18 @@ public class FilterAddresseeNotMissedLowImportanceMessage
         Message message = MessageBuilder.Builder()
             .WithTitle((string)messageData[0])
             .WithBody((string)messageData[1])
-            .WithImportance((IImportanceLevel)messageData[2])
+            .WithImportance((int)messageData[2])
             .Build();
 
-        var addressee = new RenderableAddressee(
-            new RenderableIntegration(new Messenger("Messenger")),
-            new HighImportance(),
+        const int highImportance = 3;
+        var addressee = new LogAddresseeExpansion(
+            new RenderableAddressee(
+                new RenderableIntegration(new Messenger("Messenger")), highImportance),
             messageLogMock.Object);
         TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(addressee).Build();
 
         topic.MessageHandling(message);
 
-        messageLogMock.Verify(log => log.Save(It.IsAny<IList<Message>>(), It.IsAny<Message>()), Times.Never());
+        messageLogMock.Verify(log => log.Save(It.IsAny<Message>()), Times.Never());
     }
 }

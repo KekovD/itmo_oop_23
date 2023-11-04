@@ -1,5 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab3.LabException;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Messages.Models;
@@ -8,7 +7,7 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
 {
     private string? _title;
     private string? _body;
-    private IImportanceLevel? _importance;
+    private int _importance;
 
     public IBodyBuilder WithTitle(string title)
     {
@@ -22,7 +21,7 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
         return this;
     }
 
-    public IMessageBuilder WithImportance(IImportanceLevel importance)
+    public IMessageBuilder WithImportance(int importance)
     {
         _importance = importance;
         return this;
@@ -32,10 +31,10 @@ public abstract class MessageBuilderBase : ITitleBuilder, IBodyBuilder, IImporta
         Create(
             _title ?? throw new BuilderNullException(nameof(_title)),
             _body ?? throw new BuilderNullException(nameof(_body)),
-            _importance ?? throw new BuilderNullException(nameof(_importance)));
+            _importance);
 
     protected abstract Message Create(
         string title,
         string body,
-        IImportanceLevel importance);
+        int importance);
 }

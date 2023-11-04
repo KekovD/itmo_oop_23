@@ -5,5 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Loggers.Models;
 
 public interface ILogger
 {
-    ILogger Save(IList<Message> logList, Message message);
+    IList<Message> LogList { get; }
+    ILogger Save(Message message);
 }

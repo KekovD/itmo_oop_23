@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Itmo.ObjectOrientedProgramming.Lab3.Displays.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.LabException;
+using Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Renderables.Entities;

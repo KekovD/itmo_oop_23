@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.Loggers.Services;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Topics.Entities;
@@ -26,7 +23,7 @@ public class AnAttemptToMarkUsersMessageInReadStatusAsReadReturnedAnError
                 {
                     "Title",
                     "Body",
-                    new HighImportance(),
+                    3,
                 },
             };
         }
@@ -44,11 +41,12 @@ public class AnAttemptToMarkUsersMessageInReadStatusAsReadReturnedAnError
         Message message = MessageBuilder.Builder()
             .WithTitle((string)messageData[0])
             .WithBody((string)messageData[1])
-            .WithImportance((IImportanceLevel)messageData[2])
+            .WithImportance((int)messageData[2])
             .Build();
 
+        const int lowImportance = 1;
         UserBase user = new User("User");
-        IAddresseeType userAddressee = new UserAddressee(user, new LowImportance(), new Logger());
+        IAddresseeType userAddressee = new UserAddressee(user, lowImportance);
         TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(userAddressee).Build();
         topic.MessageHandling(message);
 

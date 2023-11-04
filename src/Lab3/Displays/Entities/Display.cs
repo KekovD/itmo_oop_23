@@ -1,5 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Displays.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.LabException;
+using Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab3.Messengers.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Models;

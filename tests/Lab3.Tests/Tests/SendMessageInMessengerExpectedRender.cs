@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.ExtensionAdapters.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Entities;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.Messages.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.Messengers.Entities;
@@ -28,7 +26,7 @@ public class SendMessageInMessengerExpectedRender
                 {
                     "239",
                     "241",
-                    new MediumImportance(),
+                    2,
                 },
             };
         }
@@ -50,23 +48,23 @@ public class SendMessageInMessengerExpectedRender
         Message message = MessageBuilder.Builder()
             .WithTitle((string)messageData[0])
             .WithBody((string)messageData[1])
-            .WithImportance((IImportanceLevel)messageData[2])
+            .WithImportance((int)messageData[2])
             .Build();
 
+        const int lowImportance = 1;
         var messenger = new Messenger("TestName");
-        var addressee = new RenderableAddressee(
-            new RenderableIntegration(messenger),
-            new LowImportance(),
+        var addressee = new LogAddresseeExpansion(
+            new RenderableAddressee(
+                new RenderableIntegration(messenger), lowImportance),
             messageLogMock.Object);
         TopicBase topic = Topic.Builder().WithName("Topic").WithAddressee(addressee).Build();
 
         topic.MessageHandling(message);
-        messenger.DrawMessage();
 
         string expectedOutput = "239\n241";
         string result = messenger.Render();
 
         Assert.Equal(expectedOutput, result);
-        messageLogMock.Verify(log => log.Save(It.IsAny<IList<Message>>(), It.IsAny<Message>()), Times.Once());
+        messageLogMock.Verify(log => log.Save(It.IsAny<Message>()), Times.Once());
     }
 }

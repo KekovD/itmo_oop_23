@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Itmo.ObjectOrientedProgramming.Lab3.LabException;
+namespace Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 
 public class RenderNullException : Exception
 {

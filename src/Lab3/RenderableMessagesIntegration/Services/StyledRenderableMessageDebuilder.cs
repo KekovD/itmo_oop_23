@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using Itmo.ObjectOrientedProgramming.Lab3.MessageImportanceLevel.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Modifiers.Services;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Entities;
 using Itmo.ObjectOrientedProgramming.Lab3.RenderableMessagesIntegration.Models;
@@ -12,7 +11,7 @@ public class StyledRenderableMessageDebuilder : IStyledRenderableMessageDebuilde
 {
     private readonly IRenderable _title;
     private readonly IRenderable _body;
-    private readonly IImportanceLevel _importance;
+    private readonly int _importance;
     private Color _titleColor = Color.Empty;
     private Color _bodyColor = Color.Empty;
 

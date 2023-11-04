@@ -1,5 +1,5 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab3.Addressees.Models;
-using Itmo.ObjectOrientedProgramming.Lab3.LabException;
+using Itmo.ObjectOrientedProgramming.Lab3.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab3.Topics.Models;
 using Itmo.ObjectOrientedProgramming.Lab3.Topics.Services;
 
