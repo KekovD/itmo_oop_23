@@ -91,3 +91,5 @@ csharp_style_namespace_declarations = file_scoped:warning
 dotnet_diagnostic.CS1591.severity = none
 
 dotnet_diagnostic.CA1062.severity = none
+
+dotnet_diagnostic.CA1034.severity = none
