@@ -4,4 +4,8 @@
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab4</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Renderables\" />
+    </ItemGroup>
+
 </Project>
