@@ -5,7 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Renderables\" />
+      <Folder Include="Commands\Models\" />
+      <Folder Include="Renderables\Services\" />
+      <Folder Include="ResponsibilityChain\Entities\" />
     </ItemGroup>
 
 </Project>
