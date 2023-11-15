@@ -2,15 +2,9 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
 
-public class DisconnectedState : IState
+public class DisconnectedState : StateBase
 {
-    public IState MoveToConnected()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override bool ConnectHandle() => false;
 
-    public IState MoveToDisconnected()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override bool DisconnectHandle() => true;
 }

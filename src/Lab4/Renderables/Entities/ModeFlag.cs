@@ -7,14 +7,14 @@ using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Entities;
 
-public class ModeFlag : FlagLocalFileRenderableSubChainLinkBase
+public class ModeFlag : FlagFileShowSubChainLinkBase
 {
-    private readonly ModeFlagSubChainLinkBase _mode;
-
     private ModeFlag(ModeFlagSubChainLinkBase mode)
     {
-        _mode = mode;
+        Mode = mode;
     }
+
+    public ModeFlagSubChainLinkBase Mode { get; }
 
     public static IModeFlagBuilder Build() => new ModeFlagBuilder();
 
@@ -23,7 +23,7 @@ public class ModeFlag : FlagLocalFileRenderableSubChainLinkBase
         const string targetValue = "-m";
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal)))
-            _mode.Handle(request);
+            Mode.Handle(request);
 
         Next?.Handle(request);
     }
