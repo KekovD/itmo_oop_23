@@ -29,7 +29,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
                                       flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)))
-            _context.Transition(request);
+            _context.TransitionToOtherState(request);
 
         Next?.Handle(request);
     }

@@ -31,7 +31,7 @@ public class DisconnectCommand : CommandChainLinkBase
             _context.ConnectRequest())
         {
             Chain?.Handle(request);
-            _context.Transition(request);
+            _context.TransitionToOtherState(request);
         }
 
         Next?.Handle(request);

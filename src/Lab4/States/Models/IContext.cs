@@ -9,7 +9,8 @@ public interface IContext
     string? Drive { get; }
     IReadOnlyList<Flag>? Flags { get; }
 
-    public void Transition(Command request);
+    void TransitionToOtherState(Command request);
+    void TransitionToOtherAddress(Command request);
     bool ConnectRequest();
     bool DisconnectRequest();
 }

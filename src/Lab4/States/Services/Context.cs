@@ -24,11 +24,17 @@ public class Context : IContext
 
     public static IContextBuilder Builder() => new ContextBuilder();
 
-    public void Transition(Command request)
+    public void TransitionToOtherState(Command request)
     {
         _state = _state.ChangeState(request);
 
-        if (request is not null && _state.ConnectHandle())
+        if (_state.ConnectHandle())
+            TransitionToOtherAddress(request);
+    }
+
+    public void TransitionToOtherAddress(Command request)
+    {
+        if (_state.ConnectHandle())
         {
             Address = _addressParser.GetAddress(request);
             Drive = _addressParser.GetDrive(request);
