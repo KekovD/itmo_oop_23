@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 

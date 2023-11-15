@@ -1,4 +1,6 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
+
+namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
 public abstract class StateBase
 {
@@ -11,4 +13,6 @@ public abstract class StateBase
 
     public abstract bool ConnectHandle();
     public abstract bool DisconnectHandle();
+
+    public abstract StateBase ChangeState(Command request);
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;

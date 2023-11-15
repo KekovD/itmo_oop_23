@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Entities;
 
@@ -30,7 +29,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
                                       flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)))
-            _context.TransitionTo(new ConnectedState(), request);
+            _context.Transition(request);
 
         Next?.Handle(request);
     }

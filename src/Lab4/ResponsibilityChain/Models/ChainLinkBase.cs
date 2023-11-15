@@ -1,12 +1,12 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 
-public abstract class ChainLinkBase : IChainLink
+public abstract class ChainLinkBase
 {
-    protected IChainLink? Next { get; private set; }
+    protected ChainLinkBase? Next { get; private set; }
 
-    public void AddNext(IChainLink link)
+    public void AddNext(ChainLinkBase link)
     {
         Next?.AddNext(link);
         Next ??= link;

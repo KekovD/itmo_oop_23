@@ -5,9 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Commands\Models\" />
-      <Folder Include="Renderables\Services\" />
-      <Folder Include="ResponsibilityChain\Entities\" />
+      <Folder Include="TreeCommands\Models\" />
     </ItemGroup>
 
 </Project>

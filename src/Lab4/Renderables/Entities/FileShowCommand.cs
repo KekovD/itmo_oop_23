@@ -1,6 +1,6 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
@@ -11,13 +11,13 @@ public class FileShowCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
 
-    private FileShowCommand(FlagFileShowSubChainLinkBase first, IContext context)
+    private FileShowCommand(FlagsFileShowSubChainLinkBase first, IContext context)
     {
         Chain = first;
         _context = context;
     }
 
-    public FlagFileShowSubChainLinkBase Chain { get; }
+    public FlagsFileShowSubChainLinkBase Chain { get; }
 
     public static IFileShowCommandBuilder Builder() => new FileShowCommandBuilder();
 
@@ -41,12 +41,12 @@ public class FileShowCommand : CommandChainLinkBase
 
     private class FileShowCommandBuilder : IFileShowCommandBuilder
     {
-        private FlagFileShowSubChainLinkBase? _first;
+        private FlagsFileShowSubChainLinkBase? _first;
         private IContext? _context;
 
-        public IFileShowCommandBuilder WithSubChain(FlagFileShowSubChainLinkBase flag)
+        public IFileShowCommandBuilder WithSubChain(FlagsFileShowSubChainLinkBase flags)
         {
-            _first = flag;
+            _first = flags;
             return this;
         }
 

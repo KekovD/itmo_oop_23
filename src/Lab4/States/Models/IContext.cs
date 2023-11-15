@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
@@ -9,8 +9,7 @@ public interface IContext
     string? Drive { get; }
     IReadOnlyList<Flag>? Flags { get; }
 
-    void TransitionTo(StateBase state, Command request);
-
+    public void Transition(Command request);
     bool ConnectRequest();
     bool DisconnectRequest();
 }

@@ -1,6 +1,6 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
@@ -26,9 +26,9 @@ public class ConnectCommand : CommandChainLinkBase
         const int argumentIndex = 0;
         const int targetCount = 1;
 
-        if (_context.ConnectRequest()) return;
-
-        if (request.Body.Count >= targetCount && request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
+        if (request.Body.Count >= targetCount &&
+            request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal) &&
+            _context.DisconnectRequest())
             Chain.Handle(request);
 
         Next?.Handle(request);

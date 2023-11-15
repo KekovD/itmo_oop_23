@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Entities;
 
-public class ModeFlag : FlagFileShowSubChainLinkBase
+public class ModeFlag : FlagsFileShowSubChainLinkBase
 {
     private ModeFlag(ModeFlagSubChainLinkBase mode)
     {

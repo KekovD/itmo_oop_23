@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
@@ -8,7 +8,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
 public class Context : IContext
 {
     private readonly IAddressParser _addressParser;
-    private StateBase? _state;
+    private StateBase _state = new DisconnectedState();
 
     private Context(IAddressParser addressParser, string? address, string? drive, IList<Flag>? flags)
     {
@@ -24,22 +24,21 @@ public class Context : IContext
 
     public static IContextBuilder Builder() => new ContextBuilder();
 
-    public void TransitionTo(StateBase state, Command? request)
+    public void Transition(Command request)
     {
-        if (request is not null)
+        _state = _state.ChangeState(request);
+
+        if (request is not null && _state.ConnectHandle())
         {
             Address = _addressParser.GetAddress(request);
             Drive = _addressParser.GetDrive(request);
             Flags = request.Flags.AsReadOnly();
         }
-
-        _state = state;
-        _state.SetContext(this);
     }
 
-    public bool ConnectRequest() => _state?.ConnectHandle() ?? false;
+    public bool ConnectRequest() => _state.ConnectHandle();
 
-    public bool DisconnectRequest() => _state?.DisconnectHandle() ?? false;
+    public bool DisconnectRequest() => _state.DisconnectHandle();
 
     private class ContextBuilder : IContextBuilder
     {
