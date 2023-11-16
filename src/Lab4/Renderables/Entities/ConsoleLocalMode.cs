@@ -9,11 +9,11 @@ using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Entities;
 
-public class ConsoleMode : ModeFlagSubChainLinkBase
+public class ConsoleLocalMode : ModeFlagSubChainLinkBase
 {
     private readonly IContext _context;
 
-    private ConsoleMode(IContext context)
+    private ConsoleLocalMode(IContext context)
     {
         _context = context;
     }
@@ -24,13 +24,18 @@ public class ConsoleMode : ModeFlagSubChainLinkBase
     {
         const string targetParameter = "console";
         const string targetValue = "-m";
+        const string contextParameter = "local";
         const int targetCount = 3;
         const int pathIndex = 2;
 
+        if (_context.DisconnectRequest()) Next?.Handle(request);
+
         if (request.Flags.Any(flag =>
                 flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
-                flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)))
-            if (request.Body.Count == targetCount) FileConsoleRender(request.Body[pathIndex]);
+                flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)) &&
+            _context.CheckConnectedMode(contextParameter) &&
+            request.Body.Count == targetCount)
+            FileConsoleRender(request.Body[pathIndex]);
 
         Next?.Handle(request);
     }
@@ -70,6 +75,6 @@ public class ConsoleMode : ModeFlagSubChainLinkBase
             return this;
         }
 
-        public ConsoleMode Crate() => new(_context ?? throw new BuilderNullException(nameof(ConsoleModeBuilder)));
+        public ConsoleLocalMode Crate() => new(_context ?? throw new BuilderNullException(nameof(ConsoleModeBuilder)));
     }
 }

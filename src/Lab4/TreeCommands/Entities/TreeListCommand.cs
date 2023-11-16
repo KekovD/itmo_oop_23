@@ -7,18 +7,18 @@ using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 
-public class TreeGoToCommand : CommandChainLinkBase
+public class TreeListCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
-    private readonly FlagsTreeGoToSubChainLinqBase? _chain;
+    private readonly FlagsTreeListSubChainLinqBase _chain;
 
-    private TreeGoToCommand(IContext context, FlagsTreeGoToSubChainLinqBase? chain)
+    private TreeListCommand(IContext context, FlagsTreeListSubChainLinqBase chain)
     {
         _context = context;
         _chain = chain;
     }
 
-    public static ITreeGoToCommandBuilder Builder() => new TreeGoToCommandBuilder();
+    public static ITreeListCommandBuilder Builder() => new TreeListCommandBuilder();
 
     public override void Handle(Command request)
     {
@@ -26,40 +26,37 @@ public class TreeGoToCommand : CommandChainLinkBase
         const int firstValueIndex = 0;
         const int secondValueIndex = 1;
         const string firstValue = "tree";
-        const string secondValue = "goto";
+        const string secondValue = "list";
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
-        if (request.Body.Count == targetCount &&
+        if (request.Body.Count >= targetCount &&
             request.Body[firstValueIndex].Equals(firstValue, StringComparison.Ordinal) &&
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
-        {
-            _chain?.Handle(request);
-            _context.TransitionToOtherAddress(request);
-        }
+            _chain.Handle(request);
 
         Next?.Handle(request);
     }
 
-    private class TreeGoToCommandBuilder : ITreeGoToCommandBuilder
+    private class TreeListCommandBuilder : ITreeListCommandBuilder
     {
         private IContext? _context;
-        private FlagsTreeGoToSubChainLinqBase? _chain;
+        private FlagsTreeListSubChainLinqBase? _chain;
 
-        public ITreeGoToCommandBuilder WithContext(IContext context)
+        public ITreeListCommandBuilder WithContext(IContext context)
         {
             _context = context;
             return this;
         }
 
-        public ITreeGoToCommandBuilder WithSubChain(FlagsTreeGoToSubChainLinqBase chain)
+        public ITreeListCommandBuilder WithSubChain(FlagsTreeListSubChainLinqBase chain)
         {
             _chain = chain;
             return this;
         }
 
-        public TreeGoToCommand Crate() => new(
-            _context ?? throw new BuilderNullException(nameof(TreeGoToCommandBuilder)),
-            _chain);
+        public TreeListCommand Crate() => new(
+            _context ?? throw new BuilderNullException(nameof(TreeListCommandBuilder)),
+            _chain ?? throw new BuilderNullException(nameof(TreeListCommandBuilder)));
     }
 }

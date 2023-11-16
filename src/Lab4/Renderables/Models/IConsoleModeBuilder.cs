@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
 public interface IConsoleModeBuilder
 {
     IConsoleModeBuilder WithContext(IContext context);
-    ConsoleMode Crate();
+    ConsoleLocalMode Crate();
 }

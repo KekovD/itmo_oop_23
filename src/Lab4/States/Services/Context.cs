@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
@@ -41,6 +43,18 @@ public class Context : IContext
             Flags = request.Flags.AsReadOnly();
         }
     }
+
+    public bool CheckConnectedMode(string mode)
+    {
+        const string targetValue = "-m";
+
+        return Flags is not null &&
+               Flags.Any(flag =>
+                   flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
+                   flag.Parameter.Equals(mode, StringComparison.Ordinal));
+    }
+
+    public string GetAbsoluteAddress(string path) => _addressParser.GetAbsolutePath(path);
 
     public bool ConnectRequest() => _state.ConnectHandle();
 

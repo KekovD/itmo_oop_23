@@ -9,14 +9,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.States.Entities;
 public class ConnectCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
+    private readonly FlagsConnectSubChainLinqBase _chain;
 
     private ConnectCommand(FlagsConnectSubChainLinqBase chain, IContext context)
     {
-        Chain = chain;
+        _chain = chain;
         _context = context;
     }
-
-    public FlagsConnectSubChainLinqBase Chain { get; }
 
     public static IConnectCommandBuilder Builder() => new ConnectCommandBuilder();
 
@@ -26,10 +25,11 @@ public class ConnectCommand : CommandChainLinkBase
         const int argumentIndex = 0;
         const int targetCount = 1;
 
+        if (_context.ConnectRequest()) Next?.Handle(request);
+
         if (request.Body.Count >= targetCount &&
-            request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal) &&
-            _context.DisconnectRequest())
-            Chain.Handle(request);
+            request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
+            _chain.Handle(request);
 
         Next?.Handle(request);
     }
@@ -39,7 +39,7 @@ public class ConnectCommand : CommandChainLinkBase
         private FlagsConnectSubChainLinqBase? _chain;
         private IContext? _context;
 
-        public IConnectCommandBuilder WithChain(FlagsConnectSubChainLinqBase chain)
+        public IConnectCommandBuilder WithSubChain(FlagsConnectSubChainLinqBase chain)
         {
             _chain = chain;
             return this;

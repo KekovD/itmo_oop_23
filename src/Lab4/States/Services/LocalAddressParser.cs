@@ -32,11 +32,22 @@ public class LocalAddressParser : IAddressParser
 
         string drive = string.Empty;
 
-        if (request is not null && request.Body.Count >= targetCount && !string.IsNullOrEmpty(request.Body[targetIndex]))
+        if (request.Body.Count >= targetCount && !string.IsNullOrEmpty(request.Body[targetIndex]))
             drive = Path.GetPathRoot(request.Body[targetIndex]) ?? string.Empty;
 
         return !string.IsNullOrEmpty(drive) &&
                drive.Length == targetLength &&
                drive[targetIndex] == targetChar ? drive : string.Empty;
+    }
+
+    public string GetAbsolutePath(string path)
+    {
+        if (!Path.IsPathRooted(path))
+            path = Path.Combine(Directory.GetCurrentDirectory(), path);
+
+        if (Path.IsPathRooted(path) && Path.GetPathRoot(path) != Directory.GetCurrentDirectory())
+            return path;
+
+        return Path.GetFullPath(path);
     }
 }

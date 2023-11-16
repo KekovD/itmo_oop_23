@@ -24,7 +24,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
         const string targetValue = "-m";
         const string targetParameter = "local";
 
-        if (request.Body.Count != targetCount)
+        if (request.Body.Count != targetCount || _context.ConnectRequest())
             Next?.Handle(request);
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal) &&

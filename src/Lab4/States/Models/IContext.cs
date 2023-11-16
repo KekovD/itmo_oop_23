@@ -11,6 +11,8 @@ public interface IContext
 
     void TransitionToOtherState(Command request);
     void TransitionToOtherAddress(Command request);
+    bool CheckConnectedMode(string mode);
+    string GetAbsoluteAddress(string path);
     bool ConnectRequest();
     bool DisconnectRequest();
 }

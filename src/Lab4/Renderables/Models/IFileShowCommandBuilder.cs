@@ -6,7 +6,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
 
 public interface IFileShowCommandBuilder
 {
-    IFileShowCommandBuilder WithSubChain(FlagsFileShowSubChainLinkBase flags);
+    IFileShowCommandBuilder WithSubChain(FlagsFileShowSubChainLinkBase chain);
     IFileShowCommandBuilder WithContext(IContext context);
     FileShowCommand Crate();
 }

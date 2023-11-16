@@ -6,4 +6,5 @@ public interface IAddressParser
 {
     string GetAddress(Command request);
     string GetDrive(Command request);
+    string GetAbsolutePath(string path);
 }

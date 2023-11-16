@@ -9,14 +9,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.States.Entities;
 public class DisconnectCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
+    private readonly FlagsDisconnectSubChainLinqBase? _chain;
 
     private DisconnectCommand(IContext context, FlagsDisconnectSubChainLinqBase? chain)
     {
         _context = context;
-        Chain = chain;
+        _chain = chain;
     }
-
-    public FlagsDisconnectSubChainLinqBase? Chain { get; }
 
     public static IDisconnectCommandBuilder Builder() => new DisconnectCommandBuilder();
 
@@ -26,11 +25,12 @@ public class DisconnectCommand : CommandChainLinkBase
         const int argumentIndex = 0;
         const int targetCount = 1;
 
+        if (_context.DisconnectRequest()) Next?.Handle(request);
+
         if (request.Body.Count >= targetCount &&
-            request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal) &&
-            _context.ConnectRequest())
+            request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
         {
-            Chain?.Handle(request);
+            _chain?.Handle(request);
             _context.TransitionToOtherState(request);
         }
 
@@ -48,7 +48,7 @@ public class DisconnectCommand : CommandChainLinkBase
             return this;
         }
 
-        public IDisconnectCommandBuilder WithChain(FlagsDisconnectSubChainLinqBase chain)
+        public IDisconnectCommandBuilder WithSubChain(FlagsDisconnectSubChainLinqBase chain)
         {
             _chain = chain;
             return this;

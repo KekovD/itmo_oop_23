@@ -4,9 +4,9 @@ using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Models;
 
-public interface ITreeGoToCommandBuilder
+public interface ITreeListCommandBuilder
 {
-    ITreeGoToCommandBuilder WithContext(IContext context);
-    ITreeGoToCommandBuilder WithSubChain(FlagsTreeGoToSubChainLinqBase chain);
-    TreeGoToCommand Crate();
+    ITreeListCommandBuilder WithContext(IContext context);
+    ITreeListCommandBuilder WithSubChain(FlagsTreeListSubChainLinqBase chain);
+    TreeListCommand Crate();
 }

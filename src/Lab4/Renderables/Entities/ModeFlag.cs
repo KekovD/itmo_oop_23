@@ -4,40 +4,54 @@ using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Entities;
 
 public class ModeFlag : FlagsFileShowSubChainLinkBase
 {
-    private ModeFlag(ModeFlagSubChainLinkBase mode)
+    private readonly ModeFlagSubChainLinkBase _chain;
+    private readonly IContext _context;
+
+    private ModeFlag(ModeFlagSubChainLinkBase chain, IContext context)
     {
-        Mode = mode;
+        _chain = chain;
+        _context = context;
     }
 
-    public ModeFlagSubChainLinkBase Mode { get; }
-
-    public static IModeFlagBuilder Build() => new ModeFlagBuilder();
+    public static IModeFlagBuilder Builder() => new ModeFlagBuilder();
 
     public override void Handle(Command request)
     {
+        if (_context.DisconnectRequest()) Next?.Handle(request);
+
         const string targetValue = "-m";
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal)))
-            Mode.Handle(request);
+            _chain.Handle(request);
 
         Next?.Handle(request);
     }
 
     private class ModeFlagBuilder : IModeFlagBuilder
     {
-        private ModeFlagSubChainLinkBase? _mode;
+        private ModeFlagSubChainLinkBase? _chain;
+        private IContext? _context;
 
-        public IModeFlagBuilder AddFirstMode(ModeFlagSubChainLinkBase mode)
+        public IModeFlagBuilder WithSubChain(ModeFlagSubChainLinkBase chain)
         {
-            _mode = mode;
+            _chain = chain;
             return this;
         }
 
-        public ModeFlag Crate() => new(_mode ?? throw new BuilderNullException(nameof(ModeFlagBuilder)));
+        public IModeFlagBuilder WithContext(IContext context)
+        {
+            _context = context;
+            return this;
+        }
+
+        public ModeFlag Crate() => new(
+            _chain ?? throw new BuilderNullException(nameof(ModeFlagBuilder)),
+            _context ?? throw new BuilderNullException(nameof(ModeFlagBuilder)));
     }
 }
