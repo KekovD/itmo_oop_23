@@ -5,7 +5,7 @@ using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;

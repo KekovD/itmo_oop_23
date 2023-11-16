@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class Context : IContext
 {
@@ -55,6 +55,9 @@ public class Context : IContext
     }
 
     public string GetAbsoluteAddress(string path) => _addressParser.GetAbsolutePath(path);
+
+    public string GetUniqueFileName(string directory, string fileName) =>
+        _addressParser.GetUniqueName(directory, fileName);
 
     public bool ConnectRequest() => _state.ConnectHandle();
 

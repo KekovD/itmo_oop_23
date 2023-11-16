@@ -1,7 +1,7 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public interface IDisconnectCommandBuilder
 {

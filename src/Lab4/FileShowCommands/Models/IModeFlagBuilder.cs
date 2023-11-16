@@ -1,8 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.Renderables.Entities;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.Renderables.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Models;
 
 public interface IModeFlagBuilder
 {

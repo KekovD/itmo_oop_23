@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public interface IContext
 {
@@ -13,6 +13,7 @@ public interface IContext
     void TransitionToOtherAddress(Command request);
     bool CheckConnectedMode(string mode);
     string GetAbsoluteAddress(string path);
+    string GetUniqueFileName(string directory, string fileName);
     bool ConnectRequest();
     bool DisconnectRequest();
 }

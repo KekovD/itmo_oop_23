@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class LocalAddressParser : IAddressParser
 {
@@ -49,5 +49,22 @@ public class LocalAddressParser : IAddressParser
             return path;
 
         return Path.GetFullPath(path);
+    }
+
+    public string GetUniqueName(string directory, string fileName)
+    {
+        string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+        string fileExtension = Path.GetExtension(fileName);
+        int nameCounter = 1;
+
+        string newFileName = fileName;
+        while (File.Exists(Path.Combine(directory, newFileName)))
+        {
+            newFileName = string.Format(
+                System.Globalization.CultureInfo.InvariantCulture, "{0}_{1}{2}", fileNameWithoutExtension, nameCounter, fileExtension);
+            nameCounter++;
+        }
+
+        return newFileName;
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public abstract class StateBase
 {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Services;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public interface IContextBuilder
 {

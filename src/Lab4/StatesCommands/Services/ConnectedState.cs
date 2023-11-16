@@ -1,8 +1,8 @@
 ﻿using System;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
-namespace Itmo.ObjectOrientedProgramming.Lab4.States.Services;
+namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class ConnectedState : StateBase
 {

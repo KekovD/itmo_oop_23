@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.States.Models;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Models;
