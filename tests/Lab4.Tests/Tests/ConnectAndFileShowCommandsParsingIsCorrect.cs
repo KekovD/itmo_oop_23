@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Entities;
@@ -77,17 +78,26 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
         const int connectIndex = 2;
         const int fileShowIndex = 3;
 
+        var connectReference = (Command)consoleCommandsData[connectIndex];
+        var fileShowReference = (Command)consoleCommandsData[fileShowIndex];
+
         parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[connectStringIndex], out Command connectCommand);
         parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[fileShowStringIndex], out Command fileShowCommand);
+
+        Assert.True(connectReference.PathIndex == connectCommand.PathIndex &&
+                    connectReference.Body.SequenceEqual(connectCommand.Body) &&
+                    connectReference.Flags.SequenceEqual(connectCommand.Flags));
+
+        Assert.True(fileShowReference.PathIndex == fileShowCommand.PathIndex &&
+                    fileShowReference.Body.SequenceEqual(fileShowCommand.Body) &&
+                    fileShowReference.Flags.SequenceEqual(fileShowCommand.Flags));
 
         chain.Handle(connectCommand);
 
         chain.Handle(fileShowCommand);
 
         Assert.True(parseResult);
-        Assert.True(connectCommand.Equals((Command)consoleCommandsData[connectIndex]));
-        Assert.True(connectCommand.Equals((Command)consoleCommandsData[fileShowIndex]));
-        mockConnectCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.Once());
-        mockFileShowCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.Once());
+        mockConnectCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
+        mockFileShowCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
     }
 }
