@@ -60,7 +60,7 @@ public class CopyLocalFileSystem : CopyFileSystemSubChainLinqBase
             return this;
         }
 
-        public CopyLocalFileSystem Crate() =>
+        public CopyLocalFileSystem Create() =>
             new(_context ?? throw new BuilderNullException(nameof(CopyLocalFileSystemBuilder)));
     }
 }

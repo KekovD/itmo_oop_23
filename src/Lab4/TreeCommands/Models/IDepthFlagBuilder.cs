@@ -8,5 +8,5 @@ public interface IDepthFlagBuilder
 {
     IDepthFlagBuilder WithContext(IContext context);
     IDepthFlagBuilder WithSubChain(DepthFlagSubChainLinqBase chain);
-    DepthFlag Crate();
+    DepthFlag Create();
 }

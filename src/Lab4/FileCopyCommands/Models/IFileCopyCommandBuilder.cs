@@ -9,5 +9,5 @@ public interface IFileCopyCommandBuilder
     IFileCopyCommandBuilder WithContext(IContext context);
     IFileCopyCommandBuilder WithFlagsSubChain(FlagsFileCopySubChainLinqBase flagsChain);
     IFileCopyCommandBuilder WithFileSystemSubChain(CopyFileSystemSubChainLinqBase fileSystemChain);
-    FileCopyCommand Crate();
+    FileCopyCommand Create();
 }

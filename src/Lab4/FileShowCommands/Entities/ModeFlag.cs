@@ -10,13 +10,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
 
 public class ModeFlag : FlagsFileShowSubChainLinkBase
 {
-    private readonly ModeFlagSubChainLinkBase _chain;
+    private readonly ModeFlagSubChainLinkBase? _chain;
     private readonly IContext _context;
 
-    private ModeFlag(ModeFlagSubChainLinkBase chain, IContext context)
+    private ModeFlag(IContext context, ModeFlagSubChainLinkBase? chain)
     {
-        _chain = chain;
         _context = context;
+        _chain = chain;
     }
 
     public static IModeFlagBuilder Builder() => new ModeFlagBuilder();
@@ -28,7 +28,7 @@ public class ModeFlag : FlagsFileShowSubChainLinkBase
         const string targetValue = "-m";
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal)))
-            _chain.Handle(request);
+            _chain?.Handle(request);
 
         Next?.Handle(request);
     }
@@ -50,8 +50,8 @@ public class ModeFlag : FlagsFileShowSubChainLinkBase
             return this;
         }
 
-        public ModeFlag Crate() => new(
-            _chain ?? throw new BuilderNullException(nameof(ModeFlagBuilder)),
-            _context ?? throw new BuilderNullException(nameof(ModeFlagBuilder)));
+        public ModeFlag Create() => new(
+            _context ?? throw new BuilderNullException(nameof(ModeFlagBuilder)),
+            _chain);
     }
 }

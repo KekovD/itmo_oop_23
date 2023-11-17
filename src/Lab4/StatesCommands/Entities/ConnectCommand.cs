@@ -9,12 +9,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 public class ConnectCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
-    private readonly FlagsConnectSubChainLinqBase _chain;
+    private readonly FlagsConnectSubChainLinqBase? _chain;
 
-    private ConnectCommand(FlagsConnectSubChainLinqBase chain, IContext context)
+    private ConnectCommand(IContext context, FlagsConnectSubChainLinqBase? chain)
     {
-        _chain = chain;
         _context = context;
+        _chain = chain;
     }
 
     public static IConnectCommandBuilder Builder() => new ConnectCommandBuilder();
@@ -23,13 +23,14 @@ public class ConnectCommand : CommandChainLinkBase
     {
         const string argument = "connect";
         const int argumentIndex = 0;
+        const int pathIndex = 1;
         const int targetCount = 1;
 
         if (_context.ConnectRequest()) Next?.Handle(request);
 
         if (request.Body.Count >= targetCount &&
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
-            _chain.Handle(request);
+            _chain?.Handle(request with { PathIndex = pathIndex });
 
         Next?.Handle(request);
     }
@@ -51,9 +52,9 @@ public class ConnectCommand : CommandChainLinkBase
             return this;
         }
 
-        public ConnectCommand Crate() =>
+        public ConnectCommand Create() =>
             new(
-                _chain ?? throw new BuilderNullException(nameof(ConnectCommandBuilder)),
-                _context ?? throw new BuilderNullException(nameof(ConnectCommandBuilder)));
+                _context ?? throw new BuilderNullException(nameof(ConnectCommandBuilder)),
+                _chain);
     }
 }

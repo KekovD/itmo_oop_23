@@ -27,6 +27,7 @@ public class TreeGoToCommand : CommandChainLinkBase
         const int secondValueIndex = 1;
         const string firstValue = "tree";
         const string secondValue = "goto";
+        const int pathIndex = 2;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
@@ -35,7 +36,7 @@ public class TreeGoToCommand : CommandChainLinkBase
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
         {
             _chain?.Handle(request);
-            _context.TransitionToOtherAddress(request);
+            _context.TransitionToOtherAddress(request with { PathIndex = pathIndex });
         }
 
         Next?.Handle(request);
@@ -58,7 +59,7 @@ public class TreeGoToCommand : CommandChainLinkBase
             return this;
         }
 
-        public TreeGoToCommand Crate() => new(
+        public TreeGoToCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(TreeGoToCommandBuilder)),
             _chain);
     }

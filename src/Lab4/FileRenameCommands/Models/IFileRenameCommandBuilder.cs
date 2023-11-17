@@ -9,5 +9,5 @@ public interface IFileRenameCommandBuilder
     IFileRenameCommandBuilder WithContext(IContext context);
     IFileRenameCommandBuilder WithFlagsSubChain(FlagsFileRenameSubChainLinqBase flagsChain);
     IFileRenameCommandBuilder WithFileSystemSubChain(RenameFileSystemSubChainLinqBase fileSystemChain);
-    FileRenameCommand Crate();
+    FileRenameCommand Create();
 }

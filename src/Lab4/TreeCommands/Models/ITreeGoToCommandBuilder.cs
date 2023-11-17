@@ -8,5 +8,5 @@ public interface ITreeGoToCommandBuilder
 {
     ITreeGoToCommandBuilder WithContext(IContext context);
     ITreeGoToCommandBuilder WithSubChain(FlagsTreeGoToSubChainLinqBase chain);
-    TreeGoToCommand Crate();
+    TreeGoToCommand Create();
 }

@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Models;
 public interface ICopyLocalFileSystemBuilder
 {
     ICopyLocalFileSystemBuilder WithContext(IContext context);
-    CopyLocalFileSystem Crate();
+    CopyLocalFileSystem Create();
 }

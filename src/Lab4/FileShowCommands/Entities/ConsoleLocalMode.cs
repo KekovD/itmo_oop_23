@@ -75,6 +75,6 @@ public class ConsoleLocalMode : ModeFlagSubChainLinkBase
             return this;
         }
 
-        public ConsoleLocalMode Crate() => new(_context ?? throw new BuilderNullException(nameof(ConsoleModeBuilder)));
+        public ConsoleLocalMode Create() => new(_context ?? throw new BuilderNullException(nameof(ConsoleModeBuilder)));
     }
 }

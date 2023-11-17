@@ -29,8 +29,7 @@ public class ConsoleDepthFlag : DepthFlagSubChainLinqBase
 
     public override void Handle(Command request)
     {
-        const int targetCount = 3;
-        const int pathIndex = 2;
+        const int targetCount = 2;
         const string modeParameter = "console";
         const string connectedModeParameter = "local";
         const string modeValue = "-m";
@@ -46,15 +45,18 @@ public class ConsoleDepthFlag : DepthFlagSubChainLinqBase
         {
             const int standardDepth = 1;
             int depth = standardDepth;
-            depth = request.Flags.Any(flag => flag.Value.Equals(depthValue, StringComparison.Ordinal) &&
-                                              int.TryParse(
-                                                  flag.Parameter,
-                                                  NumberStyles.Integer,
-                                                  CultureInfo.InvariantCulture,
-                                                  out depth)) ? depth : standardDepth;
+            depth = request.Flags
+                .Any(flag => flag.Value.Equals(depthValue, StringComparison.Ordinal) &&
+                             int.TryParse(
+                                 flag.Parameter,
+                                 NumberStyles.Integer,
+                                 CultureInfo.InvariantCulture,
+                                 out depth))
+                ? depth
+                : standardDepth;
 
             PrintDirectoryTree(
-                _context.GetAbsoluteAddress(request.Body[pathIndex]),
+                _context.GetAbsoluteAddress(_context.Address ?? throw new ContextNullException(nameof(_context.Address))),
                 depth,
                 _folderSymbol,
                 _fileSymbol,
@@ -124,7 +126,7 @@ public class ConsoleDepthFlag : DepthFlagSubChainLinqBase
             return this;
         }
 
-        public ConsoleDepthFlag Crate() => new(
+        public ConsoleDepthFlag Create() => new(
             _context ?? throw new BuilderNullException(nameof(ConsoleDepthFlagBuilder)),
             _folderSymbol,
             _fileSymbol,

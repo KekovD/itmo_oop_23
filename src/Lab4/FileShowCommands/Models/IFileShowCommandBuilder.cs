@@ -8,5 +8,5 @@ public interface IFileShowCommandBuilder
 {
     IFileShowCommandBuilder WithSubChain(FlagsFileShowSubChainLinkBase chain);
     IFileShowCommandBuilder WithContext(IContext context);
-    FileShowCommand Crate();
+    FileShowCommand Create();
 }

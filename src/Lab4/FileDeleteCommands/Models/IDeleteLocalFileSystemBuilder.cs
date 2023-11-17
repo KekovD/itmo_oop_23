@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Models;
 public interface IDeleteLocalFileSystemBuilder
 {
     IDeleteLocalFileSystemBuilder WithContext(IContext context);
-    DeleteLocalFileSystem Crate();
+    DeleteLocalFileSystem Create();
 }

@@ -9,5 +9,5 @@ public interface IFileMoveCommandBuilder
     IFileMoveCommandBuilder WithContext(IContext context);
     IFileMoveCommandBuilder WithFlagsSubChain(FlagsFileMoveSubChainLinqBase flagsChain);
     IFileMoveCommandBuilder WithFileSystemSubChain(MoveFileSystemSubChainLinqBase fileSystemChain);
-    FileMoveCommand Crate();
+    FileMoveCommand Create();
 }

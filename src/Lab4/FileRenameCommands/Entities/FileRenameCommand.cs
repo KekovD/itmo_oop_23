@@ -11,9 +11,9 @@ public class FileRenameCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsFileRenameSubChainLinqBase? _flagsChain;
-    private readonly RenameFileSystemSubChainLinqBase _fileSystemChain;
+    private readonly RenameFileSystemSubChainLinqBase? _fileSystemChain;
 
-    private FileRenameCommand(IContext context, RenameFileSystemSubChainLinqBase fileSystemChain, FlagsFileRenameSubChainLinqBase? flagsChain)
+    private FileRenameCommand(IContext context, RenameFileSystemSubChainLinqBase? fileSystemChain, FlagsFileRenameSubChainLinqBase? flagsChain)
     {
         _context = context;
         _fileSystemChain = fileSystemChain;
@@ -29,6 +29,7 @@ public class FileRenameCommand : CommandChainLinkBase
         const int targetCount = 4;
         const int firstIndex = 0;
         const int secondIndex = 1;
+        const int pathIndex = 2;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
@@ -36,8 +37,8 @@ public class FileRenameCommand : CommandChainLinkBase
             request.Body[firstIndex].Equals(firstArgument, StringComparison.Ordinal) &&
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
         {
-            _flagsChain?.Handle(request);
-            _fileSystemChain.Handle(request);
+            _flagsChain?.Handle(request with { PathIndex = pathIndex });
+            _fileSystemChain?.Handle(request with { PathIndex = pathIndex });
         }
 
         Next?.Handle(request);
@@ -67,9 +68,9 @@ public class FileRenameCommand : CommandChainLinkBase
             return this;
         }
 
-        public FileRenameCommand Crate() => new(
+        public FileRenameCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(FileRenameCommandBuilder)),
-            _fileSystemChain ?? throw new BuilderNullException(nameof(FileRenameCommandBuilder)),
+            _fileSystemChain,
             _flagsChain);
     }
 }

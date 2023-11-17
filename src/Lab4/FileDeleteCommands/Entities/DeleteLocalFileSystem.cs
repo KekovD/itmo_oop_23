@@ -50,7 +50,7 @@ public class DeleteLocalFileSystem : DeleteFileSystemSubChainLinqBase
             return this;
         }
 
-        public DeleteLocalFileSystem Crate() =>
+        public DeleteLocalFileSystem Create() =>
             new(_context ?? throw new BuilderNullException(nameof(DeleteLocalFileSystemBuilder)));
     }
 }

@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Models;
 public interface IConsoleModeBuilder
 {
     IConsoleModeBuilder WithContext(IContext context);
-    ConsoleLocalMode Crate();
+    ConsoleLocalMode Create();
 }

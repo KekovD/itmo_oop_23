@@ -11,9 +11,9 @@ public class FileMoveCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsFileMoveSubChainLinqBase? _flagsChain;
-    private readonly MoveFileSystemSubChainLinqBase _fileSystemChain;
+    private readonly MoveFileSystemSubChainLinqBase? _fileSystemChain;
 
-    private FileMoveCommand(IContext context, MoveFileSystemSubChainLinqBase fileSystemChain, FlagsFileMoveSubChainLinqBase? flagsChain)
+    private FileMoveCommand(IContext context, MoveFileSystemSubChainLinqBase? fileSystemChain, FlagsFileMoveSubChainLinqBase? flagsChain)
     {
         _context = context;
         _fileSystemChain = fileSystemChain;
@@ -37,7 +37,7 @@ public class FileMoveCommand : CommandChainLinkBase
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
         {
             _flagsChain?.Handle(request);
-            _fileSystemChain.Handle(request);
+            _fileSystemChain?.Handle(request);
         }
 
         Next?.Handle(request);
@@ -67,9 +67,9 @@ public class FileMoveCommand : CommandChainLinkBase
             return this;
         }
 
-        public FileMoveCommand Crate() => new(
+        public FileMoveCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(FileMoveCommandBuilder)),
-            _fileSystemChain ?? throw new BuilderNullException(nameof(FileMoveCommandBuilder)),
+            _fileSystemChain,
             _flagsChain);
     }
 }

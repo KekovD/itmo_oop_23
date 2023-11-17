@@ -31,7 +31,10 @@ public class Context : IContext
         _state = _state.ChangeState(request);
 
         if (_state.ConnectHandle())
+        {
             TransitionToOtherAddress(request);
+            Flags = request.Flags.AsReadOnly();
+        }
     }
 
     public void TransitionToOtherAddress(Command request)
@@ -40,7 +43,6 @@ public class Context : IContext
         {
             Address = _addressParser.GetAddress(request);
             Drive = _addressParser.GetDrive(request);
-            Flags = request.Flags.AsReadOnly();
         }
     }
 
@@ -94,7 +96,7 @@ public class Context : IContext
             return this;
         }
 
-        public Context Crate() => new(
+        public Context Create() => new(
             _addressParser ?? throw new BuilderNullException(nameof(ContextBuilder)),
             _address,
             _drive,

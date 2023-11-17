@@ -60,7 +60,7 @@ public class MoveLocalFileSystem : MoveFileSystemSubChainLinqBase
             return this;
         }
 
-        public MoveLocalFileSystem Crate() =>
+        public MoveLocalFileSystem Create() =>
             new(_context ?? throw new BuilderNullException(nameof(MoveLocalFileSystemBuilder)));
     }
 }

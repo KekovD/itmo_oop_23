@@ -9,5 +9,5 @@ public interface IConsoleDepthFlagBuilder
     IConsoleDepthFlagBuilder WithFolderSymbol(string symbol);
     IConsoleDepthFlagBuilder WithFileSymbol(string symbol);
     IConsoleDepthFlagBuilder WithIndentation(string symbol);
-    ConsoleDepthFlag Crate();
+    ConsoleDepthFlag Create();
 }

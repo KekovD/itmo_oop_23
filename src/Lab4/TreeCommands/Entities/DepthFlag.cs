@@ -9,9 +9,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 public class DepthFlag : FlagsTreeListSubChainLinqBase
 {
     private readonly IContext _context;
-    private readonly DepthFlagSubChainLinqBase _chain;
+    private readonly DepthFlagSubChainLinqBase? _chain;
 
-    private DepthFlag(IContext context, DepthFlagSubChainLinqBase chain)
+    private DepthFlag(IContext context, DepthFlagSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
@@ -21,7 +21,7 @@ public class DepthFlag : FlagsTreeListSubChainLinqBase
     public override void Handle(Command request)
     {
         if (_context.ConnectRequest())
-            _chain.Handle(request);
+            _chain?.Handle(request);
 
         Next?.Handle(request);
     }
@@ -43,8 +43,8 @@ public class DepthFlag : FlagsTreeListSubChainLinqBase
             return this;
         }
 
-        public DepthFlag Crate() => new(
+        public DepthFlag Create() => new(
             _context ?? throw new BuilderNullException(nameof(DepthFlagBuilder)),
-            _chain ?? throw new BuilderNullException(nameof(DepthFlagBuilder)));
+            _chain);
     }
 }

@@ -54,7 +54,7 @@ public class DisconnectCommand : CommandChainLinkBase
             return this;
         }
 
-        public DisconnectCommand Crate() => new(
+        public DisconnectCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(DisconnectCommandBuilder)),
             _chain);
     }

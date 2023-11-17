@@ -10,12 +10,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
 public class FileShowCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
-    private readonly FlagsFileShowSubChainLinkBase _chain;
+    private readonly FlagsFileShowSubChainLinkBase? _chain;
 
-    private FileShowCommand(FlagsFileShowSubChainLinkBase first, IContext context)
+    private FileShowCommand(IContext context, FlagsFileShowSubChainLinkBase? chain)
     {
-        _chain = first;
         _context = context;
+        _chain = chain;
     }
 
     public static IFileShowCommandBuilder Builder() => new FileShowCommandBuilder();
@@ -27,13 +27,14 @@ public class FileShowCommand : CommandChainLinkBase
         const int targetCount = 2;
         const int firstIndex = 0;
         const int secondIndex = 1;
+        const int pathIndex = 2;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
         if (request.Body.Count >= targetCount &&
             request.Body[firstIndex].Equals(firstArgument, StringComparison.Ordinal)
             && request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
-            _chain.Handle(request);
+            _chain?.Handle(request with { PathIndex = pathIndex });
 
         Next?.Handle(request);
     }
@@ -55,9 +56,9 @@ public class FileShowCommand : CommandChainLinkBase
             return this;
         }
 
-        public FileShowCommand Crate() =>
+        public FileShowCommand Create() =>
             new(
-                _chain ?? throw new BuilderNullException(nameof(FileShowCommandBuilder)),
-                _context ?? throw new BuilderNullException(nameof(FileShowCommandBuilder)));
+                _context ?? throw new BuilderNullException(nameof(FileShowCommandBuilder)),
+                _chain);
     }
 }

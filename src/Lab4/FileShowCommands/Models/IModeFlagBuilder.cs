@@ -8,5 +8,5 @@ public interface IModeFlagBuilder
 {
     IModeFlagBuilder WithSubChain(ModeFlagSubChainLinkBase chain);
     IModeFlagBuilder WithContext(IContext context);
-    ModeFlag Crate();
+    ModeFlag Create();
 }

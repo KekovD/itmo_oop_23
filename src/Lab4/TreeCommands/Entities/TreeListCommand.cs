@@ -10,9 +10,9 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 public class TreeListCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
-    private readonly FlagsTreeListSubChainLinqBase _chain;
+    private readonly FlagsTreeListSubChainLinqBase? _chain;
 
-    private TreeListCommand(IContext context, FlagsTreeListSubChainLinqBase chain)
+    private TreeListCommand(IContext context, FlagsTreeListSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
@@ -22,7 +22,7 @@ public class TreeListCommand : CommandChainLinkBase
 
     public override void Handle(Command request)
     {
-        const int targetCount = 3;
+        const int targetCount = 2;
         const int firstValueIndex = 0;
         const int secondValueIndex = 1;
         const string firstValue = "tree";
@@ -33,7 +33,7 @@ public class TreeListCommand : CommandChainLinkBase
         if (request.Body.Count >= targetCount &&
             request.Body[firstValueIndex].Equals(firstValue, StringComparison.Ordinal) &&
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
-            _chain.Handle(request);
+            _chain?.Handle(request);
 
         Next?.Handle(request);
     }
@@ -55,8 +55,8 @@ public class TreeListCommand : CommandChainLinkBase
             return this;
         }
 
-        public TreeListCommand Crate() => new(
+        public TreeListCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(TreeListCommandBuilder)),
-            _chain ?? throw new BuilderNullException(nameof(TreeListCommandBuilder)));
+            _chain);
     }
 }

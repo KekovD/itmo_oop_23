@@ -16,6 +16,8 @@ public class RenameLocalFileSystem : RenameFileSystemSubChainLinqBase
         _context = context;
     }
 
+    public static IRenameLocalFileSystemBuilder Builder() => new RenameLocalFileSystemBuilder();
+
     public override void Handle(Command request)
     {
         const string targetMode = "local";
@@ -60,7 +62,7 @@ public class RenameLocalFileSystem : RenameFileSystemSubChainLinqBase
             return this;
         }
 
-        public RenameLocalFileSystem Crate() =>
+        public RenameLocalFileSystem Create() =>
             new(_context ?? throw new BuilderNullException(nameof(RenameLocalFileSystemBuilder)));
     }
 }

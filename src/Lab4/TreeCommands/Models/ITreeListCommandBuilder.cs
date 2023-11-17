@@ -8,5 +8,5 @@ public interface ITreeListCommandBuilder
 {
     ITreeListCommandBuilder WithContext(IContext context);
     ITreeListCommandBuilder WithSubChain(FlagsTreeListSubChainLinqBase chain);
-    TreeListCommand Crate();
+    TreeListCommand Create();
 }

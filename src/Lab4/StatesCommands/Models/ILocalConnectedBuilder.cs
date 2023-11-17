@@ -5,5 +5,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 public interface ILocalConnectedBuilder
 {
     ILocalConnectedBuilder WithContext(IContext context);
-    LocalConnected Crate();
+    LocalConnected Create();
 }

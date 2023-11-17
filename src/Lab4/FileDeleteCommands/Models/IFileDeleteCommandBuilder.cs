@@ -9,5 +9,5 @@ public interface IFileDeleteCommandBuilder
     IFileDeleteCommandBuilder WithContext(IContext context);
     IFileDeleteCommandBuilder WithFlagsSubChain(FlagsFileDeleteSubChainLinqBase flagsChain);
     IFileDeleteCommandBuilder WithFileSystemSubChain(DeleteFileSystemSubChainLinqBase fileSystemChain);
-    FileDeleteCommand Crate();
+    FileDeleteCommand Create();
 }

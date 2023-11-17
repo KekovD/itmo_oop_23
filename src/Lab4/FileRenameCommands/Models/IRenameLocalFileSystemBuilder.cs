@@ -6,5 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileRenameCommands.Models;
 public interface IRenameLocalFileSystemBuilder
 {
     IRenameLocalFileSystemBuilder WithContext(IContext context);
-    RenameLocalFileSystem Crate();
+    RenameLocalFileSystem Create();
 }

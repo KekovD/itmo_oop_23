@@ -10,5 +10,5 @@ public interface IContextBuilder
     IContextBuilder WithAddress(string address);
     IContextBuilder WithDrive(string drive);
     IContextBuilder WithFlags(IList<Flag> flags);
-    Context Crate();
+    Context Create();
 }

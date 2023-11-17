@@ -44,7 +44,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
             return this;
         }
 
-        public LocalConnected Crate() => new(
+        public LocalConnected Create() => new(
             _context ?? throw new BuilderNullException(nameof(LocalConnectedBuilder)));
     }
 }

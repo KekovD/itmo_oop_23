@@ -11,9 +11,9 @@ public class FileCopyCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsFileCopySubChainLinqBase? _flagsChain;
-    private readonly CopyFileSystemSubChainLinqBase _fileSystemChain;
+    private readonly CopyFileSystemSubChainLinqBase? _fileSystemChain;
 
-    private FileCopyCommand(IContext context, CopyFileSystemSubChainLinqBase fileSystemChain, FlagsFileCopySubChainLinqBase? flagsChain)
+    private FileCopyCommand(IContext context, CopyFileSystemSubChainLinqBase? fileSystemChain, FlagsFileCopySubChainLinqBase? flagsChain)
     {
         _context = context;
         _fileSystemChain = fileSystemChain;
@@ -37,7 +37,7 @@ public class FileCopyCommand : CommandChainLinkBase
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
         {
             _flagsChain?.Handle(request);
-            _fileSystemChain.Handle(request);
+            _fileSystemChain?.Handle(request);
         }
 
         Next?.Handle(request);
@@ -67,9 +67,9 @@ public class FileCopyCommand : CommandChainLinkBase
             return this;
         }
 
-        public FileCopyCommand Crate() => new(
+        public FileCopyCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(FileCopyCommandBuilder)),
-            _fileSystemChain ?? throw new BuilderNullException(nameof(FileCopyCommandBuilder)),
+            _fileSystemChain,
             _flagsChain);
     }
 }

@@ -7,5 +7,5 @@ public interface IConnectCommandBuilder
 {
     IConnectCommandBuilder WithSubChain(FlagsConnectSubChainLinqBase chain);
     IConnectCommandBuilder WithContext(IContext context);
-    ConnectCommand Crate();
+    ConnectCommand Create();
 }
