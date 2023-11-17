@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
@@ -9,10 +8,10 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class Context : IContext
 {
-    private readonly IAddressParser _addressParser;
+    private readonly IAddressParser? _addressParser;
     private StateBase _state = new DisconnectedState();
 
-    private Context(IAddressParser addressParser, string? address, string? drive, IList<Flag>? flags)
+    private Context(IAddressParser? addressParser, string? address, string? drive, IList<Flag>? flags)
     {
         _addressParser = addressParser;
         Address = address;
@@ -41,8 +40,8 @@ public class Context : IContext
     {
         if (_state.ConnectHandle())
         {
-            Address = _addressParser.GetAddress(request);
-            Drive = _addressParser.GetDrive(request);
+            Address = _addressParser?.GetAddress(request);
+            Drive = _addressParser?.GetDrive(request);
         }
     }
 
@@ -56,10 +55,11 @@ public class Context : IContext
                    flag.Parameter.Equals(mode, StringComparison.Ordinal));
     }
 
-    public string GetAbsoluteAddress(string path) => _addressParser.GetAbsolutePath(path);
+    public string GetAbsoluteAddress(string path) =>
+        _addressParser is null ? string.Empty : _addressParser.GetAbsolutePath(path);
 
     public string GetUniqueFileName(string directory, string fileName) =>
-        _addressParser.GetUniqueName(directory, fileName);
+        _addressParser is null ? string.Empty : _addressParser.GetUniqueName(directory, fileName);
 
     public bool ConnectRequest() => _state.ConnectHandle();
 
@@ -97,7 +97,7 @@ public class Context : IContext
         }
 
         public Context Create() => new(
-            _addressParser ?? throw new BuilderNullException(nameof(ContextBuilder)),
+            _addressParser,
             _address,
             _drive,
             _flags);

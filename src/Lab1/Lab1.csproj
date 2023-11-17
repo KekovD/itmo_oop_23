@@ -8,6 +8,10 @@
 
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="xunit" />
+    </ItemGroup>
+
 
 
 

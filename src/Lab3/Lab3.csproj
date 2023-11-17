@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <PackageReference Include="Crayon" />
+      <PackageReference Include="xunit" />
     </ItemGroup>
 
 </Project>

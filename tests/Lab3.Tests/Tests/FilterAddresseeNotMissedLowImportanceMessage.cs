@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab3.Tests.Tests;
 
-public class FilterAddresseeNotMissedLowImportanceMessage
+public static class FilterAddresseeNotMissedLowImportanceMessage
 {
     public static IEnumerable<object[]> GetMessageData
     {
@@ -32,7 +32,7 @@ public class FilterAddresseeNotMissedLowImportanceMessage
 
     [Theory]
     [MemberData(nameof(GetMessageData), MemberType = typeof(FilterAddresseeNotMissedLowImportanceMessage))]
-    private void ConditionCheck(IList<object> messageData)
+    private static void ConditionCheck(IList<object> messageData)
     {
         var messageLogMock = new Mock<ILogger>();
 
