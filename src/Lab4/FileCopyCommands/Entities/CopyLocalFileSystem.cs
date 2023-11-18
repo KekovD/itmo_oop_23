@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
@@ -10,10 +11,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Entities;
 public class CopyLocalFileSystem : CopyFileSystemSubChainLinqBase
 {
     private readonly IContext _context;
+    private readonly ICommand _command;
 
     private CopyLocalFileSystem(IContext context)
     {
         _context = context;
+        _command = new LocalCopyFile(context);
     }
 
     public static ICopyLocalFileSystemBuilder Builder() => new CopyLocalFileSystemBuilder();
@@ -22,32 +25,14 @@ public class CopyLocalFileSystem : CopyFileSystemSubChainLinqBase
     {
         const string targetMode = "local";
         const int targetCount = 4;
-        const int sourceIndex = 2;
-        const int destinationIndex = 3;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
         if (_context.CheckConnectedMode(targetMode) &&
             request.Body.Count == targetCount)
-            CopyFile(request.Body[sourceIndex], request.Body[destinationIndex]);
+            _command.Execute(request);
 
         Next?.Handle(request);
-    }
-
-    private void CopyFile(string sourcePath, string destinationPath)
-    {
-        string sourceFullPath = _context.GetAbsoluteAddress(sourcePath);
-        string destinationDir = _context.GetAbsoluteAddress(destinationPath);
-
-        if (!File.Exists(sourceFullPath)) return;
-
-        string fileName = Path.GetFileName(sourceFullPath);
-        string destinationFullPath = Path.Combine(destinationDir, fileName);
-
-        if (File.Exists(destinationFullPath))
-            destinationFullPath = Path.Combine(destinationDir, _context.GetUniqueFileName(destinationDir, fileName));
-
-        File.Copy(sourceFullPath, destinationFullPath);
     }
 
     private class CopyLocalFileSystemBuilder : ICopyLocalFileSystemBuilder

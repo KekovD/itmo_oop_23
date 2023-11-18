@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
@@ -10,10 +12,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 public class LocalConnected : FlagsConnectSubChainLinqBase
 {
     private readonly IContext _context;
+    private readonly ICommand _command;
 
     private LocalConnected(IContext context)
     {
         _context = context;
+        _command = new LocalConnectedCommand(context);
     }
 
     public static ILocalConnectedBuilder Builder() => new LocalConnectedBuilder();
@@ -29,7 +33,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
 
         if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
                                       flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)))
-            _context.TransitionToOtherState(request);
+            _command.Execute(request);
 
         Next?.Handle(request);
     }

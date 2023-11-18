@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
@@ -10,10 +11,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Entities;
 public class DeleteLocalFileSystem : DeleteFileSystemSubChainLinqBase
 {
     private readonly IContext _context;
+    private readonly ICommand _command;
 
     private DeleteLocalFileSystem(IContext context)
     {
         _context = context;
+        _command = new LocalDeleteFile(context);
     }
 
     public static IDeleteLocalFileSystemBuilder Builder() => new DeleteLocalFileSystemBuilder();
@@ -22,22 +25,14 @@ public class DeleteLocalFileSystem : DeleteFileSystemSubChainLinqBase
     {
         const string targetMode = "local";
         const int targetCount = 3;
-        const int pathIndex = 2;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
         if (_context.CheckConnectedMode(targetMode) &&
             request.Body.Count == targetCount)
-            DeleteFile(request.Body[pathIndex]);
+            _command.Execute(request);
 
         Next?.Handle(request);
-    }
-
-    private void DeleteFile(string filePath)
-    {
-        string fullPath = _context.GetAbsoluteAddress(filePath);
-
-        if (File.Exists(fullPath)) File.Delete(fullPath);
     }
 
     private class DeleteLocalFileSystemBuilder : IDeleteLocalFileSystemBuilder

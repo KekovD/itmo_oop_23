@@ -1,4 +1,6 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
@@ -7,15 +9,17 @@ using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 
-public class TreeGoToCommand : CommandChainLinkBase
+public class TreeGoToCommandLinq : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsTreeGoToSubChainLinqBase? _chain;
+    private readonly ICommand _command;
 
-    private TreeGoToCommand(IContext context, FlagsTreeGoToSubChainLinqBase? chain)
+    private TreeGoToCommandLinq(IContext context, FlagsTreeGoToSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
+        _command = new TreeGoToCommand(context);
     }
 
     public static ITreeGoToCommandBuilder Builder() => new TreeGoToCommandBuilder();
@@ -36,7 +40,7 @@ public class TreeGoToCommand : CommandChainLinkBase
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
         {
             _chain?.Handle(request);
-            _context.TransitionToOtherAddress(request with { PathIndex = pathIndex });
+            _command.Execute(request with { PathIndex = pathIndex });
         }
 
         Next?.Handle(request);
@@ -59,7 +63,7 @@ public class TreeGoToCommand : CommandChainLinkBase
             return this;
         }
 
-        public TreeGoToCommand Create() => new(
+        public TreeGoToCommandLinq Create() => new(
             _context ?? throw new BuilderNullException(nameof(TreeGoToCommandBuilder)),
             _chain);
     }

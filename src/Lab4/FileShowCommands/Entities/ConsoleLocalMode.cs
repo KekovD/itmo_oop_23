@@ -1,6 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
@@ -12,10 +13,12 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
 public class ConsoleLocalMode : ModeFlagSubChainLinkBase
 {
     private readonly IContext _context;
+    private readonly ICommand _command;
 
     private ConsoleLocalMode(IContext context)
     {
         _context = context;
+        _command = new LocalFileConsoleRender(context);
     }
 
     public static IConsoleModeBuilder Builder() => new ConsoleModeBuilder();
@@ -26,7 +29,6 @@ public class ConsoleLocalMode : ModeFlagSubChainLinkBase
         const string targetValue = "-m";
         const string contextParameter = "local";
         const int targetCount = 3;
-        const int pathIndex = 2;
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
@@ -35,34 +37,9 @@ public class ConsoleLocalMode : ModeFlagSubChainLinkBase
                 flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)) &&
             _context.CheckConnectedMode(contextParameter) &&
             request.Body.Count == targetCount)
-            FileConsoleRender(request.Body[pathIndex]);
+            _command.Execute(request);
 
         Next?.Handle(request);
-    }
-
-    private void FileConsoleRender(string filePath)
-    {
-        string absolutePath = Path.GetFullPath(filePath);
-
-        if (!File.Exists(absolutePath))
-        {
-            string newPath = Path.Combine(
-                _context.Drive ?? throw new ContextNullException(nameof(FileConsoleRender)),
-                Path.GetFileName(filePath));
-
-            if (File.Exists(newPath))
-            {
-                absolutePath = newPath;
-            }
-            else
-            {
-                Console.WriteLine("File not found.");
-                return;
-            }
-        }
-
-        string content = File.ReadAllText(absolutePath);
-        Console.WriteLine(content);
     }
 
     private class ConsoleModeBuilder : IConsoleModeBuilder

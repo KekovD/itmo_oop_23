@@ -31,14 +31,12 @@ public static class Application
                 .WithSubChain(LocalConnected.Builder().WithContext(Context).Create())
                 .Create();
 
-        chain.AddNext(DisconnectCommand.Builder().WithContext(Context).Create());
+        chain.AddNext(DisconnectCommandLinq.Builder().WithContext(Context).Create());
 
-        chain.AddNext(TreeGoToCommand.Builder().WithContext(Context).Create());
+        chain.AddNext(TreeGoToCommandLinq.Builder().WithContext(Context).Create());
 
         chain.AddNext(TreeListCommand.Builder().WithContext(Context).WithSubChain(
-            DepthFlag.Builder().WithContext(Context).WithSubChain(
-                ConsoleDepthFlag.Builder().WithContext(Context)
-                    .Create())
+            DepthFlag.Builder().WithContext(Context)
                 .Create())
             .Create());
 

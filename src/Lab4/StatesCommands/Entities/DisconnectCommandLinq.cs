@@ -1,4 +1,6 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
@@ -6,15 +8,17 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 
-public class DisconnectCommand : CommandChainLinkBase
+public class DisconnectCommandLinq : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsDisconnectSubChainLinqBase? _chain;
+    private readonly ICommand _command;
 
-    private DisconnectCommand(IContext context, FlagsDisconnectSubChainLinqBase? chain)
+    private DisconnectCommandLinq(IContext context, FlagsDisconnectSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
+        _command = new DisconnectCommand(context);
     }
 
     public static IDisconnectCommandBuilder Builder() => new DisconnectCommandBuilder();
@@ -31,7 +35,7 @@ public class DisconnectCommand : CommandChainLinkBase
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
         {
             _chain?.Handle(request);
-            _context.TransitionToOtherState(request);
+            _command.Execute(request);
         }
 
         Next?.Handle(request);
@@ -54,7 +58,7 @@ public class DisconnectCommand : CommandChainLinkBase
             return this;
         }
 
-        public DisconnectCommand Create() => new(
+        public DisconnectCommandLinq Create() => new(
             _context ?? throw new BuilderNullException(nameof(DisconnectCommandBuilder)),
             _chain);
     }

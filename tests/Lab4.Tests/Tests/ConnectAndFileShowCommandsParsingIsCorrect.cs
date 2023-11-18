@@ -54,11 +54,11 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
 
         var mockFileShowCommand = new Mock<FlagsFileShowSubChainLinkBase>();
 
-        CommandChainLinkBase chain = DisconnectCommand.Builder().WithContext(context).Create();
+        CommandChainLinkBase chain = DisconnectCommandLinq.Builder().WithContext(context).Create();
 
         chain.AddNext(ConnectCommand.Builder().WithContext(context).WithSubChain(mockConnectCommand.Object).Create());
 
-        chain.AddNext(TreeGoToCommand.Builder().WithContext(context).Create());
+        chain.AddNext(TreeGoToCommandLinq.Builder().WithContext(context).Create());
 
         chain.AddNext(TreeListCommand.Builder().WithContext(context).WithSubChain(
                 DepthFlag.Builder().WithContext(context)

@@ -7,5 +7,5 @@ public interface IDisconnectCommandBuilder
 {
     IDisconnectCommandBuilder WithContext(IContext context);
     IDisconnectCommandBuilder WithSubChain(FlagsDisconnectSubChainLinqBase chain);
-    DisconnectCommand Create();
+    DisconnectCommandLinq Create();
 }
