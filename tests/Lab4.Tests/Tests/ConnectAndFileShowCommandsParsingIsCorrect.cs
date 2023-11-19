@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Entities;
@@ -7,6 +8,7 @@ using Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileMoveCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileRenameCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.ModeStrategies.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
@@ -47,7 +49,22 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
     [MemberData(nameof(GetConsoleCommands), MemberType = typeof(ConnectAndFileShowCommandsParsingIsCorrect))]
     private static void ConditionCheck(IList<object> consoleCommandsData)
     {
-        IContext context = Context.Builder().Create();
+        IStrategy strategy =
+            ModeStrategies.Entities.Strategy.Builder()
+                .WithConnectionMode("local")
+                .WithMoreCommand(new LocalConnectedCommand())
+                .WithMoreCommand(new DisconnectCommand())
+                .WithMoreCommand(new LocalCopyFile())
+                .WithMoreCommand(new LocalDeleteFile())
+                .WithMoreCommand(new LocalConsoleFileShow())
+                .WithMoreCommand(new LocalMoveFile())
+                .WithMoreCommand(new LocalRenameFile())
+                .WithMoreCommand(new TreeGoToCommand())
+                .WithMoreCommand(LocalConsoleTreeListCommand.Builder().Create())
+                .Create();
+
+        IContext context = Context.Builder().WithMoreStrategy(strategy)
+            .WithMoreAddressParser(new LocalAddressParser()).Create();
         ICommandParser commandParser = new CommandParser();
 
         var mockConnectCommand = new Mock<FlagsConnectSubChainLinqBase>();
@@ -84,6 +101,9 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
         parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[connectStringIndex], out Command connectCommand);
         parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[fileShowStringIndex], out Command fileShowCommand);
 
+        chain.Handle(connectCommand);
+        chain.Handle(fileShowCommand);
+
         Assert.True(connectReference.PathIndex == connectCommand.PathIndex &&
                     connectReference.Body.SequenceEqual(connectCommand.Body) &&
                     connectReference.Flags.SequenceEqual(connectCommand.Flags));
@@ -92,11 +112,8 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
                     fileShowReference.Body.SequenceEqual(fileShowCommand.Body) &&
                     fileShowReference.Flags.SequenceEqual(fileShowCommand.Flags));
 
-        chain.Handle(connectCommand);
-
-        chain.Handle(fileShowCommand);
-
         Assert.True(parseResult);
+
         mockConnectCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
         mockFileShowCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
     }
