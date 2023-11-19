@@ -33,14 +33,16 @@ public class DepthFlag : FlagsTreeListSubChainLinqBase
         Flag? modeFlag =
             request.Flags.FirstOrDefault(flag => flag.Value.Equals(modeValue, StringComparison.Ordinal));
 
-        if (depthFlag is not null && modeFlag is not null)
+        if (modeFlag is not null)
         {
             string connectionMode = _context.GetConnectedMode();
+
+            int depth = depthFlag is not null ? int.Parse(depthFlag.Parameter, CultureInfo.InvariantCulture) : 1;
 
             return _context.GetStrategy(connectionMode)?
                 .CrateCommand(
                     new CommandFeatures("tree list", connectionMode, modeFlag.Parameter),
-                    request with { PathIndex = int.Parse(depthFlag.Parameter, CultureInfo.InvariantCulture) });
+                    request with { PathIndex = depth });
         }
 
         return Next?.Handle(request);
