@@ -66,6 +66,7 @@ public class LocalConsoleTreeListCommand : CommandBase
                 }
                 catch (UnauthorizedAccessException)
                 {
+                    Console.WriteLine($"Access denied to directory: {directory.FullName}");
                     continue;
                 }
             }
@@ -78,6 +79,7 @@ public class LocalConsoleTreeListCommand : CommandBase
                 }
                 catch (UnauthorizedAccessException)
                 {
+                    Console.WriteLine($"Access denied to file: {file.FullName}");
                     continue;
                 }
             }
