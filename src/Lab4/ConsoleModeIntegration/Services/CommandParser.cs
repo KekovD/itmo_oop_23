@@ -51,7 +51,7 @@ public class CommandParser : ICommandParser
             !TryParseFlags(consoleCommand, body, out IList<Flag> flags))
             return false;
 
-        command = new Command(body, flags, defaultPathIndex);
+        command = new Command(body.AsReadOnly(), flags.AsReadOnly(), defaultPathIndex);
         return true;
     }
 }

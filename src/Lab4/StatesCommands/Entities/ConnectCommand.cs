@@ -25,11 +25,11 @@ public class ConnectCommand : CommandChainLinkBase
         const string argument = "connect";
         const int argumentIndex = 0;
         const int pathIndex = 1;
-        const int targetCount = 1;
+        const int targetCount = 2;
 
         if (_context.ConnectRequest()) Next?.Handle(request);
 
-        if (request.Body.Count >= targetCount &&
+        if (request.Body.Count == targetCount &&
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
             return _chain?.Handle(request with { PathIndex = pathIndex });
 

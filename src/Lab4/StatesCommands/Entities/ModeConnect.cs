@@ -22,11 +22,6 @@ public class ModeConnect : FlagsConnectSubChainLinqBase
 
     public override CommandBase? Handle(Command request)
     {
-        const int targetCount = 2;
-
-        if (request.Body.Count != targetCount || _context.ConnectRequest())
-            return Next?.Handle(request);
-
         const string targetValue = "-m";
 
         Flag? foundFlag =

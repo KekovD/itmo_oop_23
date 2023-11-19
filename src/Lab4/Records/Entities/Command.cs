@@ -2,4 +2,4 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
-public record Command(IList<string> Body, IList<Flag> Flags, int PathIndex);
+public record Command(IReadOnlyList<string> Body, IReadOnlyList<Flag> Flags, int PathIndex);

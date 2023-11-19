@@ -42,7 +42,7 @@ public class Context : IContext
         if (_state.ConnectHandle())
         {
             TransitionToOtherAddress(request, connectionMode);
-            Flags = request.Flags.AsReadOnly();
+            Flags = request.Flags;
         }
     }
 
