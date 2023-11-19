@@ -2,7 +2,6 @@
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -16,13 +15,16 @@ public class LocalConsoleFileShow : CommandBase
         Characteristics = new CommandFeatures("file show", "local", "console");
     }
 
-    public override void Execute(Command request, IContext context)
+    public override void Execute(IContext context)
     {
         _context = context;
 
         const int pathIndex = 2;
 
-        FileConsoleRender(request.Body[pathIndex]);
+        if (Request is not null)
+            FileConsoleRender(Request.Body[pathIndex]);
+
+        Request = null;
     }
 
     private void FileConsoleRender(string filePath)

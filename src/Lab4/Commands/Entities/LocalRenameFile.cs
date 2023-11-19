@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -14,14 +13,19 @@ public class LocalRenameFile : CommandBase
         Characteristics = new CommandFeatures("file rename", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context)
+    public override void Execute(IContext context)
     {
         _context = context;
 
-        int pathIndex = request.PathIndex;
-        int newNameIndex = pathIndex + NextIndex;
+        if (Request is not null)
+        {
+            int pathIndex = Request.PathIndex;
+            int newNameIndex = pathIndex + NextIndex;
 
-        RenameFile(request.Body[pathIndex], request.Body[newNameIndex]);
+            RenameFile(Request.Body[pathIndex], Request.Body[newNameIndex]);
+        }
+
+        Request = null;
     }
 
     private void RenameFile(string filePath, string newName)

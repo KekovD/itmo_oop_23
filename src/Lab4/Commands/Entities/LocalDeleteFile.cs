@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -14,11 +13,14 @@ public class LocalDeleteFile : CommandBase
         Characteristics = new CommandFeatures("file delete", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context)
+    public override void Execute(IContext context)
     {
         _context = context;
 
-        DeleteFile(request.Body[request.PathIndex]);
+        if (Request is not null)
+            DeleteFile(Request.Body[Request.PathIndex]);
+
+        Request = null;
     }
 
     private void DeleteFile(string filePath)

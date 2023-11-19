@@ -2,7 +2,6 @@
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -24,16 +23,21 @@ public class LocalConsoleTreeListCommand : CommandBase
 
     public static ILocalConsoleTreeListCommandBuilder Builder() => new LocalConsoleTreeListCommandBuilder();
 
-    public override void Execute(Command request, IContext context)
+    public override void Execute(IContext context)
     {
-        PrintDirectoryTree(
-            context.GetAbsoluteAddress(
-                context.Address ?? throw new ContextNullException(nameof(context.Address)),
-                context.GetConnectedMode()),
-            request.PathIndex,
-            _folderSymbol,
-            _fileSymbol,
-            _indentationSymbol);
+        if (Request is not null)
+        {
+            PrintDirectoryTree(
+                context.GetAbsoluteAddress(
+                    context.Address ?? throw new ContextNullException(nameof(context.Address)),
+                    context.GetConnectedMode()),
+                Request.PathIndex,
+                _folderSymbol,
+                _fileSymbol,
+                _indentationSymbol);
+        }
+
+        Request = null;
     }
 
     private void PrintDirectoryTree(string rootPath, int depth, string folderSymbol, string fileSymbol, string indentationSymbol)

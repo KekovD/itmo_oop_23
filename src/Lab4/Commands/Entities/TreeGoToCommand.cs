@@ -1,5 +1,4 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -11,6 +10,11 @@ public class TreeGoToCommand : CommandBase
         Characteristics = new CommandFeatures("tree goto", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context) =>
-        context.TransitionToOtherAddress(request, context.GetConnectedMode());
+    public override void Execute(IContext context)
+    {
+        if (Request is not null)
+            context.TransitionToOtherAddress(Request, context.GetConnectedMode());
+
+        Request = null;
+    }
 }

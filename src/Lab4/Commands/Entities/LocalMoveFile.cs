@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -14,14 +13,19 @@ public class LocalMoveFile : CommandBase
         Characteristics = new CommandFeatures("file move", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context)
+    public override void Execute(IContext context)
     {
         _context = context;
 
-        int sourceIndex = request.PathIndex;
-        int destinationIndex = sourceIndex + NextIndex;
+        if (Request is not null)
+        {
+            int sourceIndex = Request.PathIndex;
+            int destinationIndex = sourceIndex + NextIndex;
 
-        MoveFile(request.Body[sourceIndex], request.Body[destinationIndex]);
+            MoveFile(Request.Body[sourceIndex], Request.Body[destinationIndex]);
+        }
+
+        Request = null;
     }
 
     private void MoveFile(string sourcePath, string destinationPath)

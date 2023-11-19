@@ -1,5 +1,4 @@
 ﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
@@ -11,6 +10,11 @@ public class DisconnectCommand : CommandBase
         Characteristics = new CommandFeatures("disconnect", string.Empty, string.Empty);
     }
 
-    public override void Execute(Command request, IContext context) =>
-        context.TransitionToOtherState(request, context.GetConnectedMode());
+    public override void Execute(IContext context)
+    {
+        if (Request is not null)
+            context.TransitionToOtherState(Request, context.GetConnectedMode());
+
+        Request = null;
+    }
 }

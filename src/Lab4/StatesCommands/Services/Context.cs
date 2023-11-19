@@ -13,8 +13,15 @@ public class Context : IContext
     private readonly IList<IStrategy> _strategies;
     private StateBase _state = new DisconnectedState();
 
-    private Context(IList<IStrategy> strategies, IList<IAddressParser>? addressParser, string? address, string? drive, IList<Flag>? flags)
+    private Context(
+        StateBase? state,
+        IList<IStrategy> strategies,
+        IList<IAddressParser>? addressParser,
+        string? address,
+        string? drive,
+        IList<Flag>? flags)
     {
+        _state = state ?? _state;
         _addressParser = addressParser ?? _addressParser;
         Address = address;
         Drive = drive;
@@ -90,6 +97,13 @@ public class Context : IContext
         private string? _address;
         private string? _drive;
         private IList<Flag>? _flags;
+        private StateBase? _state;
+
+        public IContextBuilder WithState(StateBase state)
+        {
+            _state = state;
+            return this;
+        }
 
         public IContextBuilder WithMoreAddressParser(IAddressParser addressParser)
         {
@@ -122,6 +136,7 @@ public class Context : IContext
         }
 
         public Context Create() => new(
+            _state,
             _strategies,
             _addressParser,
             _address,

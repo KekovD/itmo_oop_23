@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
@@ -39,7 +40,7 @@ public class DepthFlag : FlagsTreeListSubChainLinqBase
             return _context.GetStrategy(connectionMode)?
                 .CrateCommand(
                     new CommandFeatures("tree list", connectionMode, modeFlag.Parameter),
-                    request);
+                    request with { PathIndex = int.Parse(depthFlag.Parameter, CultureInfo.InvariantCulture) });
         }
 
         return Next?.Handle(request);

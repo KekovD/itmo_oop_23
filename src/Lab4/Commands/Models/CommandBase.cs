@@ -11,7 +11,7 @@ public abstract class CommandBase
     public Command? Request { get; protected set; }
     protected CommandFeatures? Characteristics { get; init; }
 
-    public abstract void Execute(Command request, IContext context);
+    public abstract void Execute(IContext context);
 
     public bool CompareCharacteristics(CommandFeatures other, Command request)
     {
