@@ -27,7 +27,9 @@ public class LocalConsoleTreeListCommand : CommandBase
     public override void Execute(Command request, IContext context)
     {
         PrintDirectoryTree(
-            context.GetAbsoluteAddress(context.Address ?? throw new ContextNullException(nameof(context.Address))),
+            context.GetAbsoluteAddress(
+                context.Address ?? throw new ContextNullException(nameof(context.Address)),
+                context.GetConnectedMode()),
             request.PathIndex,
             _folderSymbol,
             _fileSymbol,

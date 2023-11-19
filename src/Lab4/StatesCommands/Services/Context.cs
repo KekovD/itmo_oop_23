@@ -9,13 +9,13 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class Context : IContext
 {
-    private readonly IAddressParser? _addressParser;
+    private readonly IList<IAddressParser> _addressParser = new List<IAddressParser>();
     private readonly IList<IStrategy> _strategies;
     private StateBase _state = new DisconnectedState();
 
-    private Context(IList<IStrategy> strategies, IAddressParser? addressParser, string? address, string? drive, IList<Flag>? flags)
+    private Context(IList<IStrategy> strategies, IList<IAddressParser>? addressParser, string? address, string? drive, IList<Flag>? flags)
     {
-        _addressParser = addressParser;
+        _addressParser = addressParser ?? _addressParser;
         Address = address;
         Drive = drive;
         Flags = flags?.AsReadOnly();
@@ -28,23 +28,23 @@ public class Context : IContext
 
     public static IContextBuilder Builder() => new ContextBuilder();
 
-    public void TransitionToOtherState(Command request)
+    public void TransitionToOtherState(Command request, string connectionMode)
     {
         _state = _state.ChangeState(request);
 
         if (_state.ConnectHandle())
         {
-            TransitionToOtherAddress(request);
+            TransitionToOtherAddress(request, connectionMode);
             Flags = request.Flags.AsReadOnly();
         }
     }
 
-    public void TransitionToOtherAddress(Command request)
+    public void TransitionToOtherAddress(Command request, string connectionMode)
     {
         if (_state.ConnectHandle())
         {
-            Address = _addressParser?.GetAddress(request);
-            Drive = _addressParser?.GetDrive(request);
+            Address = GetFileSystemParser(connectionMode)?.GetAddress(request);
+            Drive = GetFileSystemParser(connectionMode)?.GetDrive(request);
         }
     }
 
@@ -61,11 +61,17 @@ public class Context : IContext
     public string GetConnectedMode() =>
         Flags?.FirstOrDefault(flag => flag.Value.Equals("-m", StringComparison.Ordinal))?.Parameter ?? string.Empty;
 
-    public string GetAbsoluteAddress(string path) =>
-        _addressParser is null ? string.Empty : _addressParser.GetAbsolutePath(path);
+    public string GetAbsoluteAddress(string path, string connectionMode)
+    {
+        IAddressParser? parser = GetFileSystemParser(connectionMode);
+        return parser is null ? string.Empty : parser.GetAbsolutePath(path);
+    }
 
-    public string GetUniqueFileName(string directory, string fileName) =>
-        _addressParser is null ? string.Empty : _addressParser.GetUniqueName(directory, fileName);
+    public string GetUniqueFileName(string directory, string fileName, string connectionMode)
+    {
+        IAddressParser? parser = GetFileSystemParser(connectionMode);
+        return parser is null ? string.Empty : parser.GetUniqueName(directory, fileName);
+    }
 
     public bool ConnectRequest() => _state.ConnectHandle();
 
@@ -74,17 +80,20 @@ public class Context : IContext
     public IStrategy? GetStrategy(string strategyFeatures) =>
         _strategies.FirstOrDefault(command => command.CompareCharacteristics(strategyFeatures));
 
+    public IAddressParser? GetFileSystemParser(string connectionMode) =>
+        _addressParser.FirstOrDefault(mode => mode.CompareConnectionMode(connectionMode));
+
     private class ContextBuilder : IContextBuilder
     {
+        private readonly IList<IAddressParser> _addressParser = new List<IAddressParser>();
         private readonly IList<IStrategy> _strategies = new List<IStrategy>();
         private string? _address;
         private string? _drive;
         private IList<Flag>? _flags;
-        private IAddressParser? _addressParser;
 
-        public IContextBuilder WithAddressParser(IAddressParser? addressParser)
+        public IContextBuilder WithMoreAddressParser(IAddressParser addressParser)
         {
-            _addressParser = addressParser;
+            _addressParser.Add(addressParser);
             return this;
         }
 

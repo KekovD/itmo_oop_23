@@ -29,8 +29,9 @@ public class LocalCopyFile : CommandBase
     {
         if (_context is null) return;
 
-        string sourceFullPath = _context.GetAbsoluteAddress(sourcePath);
-        string destinationDir = _context.GetAbsoluteAddress(destinationPath);
+        string connectionMode = _context.GetConnectedMode();
+        string sourceFullPath = _context.GetAbsoluteAddress(sourcePath, connectionMode);
+        string destinationDir = _context.GetAbsoluteAddress(destinationPath, connectionMode);
 
         if (!File.Exists(sourceFullPath)) return;
 
@@ -38,7 +39,11 @@ public class LocalCopyFile : CommandBase
         string destinationFullPath = Path.Combine(destinationDir, fileName);
 
         if (File.Exists(destinationFullPath))
-            destinationFullPath = Path.Combine(destinationDir, _context.GetUniqueFileName(destinationDir, fileName));
+        {
+            destinationFullPath = Path.Combine(
+                destinationDir,
+                _context.GetUniqueFileName(destinationDir, fileName, connectionMode));
+        }
 
         File.Copy(sourceFullPath, destinationFullPath);
     }

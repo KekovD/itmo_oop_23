@@ -32,7 +32,7 @@ public static class ConsoleApplication
             .Create();
 
     private static readonly IContext Context =
-        StatesCommands.Services.Context.Builder().WithAddressParser(new LocalAddressParser()).WithMoreStrategy(Strategy).Create();
+        StatesCommands.Services.Context.Builder().WithMoreAddressParser(new LocalAddressParser()).WithMoreStrategy(Strategy).Create();
 
     private static readonly IConsoleMode ConsoleMode = ConsoleModeIntegration.Services.ConsoleMode.Builder()
         .WithContext(Context).WithCommandParser(new CommandParser()).WithChain(MakeChain()).Create();

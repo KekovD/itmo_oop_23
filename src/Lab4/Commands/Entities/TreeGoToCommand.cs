@@ -11,5 +11,6 @@ public class TreeGoToCommand : CommandBase
         Characteristics = new CommandFeatures("tree goto", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context) => context.TransitionToOtherAddress(request);
+    public override void Execute(Command request, IContext context) =>
+        context.TransitionToOtherAddress(request, context.GetConnectedMode());
 }

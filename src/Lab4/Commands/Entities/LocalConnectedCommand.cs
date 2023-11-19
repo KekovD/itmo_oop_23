@@ -11,5 +11,6 @@ public class LocalConnectedCommand : CommandBase
         Characteristics = new CommandFeatures("connect", "local", string.Empty);
     }
 
-    public override void Execute(Command request, IContext context) => context.TransitionToOtherState(request);
+    public override void Execute(Command request, IContext context) =>
+        context.TransitionToOtherState(request, context.GetConnectedMode());
 }

@@ -25,7 +25,7 @@ public class LocalDeleteFile : CommandBase
     {
         if (_context is null) return;
 
-        string fullPath = _context.GetAbsoluteAddress(filePath);
+        string fullPath = _context.GetAbsoluteAddress(filePath, _context.GetConnectedMode());
 
         if (File.Exists(fullPath)) File.Delete(fullPath);
     }

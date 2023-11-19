@@ -7,7 +7,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public interface IContextBuilder
 {
-    IContextBuilder WithAddressParser(IAddressParser? addressParser);
+    IContextBuilder WithMoreAddressParser(IAddressParser addressParser);
     IContextBuilder WithMoreStrategy(IStrategy strategy);
     IContextBuilder WithAddress(string address);
     IContextBuilder WithDrive(string drive);

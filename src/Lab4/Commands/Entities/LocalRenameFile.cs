@@ -28,7 +28,8 @@ public class LocalRenameFile : CommandBase
     {
         if (_context is null) return;
 
-        string fullPath = _context.GetAbsoluteAddress(filePath);
+        string connectionMode = _context.GetConnectedMode();
+        string fullPath = _context.GetAbsoluteAddress(filePath, connectionMode);
         string? directory = Path.GetDirectoryName(fullPath);
 
         if (directory is null) return;

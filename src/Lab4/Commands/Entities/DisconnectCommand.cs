@@ -11,5 +11,6 @@ public class DisconnectCommand : CommandBase
         Characteristics = new CommandFeatures("disconnect", string.Empty, string.Empty);
     }
 
-    public override void Execute(Command request, IContext context) => context.TransitionToOtherState(request);
+    public override void Execute(Command request, IContext context) =>
+        context.TransitionToOtherState(request, context.GetConnectedMode());
 }

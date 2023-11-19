@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
@@ -7,6 +8,11 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 
 public class LocalAddressParser : IAddressParser
 {
+    private const string ConnectionMode = "local";
+
+    public bool CompareConnectionMode(string connectionMode) =>
+        ConnectionMode.Equals(connectionMode, StringComparison.Ordinal);
+
     public string GetAddress(Command request)
     {
         const int targetCount = 2;

@@ -10,13 +10,14 @@ public interface IContext
     string? Drive { get; }
     IReadOnlyList<Flag>? Flags { get; }
 
-    void TransitionToOtherState(Command request);
-    void TransitionToOtherAddress(Command request);
+    void TransitionToOtherState(Command request, string connectionMode);
+    void TransitionToOtherAddress(Command request, string connectionMode);
     bool CheckConnectedMode(string mode);
-    string GetAbsoluteAddress(string path);
-    string GetUniqueFileName(string directory, string fileName);
+    string GetAbsoluteAddress(string path, string connectionMode);
+    string GetUniqueFileName(string directory, string fileName, string connectionMode);
     bool ConnectRequest();
     bool DisconnectRequest();
     IStrategy? GetStrategy(string strategyFeatures);
+    IAddressParser? GetFileSystemParser(string connectionMode);
     string GetConnectedMode();
 }
