@@ -7,23 +7,28 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalFileConsoleRender : ICommand
+public class LocalConsoleFileShow : CommandBase
 {
-    private readonly IContext _context;
+    private IContext? _context;
 
-    public LocalFileConsoleRender(IContext context)
+    public LocalConsoleFileShow()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("file show", "local", "console");
     }
 
-    public void Execute(Command request)
+    public override void Execute(Command request, IContext context)
     {
+        _context = context;
+
         const int pathIndex = 2;
+
         FileConsoleRender(request.Body[pathIndex]);
     }
 
     private void FileConsoleRender(string filePath)
     {
+        if (_context is null) return;
+
         string absolutePath = Path.GetFullPath(filePath);
 
         if (!File.Exists(absolutePath))

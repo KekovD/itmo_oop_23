@@ -13,18 +13,16 @@ public class TreeGoToCommandLinq : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsTreeGoToSubChainLinqBase? _chain;
-    private readonly ICommand _command;
 
     private TreeGoToCommandLinq(IContext context, FlagsTreeGoToSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
-        _command = new TreeGoToCommand(context);
     }
 
     public static ITreeGoToCommandBuilder Builder() => new TreeGoToCommandBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const int targetCount = 3;
         const int firstValueIndex = 0;
@@ -40,10 +38,15 @@ public class TreeGoToCommandLinq : CommandChainLinkBase
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
         {
             _chain?.Handle(request);
-            _command.Execute(request with { PathIndex = pathIndex });
+            string connectionMode = _context.GetConnectedMode();
+
+            return _context.GetStrategy(connectionMode)?
+                .CrateCommand(
+                    new CommandFeatures("tree goto", connectionMode, string.Empty),
+                    request with { PathIndex = pathIndex });
         }
 
-        Next?.Handle(request);
+        return Next?.Handle(request);
     }
 
     private class TreeGoToCommandBuilder : ITreeGoToCommandBuilder

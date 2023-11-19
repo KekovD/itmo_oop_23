@@ -5,25 +5,30 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalCopyFile : ICommand
+public class LocalCopyFile : CommandBase
 {
-    private readonly IContext _context;
+    private IContext? _context;
 
-    public LocalCopyFile(IContext context)
+    public LocalCopyFile()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("file copy", "local", string.Empty);
     }
 
-    public void Execute(Command request)
+    public override void Execute(Command request, IContext context)
     {
-        const int sourceIndex = 2;
-        const int destinationIndex = 3;
+        _context = context;
+
+        int sourceIndex = request.PathIndex;
+
+        int destinationIndex = sourceIndex + NextIndex;
 
         CopyFile(request.Body[sourceIndex], request.Body[destinationIndex]);
     }
 
     private void CopyFile(string sourcePath, string destinationPath)
     {
+        if (_context is null) return;
+
         string sourceFullPath = _context.GetAbsoluteAddress(sourcePath);
         string destinationDir = _context.GetAbsoluteAddress(destinationPath);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
@@ -19,7 +20,7 @@ public class ConnectCommand : CommandChainLinkBase
 
     public static IConnectCommandBuilder Builder() => new ConnectCommandBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const string argument = "connect";
         const int argumentIndex = 0;
@@ -30,9 +31,9 @@ public class ConnectCommand : CommandChainLinkBase
 
         if (request.Body.Count >= targetCount &&
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
-            _chain?.Handle(request with { PathIndex = pathIndex });
+            return _chain?.Handle(request with { PathIndex = pathIndex });
 
-        Next?.Handle(request);
+        return Next?.Handle(request);
     }
 
     private class ConnectCommandBuilder : IConnectCommandBuilder

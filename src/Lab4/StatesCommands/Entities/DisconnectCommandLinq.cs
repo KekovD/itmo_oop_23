@@ -12,18 +12,16 @@ public class DisconnectCommandLinq : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsDisconnectSubChainLinqBase? _chain;
-    private readonly ICommand _command;
 
     private DisconnectCommandLinq(IContext context, FlagsDisconnectSubChainLinqBase? chain)
     {
         _context = context;
         _chain = chain;
-        _command = new DisconnectCommand(context);
     }
 
     public static IDisconnectCommandBuilder Builder() => new DisconnectCommandBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const string argument = "disconnect";
         const int argumentIndex = 0;
@@ -35,10 +33,14 @@ public class DisconnectCommandLinq : CommandChainLinkBase
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
         {
             _chain?.Handle(request);
-            _command.Execute(request);
+
+            return _context.GetStrategy(_context.GetConnectedMode())?
+                .CrateCommand(
+                    new CommandFeatures("disconnect", string.Empty, string.Empty),
+                    request);
         }
 
-        Next?.Handle(request);
+        return Next?.Handle(request);
     }
 
     private class DisconnectCommandBuilder : IDisconnectCommandBuilder

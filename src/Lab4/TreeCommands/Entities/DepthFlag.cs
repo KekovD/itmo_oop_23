@@ -1,4 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
+﻿using System;
+using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
@@ -9,27 +13,41 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
 public class DepthFlag : FlagsTreeListSubChainLinqBase
 {
     private readonly IContext _context;
-    private readonly DepthFlagSubChainLinqBase? _chain;
 
-    private DepthFlag(IContext context, DepthFlagSubChainLinqBase? chain)
+    private DepthFlag(IContext context)
     {
         _context = context;
-        _chain = chain;
     }
 
     public static IDepthFlagBuilder Builder() => new DepthFlagBuilder();
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
-        if (_context.ConnectRequest())
-            _chain?.Handle(request);
+        const string depthValue = "-d";
 
-        Next?.Handle(request);
+        Flag? depthFlag =
+            request.Flags.FirstOrDefault(flag => flag.Value.Equals(depthValue, StringComparison.Ordinal));
+
+        const string modeValue = "-m";
+
+        Flag? modeFlag =
+            request.Flags.FirstOrDefault(flag => flag.Value.Equals(modeValue, StringComparison.Ordinal));
+
+        if (depthFlag is not null && modeFlag is not null)
+        {
+            string connectionMode = _context.GetConnectedMode();
+
+            return _context.GetStrategy(connectionMode)?
+                .CrateCommand(
+                    new CommandFeatures("tree list", connectionMode, modeFlag.Parameter),
+                    request);
+        }
+
+        return Next?.Handle(request);
     }
 
     private class DepthFlagBuilder : IDepthFlagBuilder
     {
         private IContext? _context;
-        private DepthFlagSubChainLinqBase? _chain;
 
         public IDepthFlagBuilder WithContext(IContext context)
         {
@@ -37,14 +55,6 @@ public class DepthFlag : FlagsTreeListSubChainLinqBase
             return this;
         }
 
-        public IDepthFlagBuilder WithSubChain(DepthFlagSubChainLinqBase chain)
-        {
-            _chain = chain;
-            return this;
-        }
-
-        public DepthFlag Create() => new(
-            _context ?? throw new BuilderNullException(nameof(DepthFlagBuilder)),
-            _chain);
+        public DepthFlag Create() => new(_context ?? throw new BuilderNullException(nameof(DepthFlagBuilder)));
     }
 }

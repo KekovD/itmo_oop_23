@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
@@ -11,7 +12,8 @@ public class LocalAddressParser : IAddressParser
         const int targetCount = 2;
 
         return request.Body.Count >= targetCount &&
-               !string.IsNullOrEmpty(request.Body[request.PathIndex]) ? GetAbsolutePath(request.Body[request.PathIndex]) : string.Empty;
+               !string.IsNullOrEmpty(request.Body[request.PathIndex]) ?
+            GetAbsolutePath(request.Body[request.PathIndex]) : string.Empty;
     }
 
     public string GetDrive(Command request)
@@ -49,7 +51,8 @@ public class LocalAddressParser : IAddressParser
         while (File.Exists(Path.Combine(directory, newFileName)))
         {
             newFileName = string.Format(
-                System.Globalization.CultureInfo.InvariantCulture, "{0}_{1}{2}", fileNameWithoutExtension, nameCounter, fileExtension);
+                CultureInfo.InvariantCulture, "{0}_{1}{2}", fileNameWithoutExtension, nameCounter, fileExtension);
+
             nameCounter++;
         }
 

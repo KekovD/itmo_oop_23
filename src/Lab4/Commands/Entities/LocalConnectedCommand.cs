@@ -4,14 +4,12 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalConnectedCommand : ICommand
+public class LocalConnectedCommand : CommandBase
 {
-    private readonly IContext _context;
-
-    public LocalConnectedCommand(IContext context)
+    public LocalConnectedCommand()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("connect", "local", string.Empty);
     }
 
-    public void Execute(Command request) => _context.TransitionToOtherState(request);
+    public override void Execute(Command request, IContext context) => context.TransitionToOtherState(request);
 }

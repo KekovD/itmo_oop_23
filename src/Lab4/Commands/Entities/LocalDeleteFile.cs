@@ -5,23 +5,26 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalDeleteFile : ICommand
+public class LocalDeleteFile : CommandBase
 {
-    private readonly IContext _context;
+    private IContext? _context;
 
-    public LocalDeleteFile(IContext context)
+    public LocalDeleteFile()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("file delete", "local", string.Empty);
     }
 
-    public void Execute(Command request)
+    public override void Execute(Command request, IContext context)
     {
-        const int pathIndex = 2;
-        DeleteFile(request.Body[pathIndex]);
+        _context = context;
+
+        DeleteFile(request.Body[request.PathIndex]);
     }
 
     private void DeleteFile(string filePath)
     {
+        if (_context is null) return;
+
         string fullPath = _context.GetAbsoluteAddress(filePath);
 
         if (File.Exists(fullPath)) File.Delete(fullPath);

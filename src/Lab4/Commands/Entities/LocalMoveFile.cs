@@ -5,24 +5,29 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalMoveFile : ICommand
+public class LocalMoveFile : CommandBase
 {
-    private readonly IContext _context;
+    private IContext? _context;
 
-    public LocalMoveFile(IContext context)
+    public LocalMoveFile()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("file move", "local", string.Empty);
     }
 
-    public void Execute(Command request)
+    public override void Execute(Command request, IContext context)
     {
-        const int sourceIndex = 2;
-        const int destinationIndex = 3;
+        _context = context;
+
+        int sourceIndex = request.PathIndex;
+        int destinationIndex = sourceIndex + NextIndex;
+
         MoveFile(request.Body[sourceIndex], request.Body[destinationIndex]);
     }
 
     private void MoveFile(string sourcePath, string destinationPath)
     {
+        if (_context is null) return;
+
         string sourceFullPath = _context.GetAbsoluteAddress(sourcePath);
         string destinationDir = _context.GetAbsoluteAddress(destinationPath);
 

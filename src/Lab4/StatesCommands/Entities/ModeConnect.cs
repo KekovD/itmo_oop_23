@@ -9,33 +9,41 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 
-public class LocalConnected : FlagsConnectSubChainLinqBase
+public class ModeConnect : FlagsConnectSubChainLinqBase
 {
     private readonly IContext _context;
-    private readonly ICommand _command;
 
-    private LocalConnected(IContext context)
+    private ModeConnect(IContext context)
     {
         _context = context;
-        _command = new LocalConnectedCommand(context);
     }
 
     public static ILocalConnectedBuilder Builder() => new LocalConnectedBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const int targetCount = 2;
-        const string targetValue = "-m";
-        const string targetParameter = "local";
 
         if (request.Body.Count != targetCount || _context.ConnectRequest())
-            Next?.Handle(request);
+            return Next?.Handle(request);
 
-        if (request.Flags.Any(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal) &&
-                                      flag.Parameter.Equals(targetParameter, StringComparison.Ordinal)))
-            _command.Execute(request);
+        const string targetValue = "-m";
 
-        Next?.Handle(request);
+        Flag? foundFlag =
+            request.Flags.FirstOrDefault(flag => flag.Value.Equals(targetValue, StringComparison.Ordinal));
+
+        if (foundFlag is not null)
+        {
+            string connectionMode = foundFlag.Parameter;
+            const int pathIndex = 1;
+
+            return _context.GetStrategy(connectionMode)?
+                .CrateCommand(
+                    new CommandFeatures("connect", connectionMode, string.Empty),
+                    request with { PathIndex = pathIndex });
+        }
+
+        return Next?.Handle(request);
     }
 
     private class LocalConnectedBuilder : ILocalConnectedBuilder
@@ -48,7 +56,7 @@ public class LocalConnected : FlagsConnectSubChainLinqBase
             return this;
         }
 
-        public LocalConnected Create() => new(
+        public ModeConnect Create() => new(
             _context ?? throw new BuilderNullException(nameof(LocalConnectedBuilder)));
     }
 }

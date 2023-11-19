@@ -4,14 +4,12 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class DisconnectCommand : ICommand
+public class DisconnectCommand : CommandBase
 {
-    private readonly IContext _context;
-
-    public DisconnectCommand(IContext context)
+    public DisconnectCommand()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("disconnect", string.Empty, string.Empty);
     }
 
-    public void Execute(Command request) => _context.TransitionToOtherState(request);
+    public override void Execute(Command request, IContext context) => context.TransitionToOtherState(request);
 }

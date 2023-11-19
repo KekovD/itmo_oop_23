@@ -41,7 +41,7 @@ public class ConsoleMode : IConsoleMode
         {
             const string valueInput = "Executed";
 
-            _chain.Handle(command);
+            _chain.Handle(command)?.Execute(command, _context);
             Console.WriteLine(valueInput);
         }
     }

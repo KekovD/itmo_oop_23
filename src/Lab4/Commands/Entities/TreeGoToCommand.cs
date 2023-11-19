@@ -4,14 +4,12 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class TreeGoToCommand : ICommand
+public class TreeGoToCommand : CommandBase
 {
-    private readonly IContext _context;
-
-    public TreeGoToCommand(IContext context)
+    public TreeGoToCommand()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("tree goto", "local", string.Empty);
     }
 
-    public void Execute(Command request) => _context.TransitionToOtherAddress(request);
+    public override void Execute(Command request, IContext context) => context.TransitionToOtherAddress(request);
 }

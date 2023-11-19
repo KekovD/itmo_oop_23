@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
+using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 
@@ -12,5 +13,5 @@ public abstract class ChainLinkBase
         Next ??= link;
     }
 
-    public abstract void Handle(Command request);
+    public abstract CommandBase? Handle(Command request);
 }

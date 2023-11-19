@@ -5,26 +5,30 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class LocalRenameFile : ICommand
+public class LocalRenameFile : CommandBase
 {
-    private readonly IContext _context;
+    private IContext? _context;
 
-    public LocalRenameFile(IContext context)
+    public LocalRenameFile()
     {
-        _context = context;
+        Characteristics = new CommandFeatures("file rename", "local", string.Empty);
     }
 
-    public void Execute(Command request)
+    public override void Execute(Command request, IContext context)
     {
-        const int pathIndex = 2;
-        const int newNameIndex = 3;
+        _context = context;
+
+        int pathIndex = request.PathIndex;
+        int newNameIndex = pathIndex + NextIndex;
+
         RenameFile(request.Body[pathIndex], request.Body[newNameIndex]);
     }
 
     private void RenameFile(string filePath, string newName)
     {
-        string fullPath = _context.GetAbsoluteAddress(filePath);
+        if (_context is null) return;
 
+        string fullPath = _context.GetAbsoluteAddress(filePath);
         string? directory = Path.GetDirectoryName(fullPath);
 
         if (directory is null) return;

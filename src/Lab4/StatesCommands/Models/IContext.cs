@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab4.ModeStrategies.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
@@ -16,4 +17,6 @@ public interface IContext
     string GetUniqueFileName(string directory, string fileName);
     bool ConnectRequest();
     bool DisconnectRequest();
+    IStrategy? GetStrategy(string strategyFeatures);
+    string GetConnectedMode();
 }

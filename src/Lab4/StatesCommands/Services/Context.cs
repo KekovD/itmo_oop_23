@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Itmo.ObjectOrientedProgramming.Lab4.ModeStrategies.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
@@ -9,19 +10,21 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 public class Context : IContext
 {
     private readonly IAddressParser? _addressParser;
+    private readonly IList<IStrategy> _strategies;
     private StateBase _state = new DisconnectedState();
 
-    private Context(IAddressParser? addressParser, string? address, string? drive, IList<Flag>? flags)
+    private Context(IList<IStrategy> strategies, IAddressParser? addressParser, string? address, string? drive, IList<Flag>? flags)
     {
         _addressParser = addressParser;
         Address = address;
         Drive = drive;
         Flags = flags?.AsReadOnly();
+        _strategies = strategies;
     }
 
-    public string? Address { get; protected set; }
-    public string? Drive { get; protected set; }
-    public IReadOnlyList<Flag>? Flags { get; protected set; }
+    public string? Address { get; private set; }
+    public string? Drive { get; private set; }
+    public IReadOnlyList<Flag>? Flags { get; private set; }
 
     public static IContextBuilder Builder() => new ContextBuilder();
 
@@ -55,6 +58,9 @@ public class Context : IContext
                    flag.Parameter.Equals(mode, StringComparison.Ordinal));
     }
 
+    public string GetConnectedMode() =>
+        Flags?.FirstOrDefault(flag => flag.Value.Equals("-m", StringComparison.Ordinal))?.Parameter ?? string.Empty;
+
     public string GetAbsoluteAddress(string path) =>
         _addressParser is null ? string.Empty : _addressParser.GetAbsolutePath(path);
 
@@ -65,8 +71,12 @@ public class Context : IContext
 
     public bool DisconnectRequest() => _state.DisconnectHandle();
 
+    public IStrategy? GetStrategy(string strategyFeatures) =>
+        _strategies.FirstOrDefault(command => command.CompareCharacteristics(strategyFeatures));
+
     private class ContextBuilder : IContextBuilder
     {
+        private readonly IList<IStrategy> _strategies = new List<IStrategy>();
         private string? _address;
         private string? _drive;
         private IList<Flag>? _flags;
@@ -75,6 +85,12 @@ public class Context : IContext
         public IContextBuilder WithAddressParser(IAddressParser? addressParser)
         {
             _addressParser = addressParser;
+            return this;
+        }
+
+        public IContextBuilder WithMoreStrategy(IStrategy strategy)
+        {
+            _strategies.Add(strategy);
             return this;
         }
 
@@ -97,6 +113,7 @@ public class Context : IContext
         }
 
         public Context Create() => new(
+            _strategies,
             _addressParser,
             _address,
             _drive,

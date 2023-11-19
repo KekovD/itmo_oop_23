@@ -1,4 +1,5 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
@@ -20,7 +21,7 @@ public class TreeListCommand : CommandChainLinkBase
 
     public static ITreeListCommandBuilder Builder() => new TreeListCommandBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const int targetCount = 2;
         const int firstValueIndex = 0;
@@ -30,12 +31,12 @@ public class TreeListCommand : CommandChainLinkBase
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
-        if (request.Body.Count >= targetCount &&
+        if (request.Body.Count == targetCount &&
             request.Body[firstValueIndex].Equals(firstValue, StringComparison.Ordinal) &&
             request.Body[secondValueIndex].Equals(secondValue, StringComparison.Ordinal))
-            _chain?.Handle(request);
+            return _chain?.Handle(request);
 
-        Next?.Handle(request);
+        return Next?.Handle(request);
     }
 
     private class TreeListCommandBuilder : ITreeListCommandBuilder

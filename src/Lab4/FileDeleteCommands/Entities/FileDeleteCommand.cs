@@ -1,4 +1,6 @@
 ﻿using System;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
@@ -11,18 +13,16 @@ public class FileDeleteCommand : CommandChainLinkBase
 {
     private readonly IContext _context;
     private readonly FlagsFileDeleteSubChainLinqBase? _flagsChain;
-    private readonly DeleteFileSystemSubChainLinqBase? _fileSystemChain;
 
-    private FileDeleteCommand(IContext context, DeleteFileSystemSubChainLinqBase? fileSystemChain, FlagsFileDeleteSubChainLinqBase? flagsChain)
+    private FileDeleteCommand(IContext context, FlagsFileDeleteSubChainLinqBase? flagsChain)
     {
         _context = context;
-        _fileSystemChain = fileSystemChain;
         _flagsChain = flagsChain;
     }
 
     public static IFileDeleteCommandBuilder Builder() => new FileDeleteCommandBuilder();
 
-    public override void Handle(Command request)
+    public override CommandBase? Handle(Command request)
     {
         const string firstArgument = "file";
         const string secondArgument = "delete";
@@ -33,15 +33,20 @@ public class FileDeleteCommand : CommandChainLinkBase
 
         if (_context.DisconnectRequest()) Next?.Handle(request);
 
-        if (request.Body.Count >= targetCount &&
+        if (request.Body.Count == targetCount &&
             request.Body[firstIndex].Equals(firstArgument, StringComparison.Ordinal) &&
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
         {
             _flagsChain?.Handle(request);
-            _fileSystemChain?.Handle(request with { PathIndex = pathIndex });
+            string connectionMode = _context.GetConnectedMode();
+
+            return _context.GetStrategy(connectionMode)?
+                .CrateCommand(
+                    new CommandFeatures("file delete", connectionMode, string.Empty),
+                    request with { PathIndex = pathIndex });
         }
 
-        Next?.Handle(request);
+        return Next?.Handle(request);
     }
 
     private class FileDeleteCommandBuilder : IFileDeleteCommandBuilder
@@ -70,7 +75,6 @@ public class FileDeleteCommand : CommandChainLinkBase
 
         public FileDeleteCommand Create() => new(
             _context ?? throw new BuilderNullException(nameof(FileDeleteCommandBuilder)),
-            _fileSystemChain,
             _flagsChain);
     }
 }
