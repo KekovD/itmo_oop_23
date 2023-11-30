@@ -13,6 +13,9 @@ public class CommandParser : ICommandParser
         body = Array.Empty<string>();
 
         var parts = consoleCommand.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+        if (!parts.Any()) return false;
+
         body = parts.TakeWhile(part => !part.StartsWith("-", StringComparison.Ordinal)).ToList();
 
         return true;
