@@ -1,21 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.ConsoleModeIntegration.Services;
+using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.FileCopyCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileDeleteCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileMoveCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileRenameCommands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.ModeStrategies.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
-using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Services;
 using Itmo.ObjectOrientedProgramming.Lab4.TreeCommands.Entities;
-using Moq;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Tests.Tests;
@@ -30,13 +25,11 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
             {
                 new List<object>
                 {
-                    "connect C:\\Users -m local",
-                    "file show C:\\Users\\lavre\\Downloads\\239\\by_all\\239.txt -m console",
-                    new Command(
+                    new CommandRequest(
                         new List<string> { "connect", "C:\\Users" },
                         new List<Flag> { new Flag("-m", "local") },
                         0),
-                    new Command(
+                    new CommandRequest(
                         new List<string> { "file", "show", "C:\\Users\\lavre\\Downloads\\239\\by_all\\239.txt" },
                         new List<Flag> { new Flag("-m", "console") },
                         0),
@@ -49,72 +42,26 @@ public static class ConnectAndFileShowCommandsParsingIsCorrect
     [MemberData(nameof(GetConsoleCommands), MemberType = typeof(ConnectAndFileShowCommandsParsingIsCorrect))]
     private static void ConditionCheck(IList<object> consoleCommandsData)
     {
-        IStrategy strategy =
-            ModeStrategies.Entities.Strategy.Builder()
-                .WithConnectionMode("local")
-                .WithMoreCommand(new LocalConnectedCommand())
-                .WithMoreCommand(new DisconnectCommand())
-                .WithMoreCommand(new LocalCopyFile())
-                .WithMoreCommand(new LocalDeleteFile())
-                .WithMoreCommand(new LocalConsoleFileShow())
-                .WithMoreCommand(new LocalMoveFile())
-                .WithMoreCommand(new LocalRenameFile())
-                .WithMoreCommand(new TreeGoToCommand())
-                .WithMoreCommand(LocalConsoleTreeListCommand.Builder().Create())
-                .Create();
+        CommandChainLinkBase chain = ConnectCommandLinq.Builder().WithSubChain(new ModeConnect()).Create();
+        chain.AddNext(DisconnectCommandLinq.Builder().Create());
+        chain.AddNext(TreeGoToCommandLinq.Builder().Create());
+        chain.AddNext(TreeListCommandLinq.Builder().WithSubChain(new DepthFlag()).Create());
+        chain.AddNext(FileShowCommandLinq.Builder().WithSubChain(new ModeFlag()).Create());
+        chain.AddNext(FileMoveCommandLinq.Builder().Create());
+        chain.AddNext(FileCopyCommandLinq.Builder().Create());
+        chain.AddNext(FileDeleteCommandLinq.Builder().Create());
+        chain.AddNext(FileRenameCommandLinq.Builder().Create());
 
-        IContext context = Context.Builder().WithMoreStrategy(strategy)
-            .WithMoreAddressParser(new LocalAddressParser()).Create();
-        ICommandParser commandParser = new CommandParser();
+        const int firstStringCommandIndex = 0;
+        const int secondStringCommandIndex = 1;
 
-        var mockConnectCommand = new Mock<FlagsConnectSubChainLinqBase>();
+        CommandBase? connectCommand = chain.Handle((CommandRequest)consoleCommandsData[firstStringCommandIndex]);
+        CommandBase? fileShowCommand = chain.Handle((CommandRequest)consoleCommandsData[secondStringCommandIndex]);
 
-        var mockFileShowCommand = new Mock<FlagsFileShowSubChainLinkBase>();
+        const int nullPath = 0;
+        var nullRequest = new CommandRequest(Array.Empty<string>(), Array.Empty<Flag>(), nullPath);
 
-        CommandChainLinkBase chain = DisconnectCommandLinq.Builder().WithContext(context).Create();
-
-        chain.AddNext(ConnectCommand.Builder().WithContext(context).WithSubChain(mockConnectCommand.Object).Create());
-
-        chain.AddNext(TreeGoToCommandLinq.Builder().WithContext(context).Create());
-
-        chain.AddNext(TreeListCommand.Builder().WithContext(context).WithSubChain(
-                DepthFlag.Builder().WithContext(context)
-                    .Create())
-            .Create());
-
-        chain.AddNext(FileShowCommand.Builder().WithContext(context).WithSubChain(mockFileShowCommand.Object).Create());
-
-        chain.AddNext(FileMoveCommand.Builder().WithContext(context).Create());
-        chain.AddNext(FileCopyCommand.Builder().WithContext(context).Create());
-        chain.AddNext(FileDeleteCommand.Builder().WithContext(context).Create());
-        chain.AddNext(FileRenameCommand.Builder().WithContext(context).Create());
-
-        bool parseResult = true;
-        const int connectStringIndex = 0;
-        const int fileShowStringIndex = 1;
-        const int connectIndex = 2;
-        const int fileShowIndex = 3;
-
-        var connectReference = (Command)consoleCommandsData[connectIndex];
-        var fileShowReference = (Command)consoleCommandsData[fileShowIndex];
-
-        parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[connectStringIndex], out Command connectCommand);
-        parseResult &= commandParser.TryParseConsoleCommand((string)consoleCommandsData[fileShowStringIndex], out Command fileShowCommand);
-
-        chain.Handle(connectCommand);
-        chain.Handle(fileShowCommand);
-
-        Assert.True(connectReference.PathIndex == connectCommand.PathIndex &&
-                    connectReference.Body.SequenceEqual(connectCommand.Body) &&
-                    connectReference.Flags.SequenceEqual(connectCommand.Flags));
-
-        Assert.True(fileShowReference.PathIndex == fileShowCommand.PathIndex &&
-                    fileShowReference.Body.SequenceEqual(fileShowCommand.Body) &&
-                    fileShowReference.Flags.SequenceEqual(fileShowCommand.Flags));
-
-        Assert.True(parseResult);
-
-        mockConnectCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
-        mockFileShowCommand.Verify(handle => handle.Handle(It.IsAny<Command>()), Times.AtLeastOnce());
+        Assert.True(connectCommand is not null && connectCommand.EqualCommand(new ConnectCommand(nullRequest)));
+        Assert.True(fileShowCommand is not null && fileShowCommand.EqualCommand(new FileShowCommand(nullRequest)));
     }
 }
