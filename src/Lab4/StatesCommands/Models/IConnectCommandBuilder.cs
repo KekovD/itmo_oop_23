@@ -6,6 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 public interface IConnectCommandBuilder
 {
     IConnectCommandBuilder WithSubChain(FlagsConnectSubChainLinqBase chain);
-    IConnectCommandBuilder WithContext(IContext context);
-    ConnectCommand Create();
+    ConnectCommandLinq Create();
 }

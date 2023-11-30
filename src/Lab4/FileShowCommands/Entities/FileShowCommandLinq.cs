@@ -1,41 +1,34 @@
 ﻿using System;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileShowCommands.Entities;
 
-public class FileShowCommand : CommandChainLinkBase
+public class FileShowCommandLinq : CommandChainLinkBase
 {
-    private readonly IContext _context;
     private readonly FlagsFileShowSubChainLinkBase? _chain;
 
-    private FileShowCommand(IContext context, FlagsFileShowSubChainLinkBase? chain)
+    private FileShowCommandLinq(FlagsFileShowSubChainLinkBase? chain)
     {
-        _context = context;
         _chain = chain;
     }
 
     public static IFileShowCommandBuilder Builder() => new FileShowCommandBuilder();
 
-    public override CommandBase? Handle(Command request)
+    public override CommandBase? Handle(CommandRequest request)
     {
         const string firstArgument = "file";
         const string secondArgument = "show";
         const int targetCount = 3;
         const int firstIndex = 0;
         const int secondIndex = 1;
-        const int pathIndex = 2;
-
-        if (_context.DisconnectRequest()) Next?.Handle(request);
 
         if (request.Body.Count == targetCount &&
             request.Body[firstIndex].Equals(firstArgument, StringComparison.Ordinal) &&
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
-            return _chain?.Handle(request with { PathIndex = pathIndex });
+            return _chain?.Handle(request);
 
         return Next?.Handle(request);
     }
@@ -43,7 +36,6 @@ public class FileShowCommand : CommandChainLinkBase
     private class FileShowCommandBuilder : IFileShowCommandBuilder
     {
         private FlagsFileShowSubChainLinkBase? _chain;
-        private IContext? _context;
 
         public IFileShowCommandBuilder WithSubChain(FlagsFileShowSubChainLinkBase chain)
         {
@@ -51,15 +43,6 @@ public class FileShowCommand : CommandChainLinkBase
             return this;
         }
 
-        public IFileShowCommandBuilder WithContext(IContext context)
-        {
-            _context = context;
-            return this;
-        }
-
-        public FileShowCommand Create() =>
-            new(
-                _context ?? throw new BuilderNullException(nameof(FileShowCommandBuilder)),
-                _chain);
+        public FileShowCommandLinq Create() => new(_chain);
     }
 }

@@ -42,16 +42,16 @@ public class CommandParser : ICommandParser
         return true;
     }
 
-    public bool TryParseConsoleCommand(string consoleCommand, out Command command)
+    public bool TryParseConsoleCommand(string consoleCommand, out CommandRequest commandRequest)
     {
         const int defaultPathIndex = 0;
-        command = new Command(Array.Empty<string>(), Array.Empty<Flag>(), defaultPathIndex);
+        commandRequest = new CommandRequest(Array.Empty<string>(), Array.Empty<Flag>(), defaultPathIndex);
 
         if (!TryParseBody(consoleCommand, out IList<string> body) ||
             !TryParseFlags(consoleCommand, body, out IList<Flag> flags))
             return false;
 
-        command = new Command(body.AsReadOnly(), flags.AsReadOnly(), defaultPathIndex);
+        commandRequest = new CommandRequest(body.AsReadOnly(), flags.AsReadOnly(), defaultPathIndex);
         return true;
     }
 }

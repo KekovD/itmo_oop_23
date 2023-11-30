@@ -5,7 +5,6 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 public interface IDisconnectCommandBuilder
 {
-    IDisconnectCommandBuilder WithContext(IContext context);
     IDisconnectCommandBuilder WithSubChain(FlagsDisconnectSubChainLinqBase chain);
     DisconnectCommandLinq Create();
 }

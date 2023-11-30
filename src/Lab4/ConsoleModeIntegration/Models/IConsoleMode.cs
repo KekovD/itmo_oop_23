@@ -2,5 +2,5 @@
 
 public interface IConsoleMode
 {
-    void EnterConsoleMode();
+    void EnterConsoleMode(string userInput);
 }

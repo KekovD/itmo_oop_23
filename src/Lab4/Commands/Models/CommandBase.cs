@@ -1,5 +1,4 @@
-﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
+﻿using Itmo.ObjectOrientedProgramming.Lab4.CommandStrategies.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
@@ -7,21 +6,15 @@ namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
 
 public abstract class CommandBase
 {
-    protected const int NextIndex = 1;
-    public Command? Request { get; protected set; }
-    protected CommandFeatures? Characteristics { get; init; }
+    protected const int NextIndexIncrement = 1;
 
-    public abstract void Execute(IContext context);
-
-    public bool CompareCharacteristics(CommandFeatures other, Command request)
+    protected CommandBase(CommandRequest request)
     {
-        bool result = Characteristics is not null &&
-                      Characteristics.Type.Equals(other.Type, StringComparison.Ordinal) &&
-                      Characteristics.ConnectionMode.Equals(other.ConnectionMode, StringComparison.Ordinal) &&
-                      Characteristics.OutputMode.Equals(other.OutputMode, StringComparison.Ordinal);
-
-        Request = result ? request : Request;
-
-        return result;
+        Request = request;
     }
+
+    public CommandRequest? Request { get; }
+
+    public abstract void Execute(IStrategy strategy, IContext context);
+    public abstract bool EqualCommand(CommandBase command);
 }

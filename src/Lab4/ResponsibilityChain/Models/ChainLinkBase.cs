@@ -13,5 +13,5 @@ public abstract class ChainLinkBase
         Next ??= link;
     }
 
-    public abstract CommandBase? Handle(Command request);
+    public abstract CommandBase? Handle(CommandRequest request);
 }

@@ -1,28 +1,24 @@
 ﻿using System;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.FileRenameCommands.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.FileRenameCommands.Entities;
 
-public class FileRenameCommand : CommandChainLinkBase
+public class FileRenameCommandLinq : CommandChainLinkBase
 {
-    private readonly IContext _context;
     private readonly FlagsFileRenameSubChainLinqBase? _flagsChain;
 
-    private FileRenameCommand(IContext context, FlagsFileRenameSubChainLinqBase? flagsChain)
+    private FileRenameCommandLinq(FlagsFileRenameSubChainLinqBase? flagsChain)
     {
-        _context = context;
         _flagsChain = flagsChain;
     }
 
     public static IFileRenameCommandBuilder Builder() => new FileRenameCommandBuilder();
 
-    public override CommandBase? Handle(Command request)
+    public override CommandBase? Handle(CommandRequest request)
     {
         const string firstArgument = "file";
         const string secondArgument = "rename";
@@ -31,19 +27,13 @@ public class FileRenameCommand : CommandChainLinkBase
         const int secondIndex = 1;
         const int pathIndex = 2;
 
-        if (_context.DisconnectRequest()) Next?.Handle(request);
-
         if (request.Body.Count >= targetCount &&
             request.Body[firstIndex].Equals(firstArgument, StringComparison.Ordinal) &&
             request.Body[secondIndex].Equals(secondArgument, StringComparison.Ordinal))
         {
-            _flagsChain?.Handle(request with { PathIndex = pathIndex });
-            string connectionMode = _context.GetConnectedMode();
+            _flagsChain?.Handle(request);
 
-            return _context.GetStrategy(connectionMode)?
-                .CrateCommand(
-                    new CommandFeatures("file rename", connectionMode, string.Empty),
-                    request with { PathIndex = pathIndex });
+            return new FileRenameCommand(request with { PathIndex = pathIndex });
         }
 
         return Next?.Handle(request);
@@ -51,14 +41,7 @@ public class FileRenameCommand : CommandChainLinkBase
 
     private class FileRenameCommandBuilder : IFileRenameCommandBuilder
     {
-        private IContext? _context;
         private FlagsFileRenameSubChainLinqBase? _flagsChain;
-
-        public IFileRenameCommandBuilder WithContext(IContext context)
-        {
-            _context = context;
-            return this;
-        }
 
         public IFileRenameCommandBuilder WithFlagsSubChain(FlagsFileRenameSubChainLinqBase flagsChain)
         {
@@ -66,8 +49,6 @@ public class FileRenameCommand : CommandChainLinkBase
             return this;
         }
 
-        public FileRenameCommand Create() => new(
-            _context ?? throw new BuilderNullException(nameof(FileRenameCommandBuilder)),
-            _flagsChain);
+        public FileRenameCommandLinq Create() => new(_flagsChain);
     }
 }

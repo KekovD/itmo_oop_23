@@ -6,19 +6,20 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class DisconnectCommand : CommandBase
+public class FileDeleteCommand : CommandBase
 {
-    public DisconnectCommand(CommandRequest request)
+    public FileDeleteCommand(CommandRequest request)
         : base(request)
     {
     }
 
     public override void Execute(IStrategy strategy, IContext context)
     {
-        if (context.DisconnectRequest()) return;
+        if (context.DisconnectRequest() || Request is null)
+            return;
 
-        strategy.Execute(context, new List<string>());
+        strategy.Execute(context, new List<string> { Request.Body[Request.PathIndex] });
     }
 
-    public override bool EqualCommand(CommandBase command) => command is DisconnectCommand;
+    public override bool EqualCommand(CommandBase command) => command is FileDeleteCommand;
 }

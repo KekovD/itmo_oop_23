@@ -6,9 +6,9 @@ using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.Commands.Entities;
 
-public class TreeGoToCommand : CommandBase
+public class FileCopyCommand : CommandBase
 {
-    public TreeGoToCommand(CommandRequest request)
+    public FileCopyCommand(CommandRequest request)
         : base(request)
     {
     }
@@ -18,8 +18,11 @@ public class TreeGoToCommand : CommandBase
         if (context.DisconnectRequest() || Request is null)
             return;
 
-        strategy.Execute(context, new List<string> { Request.Body[Request.PathIndex] });
+        int sourceIndex = Request.PathIndex;
+        int destinationIndex = sourceIndex + NextIndexIncrement;
+
+        strategy.Execute(context, new List<string> { Request.Body[sourceIndex], Request.Body[destinationIndex] });
     }
 
-    public override bool EqualCommand(CommandBase command) => command is TreeGoToCommand;
+    public override bool EqualCommand(CommandBase command) => command is FileCopyCommand;
 }

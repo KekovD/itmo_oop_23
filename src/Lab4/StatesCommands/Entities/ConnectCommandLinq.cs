@@ -1,37 +1,31 @@
 ﻿using System;
 using Itmo.ObjectOrientedProgramming.Lab4.Commands.Models;
-using Itmo.ObjectOrientedProgramming.Lab4.Exceptions;
 using Itmo.ObjectOrientedProgramming.Lab4.Records.Entities;
 using Itmo.ObjectOrientedProgramming.Lab4.ResponsibilityChain.Models;
 using Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab4.StatesCommands.Entities;
 
-public class ConnectCommand : CommandChainLinkBase
+public class ConnectCommandLinq : CommandChainLinkBase
 {
-    private readonly IContext _context;
     private readonly FlagsConnectSubChainLinqBase? _chain;
 
-    private ConnectCommand(IContext context, FlagsConnectSubChainLinqBase? chain)
+    private ConnectCommandLinq(FlagsConnectSubChainLinqBase? chain)
     {
-        _context = context;
         _chain = chain;
     }
 
     public static IConnectCommandBuilder Builder() => new ConnectCommandBuilder();
 
-    public override CommandBase? Handle(Command request)
+    public override CommandBase? Handle(CommandRequest request)
     {
         const string argument = "connect";
         const int argumentIndex = 0;
-        const int pathIndex = 1;
         const int targetCount = 2;
-
-        if (_context.ConnectRequest()) Next?.Handle(request);
 
         if (request.Body.Count == targetCount &&
             request.Body[argumentIndex].Equals(argument, StringComparison.Ordinal))
-            return _chain?.Handle(request with { PathIndex = pathIndex });
+            return _chain?.Handle(request);
 
         return Next?.Handle(request);
     }
@@ -39,7 +33,6 @@ public class ConnectCommand : CommandChainLinkBase
     private class ConnectCommandBuilder : IConnectCommandBuilder
     {
         private FlagsConnectSubChainLinqBase? _chain;
-        private IContext? _context;
 
         public IConnectCommandBuilder WithSubChain(FlagsConnectSubChainLinqBase chain)
         {
@@ -47,15 +40,6 @@ public class ConnectCommand : CommandChainLinkBase
             return this;
         }
 
-        public IConnectCommandBuilder WithContext(IContext context)
-        {
-            _context = context;
-            return this;
-        }
-
-        public ConnectCommand Create() =>
-            new(
-                _context ?? throw new BuilderNullException(nameof(ConnectCommandBuilder)),
-                _chain);
+        public ConnectCommandLinq Create() => new(_chain);
     }
 }
