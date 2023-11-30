@@ -17,13 +17,20 @@ public class ConsoleMode : IConsoleMode
     private readonly CommandChainLinkBase _chain;
     private readonly ICommandParser _parser;
     private readonly IList<StrategyCommandPair> _strategies;
+    private readonly IOutputStrategy _outputStrategy;
 
-    private ConsoleMode(IContext context, CommandChainLinkBase chain, ICommandParser parser, IList<StrategyCommandPair> strategies)
+    private ConsoleMode(
+        IContext context,
+        CommandChainLinkBase chain,
+        ICommandParser parser,
+        IList<StrategyCommandPair> strategies,
+        IOutputStrategy outputStrategy)
     {
         _context = context;
         _chain = chain;
         _parser = parser;
         _strategies = strategies;
+        _outputStrategy = outputStrategy;
     }
 
     public static IConsoleModeBuilder Builder() => new ConsoleModeBuilder();
@@ -53,11 +60,11 @@ public class ConsoleMode : IConsoleMode
             if (concreteStrategy is not null)
             {
                 concreteCommand?.Execute(concreteStrategy, _context);
-                Console.WriteLine("Execute.");
+                _outputStrategy.Write("Execute.");
                 return;
             }
 
-            Console.WriteLine("Command not found.");
+            _outputStrategy.Write("Command not found.");
         }
     }
 
@@ -70,6 +77,7 @@ public class ConsoleMode : IConsoleMode
         private IContext? _context;
         private CommandChainLinkBase? _chain;
         private ICommandParser? _parser;
+        private IOutputStrategy? _outputStrategy;
 
         public IConsoleModeBuilder WithContext(IContext context)
         {
@@ -95,10 +103,17 @@ public class ConsoleMode : IConsoleMode
             return this;
         }
 
+        public IConsoleModeBuilder WithOutputStrategy(IOutputStrategy outputStrategy)
+        {
+            _outputStrategy = outputStrategy;
+            return this;
+        }
+
         public ConsoleMode Create() => new(
             _context ?? throw new BuilderNullException($"{nameof(ConsoleModeBuilder)} {nameof(_context)} is null"),
             _chain ?? throw new BuilderNullException($"{nameof(ConsoleModeBuilder)} {nameof(_chain)} is null"),
             _parser ?? throw new BuilderNullException($"{nameof(ConsoleModeBuilder)} {nameof(_parser)} is null"),
-            _strategies);
+            _strategies,
+            _outputStrategy ?? throw new BuilderNullException($"{nameof(ConsoleModeBuilder)} {nameof(_outputStrategy)} is null"));
     }
 }

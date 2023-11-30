@@ -58,6 +58,7 @@ public static class ConsoleLocalApplication
         return ConsoleModeIntegration.Services.ConsoleMode.Builder()
             .WithContext(Context.Builder().Create())
             .WithCommandParser(new CommandParser())
+            .WithOutputStrategy(new ConsoleOutputStrategy())
             .WithChain(chain)
             .WithMoreStrategy(new ConnectCommand(nullRequest), new ConnectedStrategy(addressParser))
             .WithMoreStrategy(new DisconnectCommand(nullRequest), new DisconnectStrategy())

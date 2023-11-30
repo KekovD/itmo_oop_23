@@ -12,5 +12,6 @@ public interface IConsoleModeBuilder
     IConsoleModeBuilder WithChain(CommandChainLinkBase chain);
     IConsoleModeBuilder WithCommandParser(ICommandParser parser);
     IConsoleModeBuilder WithMoreStrategy(CommandBase command, IStrategy strategy);
+    IConsoleModeBuilder WithOutputStrategy(IOutputStrategy outputStrategy);
     ConsoleMode Create();
 }
