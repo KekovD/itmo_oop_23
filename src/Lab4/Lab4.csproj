@@ -3,9 +3,5 @@
     <PropertyGroup>
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab4</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="xunit" />
-    </ItemGroup>
-
+    
 </Project>
