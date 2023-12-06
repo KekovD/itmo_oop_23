@@ -53,13 +53,14 @@ public class Initial : SqlMigration
         (
             account_id bigint primary key generated always as identity ,
             user_id bigint not null references users(user_id) ,
-            account_pin_code text not null ,
-            account_balance not null ,
+            account_balance numeric(20, 2) not null ,
             account_state account_state not null ,
             account_open_date date not null ,
             account_close_date date ,
+            account_pin_code text not null
             
             primary key (account_id, user_id) ,
+            check (account_id >= 10000000 and account_id <= 99999999) ,
             check ((select user_role from users where user_id = customer_accounts.user_id) = 'customer')
         );
         
@@ -67,7 +68,7 @@ public class Initial : SqlMigration
         (
             account_id bigint not null references customers_accounts(account_id) ,
             operation_type operation_type not null ,
-            operation_amount numeric not null ,
+            operation_amount numeric(15, 2) not null ,
             operation_state operation_state not null ,
             operation_date date not null
         );

@@ -11,4 +11,8 @@
       <PackageReference Include="Itmo.Dev.Platform.Postgres" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Lab5.Application.Abstractions\Lab5.Application.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>
