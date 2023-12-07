@@ -2,7 +2,6 @@
 
 public enum OperationType
 {
-    None,
     Deposit,
     Withdrawal,
 }

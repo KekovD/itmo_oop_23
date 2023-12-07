@@ -2,7 +2,6 @@
 
 public enum OperationState
 {
-    None,
     Successful,
     Failed,
 }

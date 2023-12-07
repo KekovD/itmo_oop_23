@@ -2,7 +2,6 @@
 
 public enum CustomerAccountState
 {
-    None,
     Open,
     Close,
 }
