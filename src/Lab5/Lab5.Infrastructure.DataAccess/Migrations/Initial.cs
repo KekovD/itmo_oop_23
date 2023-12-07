@@ -66,8 +66,9 @@ public class Initial : SqlMigration
         create table customers_accounts_operations_history
         (
             account_id bigint not null references customers_accounts(account_id) ,
+            operation_id bigint primary key generated always as identity ,
+            operation_amount numeric(20, 2) not null check(operation_amount > 0) ,
             operation_type operation_type not null ,
-            operation_amount numeric(15, 2) not null ,
             operation_state operation_state not null ,
             operation_date date not null
         );
