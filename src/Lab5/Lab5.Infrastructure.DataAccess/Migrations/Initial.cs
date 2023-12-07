@@ -41,7 +41,7 @@ public class Initial : SqlMigration
         
         create table admins_accounts
         (
-            account_id bigint primary key generated always as identity ,
+            account_id numeric(16, 0) primary key generated always as identity ,
             user_id bigint not null references users(user_id) ,
             account_pin_code text not null ,
             
@@ -51,7 +51,7 @@ public class Initial : SqlMigration
         
         create table customers_accounts
         (
-            account_id bigint primary key generated always as identity ,
+            account_id numeric(16, 0) primary key generated always as identity ,
             user_id bigint not null references users(user_id) ,
             account_balance numeric(20, 2) not null ,
             account_state account_state not null ,
@@ -60,7 +60,6 @@ public class Initial : SqlMigration
             account_pin_code text not null
             
             primary key (account_id, user_id) ,
-            check (account_id >= 10000000 and account_id <= 99999999) ,
             check ((select user_role from users where user_id = customer_accounts.user_id) = 'customer')
         );
         

@@ -15,7 +15,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         _connectionProvider = connectionProvider;
     }
 
-    public string? FindAccountPasswordById(long userId, long accountId)
+    public string? FindAccountPasswordById(long userId, decimal accountId)
     {
         const string sql = """
                            select account_pin_code
@@ -42,7 +42,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         return password;
     }
 
-    public CustomerAccount? FindAccountById(long userId, long accountId)
+    public CustomerAccount? FindAccountById(long userId, decimal accountId)
     {
         const string sql = """
                            select account_id, user_id, account_balance, account_state, account_open_date, account_close_date
@@ -64,8 +64,8 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         if (reader.Read() is false)
             return null;
 
-        const int userIdIndex = 0;
-        const int accountIdIndex = 1;
+        const int accountIdIndex = 0;
+        const int userIdIndex = 1;
         const int balanceIndex = 2;
         const int stateIndex = 3;
         const int openDateIndex = 4;
@@ -74,8 +74,8 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         DateTime? closeDate = reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
         var customer = new CustomerAccount(
+            AccountId: reader.GetDecimal(accountIdIndex),
             UserId: reader.GetInt64(userIdIndex),
-            AccountId: reader.GetInt32(accountIdIndex),
             Balance: reader.GetDecimal(balanceIndex),
             State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
             OpenDate: reader.GetDateTime(openDateIndex),
