@@ -15,7 +15,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
         _connectionProvider = connectionProvider;
     }
 
-    public IEnumerable<Operation> FindOperationsHistoryById(decimal accountId)
+    public IEnumerable<Operation> FindOperationsHistoryById(long accountId)
     {
         const string sql = """
                            select account_id, operation_id, operation_amount, operation_type, operation_state, operation_date
@@ -42,7 +42,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
         while (reader.Read())
         {
             yield return new Operation(
-                AccountId: reader.GetDecimal(accountIdIndex),
+                AccountId: reader.GetInt64(accountIdIndex),
                 OperationId: reader.GetInt64(operationIdIndex),
                 Amount: reader.GetDecimal(amountIndex),
                 Type: reader.GetFieldValue<OperationType>(typeIndex),

@@ -4,5 +4,5 @@ namespace Application.Abstractions.Repositories;
 
 public interface IOperationsHistoryRepository
 {
-    IEnumerable<Operation> FindOperationsHistoryById(decimal accountId);
+    IEnumerable<Operation> FindOperationsHistoryById(long accountId);
 }

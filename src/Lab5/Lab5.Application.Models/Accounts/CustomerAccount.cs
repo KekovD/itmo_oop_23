@@ -1,7 +1,7 @@
 ﻿namespace Application.Models.Accounts;
 
 public record CustomerAccount(
-    decimal AccountId,
+    long AccountId,
     long UserId,
     decimal Balance,
     CustomerAccountState State,

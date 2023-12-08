@@ -2,5 +2,5 @@
 
 public interface IAdminAccountsRepository
 {
-    string? FindAdminPasswordById(long userId, decimal accountId);
+    string? FindAdminPasswordById(long userId, long accountId);
 }

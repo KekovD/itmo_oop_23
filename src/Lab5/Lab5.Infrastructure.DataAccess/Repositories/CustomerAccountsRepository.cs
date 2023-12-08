@@ -15,7 +15,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         _connectionProvider = connectionProvider;
     }
 
-    public string? FindAccountPasswordById(long userId, decimal accountId)
+    public string? FindAccountPasswordById(long userId, long accountId)
     {
         const string sql = """
                            select account_pin_code
@@ -74,7 +74,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         DateTime? closeDate = reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
         var customer = new CustomerAccount(
-            AccountId: reader.GetDecimal(accountIdIndex),
+            AccountId: reader.GetInt64(accountIdIndex),
             UserId: reader.GetInt64(userIdIndex),
             Balance: reader.GetDecimal(balanceIndex),
             State: reader.GetFieldValue<CustomerAccountState>(stateIndex),

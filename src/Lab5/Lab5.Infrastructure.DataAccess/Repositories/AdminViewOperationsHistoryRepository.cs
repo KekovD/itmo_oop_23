@@ -39,7 +39,7 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         while (reader.Read())
         {
             yield return new Operation(
-                AccountId: reader.GetDecimal(accountIdIndex),
+                AccountId: reader.GetInt64(accountIdIndex),
                 OperationId: reader.GetInt64(operationIdIndex),
                 Amount: reader.GetDecimal(amountIndex),
                 Type: reader.GetFieldValue<OperationType>(typeIndex),

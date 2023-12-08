@@ -14,7 +14,7 @@ public class AdminAccountsRepository : IAdminAccountsRepository
         _connectionProvider = connectionProvider;
     }
 
-    public string? FindAdminPasswordById(long userId, decimal accountId)
+    public string? FindAdminPasswordById(long userId, long accountId)
     {
         const string sql = """
                            select account_pin_code

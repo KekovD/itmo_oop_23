@@ -41,7 +41,7 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
             DateTime? closeDate = reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
             yield return new CustomerAccount(
-                AccountId: reader.GetDecimal(accountIdIndex),
+                AccountId: reader.GetInt64(accountIdIndex),
                 UserId: reader.GetInt64(userIdIndex),
                 Balance: reader.GetDecimal(balanceIndex),
                 State: reader.GetFieldValue<CustomerAccountState>(stateIndex),

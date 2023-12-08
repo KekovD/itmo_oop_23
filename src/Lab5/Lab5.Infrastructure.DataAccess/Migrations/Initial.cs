@@ -41,32 +41,32 @@ public class Initial : SqlMigration
         
         create table admins_accounts
         (
-            account_id numeric(16, 0) primary key generated always as identity ,
-            user_id bigint not null references users(user_id) ,
-            account_pin_code text not null ,
+            account_id bigint not null unique,
+            user_id bigint primary key not null references users(user_id) ,
+            account_pin_code text not null
             
-            primary key (account_id, user_id) ,
-            check ((select user_role from users where user_id = admins_accounts.user_id) = 'admin')
+            primary key (account_id, user_id) , 
+            foreign key (user_id) references users(user_id)
         );
         
         create table customers_accounts
         (
-            account_id numeric(16, 0) primary key generated always as identity ,
-            user_id bigint not null references users(user_id) ,
+            account_id bigint not null unique,
+            user_id bigint primary key not null references users(user_id) ,
             account_balance numeric(20, 2) not null ,
             account_state account_state not null ,
             account_open_date date not null ,
             account_close_date date ,
-            account_pin_code text not null
+            account_pin_code text not null ,
             
-            primary key (account_id, user_id) ,
-            check ((select user_role from users where user_id = customer_accounts.user_id) = 'customer')
+            primary key (account_id, user_id) , 
+            foreign key (user_id) references users(user_id)
         );
         
         create table customers_accounts_operations_history
         (
-            account_id bigint not null references customers_accounts(account_id) ,
-            operation_id bigint primary key generated always as identity ,
+            account_id bigint primary key not null references customers_accounts(account_id) ,
+            operation_id bigint generated always as identity ,
             operation_amount numeric(20, 2) not null check(operation_amount > 0) ,
             operation_type operation_type not null ,
             operation_state operation_state not null ,
