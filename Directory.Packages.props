@@ -16,6 +16,7 @@
     <PackageVersion Include="SourceKit.Analyzers.MemberAccessibility" Version="1.0.4" />
     <PackageVersion Include="SourceKit.Analyzers.Nullable" Version="1.0.4" />
     <PackageVersion Include="SourceKit.Analyzers.Properties" Version="1.0.4" />
+    <PackageVersion Include="Spectre.Console" Version="0.48.1-preview.0.5" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
     <PackageVersion Include="xunit" Version="2.5.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.0">

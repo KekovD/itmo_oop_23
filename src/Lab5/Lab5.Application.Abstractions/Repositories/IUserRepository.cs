@@ -4,5 +4,5 @@ namespace Application.Abstractions.Repositories;
 
 public interface IUserRepository
 {
-    User? FindUserByUsername(string username);
+     Task<User?> FindUserByUsername(string username);
 }

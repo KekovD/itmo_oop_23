@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Workshop5.Application.Contracts</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Admins\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Lab5.Application.Models\Lab5.Application.Models.csproj" />
+    </ItemGroup>
+
+</Project>

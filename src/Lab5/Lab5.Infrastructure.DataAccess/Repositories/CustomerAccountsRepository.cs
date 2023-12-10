@@ -15,25 +15,22 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         _connectionProvider = connectionProvider;
     }
 
-    public string? FindAccountPasswordById(long userId, long accountId)
+    public async Task<string?> FindAccountPasswordByAccountId(long accountId)
     {
         const string sql = """
                            select account_pin_code
                            from customers_accounts
-                           where user_id = :userId
-                           and account_id = :accountId;
+                           where account_id = :accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
-            .GetResult();
+        await using NpgsqlConnection connection =
+            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
 
-        using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("userId", userId).AddParameter("accountId", accountId);
-        using NpgsqlDataReader reader = command.ExecuteReader();
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("accountId", accountId);
+        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        if (reader.Read() is false)
+        if (await reader.ReadAsync().ConfigureAwait(false) is false)
             return null;
 
         const int passwordIndex = 0;
@@ -42,26 +39,23 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         return password;
     }
 
-    public CustomerAccount? FindAccountById(long userId, decimal accountId)
+    public async Task<CustomerAccount?> FindAccountByAccountId(long accountId)
     {
         const string sql = """
                            select account_id, user_id, account_balance, account_state, account_open_date, account_close_date
                            from customers_accounts
-                           where user_id = :userId
-                           and account_id = :accountId;
+                           where account_id = :accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
-            .GetResult();
+        await using NpgsqlConnection connection =
+            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
 
-        using var command = new NpgsqlCommand(sql, connection);
-        command.AddParameter("userId", userId).AddParameter("accountId", accountId);
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("accountId", accountId);
 
-        using NpgsqlDataReader reader = command.ExecuteReader();
+        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
-        if (reader.Read() is false)
+        if (await reader.ReadAsync().ConfigureAwait(false) is false)
             return null;
 
         const int accountIdIndex = 0;
@@ -71,13 +65,13 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         const int openDateIndex = 4;
         const int closeDateIndex = 5;
 
-        DateTime? closeDate = reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
+        DateTime? closeDate = await reader.IsDBNullAsync(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
         var customer = new CustomerAccount(
             AccountId: reader.GetInt64(accountIdIndex),
             UserId: reader.GetInt64(userIdIndex),
             Balance: reader.GetDecimal(balanceIndex),
-            State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
+            State: await reader.GetFieldValueAsync<CustomerAccountState>(stateIndex),
             OpenDate: reader.GetDateTime(openDateIndex),
             CloseDate: closeDate);
 

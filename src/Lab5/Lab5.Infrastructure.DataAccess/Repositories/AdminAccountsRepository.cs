@@ -14,7 +14,7 @@ public class AdminAccountsRepository : IAdminAccountsRepository
         _connectionProvider = connectionProvider;
     }
 
-    public string? FindAdminPasswordById(long userId, long accountId)
+    public async Task<string?> FindAdminPasswordByAccountId(long userId, long accountId)
     {
         const string sql = """
                            select account_pin_code
@@ -23,16 +23,13 @@ public class AdminAccountsRepository : IAdminAccountsRepository
                            and account_id = :accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
-            .GetResult();
+        await using NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
 
-        using var command = new NpgsqlCommand(sql, connection);
+        await using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("userId", userId).AddParameter("accountId", accountId);
-        using NpgsqlDataReader reader = command.ExecuteReader();
+        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync();
 
-        if (reader.Read() is false)
+        if (await reader.ReadAsync() is false)
             return null;
 
         const int passwordIndex = 0;

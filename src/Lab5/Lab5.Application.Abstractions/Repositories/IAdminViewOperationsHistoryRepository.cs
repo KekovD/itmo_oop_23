@@ -4,5 +4,5 @@ namespace Application.Abstractions.Repositories;
 
 public interface IAdminViewOperationsHistoryRepository
 {
-    IEnumerable<Operation> GetAllOperationsHistory();
+    IAsyncEnumerable<Operation> GetAllOperationsHistory();
 }

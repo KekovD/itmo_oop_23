@@ -4,6 +4,6 @@ namespace Application.Abstractions.Repositories;
 
 public interface ICustomerAccountsRepository
 {
-    string? FindAccountPasswordById(long userId, long accountId);
-    CustomerAccount? FindAccountById(long userId, decimal accountId);
+    Task<string?> FindAccountPasswordByAccountId(long accountId);
+    Task<CustomerAccount?> FindAccountByAccountId(long accountId);
 }

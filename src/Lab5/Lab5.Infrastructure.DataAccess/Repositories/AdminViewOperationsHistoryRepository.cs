@@ -14,20 +14,17 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         _connectionProvider = connectionProvider;
     }
 
-    public IEnumerable<Operation> GetAllOperationsHistory()
+    public async IAsyncEnumerable<Operation> GetAllOperationsHistory()
     {
         const string sql = """
                            select account_id, operation_id, operation_amount, operation_type, operation_state, operation_date
                            from customers_accounts_operations_history;
                            """;
 
-        using NpgsqlConnection connection = Task
-            .Run(async () =>
-                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
-            .GetResult();
+        await using NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
 
-        using var command = new NpgsqlCommand(sql, connection);
-        using NpgsqlDataReader reader = command.ExecuteReader();
+        await using var command = new NpgsqlCommand(sql, connection);
+        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         const int accountIdIndex = 0;
         const int operationIdIndex = 1;
@@ -36,14 +33,14 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         const int stateIndex = 4;
         const int dateIndex = 5;
 
-        while (reader.Read())
+        while (await reader.ReadAsync().ConfigureAwait(false))
         {
             yield return new Operation(
                 AccountId: reader.GetInt64(accountIdIndex),
                 OperationId: reader.GetInt64(operationIdIndex),
                 Amount: reader.GetDecimal(amountIndex),
-                Type: reader.GetFieldValue<OperationType>(typeIndex),
-                State: reader.GetFieldValue<OperationState>(stateIndex),
+                Type: await reader.GetFieldValueAsync<OperationType>(typeIndex),
+                State: await reader.GetFieldValueAsync<OperationState>(stateIndex),
                 Date: reader.GetDateTime(dateIndex));
         }
     }

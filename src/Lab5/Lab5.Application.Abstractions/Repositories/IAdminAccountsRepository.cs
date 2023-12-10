@@ -2,5 +2,5 @@
 
 public interface IAdminAccountsRepository
 {
-    string? FindAdminPasswordById(long userId, long accountId);
+    Task<string?> FindAdminPasswordByAccountId(long userId, long accountId);
 }
