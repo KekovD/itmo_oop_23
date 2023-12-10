@@ -1,26 +1,19 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Workshop5.Application.Contracts.Customers;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
 public class CustomerScenarioProvider : IScenarioProvider
 {
-    private readonly ICustomerLoginService _loginService;
+    private readonly IEnumerable<IScenario> _subScenarios;
 
-    public CustomerScenarioProvider(ICustomerLoginService loginService)
+    public CustomerScenarioProvider(IEnumerable<IScenario> subScenarios)
     {
-        _loginService = loginService;
+        _subScenarios = subScenarios;
     }
 
     public bool TryGetScenario([NotNullWhen(true)] out IScenario? scenario)
     {
-        var subScenarios = new List<IScenario>
-        {
-            new CustomerLoginScenario(_loginService),
-            new CustomerRegisterScenario(),
-        };
-
-        scenario = new ScenarioGroup("Customer", subScenarios);
+        scenario = new ScenarioGroup("Customer", _subScenarios);
         return true;
     }
 }

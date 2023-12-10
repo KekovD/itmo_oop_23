@@ -1,17 +1,22 @@
-﻿using Spectre.Console;
-using Workshop5.Application.Contracts;
-using Workshop5.Application.Contracts.Customers;
-using Workshop5.Application.Contracts.Exceptions;
+﻿using Lab5.Application.Contracts;
+using Lab5.Application.Contracts.Customers;
+using Lab5.Application.Contracts.Exceptions;
+using Lab5.Presentation.Console.Scenarios.Selectors;
+using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
 public class CustomerLoginScenario : IScenario
 {
     private readonly ICustomerLoginService _userService;
+    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly ISelector _selector;
 
-    public CustomerLoginScenario(ICustomerLoginService userService)
+    public CustomerLoginScenario(ICustomerLoginService userService,  IEnumerable<IScenario> subScenarios, ISelector selector)
     {
         _userService = userService;
+        _subScenarios = subScenarios;
+        _selector = selector;
     }
 
     public string Name => "Login";
@@ -27,10 +32,14 @@ public class CustomerLoginScenario : IScenario
         {
             LoginResult.Success => "Successful login",
             LoginResult.NotFound => "User not found",
+            LoginResult.WrongPassword => "Wrong password",
             _ => throw new ServiceArgumentOutOfRangeException(nameof(result)),
         };
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
+
+        if (result is LoginResult.Success)
+            _selector.ConsoleSelector(_subScenarios);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Workshop5.Application.Contracts;
+﻿namespace Lab5.Application.Contracts;
 
 public interface IPasswordHasher
 {

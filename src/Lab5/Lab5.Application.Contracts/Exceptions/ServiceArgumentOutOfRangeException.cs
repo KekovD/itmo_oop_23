@@ -1,4 +1,4 @@
-﻿namespace Workshop5.Application.Contracts.Exceptions;
+﻿namespace Lab5.Application.Contracts.Exceptions;
 
 public class ServiceArgumentOutOfRangeException : ArgumentOutOfRangeException
 {

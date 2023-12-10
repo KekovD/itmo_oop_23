@@ -17,7 +17,7 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
     public async IAsyncEnumerable<CustomerAccount> GetAllCustomerAccount()
     {
         const string sql = """
-                           select account_id, user_id, account_balance, account_state, account_open_date, account_close_date
+                           select account_id, account_balance, account_state, account_open_date, account_close_date
                            from customers_accounts;
                            """;
 
@@ -28,11 +28,10 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
         await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
 
         const int accountIdIndex = 0;
-        const int userIdIndex = 1;
-        const int balanceIndex = 2;
-        const int stateIndex = 3;
-        const int openDateIndex = 4;
-        const int closeDateIndex = 5;
+        const int balanceIndex = 1;
+        const int stateIndex = 2;
+        const int openDateIndex = 3;
+        const int closeDateIndex = 4;
 
         while (await reader.ReadAsync().ConfigureAwait(false))
         {
@@ -41,7 +40,6 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
 
             yield return new CustomerAccount(
                 AccountId: reader.GetInt64(accountIdIndex),
-                UserId: reader.GetInt64(userIdIndex),
                 Balance: reader.GetDecimal(balanceIndex),
                 State: await reader.GetFieldValueAsync<CustomerAccountState>(stateIndex),
                 OpenDate: reader.GetDateTime(openDateIndex),

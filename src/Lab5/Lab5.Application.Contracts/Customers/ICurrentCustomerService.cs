@@ -1,6 +1,6 @@
 ﻿using Application.Models.Accounts;
 
-namespace Workshop5.Application.Contracts.Customers;
+namespace Lab5.Application.Contracts.Customers;
 
 public interface ICurrentCustomerService
 {

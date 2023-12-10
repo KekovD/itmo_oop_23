@@ -1,4 +1,4 @@
-﻿namespace Workshop5.Application.Contracts;
+﻿namespace Lab5.Application.Contracts;
 
 public abstract record LoginResult
 {
@@ -8,5 +8,7 @@ public abstract record LoginResult
 
     public sealed record NotFound : LoginResult;
 
-    public sealed record Failure : LoginResult;
+    public sealed record WrongPassword : LoginResult;
+
+    public sealed record AccountClosed : LoginResult;
 }

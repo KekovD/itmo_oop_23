@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Repositories;
 using Application.Models.Accounts;
-using Workshop5.Application.Contracts;
-using Workshop5.Application.Contracts.Customers;
+using Lab5.Application.Contracts;
+using Lab5.Application.Contracts.Customers;
 
 namespace Lab5.Application.Customers;
 
@@ -21,19 +21,22 @@ internal class CustomerLoginService : ICustomerLoginService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<LoginResult> Login(long accountId, string password)
+    public async Task<LoginResult> Login(long accountId, string plainTextPassword)
     {
         CustomerAccount? customer = await _repository.FindAccountByAccountId(accountId);
 
         if (customer is null)
             return new LoginResult.NotFound();
 
+        if (customer.State.Equals(CustomerAccountState.Close))
+            return new LoginResult.AccountClosed();
+
         string? hashedPassword = await _repository.FindAccountPasswordByAccountId(accountId);
 
         if (hashedPassword is not null &&
-            _passwordHasher.VerifyHashedPassword(hashedPassword, password) != new PasswordVerificationResult.Success())
+            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) != new PasswordVerificationResult.Success())
         {
-            return new LoginResult.Failure();
+            return new LoginResult.WrongPassword();
         }
 
         _currentCustomerManager.Customer = customer;

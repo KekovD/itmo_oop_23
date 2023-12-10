@@ -1,5 +1,5 @@
 ﻿using Application.Models.Accounts;
-using Workshop5.Application.Contracts.Customers;
+using Lab5.Application.Contracts.Customers;
 
 namespace Lab5.Application.Customers;
 

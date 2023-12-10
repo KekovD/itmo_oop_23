@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
-using Workshop5.Application.Contracts;
+using Lab5.Application.Contracts;
 
 namespace Lab5.Application;
 
