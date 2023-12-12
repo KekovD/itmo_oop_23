@@ -1,4 +1,6 @@
-﻿using Lab5.Application.Contracts.Customers;
+﻿using Application.Models.Accounts;
+using Lab5.Application.Contracts;
+using Lab5.Application.Contracts.Customers;
 using Lab5.Application.Exceptions;
 
 namespace Lab5.Application.Customers;
@@ -12,11 +14,18 @@ internal class CustomerBalanceViewService : ICustomerBalanceViewService
         _currentCustomerManager = currentCustomerManager;
     }
 
-    public Task<decimal> ViewBalance()
+    public Task<TransactionResult> ViewBalance(out decimal balance)
     {
-        if (_currentCustomerManager.Customer is not null)
-            return Task.FromResult(_currentCustomerManager.Customer.Balance);
+        if (_currentCustomerManager.Customer is null)
+            throw new CurrentCustomerManagerNullException(nameof(CustomerBalanceViewService));
 
-        throw new CurrentCustomerManagerNullException(nameof(CustomerBalanceViewService));
+        if (_currentCustomerManager.Customer.State is CustomerAccountState.Close)
+        {
+            balance = 0;
+            return Task.FromResult<TransactionResult>(new TransactionResult.Rejected());
+        }
+
+        balance = _currentCustomerManager.Customer.Balance;
+        return Task.FromResult<TransactionResult>(new TransactionResult.Success());
     }
 }
