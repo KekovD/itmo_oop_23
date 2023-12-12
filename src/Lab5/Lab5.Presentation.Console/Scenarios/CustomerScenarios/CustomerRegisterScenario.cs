@@ -3,6 +3,7 @@ using Application.Models.Users;
 using Lab5.Application.Contracts;
 using Lab5.Application.Contracts.Customers;
 using Lab5.Application.Contracts.Exceptions;
+using Lab5.Presentation.Console.Scenarios.Selectors;
 using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
@@ -10,10 +11,14 @@ namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 public class CustomerRegisterScenario : IScenario
 {
     private readonly ICustomerRegisterService _userService;
+    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly ISelector _selector;
 
-    public CustomerRegisterScenario(ICustomerRegisterService userService)
+    public CustomerRegisterScenario(ICustomerRegisterService userService, IEnumerable<IScenario> subScenarios, ISelector selector)
     {
         _userService = userService;
+        _subScenarios = subScenarios;
+        _selector = selector;
     }
 
     public string Name => "Login";
@@ -41,5 +46,8 @@ public class CustomerRegisterScenario : IScenario
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
+
+        if (result is RegisterResult.Success)
+            _selector.ConsoleSelector(_subScenarios);
     }
 }
