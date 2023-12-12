@@ -26,7 +26,7 @@ internal class CustomerWithdrawalService : ICustomerWithdrawalService
     public async Task<TransactionResult> Withdrawal(decimal replenishmentAmount)
     {
         if (_currentCustomerManager.Customer is null)
-            throw new CurrentCustomerManagerNullException(nameof(CustomerDepositService));
+            throw new CurrentCustomerManagerNullException(nameof(CustomerWithdrawalService));
 
         const int nullId = 0;
 
