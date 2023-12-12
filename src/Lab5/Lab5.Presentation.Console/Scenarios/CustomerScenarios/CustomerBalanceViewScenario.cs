@@ -15,13 +15,12 @@ public class CustomerBalanceViewScenario : IScenario
 
     public string Name => "View balance";
 
-    public Task Run()
+    public async Task Run()
     {
-        string message = _service.ViewBalance().ToString(CultureInfo.InvariantCulture);
+        decimal balance = await _service.ViewBalance();
+        string message = balance.ToString(CultureInfo.InvariantCulture);
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
-
-        return Task.CompletedTask;
     }
 }

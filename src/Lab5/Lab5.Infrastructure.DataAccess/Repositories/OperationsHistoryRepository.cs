@@ -47,4 +47,23 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
                 Date: reader.GetDateTime(dateIndex));
         }
     }
+
+    public async Task AddOperationToHistory(Operation operation)
+    {
+        const string sql = """
+                           insert into customers_accounts_operations_history(account_id, operation_amount, operation_type, operation_state, operation_date)
+                           values(:accountId, :operationAmount, :operationType, :operationState, :operationDate);
+                           """;
+
+        await using NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("accountId", operation.AccountId);
+        command.AddParameter("operationAmount", operation.Amount);
+        command.AddParameter("operationType", operation.Type);
+        command.AddParameter("operationState", operation.State);
+        command.AddParameter("operationDate", operation.Date);
+
+        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+    }
 }

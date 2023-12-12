@@ -12,10 +12,10 @@ internal class CustomerBalanceViewService : ICustomerBalanceViewService
         _currentCustomerManager = currentCustomerManager;
     }
 
-    public decimal ViewBalance()
+    public Task<decimal> ViewBalance()
     {
         if (_currentCustomerManager.Customer is not null)
-            return _currentCustomerManager.Customer.Balance;
+            return Task.FromResult(_currentCustomerManager.Customer.Balance);
 
         throw new CurrentCustomerManagerNullException(nameof(CustomerBalanceViewService));
     }

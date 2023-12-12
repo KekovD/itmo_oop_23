@@ -2,5 +2,5 @@
 
 public interface ICustomerBalanceViewService
 {
-    decimal ViewBalance();
+    Task<decimal> ViewBalance();
 }

@@ -108,4 +108,22 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
 
         await command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
+
+    public async Task ChangeBalance(CustomerAccount account, decimal newBalance)
+    {
+        const string sql = """
+                           update customers_accounts
+                           set account_balance = :newBalance
+                           where account_id = :accountId;
+                           """;
+
+        await using NpgsqlConnection connection =
+            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("newBalance", newBalance);
+        command.AddParameter("accountId", account.AccountId);
+
+        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+    }
 }

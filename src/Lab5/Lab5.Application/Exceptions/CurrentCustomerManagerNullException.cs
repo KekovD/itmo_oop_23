@@ -1,6 +1,6 @@
 ﻿namespace Lab5.Application.Exceptions;
 
-public class CurrentCustomerManagerNullException : NullReferenceException
+internal class CurrentCustomerManagerNullException : NullReferenceException
 {
     public CurrentCustomerManagerNullException()
         : base("Current customer is null")

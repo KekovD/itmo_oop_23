@@ -8,4 +8,5 @@ public interface ICustomerAccountsRepository
     Task<string?> FindAccountPasswordByAccountId(long accountId);
     Task<CustomerAccount?> FindAccountByAccountId(long accountId);
     Task CreateCustomer(User newUser, CustomerAccount newAccount, string hashedPassword);
+    Task ChangeBalance(CustomerAccount account, decimal newBalance);
 }
