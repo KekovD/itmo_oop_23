@@ -8,10 +8,12 @@ namespace Lab5.Infrastructure.DataAccess.Repositories;
 public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryRepository
 {
     private readonly IPostgresConnectionProvider _connectionProvider;
+    private readonly IOperationsHistoryRepository _operationsHistoryRepository;
 
-    public AdminViewOperationsHistoryRepository(IPostgresConnectionProvider connectionProvider)
+    public AdminViewOperationsHistoryRepository(IPostgresConnectionProvider connectionProvider, IOperationsHistoryRepository operationsHistoryRepository)
     {
         _connectionProvider = connectionProvider;
+        _operationsHistoryRepository = operationsHistoryRepository;
     }
 
     public async IAsyncEnumerable<Operation> GetAllOperationsHistory()
@@ -44,4 +46,7 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
                 Date: reader.GetDateTime(dateIndex));
         }
     }
+
+    public IAsyncEnumerable<Operation> GetAllOperationsHistoryByCustomerAccountId(long customerAccountId) =>
+        _operationsHistoryRepository.FindOperationsHistoryByAccountId(customerAccountId);
 }
