@@ -126,4 +126,22 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
 
         await command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
+
+    public async Task ChangeAccountStateToClose(CustomerAccount account, DateTime closeDate)
+    {
+        const string sql = """
+                           update customers_accounts
+                           set account_state = 'close', account_close_date = :closeDate
+                           where account_id = :accountId;
+                           """;
+
+        await using NpgsqlConnection connection =
+            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+
+        await using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("closeDate", closeDate);
+        command.AddParameter("accountId", account.AccountId);
+
+        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+    }
 }
