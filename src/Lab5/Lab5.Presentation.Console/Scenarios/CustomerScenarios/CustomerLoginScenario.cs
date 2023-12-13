@@ -1,5 +1,4 @@
-﻿using Lab5.Application.Contracts;
-using Lab5.Application.Contracts.Customers;
+﻿using Lab5.Application.Contracts.Customers;
 using Lab5.Application.Contracts.Exceptions;
 using Lab5.Presentation.Console.Scenarios.Selectors;
 using Spectre.Console;
@@ -26,20 +25,21 @@ public class CustomerLoginScenario : IScenario
         long accountId = AnsiConsole.Ask<long>("Enter your account id");
         string password = AnsiConsole.Ask<string>("Enter your password");
 
-        LoginResult result = await _userService.Login(accountId, password);
+        CustomerLoginResult result = await _userService.Login(accountId, password);
 
         string message = result switch
         {
-            LoginResult.Success => "Successful login",
-            LoginResult.NotFound => "User not found",
-            LoginResult.WrongPassword => "Wrong password",
-            _ => throw new ServiceArgumentOutOfRangeException(nameof(result)),
+            CustomerLoginResult.Success => "Successful login",
+            CustomerLoginResult.NotFound => "User not found",
+            CustomerLoginResult.WrongPassword => "Wrong password",
+            CustomerLoginResult.AccountClosed => "Account closed",
+            _ => throw new ServiceArgumentOutOfRangeException($"{nameof(CustomerLoginScenario)} {nameof(result)}"),
         };
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
 
-        if (result is LoginResult.Success)
+        if (result is CustomerLoginResult.Success)
             _selector.ConsoleSelector(_subScenarios);
     }
 }
