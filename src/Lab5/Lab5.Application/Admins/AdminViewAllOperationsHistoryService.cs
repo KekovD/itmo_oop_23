@@ -15,7 +15,7 @@ internal class AdminViewAllOperationsHistoryService : IAdminViewAllOperationsHis
 
     public async IAsyncEnumerable<Operation> ViewAllOperationsHistory()
     {
-        await foreach (Operation operation in _repository.GetAllOperationsHistory())
+        await foreach (Operation operation in _repository.FindAllOperationsHistory())
         {
             yield return operation;
         }

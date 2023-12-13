@@ -21,7 +21,7 @@ internal class CustomerViewPeriodOperationsHistoryService : ICustomerViewPeriodO
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerViewPeriodOperationsHistoryService));
 
-        await foreach (Operation operation in _repository.FindOperationsHistoryByAccountIdAndPeriod(
+        await foreach (Operation operation in _repository.FindPeriodOperationsHistoryByAccountId(
                            _currentCustomerManager.Customer.AccountId, startDate, endDate))
         {
             yield return operation;

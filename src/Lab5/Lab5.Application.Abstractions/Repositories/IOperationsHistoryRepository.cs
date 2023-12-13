@@ -6,6 +6,6 @@ public interface IOperationsHistoryRepository
 {
     IAsyncEnumerable<Operation> FindOperationsHistoryByAccountId(long accountId);
 
-    IAsyncEnumerable<Operation> FindOperationsHistoryByAccountIdAndPeriod(long accountId, DateTime startDate, DateTime endDate);
+    IAsyncEnumerable<Operation> FindPeriodOperationsHistoryByAccountId(long accountId, DateTime startDate, DateTime endDate);
     Task AddOperationToHistory(Operation operation);
 }

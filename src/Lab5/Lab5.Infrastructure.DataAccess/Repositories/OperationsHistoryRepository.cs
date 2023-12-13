@@ -48,7 +48,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
         }
     }
 
-    public async IAsyncEnumerable<Operation> FindOperationsHistoryByAccountIdAndPeriod(long accountId, DateTime startDate, DateTime endDate)
+    public async IAsyncEnumerable<Operation> FindPeriodOperationsHistoryByAccountId(long accountId, DateTime startDate, DateTime endDate)
     {
         const string sql = """
                            select account_id, operation_id, operation_amount, operation_type, operation_state, operation_date

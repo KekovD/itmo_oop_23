@@ -15,7 +15,7 @@ public class AdminViewAllOperationsHistoryByCustomerService : IAdminViewAllOpera
 
     public async IAsyncEnumerable<Operation> ViewAllOperationsHistoryByCustomer(long customerAccountId)
     {
-        await foreach (Operation operation in _repository.GetAllOperationsHistoryByCustomerAccountId(customerAccountId))
+        await foreach (Operation operation in _repository.FindAllOperationsHistoryByCustomerAccountId(customerAccountId))
         {
             yield return operation;
         }
