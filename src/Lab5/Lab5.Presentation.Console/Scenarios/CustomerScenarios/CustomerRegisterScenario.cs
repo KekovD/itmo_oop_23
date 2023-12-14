@@ -8,13 +8,13 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerRegisterScenario : IScenario
+public class CustomerRegisterScenario : ICustomerProviderSubScenario
 {
     private readonly ICustomerRegisterService _userService;
-    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly IEnumerable<ICustomerLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
 
-    public CustomerRegisterScenario(ICustomerRegisterService userService, IEnumerable<IScenario> subScenarios, ISelector selector)
+    public CustomerRegisterScenario(ICustomerRegisterService userService, IEnumerable<ICustomerLoginSubScenario> subScenarios, ISelector selector)
     {
         _userService = userService;
         _subScenarios = subScenarios;

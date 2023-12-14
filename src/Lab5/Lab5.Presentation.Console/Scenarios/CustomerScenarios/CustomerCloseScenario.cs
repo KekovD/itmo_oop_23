@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerCloseScenario : IScenario
+public class CustomerCloseScenario : ICustomerLoginSubScenario
 {
     private readonly ICustomerCloseService _service;
 

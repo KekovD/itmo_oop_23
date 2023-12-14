@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerDepositScenario : IScenario
+public class CustomerDepositScenario : ICustomerLoginSubScenario
 {
     private readonly ICustomerDepositService _service;
 

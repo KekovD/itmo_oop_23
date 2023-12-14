@@ -6,7 +6,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerViewPeriodOperationsHistoryScenario : IScenario
+public class CustomerViewPeriodOperationsHistoryScenario : ICustomerLoginSubScenario
 {
     private readonly ICustomerViewPeriodOperationsHistoryService _service;
 

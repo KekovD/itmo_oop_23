@@ -4,9 +4,9 @@ namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
 public class CustomerScenarioProvider : IScenarioProvider
 {
-    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly IEnumerable<ICustomerProviderSubScenario> _subScenarios;
 
-    public CustomerScenarioProvider(IEnumerable<IScenario> subScenarios)
+    public CustomerScenarioProvider(IEnumerable<ICustomerProviderSubScenario> subScenarios)
     {
         _subScenarios = subScenarios;
     }

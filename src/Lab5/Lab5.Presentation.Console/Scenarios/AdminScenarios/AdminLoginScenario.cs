@@ -5,13 +5,13 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.AdminScenarios;
 
-public class AdminLoginScenario : IScenario
+public class AdminLoginScenario : IAdminProviderSubScenario
 {
     private readonly IAdminLoginService _userService;
-    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly IEnumerable<IAdminLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
 
-    public AdminLoginScenario(IAdminLoginService userService, IEnumerable<IScenario> subScenarios, ISelector selector)
+    public AdminLoginScenario(IAdminLoginService userService, IEnumerable<IAdminLoginSubScenario> subScenarios, ISelector selector)
     {
         _userService = userService;
         _subScenarios = subScenarios;

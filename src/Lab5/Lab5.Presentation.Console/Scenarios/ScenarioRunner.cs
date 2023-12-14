@@ -5,11 +5,12 @@ namespace Lab5.Presentation.Console.Scenarios;
 public class ScenarioRunner
 {
     private readonly IEnumerable<IScenarioProvider> _providers;
-    private readonly ISelector _selector = new Selector();
+    private readonly ISelector _selector;
 
-    public ScenarioRunner(IEnumerable<IScenarioProvider> providers)
+    public ScenarioRunner(IEnumerable<IScenarioProvider> providers, ISelector selector)
     {
         _providers = providers;
+        _selector = selector;
     }
 
     public void Run()

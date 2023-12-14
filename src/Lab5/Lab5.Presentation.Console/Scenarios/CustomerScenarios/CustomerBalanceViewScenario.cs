@@ -6,7 +6,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerBalanceViewScenario : IScenario
+public class CustomerBalanceViewScenario : ICustomerLoginSubScenario
 {
     private readonly ICustomerBalanceViewService _service;
 

@@ -4,9 +4,9 @@ namespace Lab5.Presentation.Console.Scenarios.AdminScenarios;
 
 public class AdminScenarioProvider : IScenarioProvider
 {
-    private readonly IEnumerable<IScenario> _subScenarios;
+    private readonly IEnumerable<IAdminProviderSubScenario> _subScenarios;
 
-    public AdminScenarioProvider(IEnumerable<IScenario> subScenarios)
+    public AdminScenarioProvider(IEnumerable<IAdminProviderSubScenario> subScenarios)
     {
         _subScenarios = subScenarios;
     }

@@ -6,7 +6,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.AdminScenarios;
 
-public class AdminViewPeriodOperationsHistoryScenario : IScenario
+public class AdminViewPeriodOperationsHistoryScenario : IAdminLoginSubScenario
 {
     private readonly IAdminViewPeriodOperationsHistoryService _service;
 

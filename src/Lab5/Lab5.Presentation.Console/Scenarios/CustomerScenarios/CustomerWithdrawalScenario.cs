@@ -5,7 +5,7 @@ using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios.CustomerScenarios;
 
-public class CustomerWithdrawalScenario : IScenario
+public class CustomerWithdrawalScenario : ICustomerLoginSubScenario
 {
     private readonly ICustomerWithdrawalService _service;
 
