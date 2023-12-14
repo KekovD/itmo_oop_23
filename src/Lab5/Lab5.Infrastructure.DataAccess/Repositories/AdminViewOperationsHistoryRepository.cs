@@ -17,17 +17,23 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         _operationsHistoryRepository = operationsHistoryRepository;
     }
 
-    public async IAsyncEnumerable<Operation> FindAllOperationsHistory()
+    public IEnumerable<Operation> FindAllOperationsHistory()
     {
         const string sql = """
                            select account_id, operation_id, operation_amount, operation_type, operation_state, operation_date
                            from customers_accounts_operations_history;
                            """;
 
-        await using NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var command = new NpgsqlCommand(sql, connection);
+
+        using NpgsqlDataReader reader = command.ExecuteReader();
+
+        var operations = new List<Operation>();
 
         const int accountIdIndex = 0;
         const int operationIdIndex = 1;
@@ -36,35 +42,45 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         const int stateIndex = 4;
         const int dateIndex = 5;
 
-        while (await reader.ReadAsync().ConfigureAwait(false))
+        while (reader.Read())
         {
-            yield return new Operation(
+            operations.Add(new Operation(
                 AccountId: reader.GetInt64(accountIdIndex),
                 OperationId: reader.GetInt64(operationIdIndex),
                 Amount: reader.GetDecimal(amountIndex),
-                Type: await reader.GetFieldValueAsync<OperationType>(typeIndex),
-                State: await reader.GetFieldValueAsync<OperationState>(stateIndex),
-                Date: reader.GetDateTime(dateIndex));
+                Type: reader.GetFieldValue<OperationType>(typeIndex),
+                State: reader.GetFieldValue<OperationState>(stateIndex),
+                Date: reader.GetDateTime(dateIndex)));
         }
+
+        return operations;
     }
 
-    public IAsyncEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId) =>
-        _operationsHistoryRepository.FindOperationsHistoryByAccountId(customerAccountId);
+    public IEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId)
+    {
+        return _operationsHistoryRepository.FindOperationsHistoryByAccountId(customerAccountId);
+    }
 
-    public async IAsyncEnumerable<Operation> FindPeriodOperationsHistory(DateTime startDate, DateTime endDate)
+    public IEnumerable<Operation> FindPeriodOperationsHistory(DateTime startDate, DateTime endDate)
     {
         const string sql = """
                            select account_id, operation_id, operation_amount, operation_type, operation_state, operation_date
                            from customers_accounts_operations_history
-                           where operation_date between :startDate and :endDate;
+                           where operation_date between @startDate and @endDate;
                            """;
 
-        await using NpgsqlConnection connection = await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("startDate", startDate);
         command.AddParameter("endDate", endDate);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+
+        using NpgsqlDataReader reader = command.ExecuteReader();
+
+        var operations = new List<Operation>();
 
         const int accountIdIndex = 0;
         const int operationIdIndex = 1;
@@ -73,18 +89,20 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         const int stateIndex = 4;
         const int dateIndex = 5;
 
-        while (await reader.ReadAsync().ConfigureAwait(false))
+        while (reader.Read())
         {
-            yield return new Operation(
+            operations.Add(new Operation(
                 AccountId: reader.GetInt64(accountIdIndex),
                 OperationId: reader.GetInt64(operationIdIndex),
                 Amount: reader.GetDecimal(amountIndex),
-                Type: await reader.GetFieldValueAsync<OperationType>(typeIndex),
-                State: await reader.GetFieldValueAsync<OperationState>(stateIndex),
-                Date: reader.GetDateTime(dateIndex));
+                Type: reader.GetFieldValue<OperationType>(typeIndex),
+                State: reader.GetFieldValue<OperationState>(stateIndex),
+                Date: reader.GetDateTime(dateIndex)));
         }
+
+        return operations;
     }
 
-    public IAsyncEnumerable<Operation> FindPeriodOperationsHistoryByCustomerAccountId(long accountId, DateTime startDate, DateTime endDate) =>
+    public IEnumerable<Operation> FindPeriodOperationsHistoryByCustomerAccountId(long accountId, DateTime startDate, DateTime endDate) =>
         _operationsHistoryRepository.FindPeriodOperationsHistoryByAccountId(accountId, startDate, endDate);
 }

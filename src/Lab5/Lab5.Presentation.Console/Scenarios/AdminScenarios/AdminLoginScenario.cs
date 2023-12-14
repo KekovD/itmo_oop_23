@@ -11,7 +11,8 @@ public class AdminLoginScenario : IAdminProviderSubScenario
     private readonly IEnumerable<IAdminLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
 
-    public AdminLoginScenario(IAdminLoginService userService, IEnumerable<IAdminLoginSubScenario> subScenarios, ISelector selector)
+    public AdminLoginScenario(
+        IAdminLoginService userService, IEnumerable<IAdminLoginSubScenario> subScenarios, ISelector selector)
     {
         _userService = userService;
         _subScenarios = subScenarios;
@@ -20,12 +21,12 @@ public class AdminLoginScenario : IAdminProviderSubScenario
 
     public string Name => "Login";
 
-    public async Task Run()
+    public void Run()
     {
         long accountId = AnsiConsole.Ask<long>("Enter your account id");
         string password = AnsiConsole.Ask<string>("Enter your password");
 
-        AdminLoginResult result = await _userService.Login(accountId, password);
+        AdminLoginResult result = _userService.Login(accountId, password);
 
         string message = result switch
         {

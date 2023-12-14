@@ -12,14 +12,15 @@ internal class CustomerCloseService : ICustomerCloseService
     private readonly CurrentCustomerManager _currentCustomerManager;
     private readonly IPasswordHasher _passwordHasher;
 
-    public CustomerCloseService(ICustomerAccountsRepository repository, CurrentCustomerManager currentCustomerManager, IPasswordHasher passwordHasher)
+    public CustomerCloseService(
+        ICustomerAccountsRepository repository, CurrentCustomerManager currentCustomerManager, IPasswordHasher passwordHasher)
     {
         _repository = repository;
         _currentCustomerManager = currentCustomerManager;
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<CloseResult> DeleteAccount(string plainTextPassword)
+    public CloseResult DeleteAccount(string plainTextPassword)
     {
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerCloseService));
@@ -27,15 +28,16 @@ internal class CustomerCloseService : ICustomerCloseService
         if (_currentCustomerManager.Customer.State is CustomerAccountState.Close)
             return new CloseResult.WrongPassword();
 
-        string? hashedPassword = await _repository.FindAccountPasswordByAccountId(_currentCustomerManager.Customer.AccountId);
+        string? hashedPassword = _repository.FindAccountPasswordByAccountId(_currentCustomerManager.Customer.AccountId);
 
-        if (hashedPassword is not null &&
-            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) != new PasswordVerificationResult.Success())
+        if (!string.IsNullOrEmpty(hashedPassword) &&
+            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) is not
+            PasswordVerificationResult.Success)
         {
             return new CloseResult.WrongPassword();
         }
 
-        await _repository.ChangeAccountStateToClose(_currentCustomerManager.Customer, DateTime.Now);
+        _repository.ChangeAccountStateToClose(_currentCustomerManager.Customer, DateTime.Now);
         return new CloseResult.Success();
     }
 }

@@ -14,18 +14,23 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
         _connectionProvider = connectionProvider;
     }
 
-    public async IAsyncEnumerable<CustomerAccount> GetAllCustomerAccount()
+    public IEnumerable<CustomerAccount> GetAllCustomerAccount()
     {
         const string sql = """
                            select account_id, account_balance, account_state, account_open_date, account_close_date
                            from customers_accounts;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using var command = new NpgsqlCommand(sql, connection);
+
+        using NpgsqlDataReader reader = command.ExecuteReader();
+
+        var accounts = new List<CustomerAccount>();
 
         const int accountIdIndex = 0;
         const int balanceIndex = 1;
@@ -33,17 +38,19 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
         const int openDateIndex = 3;
         const int closeDateIndex = 4;
 
-        while (await reader.ReadAsync().ConfigureAwait(false))
+        while (reader.Read())
         {
             DateTime? closeDate =
-                await reader.IsDBNullAsync(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
+                reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
-            yield return new CustomerAccount(
+            accounts.Add(new CustomerAccount(
                 AccountId: reader.GetInt64(accountIdIndex),
                 Balance: reader.GetDecimal(balanceIndex),
-                State: await reader.GetFieldValueAsync<CustomerAccountState>(stateIndex),
+                State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
                 OpenDate: reader.GetDateTime(openDateIndex),
-                CloseDate: closeDate);
+                CloseDate: closeDate));
         }
+
+        return accounts;
     }
 }

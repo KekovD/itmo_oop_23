@@ -2,5 +2,5 @@
 
 public interface ICustomerDepositService
 {
-    Task<TransactionResult> Replenishment(decimal replenishmentAmount);
+    TransactionResult Replenishment(decimal replenishmentAmount);
 }

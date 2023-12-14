@@ -16,11 +16,11 @@ public class CustomerDepositScenario : ICustomerLoginSubScenario
 
     public string Name => "Deposit";
 
-    public async Task Run()
+    public void Run()
     {
         decimal replenishmentAmount = AnsiConsole.Ask<decimal>("Enter the amount of money");
 
-        TransactionResult result = await _service.Replenishment(replenishmentAmount);
+        TransactionResult result = _service.Replenishment(replenishmentAmount);
 
         string message = result switch
         {

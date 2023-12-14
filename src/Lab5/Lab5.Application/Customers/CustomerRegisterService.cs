@@ -22,16 +22,16 @@ internal class CustomerRegisterService : ICustomerRegisterService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<RegisterResult> Register(User user, CustomerAccount newAccount, string plainTextPassword)
+    public RegisterResult Register(User user, CustomerAccount newAccount, string plainTextPassword)
     {
-        CustomerAccount? existingAccount = await _repository.FindAccountByAccountId(newAccount.AccountId);
+        CustomerAccount? existingAccount = _repository.FindAccountByAccountId(newAccount.AccountId);
 
-        if (existingAccount is not null)
+        if (existingAccount != null)
             return new RegisterResult.AccountAlreadyExists();
 
         string hashedPassword = _passwordHasher.HashPassword(plainTextPassword);
 
-        await _repository.CreateCustomer(user, newAccount, hashedPassword);
+        _repository.CreateCustomer(user, newAccount, hashedPassword);
 
         _currentCustomerManager.Customer = newAccount;
         return new RegisterResult.Success();

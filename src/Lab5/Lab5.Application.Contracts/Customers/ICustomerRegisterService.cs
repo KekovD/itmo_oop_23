@@ -5,5 +5,5 @@ namespace Lab5.Application.Contracts.Customers;
 
 public interface ICustomerRegisterService
 {
-    Task<RegisterResult> Register(User user, CustomerAccount newAccount, string plainTextPassword);
+    RegisterResult Register(User user, CustomerAccount newAccount, string plainTextPassword);
 }

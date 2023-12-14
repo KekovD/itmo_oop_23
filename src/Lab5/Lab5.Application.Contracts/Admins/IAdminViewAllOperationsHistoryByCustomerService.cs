@@ -4,5 +4,5 @@ namespace Lab5.Application.Contracts.Admins;
 
 public interface IAdminViewAllOperationsHistoryByCustomerService
 {
-    IAsyncEnumerable<Operation> ViewAllOperationsHistoryByCustomer(long customerAccountId);
+    IEnumerable<Operation> ViewAllOperationsHistoryByCustomer(long customerAccountId);
 }

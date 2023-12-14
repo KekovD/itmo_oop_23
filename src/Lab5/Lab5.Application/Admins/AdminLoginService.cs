@@ -18,17 +18,17 @@ internal class AdminLoginService : IAdminLoginService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<AdminLoginResult> Login(long accountId, string plainTextPassword)
+    public AdminLoginResult Login(long accountId, string plainTextPassword)
     {
-        AdminAccount? admin = await _repository.FindAccountByAccountId(accountId);
+        AdminAccount? admin = _repository.FindAccountByAccountId(accountId);
 
         if (admin is null)
             return new AdminLoginResult.NotFound();
 
-        string? hashedPassword = await _repository.FindAdminPasswordByAccountId(accountId);
+        string? hashedPassword = _repository.FindAdminPasswordByAccountId(accountId);
 
-        if (hashedPassword is not null &&
-            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) != new PasswordVerificationResult.Success())
+        if (!string.IsNullOrEmpty(hashedPassword) &&
+            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) is not PasswordVerificationResult.Success)
         {
             return new AdminLoginResult.WrongPassword();
         }

@@ -4,8 +4,8 @@ namespace Application.Abstractions.Repositories;
 
 public interface IAdminViewOperationsHistoryRepository
 {
-    IAsyncEnumerable<Operation> FindAllOperationsHistory();
-    IAsyncEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId);
-    IAsyncEnumerable<Operation> FindPeriodOperationsHistory(DateTime startDate, DateTime endDate);
-    IAsyncEnumerable<Operation> FindPeriodOperationsHistoryByCustomerAccountId(long accountId, DateTime startDate, DateTime endDate);
+    IEnumerable<Operation> FindAllOperationsHistory();
+    IEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId);
+    IEnumerable<Operation> FindPeriodOperationsHistory(DateTime startDate, DateTime endDate);
+    IEnumerable<Operation> FindPeriodOperationsHistoryByCustomerAccountId(long accountId, DateTime startDate, DateTime endDate);
 }

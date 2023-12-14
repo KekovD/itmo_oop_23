@@ -16,11 +16,11 @@ public class CustomerWithdrawalScenario : ICustomerLoginSubScenario
 
     public string Name => "Withdrawal";
 
-    public async Task Run()
+    public void Run()
     {
         decimal replenishmentAmount = AnsiConsole.Ask<decimal>("Enter the amount of money");
 
-        TransactionResult result = await _service.Withdrawal(replenishmentAmount);
+        TransactionResult result = _service.Withdrawal(replenishmentAmount);
 
         string message = result switch
         {

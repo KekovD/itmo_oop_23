@@ -4,5 +4,5 @@ namespace Lab5.Application.Contracts.Customers;
 
 public interface ICustomerViewAllOperationsHistoryService
 {
-    IAsyncEnumerable<Operation> ViewAllOperationsHistory();
+    IEnumerable<Operation> ViewAllOperationsHistory();
 }

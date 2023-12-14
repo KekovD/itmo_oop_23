@@ -23,7 +23,7 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
 
     public string Name => "Login";
 
-    public async Task Run()
+    public void Run()
     {
         string username = AnsiConsole.Ask<string>("Enter your username");
         long accountId = AnsiConsole.Ask<long>("Enter your account id");
@@ -35,7 +35,7 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
         var newAccount =
             new CustomerAccount(accountId, registerBalance, CustomerAccountState.Open, DateTime.Now, null);
 
-        RegisterResult result = await _userService.Register(newUser, newAccount, password);
+        RegisterResult result = _userService.Register(newUser, newAccount, password);
 
         string message = result switch
         {

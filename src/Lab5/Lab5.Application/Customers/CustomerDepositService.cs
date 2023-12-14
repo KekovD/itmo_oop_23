@@ -23,7 +23,7 @@ internal class CustomerDepositService : ICustomerDepositService
         _operationsHistoryRepository = operationsHistoryRepository;
     }
 
-    public async Task<TransactionResult> Replenishment(decimal replenishmentAmount)
+    public TransactionResult Replenishment(decimal replenishmentAmount)
     {
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerDepositService));
@@ -40,13 +40,13 @@ internal class CustomerDepositService : ICustomerDepositService
 
         if (_currentCustomerManager.Customer.State is CustomerAccountState.Close)
         {
-            await _operationsHistoryRepository.AddOperationToHistory(operation);
+            _operationsHistoryRepository.AddOperationToHistory(operation);
             return new TransactionResult.Rejected();
         }
 
         decimal newBalance = _currentCustomerManager.Customer.Balance + replenishmentAmount;
-        await _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
-        await _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
+        _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
+        _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
 
         return new TransactionResult.Success();
     }

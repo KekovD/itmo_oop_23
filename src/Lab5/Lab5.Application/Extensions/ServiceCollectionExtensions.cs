@@ -17,7 +17,8 @@ public static class ServiceCollectionExtensions
             .AddScoped<IAdminViewAllOperationsHistoryByCustomerService,
                 AdminViewAllOperationsHistoryByCustomerService>()
             .AddScoped<IAdminViewAllOperationsHistoryService, AdminViewAllOperationsHistoryService>()
-            .AddScoped<IAdminViewPeriodOperationsHistoryService, AdminViewPeriodOperationsHistoryService>();
+            .AddScoped<IAdminViewPeriodOperationsHistoryService, AdminViewPeriodOperationsHistoryService>()
+            .AddScoped<IAddAdminsService, AddAdminsService>();
 
         collection
             .AddScoped<CurrentAdminManager>()
@@ -35,7 +36,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<ICustomerWithdrawalService, CustomerWithdrawalService>();
 
         collection
-            .AddScoped<ICurrentCustomerService>()
+            .AddScoped<CurrentCustomerManager>()
             .AddScoped<ICurrentCustomerService>(
                 provider => provider.GetRequiredService<CurrentCustomerManager>());
 

@@ -4,7 +4,7 @@ namespace Application.Abstractions.Repositories;
 
 public interface IUserRepository
 {
-     Task<User?> FindUserByUsername(string username);
-     Task<long?> FindIdByUsername(string username);
-     Task CreateUser(User newUser);
+     User? FindUserByUsername(string username);
+     long? FindIdByUsername(string username);
+     void CreateUser(User newUser);
 }

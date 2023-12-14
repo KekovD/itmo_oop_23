@@ -2,5 +2,5 @@
 
 public interface ICustomerWithdrawalService
 {
-    Task<TransactionResult> Withdrawal(decimal replenishmentAmount);
+    TransactionResult Withdrawal(decimal replenishmentAmount);
 }

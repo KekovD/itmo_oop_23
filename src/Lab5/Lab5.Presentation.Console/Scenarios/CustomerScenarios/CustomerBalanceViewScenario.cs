@@ -17,9 +17,9 @@ public class CustomerBalanceViewScenario : ICustomerLoginSubScenario
 
     public string Name => "View balance";
 
-    public async Task Run()
+    public void Run()
     {
-        TransactionResult result = await _service.ViewBalance(out decimal balance);
+        TransactionResult result = _service.ViewBalance(out decimal balance);
 
         string message = result switch
         {

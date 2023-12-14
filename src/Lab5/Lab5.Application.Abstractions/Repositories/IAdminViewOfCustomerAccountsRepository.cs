@@ -4,5 +4,5 @@ namespace Application.Abstractions.Repositories;
 
 public interface IAdminViewOfCustomerAccountsRepository
 {
-    IAsyncEnumerable<CustomerAccount> GetAllCustomerAccount();
+    IEnumerable<CustomerAccount> GetAllCustomerAccount();
 }

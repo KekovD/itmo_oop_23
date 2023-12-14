@@ -15,9 +15,9 @@ public class ScenarioGroup : IScenario
 
     public string Name { get; }
 
-    public async Task Run()
+    public void Run()
     {
         IScenario scenario = _selector.ConsoleSelector(_subScenarios);
-        await scenario.Run();
+        scenario.Run();
     }
 }

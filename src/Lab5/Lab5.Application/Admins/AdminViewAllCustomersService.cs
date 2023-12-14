@@ -13,11 +13,5 @@ public class AdminViewAllCustomersService : IAdminViewAllCustomersService
         _repository = repository;
     }
 
-    public async IAsyncEnumerable<CustomerAccount> ViewAllCustomers()
-    {
-        await foreach (CustomerAccount customerAccount in _repository.GetAllCustomerAccount())
-        {
-            yield return customerAccount;
-        }
-    }
+    public IEnumerable<CustomerAccount> ViewAllCustomers() => _repository.GetAllCustomerAccount();
 }

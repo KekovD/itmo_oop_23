@@ -20,12 +20,12 @@ public class CustomerLoginScenario : ICustomerProviderSubScenario
 
     public string Name => "Login";
 
-    public async Task Run()
+    public void Run()
     {
         long accountId = AnsiConsole.Ask<long>("Enter your account id");
         string password = AnsiConsole.Ask<string>("Enter your password");
 
-        CustomerLoginResult result = await _userService.Login(accountId, password);
+        CustomerLoginResult result = _userService.Login(accountId, password);
 
         string message = result switch
         {

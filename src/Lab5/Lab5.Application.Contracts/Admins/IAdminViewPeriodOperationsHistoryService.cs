@@ -4,5 +4,5 @@ namespace Lab5.Application.Contracts.Admins;
 
 public interface IAdminViewPeriodOperationsHistoryService
 {
-    IAsyncEnumerable<Operation> ViewPeriodOperationsHistory(DateTime startDate, DateTime endDate);
+    IEnumerable<Operation> ViewPeriodOperationsHistory(DateTime startDate, DateTime endDate);
 }

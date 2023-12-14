@@ -13,11 +13,6 @@ public class AdminViewAllOperationsHistoryByCustomerService : IAdminViewAllOpera
         _repository = repository;
     }
 
-    public async IAsyncEnumerable<Operation> ViewAllOperationsHistoryByCustomer(long customerAccountId)
-    {
-        await foreach (Operation operation in _repository.FindAllOperationsHistoryByCustomerAccountId(customerAccountId))
-        {
-            yield return operation;
-        }
-    }
+    public IEnumerable<Operation> ViewAllOperationsHistoryByCustomer(long customerAccountId) =>
+        _repository.FindAllOperationsHistoryByCustomerAccountId(customerAccountId);
 }

@@ -15,22 +15,24 @@ public class UserRepository : IUserRepository
         _connectionProvider = connectionProvider;
     }
 
-    public async Task<User?> FindUserByUsername(string username)
+    public User? FindUserByUsername(string username)
     {
         const string sql = """
                            select user_name, user_role
                            from users
-                           where user_name = :username;
+                           where user_name = @username;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("username", username);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using NpgsqlDataReader reader = command.ExecuteReader();
 
-        if (await reader.ReadAsync().ConfigureAwait(false) is false)
+        if (!reader.Read())
             return null;
 
         const int userNameIndex = 0;
@@ -38,27 +40,29 @@ public class UserRepository : IUserRepository
 
         var user = new User(
             Username: reader.GetString(userNameIndex),
-            Role: await reader.GetFieldValueAsync<UserRole>(userRoleIndex));
+            Role: reader.GetFieldValue<UserRole>(userRoleIndex));
 
         return user;
     }
 
-    public async Task<long?> FindIdByUsername(string username)
+    public long? FindIdByUsername(string username)
     {
         const string sql = """
                            select user_id
                            from users
-                           where user_name = :username;
+                           where user_name = @username;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("username", username);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using NpgsqlDataReader reader = command.ExecuteReader();
 
-        if (await reader.ReadAsync().ConfigureAwait(false) is false)
+        if (!reader.Read())
             return null;
 
         const int userIdIndex = 0;
@@ -66,25 +70,27 @@ public class UserRepository : IUserRepository
         return reader.GetInt64(userIdIndex);
     }
 
-    public async Task CreateUser(User newUser)
+    public void CreateUser(User newUser)
     {
-        User? existingUser = await FindUserByUsername(newUser.Username);
+        User? existingUser = FindUserByUsername(newUser.Username);
 
-        if (existingUser is not null)
+        if (existingUser != null)
             return;
 
         const string sql = """
                            insert into users(user_name, user_role)
-                           values(:userName, :userRole);
+                           values(@userName, @userRole);
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("userName", newUser.Username);
         command.AddParameter("userRole", newUser.Role);
 
-        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+        command.ExecuteNonQuery();
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ICustomerLoginService
 {
-    Task<CustomerLoginResult> Login(long accountId, string plainTextPassword);
+    CustomerLoginResult Login(long accountId, string plainTextPassword);
 }

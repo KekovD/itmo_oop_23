@@ -2,5 +2,5 @@
 
 public interface IAdminLoginService
 {
-    Task<AdminLoginResult> Login(long accountId, string plainTextPassword);
+    AdminLoginResult Login(long accountId, string plainTextPassword);
 }

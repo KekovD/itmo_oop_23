@@ -16,11 +16,11 @@ public class CustomerCloseScenario : ICustomerLoginSubScenario
 
     public string Name => "Close account";
 
-    public async Task Run()
+    public void Run()
     {
         string password = AnsiConsole.Ask<string>("Enter your password");
 
-        CloseResult result = await _service.DeleteAccount(password);
+        CloseResult result = _service.DeleteAccount(password);
 
         string message = result switch
         {

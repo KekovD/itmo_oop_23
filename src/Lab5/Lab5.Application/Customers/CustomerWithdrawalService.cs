@@ -23,7 +23,7 @@ internal class CustomerWithdrawalService : ICustomerWithdrawalService
         _operationsHistoryRepository = operationsHistoryRepository;
     }
 
-    public async Task<TransactionResult> Withdrawal(decimal replenishmentAmount)
+    public TransactionResult Withdrawal(decimal withdrawalAmount)
     {
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerWithdrawalService));
@@ -33,21 +33,21 @@ internal class CustomerWithdrawalService : ICustomerWithdrawalService
         var operation = new Operation(
             _currentCustomerManager.Customer.AccountId,
             nullId,
-            replenishmentAmount,
+            withdrawalAmount,
             OperationType.Withdrawal,
             OperationState.Failed,
             DateTime.Now);
 
         if (_currentCustomerManager.Customer.State is CustomerAccountState.Close
-            || _currentCustomerManager.Customer.Balance < replenishmentAmount)
+            || _currentCustomerManager.Customer.Balance < withdrawalAmount)
         {
-            await _operationsHistoryRepository.AddOperationToHistory(operation);
+            _operationsHistoryRepository.AddOperationToHistory(operation);
             return new TransactionResult.Rejected();
         }
 
-        decimal newBalance = _currentCustomerManager.Customer.Balance - replenishmentAmount;
-        await _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
-        await _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
+        decimal newBalance = _currentCustomerManager.Customer.Balance - withdrawalAmount;
+        _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
+        _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
 
         return new TransactionResult.Success();
     }

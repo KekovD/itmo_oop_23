@@ -17,7 +17,7 @@ public class CustomerViewPeriodOperationsHistoryScenario : ICustomerLoginSubScen
 
     public string Name => "View operation history for the period";
 
-    public async Task Run()
+    public void Run()
     {
         string start = AnsiConsole.Ask<string>("Enter the start date in the format dd.mm.yyyy");
         string end = AnsiConsole.Ask<string>("Enter the end date in the format dd.mm.yyyy");
@@ -32,7 +32,7 @@ public class CustomerViewPeriodOperationsHistoryScenario : ICustomerLoginSubScen
 
         var stringBuilder = new StringBuilder();
 
-        await foreach (Operation operation in _service.ViewPeriodOperationsHistory(startDate, endDate))
+        foreach (Operation operation in _service.ViewPeriodOperationsHistory(startDate, endDate))
         {
             stringBuilder.AppendFormat(
                 CultureInfo.InvariantCulture,
@@ -43,11 +43,9 @@ public class CustomerViewPeriodOperationsHistoryScenario : ICustomerLoginSubScen
                 operation.Type,
                 operation.State,
                 operation.Date);
-
-            AnsiConsole.WriteLine(stringBuilder.ToString());
-            stringBuilder.Clear();
         }
 
+        AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ICustomerCloseService
 {
-    Task<CloseResult> DeleteAccount(string plainTextPassword);
+    CloseResult DeleteAccount(string plainTextPassword);
 }

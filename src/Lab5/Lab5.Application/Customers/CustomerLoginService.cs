@@ -21,9 +21,9 @@ internal class CustomerLoginService : ICustomerLoginService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<CustomerLoginResult> Login(long accountId, string plainTextPassword)
+    public CustomerLoginResult Login(long accountId, string plainTextPassword)
     {
-        CustomerAccount? customer = await _repository.FindAccountByAccountId(accountId);
+        CustomerAccount? customer = _repository.FindAccountByAccountId(accountId);
 
         if (customer is null)
             return new CustomerLoginResult.NotFound();
@@ -31,10 +31,11 @@ internal class CustomerLoginService : ICustomerLoginService
         if (customer.State.Equals(CustomerAccountState.Close))
             return new CustomerLoginResult.AccountClosed();
 
-        string? hashedPassword = await _repository.FindAccountPasswordByAccountId(accountId);
+        string? hashedPassword = _repository.FindAccountPasswordByAccountId(accountId);
 
-        if (hashedPassword is not null &&
-            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) != new PasswordVerificationResult.Success())
+        if (!string.IsNullOrEmpty(hashedPassword) &&
+            _passwordHasher.VerifyHashedPassword(hashedPassword, plainTextPassword) is not
+            PasswordVerificationResult.Success)
         {
             return new CustomerLoginResult.WrongPassword();
         }

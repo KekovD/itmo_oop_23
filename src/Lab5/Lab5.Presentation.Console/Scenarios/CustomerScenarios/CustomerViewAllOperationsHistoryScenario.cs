@@ -17,11 +17,11 @@ public class CustomerViewAllOperationsHistoryScenario : ICustomerLoginSubScenari
 
     public string Name => "View all operation history";
 
-    public async Task Run()
+    public void Run()
     {
         var stringBuilder = new StringBuilder();
 
-        await foreach (Operation operation in _service.ViewAllOperationsHistory())
+        foreach (Operation operation in _service.ViewAllOperationsHistory())
         {
             stringBuilder.AppendFormat(
                 CultureInfo.InvariantCulture,
@@ -32,11 +32,9 @@ public class CustomerViewAllOperationsHistoryScenario : ICustomerLoginSubScenari
                 operation.Type,
                 operation.State,
                 operation.Date);
-
-            AnsiConsole.WriteLine(stringBuilder.ToString());
-            stringBuilder.Clear();
         }
 
+        AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
     }
 }

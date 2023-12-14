@@ -17,13 +17,13 @@ public class AdminViewAllOperationsHistoryByCustomerScenario : IAdminLoginSubSce
 
     public string Name => "View all operation history by customer";
 
-    public async Task Run()
+    public void Run()
     {
         long accountId = AnsiConsole.Ask<long>("Enter customer account id");
 
         var stringBuilder = new StringBuilder();
 
-        await foreach (Operation operation in _service.ViewAllOperationsHistoryByCustomer(accountId))
+        foreach (Operation operation in _service.ViewAllOperationsHistoryByCustomer(accountId).ToList())
         {
             stringBuilder.AppendFormat(
                 CultureInfo.InvariantCulture,
@@ -34,11 +34,9 @@ public class AdminViewAllOperationsHistoryByCustomerScenario : IAdminLoginSubSce
                 operation.Type,
                 operation.State,
                 operation.Date);
-
-            AnsiConsole.WriteLine(stringBuilder.ToString());
-            stringBuilder.Clear();
         }
 
+        AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
     }
 }

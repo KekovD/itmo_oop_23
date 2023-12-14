@@ -17,11 +17,11 @@ public class AdminViewAllCustomersScenario : IAdminLoginSubScenario
 
     public string Name => "View all customers";
 
-    public async Task Run()
+    public void Run()
     {
         var stringBuilder = new StringBuilder();
 
-        await foreach (CustomerAccount account in _service.ViewAllCustomers())
+        foreach (CustomerAccount account in _service.ViewAllCustomers().ToList())
         {
             stringBuilder.AppendFormat(
                 CultureInfo.InvariantCulture,
@@ -31,11 +31,9 @@ public class AdminViewAllCustomersScenario : IAdminLoginSubScenario
                 account.State,
                 account.OpenDate,
                 account.CloseDate.HasValue ? account.CloseDate.Value.ToString(CultureInfo.InvariantCulture) : "N/A");
-
-            AnsiConsole.WriteLine(stringBuilder.ToString());
-            stringBuilder.Clear();
         }
 
+        AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
     }
 }

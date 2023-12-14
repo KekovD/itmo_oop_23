@@ -14,7 +14,7 @@ internal class CustomerBalanceViewService : ICustomerBalanceViewService
         _currentCustomerManager = currentCustomerManager;
     }
 
-    public Task<TransactionResult> ViewBalance(out decimal balance)
+    public TransactionResult ViewBalance(out decimal balance)
     {
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerBalanceViewService));
@@ -22,10 +22,10 @@ internal class CustomerBalanceViewService : ICustomerBalanceViewService
         if (_currentCustomerManager.Customer.State is CustomerAccountState.Close)
         {
             balance = 0;
-            return Task.FromResult<TransactionResult>(new TransactionResult.Rejected());
+            return new TransactionResult.Rejected();
         }
 
         balance = _currentCustomerManager.Customer.Balance;
-        return Task.FromResult<TransactionResult>(new TransactionResult.Success());
+        return new TransactionResult.Success();
     }
 }

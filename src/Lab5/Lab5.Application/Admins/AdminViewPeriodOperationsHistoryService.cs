@@ -13,11 +13,6 @@ public class AdminViewPeriodOperationsHistoryService : IAdminViewPeriodOperation
         _repository = repository;
     }
 
-    public async IAsyncEnumerable<Operation> ViewPeriodOperationsHistory(DateTime startDate, DateTime endDate)
-    {
-        await foreach (Operation operation in _repository.FindPeriodOperationsHistory(startDate, endDate))
-        {
-            yield return operation;
-        }
-    }
+    public IEnumerable<Operation> ViewPeriodOperationsHistory(DateTime startDate, DateTime endDate) =>
+        _repository.FindPeriodOperationsHistory(startDate, endDate);
 }

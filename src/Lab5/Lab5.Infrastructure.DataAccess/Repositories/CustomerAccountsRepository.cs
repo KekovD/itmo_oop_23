@@ -19,22 +19,24 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         _userRepository = userRepository;
     }
 
-    public async Task<string?> FindAccountPasswordByAccountId(long accountId)
+    public string? FindAccountPasswordByAccountId(long accountId)
     {
         const string sql = """
                            select account_pin_code
                            from customers_accounts
-                           where account_id = :accountId;
+                           where account_id = @accountId;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("accountId", accountId);
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using NpgsqlDataReader reader = command.ExecuteReader();
 
-        if (await reader.ReadAsync().ConfigureAwait(false) is false)
+        if (!reader.Read())
             return null;
 
         const int passwordIndex = 0;
@@ -43,23 +45,25 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         return password;
     }
 
-    public async Task<CustomerAccount?> FindAccountByAccountId(long accountId)
+    public CustomerAccount? FindAccountByAccountId(long accountId)
     {
         const string sql = """
                            select account_id, account_balance, account_state, account_open_date, account_close_date
                            from customers_accounts
-                           where account_id = :accountId;
+                           where account_id = @accountId;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("accountId", accountId);
 
-        await using NpgsqlDataReader reader = await command.ExecuteReaderAsync().ConfigureAwait(false);
+        using NpgsqlDataReader reader = command.ExecuteReader();
 
-        if (await reader.ReadAsync().ConfigureAwait(false) is false)
+        if (!reader.Read())
             return null;
 
         const int accountIdIndex = 0;
@@ -68,37 +72,39 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         const int openDateIndex = 3;
         const int closeDateIndex = 4;
 
-        DateTime? closeDate = await reader.IsDBNullAsync(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
+        DateTime? closeDate = reader.IsDBNull(closeDateIndex) ? null : reader.GetDateTime(closeDateIndex);
 
         var customer = new CustomerAccount(
             AccountId: reader.GetInt64(accountIdIndex),
             Balance: reader.GetDecimal(balanceIndex),
-            State: await reader.GetFieldValueAsync<CustomerAccountState>(stateIndex),
+            State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
             OpenDate: reader.GetDateTime(openDateIndex),
             CloseDate: closeDate);
 
         return customer;
     }
 
-    public async Task CreateCustomer(User newUser, CustomerAccount newAccount, string hashedPassword)
+    public void CreateCustomer(User newUser, CustomerAccount newAccount, string hashedPassword)
     {
-        await _userRepository.CreateUser(newUser);
+        _userRepository.CreateUser(newUser);
 
-        User? user = await _userRepository.FindUserByUsername(newUser.Username);
-        long? userId = await _userRepository.FindIdByUsername(newUser.Username);
+        User? user = _userRepository.FindUserByUsername(newUser.Username);
+        long? userId = _userRepository.FindIdByUsername(newUser.Username);
 
         if (user is null && userId is null)
             throw new UserCreationException($"{nameof(CreateCustomer)} User could not be created.");
 
         const string sql = """
                            insert into customers_accounts(account_id, user_id, account_balance, account_state, account_open_date, account_pin_code)
-                           values(:accountId, :userId, :accountBalance, :accountState, :accountOpenDate, :accountPinCode);
+                           values(@accountId, @userId, @accountBalance, @accountState, @accountOpenDate, @accountPinCode);
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("accountId", newAccount.AccountId);
         command.AddParameter("userId", userId);
         command.AddParameter("accountBalance", newAccount.Balance);
@@ -106,42 +112,46 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         command.AddParameter("accountOpenDate", newAccount.OpenDate);
         command.AddParameter("accountPinCode", hashedPassword);
 
-        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+        command.ExecuteNonQuery();
     }
 
-    public async Task ChangeBalance(CustomerAccount account, decimal newBalance)
+    public void ChangeBalance(CustomerAccount account, decimal newBalance)
     {
         const string sql = """
                            update customers_accounts
-                           set account_balance = :newBalance
-                           where account_id = :accountId;
+                           set account_balance = @newBalance
+                           where account_id = @accountId;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("newBalance", newBalance);
         command.AddParameter("accountId", account.AccountId);
 
-        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+        command.ExecuteNonQuery();
     }
 
-    public async Task ChangeAccountStateToClose(CustomerAccount account, DateTime closeDate)
+    public void ChangeAccountStateToClose(CustomerAccount account, DateTime closeDate)
     {
         const string sql = """
                            update customers_accounts
-                           set account_state = 'close', account_close_date = :closeDate
-                           where account_id = :accountId;
+                           set account_state = 'close', account_close_date = @closeDate
+                           where account_id = @accountId;
                            """;
 
-        await using NpgsqlConnection connection =
-            await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false);
+        using NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
 
-        await using var command = new NpgsqlCommand(sql, connection);
+        using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("closeDate", closeDate);
         command.AddParameter("accountId", account.AccountId);
 
-        await command.ExecuteNonQueryAsync().ConfigureAwait(false);
+        command.ExecuteNonQuery();
     }
 }

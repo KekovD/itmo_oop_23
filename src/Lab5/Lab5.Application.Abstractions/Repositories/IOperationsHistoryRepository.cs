@@ -4,8 +4,7 @@ namespace Application.Abstractions.Repositories;
 
 public interface IOperationsHistoryRepository
 {
-    IAsyncEnumerable<Operation> FindOperationsHistoryByAccountId(long accountId);
-
-    IAsyncEnumerable<Operation> FindPeriodOperationsHistoryByAccountId(long accountId, DateTime startDate, DateTime endDate);
-    Task AddOperationToHistory(Operation operation);
+    IEnumerable<Operation> FindOperationsHistoryByAccountId(long accountId);
+    IEnumerable<Operation> FindPeriodOperationsHistoryByAccountId(long accountId, DateTime startDate, DateTime endDate);
+    void AddOperationToHistory(Operation operation);
 }
