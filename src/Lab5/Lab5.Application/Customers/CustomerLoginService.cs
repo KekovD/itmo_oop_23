@@ -28,7 +28,7 @@ internal class CustomerLoginService : ICustomerLoginService
         if (customer is null)
             return new CustomerLoginResult.NotFound();
 
-        if (customer.State.Equals(CustomerAccountState.Close))
+        if (customer.State.Equals(AccountState.Close))
             return new CustomerLoginResult.AccountClosed();
 
         string? hashedPassword = _repository.FindAccountPasswordByAccountId(accountId);

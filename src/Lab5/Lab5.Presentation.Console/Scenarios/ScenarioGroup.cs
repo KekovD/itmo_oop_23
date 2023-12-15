@@ -1,4 +1,5 @@
 ﻿using Lab5.Presentation.Console.Scenarios.Selectors;
+using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios;
 
@@ -19,5 +20,6 @@ public class ScenarioGroup : IScenario
     {
         IScenario scenario = _selector.ConsoleSelector(_subScenarios);
         scenario.Run();
+        AnsiConsole.Clear();
     }
 }

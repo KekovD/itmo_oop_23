@@ -46,7 +46,7 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
             accounts.Add(new CustomerAccount(
                 AccountId: reader.GetInt64(accountIdIndex),
                 Balance: reader.GetDecimal(balanceIndex),
-                State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
+                State: reader.GetFieldValue<AccountState>(stateIndex),
                 OpenDate: reader.GetDateTime(openDateIndex),
                 CloseDate: closeDate));
         }

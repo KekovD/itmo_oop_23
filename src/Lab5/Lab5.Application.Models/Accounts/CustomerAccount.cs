@@ -3,6 +3,6 @@
 public record CustomerAccount(
     long AccountId,
     decimal Balance,
-    CustomerAccountState State,
+    AccountState State,
     DateTime OpenDate,
     DateTime? CloseDate);

@@ -35,5 +35,6 @@ public class AdminViewAllCustomersScenario : IAdminLoginSubScenario
 
         AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

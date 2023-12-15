@@ -11,5 +11,5 @@ public class MappingPlugin : IDataSourcePlugin
         builder
             .MapEnum<OperationType>()
             .MapEnum<OperationState>()
-            .MapEnum<CustomerAccountState>();
+            .MapEnum<AccountState>();
 }

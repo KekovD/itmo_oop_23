@@ -13,6 +13,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Lab5.Application.Abstractions\Lab5.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\Lab5.Application.Models\Lab5.Application.Models.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Lab5.Application.Abstractions\Lab5.Application.Abstractions.csproj" />
+      <ProjectReference Include="..\Lab5.Application.Models\Lab5.Application.Models.csproj" />
+    </ItemGroup>
+    
 </Project>

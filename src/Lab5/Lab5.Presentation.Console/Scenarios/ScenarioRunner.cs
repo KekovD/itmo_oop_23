@@ -1,6 +1,7 @@
 ﻿using Application.Models.Accounts;
 using Lab5.Application.Contracts.Admins;
 using Lab5.Presentation.Console.Scenarios.Selectors;
+using Spectre.Console;
 
 namespace Lab5.Presentation.Console.Scenarios;
 
@@ -20,10 +21,9 @@ public class ScenarioRunner
     public void Run()
     {
         IEnumerable<IScenario> scenarios = GetScenarios();
-
         IScenario scenario = _selector.ConsoleSelector(scenarios);
-
         scenario.Run();
+        AnsiConsole.Clear();
     }
 
     public void AddAdmins(AdminAccount adminAccounts, string plainTextPassword) =>

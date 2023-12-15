@@ -31,5 +31,6 @@ public class CustomerDepositScenario : ICustomerLoginSubScenario
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

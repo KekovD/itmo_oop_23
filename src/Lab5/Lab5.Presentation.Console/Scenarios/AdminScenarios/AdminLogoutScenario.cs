@@ -18,5 +18,6 @@ public class AdminLogoutScenario : IAdminLoginSubScenario
     {
         _service.Logout();
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

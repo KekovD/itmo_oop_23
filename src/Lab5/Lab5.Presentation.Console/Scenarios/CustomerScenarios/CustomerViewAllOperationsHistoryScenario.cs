@@ -31,10 +31,11 @@ public class CustomerViewAllOperationsHistoryScenario : ICustomerLoginSubScenari
                 operation.Amount,
                 operation.Type,
                 operation.State,
-                operation.Date);
+                operation.Date.ToShortDateString());
         }
 
         AnsiConsole.WriteLine(stringBuilder.ToString());
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

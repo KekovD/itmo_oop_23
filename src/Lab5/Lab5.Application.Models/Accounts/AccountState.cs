@@ -1,6 +1,6 @@
 ﻿namespace Application.Models.Accounts;
 
-public enum CustomerAccountState
+public enum AccountState
 {
     Open,
     Close,

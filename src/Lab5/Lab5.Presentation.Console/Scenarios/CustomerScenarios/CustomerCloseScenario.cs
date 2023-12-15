@@ -32,5 +32,6 @@ public class CustomerCloseScenario : ICustomerLoginSubScenario
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

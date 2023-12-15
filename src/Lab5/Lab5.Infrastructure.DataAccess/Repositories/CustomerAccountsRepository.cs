@@ -73,7 +73,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         var customer = new CustomerAccount(
             AccountId: reader.GetInt64(accountIdIndex),
             Balance: reader.GetDecimal(balanceIndex),
-            State: reader.GetFieldValue<CustomerAccountState>(stateIndex),
+            State: reader.GetFieldValue<AccountState>(stateIndex),
             OpenDate: reader.GetDateTime(openDateIndex),
             CloseDate: closeDate);
 
@@ -138,5 +138,31 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         command.AddParameter("closeDate", closeDate);
         command.AddParameter("accountId", account.AccountId);
         command.ExecuteNonQueryAsync().ConfigureAwait(false);
+    }
+
+    public decimal? FindBalanceByAccountId(long accountId)
+    {
+        const string sql = """
+                           select account_balance
+                           from customers_accounts
+                           where account_id = @accountId;
+                           """;
+
+        NpgsqlConnection connection = Task
+            .Run(async () =>
+                await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
+            .GetResult();
+
+        using var command = new NpgsqlCommand(sql, connection);
+        command.AddParameter("accountId", accountId);
+        using NpgsqlDataReader reader = command.ExecuteReader();
+
+        if (!reader.Read())
+            return null;
+
+        const int balanceIndex = 0;
+        decimal balance = reader.GetDecimal(balanceIndex);
+
+        return balance;
     }
 }

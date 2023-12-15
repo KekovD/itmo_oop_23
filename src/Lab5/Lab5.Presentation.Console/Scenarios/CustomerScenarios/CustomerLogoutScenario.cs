@@ -18,5 +18,6 @@ public class CustomerLogoutScenario : ICustomerLoginSubScenario
     {
         _service.Logout();
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }

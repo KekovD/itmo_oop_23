@@ -25,7 +25,7 @@ internal class CustomerCloseService : ICustomerCloseService
         if (_currentCustomerManager.Customer is null)
             throw new CurrentCustomerManagerNullException(nameof(CustomerCloseService));
 
-        if (_currentCustomerManager.Customer.State is CustomerAccountState.Close)
+        if (_currentCustomerManager.Customer.State is AccountState.Close)
             return new CloseResult.WrongPassword();
 
         string? hashedPassword = _repository.FindAccountPasswordByAccountId(_currentCustomerManager.Customer.AccountId);

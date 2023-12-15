@@ -36,19 +36,28 @@ internal class CustomerWithdrawalService : ICustomerWithdrawalService
             withdrawalAmount,
             OperationType.Withdrawal,
             OperationState.Failed,
-            DateTime.Now);
+            DateTime.UtcNow);
 
-        if (_currentCustomerManager.Customer.State is CustomerAccountState.Close
+        if (_currentCustomerManager.Customer.State is AccountState.Close
             || _currentCustomerManager.Customer.Balance < withdrawalAmount)
         {
             _operationsHistoryRepository.AddOperationToHistory(operation);
             return new TransactionResult.Rejected();
         }
 
-        decimal newBalance = _currentCustomerManager.Customer.Balance - withdrawalAmount;
-        _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
-        _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
+        decimal? currentBalance = _customerRepository.FindBalanceByAccountId(_currentCustomerManager.Customer.AccountId);
 
-        return new TransactionResult.Success();
+        if (currentBalance is not null)
+        {
+            decimal newBalance = currentBalance.Value - withdrawalAmount;
+            _customerRepository.ChangeBalance(_currentCustomerManager.Customer, newBalance);
+            _operationsHistoryRepository.AddOperationToHistory(operation with { State = OperationState.Successful });
+
+            return new TransactionResult.Success();
+        }
+
+        _operationsHistoryRepository.AddOperationToHistory(operation);
+
+        return new TransactionResult.Rejected();
     }
 }

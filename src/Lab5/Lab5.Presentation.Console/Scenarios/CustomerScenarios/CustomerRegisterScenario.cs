@@ -36,7 +36,7 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
         const decimal registerBalance = 0;
 
         var newAccount =
-            new CustomerAccount(accountId, registerBalance, CustomerAccountState.Open, DateTime.Now, null);
+            new CustomerAccount(accountId, registerBalance, AccountState.Open, DateTime.Now, null);
 
         RegisterResult result = _userService.Register(newAccount, password);
 

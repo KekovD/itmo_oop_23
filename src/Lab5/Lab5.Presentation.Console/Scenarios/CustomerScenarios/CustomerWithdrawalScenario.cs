@@ -31,5 +31,6 @@ public class CustomerWithdrawalScenario : ICustomerLoginSubScenario
 
         AnsiConsole.WriteLine(message);
         AnsiConsole.Ask<string>("Ok");
+        AnsiConsole.Clear();
     }
 }
