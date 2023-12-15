@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab5.Tests.Tests;
 
-public static class AccountWithdrawal
+public static class AccountWithdrawalSuccessful
 {
     public static IEnumerable<object[]> GetRequest
     {
@@ -26,7 +26,7 @@ public static class AccountWithdrawal
     }
 
     [Theory]
-    [MemberData(nameof(GetRequest), MemberType = typeof(AccountWithdrawal))]
+    [MemberData(nameof(GetRequest), MemberType = typeof(AccountWithdrawalSuccessful))]
     private static void ConditionCheck(IList<object> requests)
     {
         var collection = new ServiceCollection();
