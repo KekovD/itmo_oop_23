@@ -12,12 +12,18 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
     private readonly ICustomerRegisterService _userService;
     private readonly IEnumerable<ICustomerLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
+    private readonly ICurrentCustomerService _service;
 
-    public CustomerRegisterScenario(ICustomerRegisterService userService, IEnumerable<ICustomerLoginSubScenario> subScenarios, ISelector selector)
+    public CustomerRegisterScenario(
+        ICustomerRegisterService userService,
+        IEnumerable<ICustomerLoginSubScenario> subScenarios,
+        ISelector selector,
+        ICurrentCustomerService service)
     {
         _userService = userService;
         _subScenarios = subScenarios;
         _selector = selector;
+        _service = service;
     }
 
     public string Name => "Register";
@@ -45,6 +51,11 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is RegisterResult.Success)
-            _selector.ConsoleSelector(_subScenarios).Run();
+        {
+            while (_service.Customer is not null)
+            {
+                _selector.ConsoleSelector(_subScenarios).Run();
+            }
+        }
     }
 }

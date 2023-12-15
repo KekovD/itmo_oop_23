@@ -10,12 +10,14 @@ public class CustomerLoginScenario : ICustomerProviderSubScenario
     private readonly ICustomerLoginService _userService;
     private readonly IEnumerable<ICustomerLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
+    private readonly ICurrentCustomerService _service;
 
-    public CustomerLoginScenario(ICustomerLoginService userService,  IEnumerable<ICustomerLoginSubScenario> subScenarios, ISelector selector)
+    public CustomerLoginScenario(ICustomerLoginService userService,  IEnumerable<ICustomerLoginSubScenario> subScenarios, ISelector selector, ICurrentCustomerService service)
     {
         _userService = userService;
         _subScenarios = subScenarios;
         _selector = selector;
+        _service = service;
     }
 
     public string Name => "Login";
@@ -40,6 +42,11 @@ public class CustomerLoginScenario : ICustomerProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is CustomerLoginResult.Success)
-            _selector.ConsoleSelector(_subScenarios).Run();
+        {
+            while (_service.Customer is not null)
+            {
+                _selector.ConsoleSelector(_subScenarios).Run();
+            }
+        }
     }
 }

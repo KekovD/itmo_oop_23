@@ -28,7 +28,8 @@ public static class ServiceCollectionExtensions
             .AddScoped<ICustomerLoginSubScenario, CustomerBalanceViewScenario>()
             .AddScoped<ICustomerLoginSubScenario, CustomerViewAllOperationsHistoryScenario>()
             .AddScoped<ICustomerLoginSubScenario, CustomerViewPeriodOperationsHistoryScenario>()
-            .AddScoped<ICustomerLoginSubScenario, CustomerCloseScenario>();
+            .AddScoped<ICustomerLoginSubScenario, CustomerCloseScenario>()
+            .AddScoped<ICustomerLoginSubScenario, CustomerLogoutScenario>();
 
         collection.AddScoped<IAdminProviderSubScenario, AdminLoginScenario>();
 
@@ -36,7 +37,8 @@ public static class ServiceCollectionExtensions
             .AddScoped<IAdminLoginSubScenario, AdminViewAllCustomersScenario>()
             .AddScoped<IAdminLoginSubScenario, AdminViewAllOperationsHistoryScenario>()
             .AddScoped<IAdminLoginSubScenario, AdminViewAllOperationsHistoryByCustomerScenario>()
-            .AddScoped<IAdminLoginSubScenario, AdminViewPeriodOperationsHistoryScenario>();
+            .AddScoped<IAdminLoginSubScenario, AdminViewPeriodOperationsHistoryScenario>()
+            .AddScoped<IAdminLoginSubScenario, AdminLogoutScenario>();
 
         return collection;
     }

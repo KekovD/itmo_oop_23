@@ -10,13 +10,15 @@ public class AdminLoginScenario : IAdminProviderSubScenario
     private readonly IAdminLoginService _userService;
     private readonly IEnumerable<IAdminLoginSubScenario> _subScenarios;
     private readonly ISelector _selector;
+    private readonly ICurrentAdminService _service;
 
     public AdminLoginScenario(
-        IAdminLoginService userService, IEnumerable<IAdminLoginSubScenario> subScenarios, ISelector selector)
+        IAdminLoginService userService, IEnumerable<IAdminLoginSubScenario> subScenarios, ISelector selector, ICurrentAdminService service)
     {
         _userService = userService;
         _subScenarios = subScenarios;
         _selector = selector;
+        _service = service;
     }
 
     public string Name => "Login";
@@ -40,6 +42,11 @@ public class AdminLoginScenario : IAdminProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is AdminLoginResult.Success)
-            _selector.ConsoleSelector(_subScenarios).Run();
+        {
+            while (_service.Admin is not null)
+            {
+                _selector.ConsoleSelector(_subScenarios).Run();
+            }
+        }
     }
 }
