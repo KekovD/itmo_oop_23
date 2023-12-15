@@ -16,7 +16,8 @@ public static class ServiceCollectionExtensions
 
         collection
             .AddScoped<IScenarioProvider, AdminScenarioProvider>()
-            .AddScoped<IScenarioProvider, CustomerScenarioProvider>();
+            .AddScoped<IScenarioProvider, CustomerScenarioProvider>()
+            .AddScoped<IScenarioProvider, ExitScenarioProvider>();
 
         collection
             .AddScoped<ICustomerProviderSubScenario, CustomerLoginScenario>()
@@ -32,6 +33,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<ICustomerLoginSubScenario, CustomerLogoutScenario>();
 
         collection.AddScoped<IAdminProviderSubScenario, AdminLoginScenario>();
+        collection.AddScoped<IExitScenario, ExitScenario>();
 
         collection
             .AddScoped<IAdminLoginSubScenario, AdminViewAllCustomersScenario>()
