@@ -40,6 +40,6 @@ public class CustomerLoginScenario : ICustomerProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is CustomerLoginResult.Success)
-            _selector.ConsoleSelector(_subScenarios);
+            _selector.ConsoleSelector(_subScenarios).Run();
     }
 }

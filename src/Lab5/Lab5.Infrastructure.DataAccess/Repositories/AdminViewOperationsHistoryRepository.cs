@@ -24,7 +24,7 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
                            from customers_accounts_operations_history;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -56,10 +56,8 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
         return operations;
     }
 
-    public IEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId)
-    {
-        return _operationsHistoryRepository.FindOperationsHistoryByAccountId(customerAccountId);
-    }
+    public IEnumerable<Operation> FindAllOperationsHistoryByCustomerAccountId(long customerAccountId) =>
+        _operationsHistoryRepository.FindOperationsHistoryByAccountId(customerAccountId);
 
     public IEnumerable<Operation> FindPeriodOperationsHistory(DateTime startDate, DateTime endDate)
     {
@@ -69,7 +67,7 @@ public class AdminViewOperationsHistoryRepository : IAdminViewOperationsHistoryR
                            where operation_date between @startDate and @endDate;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();

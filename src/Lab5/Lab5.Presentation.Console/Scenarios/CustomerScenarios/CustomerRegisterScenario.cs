@@ -1,5 +1,4 @@
 ﻿using Application.Models.Accounts;
-using Application.Models.Users;
 using Lab5.Application.Contracts;
 using Lab5.Application.Contracts.Customers;
 using Lab5.Application.Contracts.Exceptions;
@@ -21,21 +20,19 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
         _selector = selector;
     }
 
-    public string Name => "Login";
+    public string Name => "Register";
 
     public void Run()
     {
-        string username = AnsiConsole.Ask<string>("Enter your username");
         long accountId = AnsiConsole.Ask<long>("Enter your account id");
         string password = AnsiConsole.Ask<string>("Enter your password");
 
-        var newUser = new User(username, UserRole.Customer);
         const decimal registerBalance = 0;
 
         var newAccount =
             new CustomerAccount(accountId, registerBalance, CustomerAccountState.Open, DateTime.Now, null);
 
-        RegisterResult result = _userService.Register(newUser, newAccount, password);
+        RegisterResult result = _userService.Register(newAccount, password);
 
         string message = result switch
         {
@@ -48,6 +45,6 @@ public class CustomerRegisterScenario : ICustomerProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is RegisterResult.Success)
-            _selector.ConsoleSelector(_subScenarios);
+            _selector.ConsoleSelector(_subScenarios).Run();
     }
 }

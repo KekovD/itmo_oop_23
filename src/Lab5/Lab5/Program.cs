@@ -1,5 +1,4 @@
 ﻿using Application.Models.Accounts;
-using Application.Models.Users;
 using Lab5.Application.Extensions;
 using Lab5.Infrastructure.DataAccess.Extensions;
 using Lab5.Presentation.Console.Extensions;
@@ -30,7 +29,7 @@ scope.UseInfrastructureDataAccess();
 ScenarioRunner scenarioRunner = scope.ServiceProvider
     .GetRequiredService<ScenarioRunner>();
 
-scenarioRunner.AddAdmins(new User("Temp", UserRole.Admin), new AdminAccount(239), "241");
+scenarioRunner.AddAdmins(new AdminAccount(239), "241");
 
 while (true)
 {

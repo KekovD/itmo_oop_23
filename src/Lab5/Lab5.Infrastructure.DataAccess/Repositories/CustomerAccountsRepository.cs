@@ -1,9 +1,7 @@
 ﻿using Application.Abstractions.Repositories;
 using Application.Models.Accounts;
-using Application.Models.Users;
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
-using Lab5.Infrastructure.DataAccess.Exceptions;
 using Npgsql;
 
 namespace Lab5.Infrastructure.DataAccess.Repositories;
@@ -11,12 +9,10 @@ namespace Lab5.Infrastructure.DataAccess.Repositories;
 public class CustomerAccountsRepository : ICustomerAccountsRepository
 {
     private readonly IPostgresConnectionProvider _connectionProvider;
-    private readonly IUserRepository _userRepository;
 
-    public CustomerAccountsRepository(IPostgresConnectionProvider connectionProvider, IUserRepository userRepository)
+    public CustomerAccountsRepository(IPostgresConnectionProvider connectionProvider)
     {
         _connectionProvider = connectionProvider;
-        _userRepository = userRepository;
     }
 
     public string? FindAccountPasswordByAccountId(long accountId)
@@ -27,7 +23,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
                            where account_id = @accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -53,7 +49,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
                            where account_id = @accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -84,35 +80,25 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         return customer;
     }
 
-    public void CreateCustomer(User newUser, CustomerAccount newAccount, string hashedPassword)
+    public void CreateCustomer(CustomerAccount newAccount, string hashedPassword)
     {
-        _userRepository.CreateUser(newUser);
-
-        User? user = _userRepository.FindUserByUsername(newUser.Username);
-        long? userId = _userRepository.FindIdByUsername(newUser.Username);
-
-        if (user is null && userId is null)
-            throw new UserCreationException($"{nameof(CreateCustomer)} User could not be created.");
-
         const string sql = """
-                           insert into customers_accounts(account_id, user_id, account_balance, account_state, account_open_date, account_pin_code)
-                           values(@accountId, @userId, @accountBalance, @accountState, @accountOpenDate, @accountPinCode);
+                           insert into customers_accounts(account_id, account_balance, account_state, account_open_date, account_pin_code)
+                           values(@accountId, @accountBalance, @accountState, @accountOpenDate, @accountPinCode);
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
 
         using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("accountId", newAccount.AccountId);
-        command.AddParameter("userId", userId);
         command.AddParameter("accountBalance", newAccount.Balance);
         command.AddParameter("accountState", newAccount.State);
         command.AddParameter("accountOpenDate", newAccount.OpenDate);
         command.AddParameter("accountPinCode", hashedPassword);
-
-        command.ExecuteNonQuery();
+        command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
 
     public void ChangeBalance(CustomerAccount account, decimal newBalance)
@@ -123,7 +109,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
                            where account_id = @accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -143,7 +129,7 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
                            where account_id = @accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -151,7 +137,6 @@ public class CustomerAccountsRepository : ICustomerAccountsRepository
         using var command = new NpgsqlCommand(sql, connection);
         command.AddParameter("closeDate", closeDate);
         command.AddParameter("accountId", account.AccountId);
-
-        command.ExecuteNonQuery();
+        command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
 }

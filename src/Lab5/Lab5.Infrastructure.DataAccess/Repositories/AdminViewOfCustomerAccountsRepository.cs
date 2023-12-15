@@ -21,7 +21,7 @@ public class AdminViewOfCustomerAccountsRepository : IAdminViewOfCustomerAccount
                            from customers_accounts;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();

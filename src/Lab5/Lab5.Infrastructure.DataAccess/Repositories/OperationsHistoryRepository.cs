@@ -23,7 +23,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
                            where account_id = @accountId;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -64,7 +64,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
                            where account_id = @accountId and operation_date between @startDate and @endDate;
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -106,7 +106,7 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
                            values(@accountId, @operationAmount, @operationType, @operationState, @operationDate);
                            """;
 
-        using NpgsqlConnection connection = Task
+        NpgsqlConnection connection = Task
             .Run(async () =>
                 await _connectionProvider.GetConnectionAsync(default).ConfigureAwait(false)).GetAwaiter()
             .GetResult();
@@ -117,7 +117,6 @@ public class OperationsHistoryRepository : IOperationsHistoryRepository
         command.AddParameter("operationType", operation.Type);
         command.AddParameter("operationState", operation.State);
         command.AddParameter("operationDate", operation.Date);
-
-        command.ExecuteNonQuery();
+        command.ExecuteNonQueryAsync().ConfigureAwait(false);
     }
 }

@@ -40,6 +40,6 @@ public class AdminLoginScenario : IAdminProviderSubScenario
         AnsiConsole.Ask<string>("Ok");
 
         if (result is AdminLoginResult.Success)
-            _selector.ConsoleSelector(_subScenarios);
+            _selector.ConsoleSelector(_subScenarios).Run();
     }
 }

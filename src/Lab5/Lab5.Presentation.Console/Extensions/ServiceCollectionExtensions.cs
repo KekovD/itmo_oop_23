@@ -30,6 +30,8 @@ public static class ServiceCollectionExtensions
             .AddScoped<ICustomerLoginSubScenario, CustomerViewPeriodOperationsHistoryScenario>()
             .AddScoped<ICustomerLoginSubScenario, CustomerCloseScenario>();
 
+        collection.AddScoped<IAdminProviderSubScenario, AdminLoginScenario>();
+
         collection
             .AddScoped<IAdminLoginSubScenario, AdminViewAllCustomersScenario>()
             .AddScoped<IAdminLoginSubScenario, AdminViewAllOperationsHistoryScenario>()

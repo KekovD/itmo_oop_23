@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions.Repositories;
 using Application.Models.Accounts;
-using Application.Models.Users;
 using Lab5.Application.Contracts;
 using Lab5.Application.Contracts.Customers;
 
@@ -22,16 +21,16 @@ internal class CustomerRegisterService : ICustomerRegisterService
         _passwordHasher = passwordHasher;
     }
 
-    public RegisterResult Register(User user, CustomerAccount newAccount, string plainTextPassword)
+    public RegisterResult Register(CustomerAccount newAccount, string plainTextPassword)
     {
         CustomerAccount? existingAccount = _repository.FindAccountByAccountId(newAccount.AccountId);
 
-        if (existingAccount != null)
+        if (existingAccount is not null)
             return new RegisterResult.AccountAlreadyExists();
 
         string hashedPassword = _passwordHasher.HashPassword(plainTextPassword);
 
-        _repository.CreateCustomer(user, newAccount, hashedPassword);
+        _repository.CreateCustomer(newAccount, hashedPassword);
 
         _currentCustomerManager.Customer = newAccount;
         return new RegisterResult.Success();

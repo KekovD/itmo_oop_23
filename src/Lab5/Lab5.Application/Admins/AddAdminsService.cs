@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions.Repositories;
 using Application.Models.Accounts;
-using Application.Models.Users;
 using Lab5.Application.Contracts;
 using Lab5.Application.Contracts.Admins;
 
@@ -17,10 +16,10 @@ internal class AddAdminsService : IAddAdminsService
         _passwordHasher = passwordHasher;
     }
 
-    public void AddAdmin(User user, AdminAccount adminAccounts, string plainTextPassword)
+    public void AddAdmin(AdminAccount adminAccounts, string plainTextPassword)
     {
         string hashedPassword = _passwordHasher.HashPassword(plainTextPassword);
 
-        _repository.AddAdmin(user, adminAccounts, hashedPassword);
+        _repository.AddAdmin(adminAccounts, hashedPassword);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Application.Models.Accounts;
-using Application.Models.Users;
 using Lab5.Application.Contracts.Admins;
 using Lab5.Presentation.Console.Scenarios.Selectors;
 
@@ -27,8 +26,8 @@ public class ScenarioRunner
         scenario.Run();
     }
 
-    public void AddAdmins(User user, AdminAccount adminAccounts, string plainTextPassword) =>
-        _service.AddAdmin(user, adminAccounts, plainTextPassword);
+    public void AddAdmins(AdminAccount adminAccounts, string plainTextPassword) =>
+        _service.AddAdmin(adminAccounts, plainTextPassword);
 
     private IEnumerable<IScenario> GetScenarios()
     {

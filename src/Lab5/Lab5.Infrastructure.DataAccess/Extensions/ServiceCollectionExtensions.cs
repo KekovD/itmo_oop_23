@@ -20,7 +20,6 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IDataSourcePlugin, MappingPlugin>();
 
         collection
-            .AddScoped<IUserRepository, UserRepository>()
             .AddScoped<IAdminAccountsRepository, AdminAccountsRepository>()
             .AddScoped<IAdminViewOfCustomerAccountsRepository, AdminViewOfCustomerAccountsRepository>()
             .AddScoped<IAdminViewOperationsHistoryRepository, AdminViewOperationsHistoryRepository>()
