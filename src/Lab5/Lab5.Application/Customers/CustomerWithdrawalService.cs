@@ -39,7 +39,7 @@ internal class CustomerWithdrawalService : ICustomerWithdrawalService
             DateTime.UtcNow);
 
         if (_currentCustomerManager.Customer.State is AccountState.Close
-            || _currentCustomerManager.Customer.Balance < withdrawalAmount)
+            || _customerRepository.FindBalanceByAccountId(_currentCustomerManager.Customer.AccountId) < withdrawalAmount)
         {
             _operationsHistoryRepository.AddOperationToHistory(operation);
             return new TransactionResult.Rejected();
