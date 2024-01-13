@@ -90,8 +90,11 @@ csharp_style_namespace_declarations = file_scoped:warning
 # Disable XML docs
 dotnet_diagnostic.CS1591.severity = none
 
+# CA1062: Validate arguments of public methods
 dotnet_diagnostic.CA1062.severity = none
 
+# CA1034: Nested types should not be visible
 dotnet_diagnostic.CA1034.severity = none
 
+# CA2007: Do not directly await a Task
 dotnet_diagnostic.CA2007.severity = none
